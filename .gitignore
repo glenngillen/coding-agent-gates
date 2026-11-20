@@ -1,0 +1,11 @@
+# Used when this example is copied out as a standalone repository.
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.hypothesis/
+.import_linter_cache/
+.tmp/
+# Per-session state written by integrations/claude_stop_hook.py
+.claude/architecture-gate/
+experiment/runs/*.lock

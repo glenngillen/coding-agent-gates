@@ -1,0 +1,22 @@
+# Architecture contracts for the order service, checked by Import Linter.
+# Run through the canonical sensor (integrations/check_architecture.py), which
+# puts src/ on the import path and classifies the result.
+#
+# The gates/ package (the sensor and its adapters) is deliberately outside
+# root_packages: this contract governs the agent-editable application code only.
+
+[importlinter]
+root_packages =
+    orders
+
+[importlinter:contract:controllers-not-repositories]
+name = Controllers must not import infrastructure repositories directly
+type = forbidden
+source_modules =
+    orders.controllers
+forbidden_modules =
+    orders.infrastructure
+# Controller -> application service -> repository stays legal. This contract
+# catches only the direct edge; a stricter dependency-inversion policy would
+# need a different contract (see README.md).
+allow_indirect_imports = True

@@ -1,0 +1,20 @@
+# Architecture gate at commit time. Install inside a standalone copy of this
+# example (pre-commit reads this file from the repository root):
+#   .venv/bin/pre-commit install
+# See integrations/pre-commit.md for the snapshot it checks and its bypasses.
+repos:
+  - repo: local
+    hooks:
+      - id: architecture-contracts
+        name: architecture contracts (full package)
+        # The same canonical sensor as the Stop hook and CI, from the example's
+        # virtual environment (pinned lint-imports). Windows: .venv\Scripts\python.exe
+        entry: .venv/bin/python integrations/check_architecture.py
+        # pre-commit 4.4.0 renamed `language: system` to `unsupported`; `system`
+        # is a deprecated alias. pre-commit 4.7.0 is pinned in requirements.lock.
+        language: unsupported
+        # Whole-package analysis: never hand the sensor a list of changed files.
+        pass_filenames: false
+        # Run on every commit. Without this, a commit that only deletes files
+        # reports "(no files to check) Skipped" (observed with pre-commit 4.7.0).
+        always_run: true
