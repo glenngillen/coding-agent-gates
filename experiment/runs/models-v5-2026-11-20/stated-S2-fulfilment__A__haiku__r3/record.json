@@ -1,0 +1,194 @@
+{
+  "artifacts": {},
+  "evidence_kind": "real",
+  "identity": {
+    "agent_effort": null,
+    "agent_model_requested": "claude-haiku-5-5",
+    "agent_models_reported": [],
+    "arm": "A",
+    "baseline_commit": null,
+    "baseline_tree_sha256": null,
+    "blind_id": "22b3bd6dbeb2",
+    "environment": {
+      "claude_cli": "2.1.322 (Claude Code)",
+      "import_linter": "2.17",
+      "platform": "macOS-26.6.2-arm64-arm-64bit",
+      "python": "3.12.15"
+    },
+    "finished_at": null,
+    "frozen_manifest_sha256": null,
+    "guidance": "stated",
+    "instruction_sha256": null,
+    "messages_sha256": null,
+    "model_key": "haiku",
+    "protocol": "experiment/protocol-v5.md",
+    "repeat": 3,
+    "run_id": "stated-S2-fulfilment__A__haiku__r3",
+    "scenario_id": "S2-fulfilment",
+    "scenario_sha256": null,
+    "seed": "unsupported by the Claude Code CLI; not set",
+    "sequence": 95,
+    "session": "one fresh process per session, --no-session-persistence; steps sent as successive user messages with --input-format stream-json",
+    "settings_sha256": null,
+    "started_at": null,
+    "study": "models-v5-2026-11-20",
+    "study_sha256": null,
+    "workspace_history": null
+  },
+  "infrastructure_retries": [],
+  "ledger": null,
+  "notes": [
+    "an earlier session was refused by the spend cap; no new sessions start"
+  ],
+  "outcome": {
+    "baseline_tests_modified": null,
+    "behavior": null,
+    "final_structural": null,
+    "final_structural_raw": null,
+    "final_violations": null,
+    "judge_unavailable": false,
+    "legacy_reports_modified": null,
+    "semantic_judge": null,
+    "semantic_label": null,
+    "semantic_label_note": "unavailable: no independent human labels for final runs (Decisions, 2026-11-19); semantic_judge is a judge output, not ground truth",
+    "settings_file_check": null,
+    "steps_reached": 0,
+    "submission": "final snapshot evaluated as a synthetic final submission; no merge was attempted or blocked",
+    "tampering_detected": null,
+    "termination": "not_started_cap"
+  },
+  "repair": {
+    "applicable": false,
+    "max_repairs_per_turn": 3,
+    "requests": null
+  },
+  "schema": "coding-agent-gates/run-record-v2/v1",
+  "settings_integrity": null,
+  "time": {
+    "check_seconds": {
+      "judge_s": null,
+      "sensor_s": null
+    },
+    "session_s": null
+  },
+  "turns": [
+    {
+      "caught": null,
+      "censored": true,
+      "cost_usd": null,
+      "cut_short": null,
+      "duration_s": null,
+      "end_structural": null,
+      "first_structural": null,
+      "new_edges": null,
+      "persisting_violation": null,
+      "reached": false,
+      "repair_requests": null,
+      "repaired": null,
+      "result_subtype": null,
+      "semantic_first": null,
+      "slip": null,
+      "step": 1
+    },
+    {
+      "caught": null,
+      "censored": true,
+      "cost_usd": null,
+      "cut_short": null,
+      "duration_s": null,
+      "end_structural": null,
+      "first_structural": null,
+      "new_edges": null,
+      "persisting_violation": null,
+      "reached": false,
+      "repair_requests": null,
+      "repaired": null,
+      "result_subtype": null,
+      "semantic_first": null,
+      "slip": null,
+      "step": 2
+    },
+    {
+      "caught": null,
+      "censored": true,
+      "cost_usd": null,
+      "cut_short": null,
+      "duration_s": null,
+      "end_structural": null,
+      "first_structural": null,
+      "new_edges": null,
+      "persisting_violation": null,
+      "reached": false,
+      "repair_requests": null,
+      "repaired": null,
+      "result_subtype": null,
+      "semantic_first": null,
+      "slip": null,
+      "step": 3
+    },
+    {
+      "caught": null,
+      "censored": true,
+      "cost_usd": null,
+      "cut_short": null,
+      "duration_s": null,
+      "end_structural": null,
+      "first_structural": null,
+      "new_edges": null,
+      "persisting_violation": null,
+      "reached": false,
+      "repair_requests": null,
+      "repaired": null,
+      "result_subtype": null,
+      "semantic_first": null,
+      "slip": null,
+      "step": 4
+    }
+  ],
+  "usage": {
+    "agent": {
+      "by_model": null,
+      "cost_basis": "total_cost_usd / costUSD reported by the Claude Code CLI: API-equivalent list-price estimates; under a subscription login they are notional, not an invoice",
+      "cost_usd": null,
+      "missing": "no result event: the CLI reported no usage"
+    },
+    "judge": {
+      "development": {
+        "calls": 0,
+        "cost_basis": "total_cost_usd / costUSD reported by the Claude Code CLI: API-equivalent list-price estimates; under a subscription login they are notional, not an invoice",
+        "cost_usd": "0",
+        "known_cost_subtotal_usd": "0",
+        "models": [],
+        "started_calls": 0,
+        "tokens": null,
+        "tokens_missing_calls": {
+          "cache_creation_input_tokens": 0,
+          "cache_read_input_tokens": 0,
+          "input_tokens": 0,
+          "output_tokens": 0
+        },
+        "unknown_cost_calls": 0,
+        "unknown_cost_held_usd": "0",
+        "unknown_cost_unrecorded_charge_calls": 0
+      },
+      "evaluation": {
+        "calls": 0,
+        "cost_basis": "total_cost_usd / costUSD reported by the Claude Code CLI: API-equivalent list-price estimates; under a subscription login they are notional, not an invoice",
+        "cost_usd": "0",
+        "known_cost_subtotal_usd": "0",
+        "models": [],
+        "started_calls": 0,
+        "tokens": null,
+        "tokens_missing_calls": {
+          "cache_creation_input_tokens": 0,
+          "cache_read_input_tokens": 0,
+          "input_tokens": 0,
+          "output_tokens": 0
+        },
+        "unknown_cost_calls": 0,
+        "unknown_cost_held_usd": "0",
+        "unknown_cost_unrecorded_charge_calls": 0
+      }
+    }
+  }
+}

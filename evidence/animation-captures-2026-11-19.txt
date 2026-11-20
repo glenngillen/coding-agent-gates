@@ -1,0 +1,77 @@
+# Animation diagnostic captures (captured, not edited)
+# Date: 2026-11-19T11:18:09Z
+# Each scenario runs in a disposable copy of the example (<copy>) with the named fixture overlaid; the normal package is untouched.
+# Python: Python 3.12.15  import-linter: import-linter 2.17
+
+## baseline
+$ .venv/bin/python integrations/check_architecture.py
+ARCHITECTURE CHECK PASSED (snapshot 470476b02ddd): Controllers must not import infrastructure repositories directly
+[exit 0]
+
+## direct_import: canonical sensor
+$ .venv/bin/python integrations/check_architecture.py
+ARCHITECTURE VIOLATION
+Rule broken: Controllers must not import infrastructure repositories directly
+  orders.controllers.orders -> orders.infrastructure.repository (line 16)
+How to fix: Controllers may decode requests, call orders.application services and map responses. Route the data access through the application service (add a service method if needed) and remove the controller's import of orders.infrastructure.
+Snapshot: 3ee1fecf56ac
+Repair the code; do not edit .importlinter, the gates package or tests, and do not move code out of the checked package to make this pass.
+
+--- lint-imports output ---
+---------
+Contracts
+---------
+
+Analyzed 9 files, 9 dependencies.
+---------------------------------
+
+Controllers must not import infrastructure repositories directly BROKEN
+
+Contracts: 0 kept, 1 broken.
+
+
+----------------
+Broken contracts
+----------------
+
+Controllers must not import infrastructure repositories directly
+----------------------------------------------------------------
+
+orders.controllers is not allowed to import orders.infrastructure:
+
+-   orders.controllers.orders -> orders.infrastructure.repository (l.16)
+[exit 1]
+
+## direct_import: Stop hook, four consecutive Stop events, budget 3
+$ .venv/bin/python integrations/claude_stop_hook.py --max-repairs 3 < fixtures/hook-protocol/stop.json
+{"decision": "block", "reason": "ARCHITECTURE VIOLATION\nRule broken: Controllers must not import infrastructure repositories directly\n  orders.controllers.orders -> orders.infrastructure.repository (line 16)\nHow to fix: Controllers may decode requests, call orders.application services and map responses. Route the data access through the application service (add a service method if needed) and remove the controller's import of orders.infrastructure.\nSnapshot: 3ee1fecf56ac\nRepair the code; do not edit .importlinter, the gates package or tests, and do not move code out of the checked package to make this pass.\n\n(Architecture gate: repair request 1 of 3 this turn. Fix the code and finish again; the check reruns on the whole package.)"}
+[exit 0]
+
+$ .venv/bin/python integrations/claude_stop_hook.py --max-repairs 3 < fixtures/hook-protocol/stop.json
+{"decision": "block", "reason": "ARCHITECTURE VIOLATION\nRule broken: Controllers must not import infrastructure repositories directly\n  orders.controllers.orders -> orders.infrastructure.repository (line 16)\nHow to fix: Controllers may decode requests, call orders.application services and map responses. Route the data access through the application service (add a service method if needed) and remove the controller's import of orders.infrastructure.\nSnapshot: 3ee1fecf56ac\nRepair the code; do not edit .importlinter, the gates package or tests, and do not move code out of the checked package to make this pass.\n\n(Architecture gate: repair request 2 of 3 this turn. Fix the code and finish again; the check reruns on the whole package.)"}
+[exit 0]
+
+$ .venv/bin/python integrations/claude_stop_hook.py --max-repairs 3 < fixtures/hook-protocol/stop.json
+{"decision": "block", "reason": "ARCHITECTURE VIOLATION\nRule broken: Controllers must not import infrastructure repositories directly\n  orders.controllers.orders -> orders.infrastructure.repository (line 16)\nHow to fix: Controllers may decode requests, call orders.application services and map responses. Route the data access through the application service (add a service method if needed) and remove the controller's import of orders.infrastructure.\nSnapshot: 3ee1fecf56ac\nRepair the code; do not edit .importlinter, the gates package or tests, and do not move code out of the checked package to make this pass.\n\n(Architecture gate: repair request 3 of 3 this turn. Fix the code and finish again; the check reruns on the whole package.)"}
+[exit 0]
+
+$ .venv/bin/python integrations/claude_stop_hook.py --max-repairs 3 < fixtures/hook-protocol/stop.json
+{"systemMessage": "Architecture gate UNRESOLVED: still a violation after 3 repair request(s) this turn. Last result: ARCHITECTURE VIOLATION This candidate has not passed the architecture check. Do not treat it as complete; fix it and run integrations/check_architecture.py, or rely on the CI check before merging."}
+[exit 0]
+
+## semantic_leakage: canonical sensor
+$ .venv/bin/python integrations/check_architecture.py
+ARCHITECTURE CHECK PASSED (snapshot d698b3afdb4b): Controllers must not import infrastructure repositories directly
+[exit 0]
+
+## syntax_error: canonical sensor
+$ .venv/bin/python integrations/check_architecture.py
+ARCHITECTURE CHECK ERROR: the architecture rules were not checked.
+Reason: lint-imports did not produce a contract report: Syntax error in <copy>/src/orders/application/half_written.py, line 5: <unavailable>
+Snapshot: 6d2fabe18422
+This is not a pass. Fix the cause above (for example a syntax error or a missing tool) and run the check again.
+
+--- lint-imports output ---
+Syntax error in <copy>/src/orders/application/half_written.py, line 5: <unavailable>
+[exit 3]
+

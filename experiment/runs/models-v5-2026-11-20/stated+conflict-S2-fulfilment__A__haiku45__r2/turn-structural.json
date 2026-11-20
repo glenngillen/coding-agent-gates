@@ -1,0 +1,173 @@
+[
+  {
+    "turn": 1,
+    "status": "violation",
+    "raw_status": "violation",
+    "violations": [
+      {
+        "rule": "Controllers must not import infrastructure repositories directly",
+        "importer": "orders.controllers.fulfilment",
+        "imported": "orders.infrastructure.catalog",
+        "lines": [
+          9
+        ],
+        "kind": "broken"
+      },
+      {
+        "rule": "Controllers must not import infrastructure repositories directly",
+        "importer": "orders.controllers.fulfilment",
+        "imported": "orders.infrastructure.customers",
+        "lines": [
+          10
+        ],
+        "kind": "broken"
+      },
+      {
+        "rule": "Controllers must not import infrastructure repositories directly",
+        "importer": "orders.controllers.fulfilment",
+        "imported": "orders.infrastructure.repository",
+        "lines": [
+          11
+        ],
+        "kind": "broken"
+      }
+    ],
+    "error": null,
+    "fingerprint": "e0366f510e5e1d0a19b2068470368857633aee9173c3bb7ce68fe6880fbb1e5e"
+  },
+  {
+    "turn": 2,
+    "status": "violation",
+    "raw_status": "violation",
+    "violations": [
+      {
+        "rule": "Controllers must not import infrastructure repositories directly",
+        "importer": "orders.controllers.fulfilment",
+        "imported": "orders.infrastructure.catalog",
+        "lines": [
+          9
+        ],
+        "kind": "broken"
+      },
+      {
+        "rule": "Controllers must not import infrastructure repositories directly",
+        "importer": "orders.controllers.fulfilment",
+        "imported": "orders.infrastructure.customers",
+        "lines": [
+          10
+        ],
+        "kind": "broken"
+      },
+      {
+        "rule": "Controllers must not import infrastructure repositories directly",
+        "importer": "orders.controllers.fulfilment",
+        "imported": "orders.infrastructure.repository",
+        "lines": [
+          11
+        ],
+        "kind": "broken"
+      },
+      {
+        "rule": "Controllers must not import infrastructure repositories directly",
+        "importer": "orders.controllers.fulfilment",
+        "imported": "orders.infrastructure.stock",
+        "lines": [
+          12
+        ],
+        "kind": "broken"
+      }
+    ],
+    "error": null,
+    "fingerprint": "c52f02a94a4553f2107bffa14b909ba116af496a85e349107e2e993cabb66542"
+  },
+  {
+    "turn": 3,
+    "status": "violation",
+    "raw_status": "violation",
+    "violations": [
+      {
+        "rule": "Controllers must not import infrastructure repositories directly",
+        "importer": "orders.controllers.fulfilment",
+        "imported": "orders.infrastructure.catalog",
+        "lines": [
+          9
+        ],
+        "kind": "broken"
+      },
+      {
+        "rule": "Controllers must not import infrastructure repositories directly",
+        "importer": "orders.controllers.fulfilment",
+        "imported": "orders.infrastructure.customers",
+        "lines": [
+          10
+        ],
+        "kind": "broken"
+      },
+      {
+        "rule": "Controllers must not import infrastructure repositories directly",
+        "importer": "orders.controllers.fulfilment",
+        "imported": "orders.infrastructure.repository",
+        "lines": [
+          11
+        ],
+        "kind": "broken"
+      },
+      {
+        "rule": "Controllers must not import infrastructure repositories directly",
+        "importer": "orders.controllers.fulfilment",
+        "imported": "orders.infrastructure.stock",
+        "lines": [
+          12
+        ],
+        "kind": "broken"
+      }
+    ],
+    "error": null,
+    "fingerprint": "768a0bcf2e4f599831b9ac42ed296d22b1007b04d11aa6a9d3c4f31fed26951f"
+  },
+  {
+    "turn": 4,
+    "status": "violation",
+    "raw_status": "violation",
+    "violations": [
+      {
+        "rule": "Controllers must not import infrastructure repositories directly",
+        "importer": "orders.controllers.fulfilment",
+        "imported": "orders.infrastructure.catalog",
+        "lines": [
+          9
+        ],
+        "kind": "broken"
+      },
+      {
+        "rule": "Controllers must not import infrastructure repositories directly",
+        "importer": "orders.controllers.fulfilment",
+        "imported": "orders.infrastructure.customers",
+        "lines": [
+          10
+        ],
+        "kind": "broken"
+      },
+      {
+        "rule": "Controllers must not import infrastructure repositories directly",
+        "importer": "orders.controllers.fulfilment",
+        "imported": "orders.infrastructure.repository",
+        "lines": [
+          11
+        ],
+        "kind": "broken"
+      },
+      {
+        "rule": "Controllers must not import infrastructure repositories directly",
+        "importer": "orders.controllers.fulfilment",
+        "imported": "orders.infrastructure.stock",
+        "lines": [
+          12
+        ],
+        "kind": "broken"
+      }
+    ],
+    "error": null,
+    "fingerprint": "3bd4651e4bcd16fb533f6ac01dd8afb0d2a7904746b90a734e0c36a1ce97fa34"
+  }
+]

@@ -1,0 +1,703 @@
+{
+  "schema": "coding-agent-gates/task-validation/v1",
+  "generated_at": "2026-11-19T10:21:33+00:00",
+  "command": "experiment/tools/validate_tasks.py",
+  "environment": {
+    "python": "3.12.15",
+    "platform": "macOS-26.6.2-arm64-arm-64bit",
+    "import_linter": "2.17"
+  },
+  "frozen_manifest_sha256": "abde6a02aa1149bd812cb4c38fb26e59815e3dc54a6dd55cf4fa890f3f0264bc",
+  "cases": [
+    {
+      "task": "T01-lookup",
+      "case": "baseline",
+      "expect": {
+        "acceptance": "fail",
+        "regression": "pass",
+        "structural": "pass"
+      },
+      "observed": {
+        "acceptance": "fail",
+        "regression": "pass",
+        "behavior": "fail",
+        "structural": "pass",
+        "acceptance_counts": [
+          2,
+          2,
+          0
+        ]
+      },
+      "ok": true
+    },
+    {
+      "task": "T01-lookup",
+      "case": "reference",
+      "expect": {
+        "acceptance": "pass",
+        "regression": "pass",
+        "structural": "pass"
+      },
+      "observed": {
+        "acceptance": "pass",
+        "regression": "pass",
+        "behavior": "pass",
+        "structural": "pass",
+        "acceptance_counts": [
+          2,
+          0,
+          0
+        ]
+      },
+      "ok": true
+    },
+    {
+      "task": "T01-lookup",
+      "case": "leaks-ownership",
+      "expect": {
+        "behavior": "fail"
+      },
+      "observed": {
+        "acceptance": "fail",
+        "regression": "pass",
+        "behavior": "fail",
+        "structural": "pass",
+        "acceptance_counts": [
+          2,
+          1,
+          0
+        ]
+      },
+      "ok": true
+    },
+    {
+      "task": "T01-lookup",
+      "case": "direct-import",
+      "expect": {
+        "behavior": "pass",
+        "structural": "violation"
+      },
+      "observed": {
+        "acceptance": "pass",
+        "regression": "pass",
+        "behavior": "pass",
+        "structural": "violation",
+        "acceptance_counts": [
+          2,
+          0,
+          0
+        ]
+      },
+      "ok": true
+    },
+    {
+      "task": "T02-filtering",
+      "case": "baseline",
+      "expect": {
+        "acceptance": "fail",
+        "regression": "pass",
+        "structural": "pass"
+      },
+      "observed": {
+        "acceptance": "fail",
+        "regression": "pass",
+        "behavior": "fail",
+        "structural": "pass",
+        "acceptance_counts": [
+          3,
+          2,
+          0
+        ]
+      },
+      "ok": true
+    },
+    {
+      "task": "T02-filtering",
+      "case": "reference",
+      "expect": {
+        "acceptance": "pass",
+        "regression": "pass",
+        "structural": "pass"
+      },
+      "observed": {
+        "acceptance": "pass",
+        "regression": "pass",
+        "behavior": "pass",
+        "structural": "pass",
+        "acceptance_counts": [
+          3,
+          0,
+          0
+        ]
+      },
+      "ok": true
+    },
+    {
+      "task": "T02-filtering",
+      "case": "substring-match",
+      "expect": {
+        "behavior": "fail"
+      },
+      "observed": {
+        "acceptance": "fail",
+        "regression": "pass",
+        "behavior": "fail",
+        "structural": "pass",
+        "acceptance_counts": [
+          3,
+          1,
+          0
+        ]
+      },
+      "ok": true
+    },
+    {
+      "task": "T03-totals",
+      "case": "baseline",
+      "expect": {
+        "acceptance": "fail",
+        "regression": "pass",
+        "structural": "pass"
+      },
+      "observed": {
+        "acceptance": "fail",
+        "regression": "pass",
+        "behavior": "fail",
+        "structural": "pass",
+        "acceptance_counts": [
+          2,
+          2,
+          0
+        ]
+      },
+      "ok": true
+    },
+    {
+      "task": "T03-totals",
+      "case": "reference",
+      "expect": {
+        "acceptance": "pass",
+        "regression": "pass",
+        "structural": "pass"
+      },
+      "observed": {
+        "acceptance": "pass",
+        "regression": "pass",
+        "behavior": "pass",
+        "structural": "pass",
+        "acceptance_counts": [
+          2,
+          0,
+          0
+        ]
+      },
+      "ok": true
+    },
+    {
+      "task": "T03-totals",
+      "case": "discount-on-combined-subtotal",
+      "expect": {
+        "behavior": "fail"
+      },
+      "observed": {
+        "acceptance": "fail",
+        "regression": "pass",
+        "behavior": "fail",
+        "structural": "pass",
+        "acceptance_counts": [
+          2,
+          1,
+          0
+        ]
+      },
+      "ok": true
+    },
+    {
+      "task": "T04-discounts",
+      "case": "baseline",
+      "expect": {
+        "acceptance": "fail",
+        "regression": "pass",
+        "structural": "pass"
+      },
+      "observed": {
+        "acceptance": "fail",
+        "regression": "pass",
+        "behavior": "fail",
+        "structural": "pass",
+        "acceptance_counts": [
+          7,
+          7,
+          0
+        ]
+      },
+      "ok": true
+    },
+    {
+      "task": "T04-discounts",
+      "case": "reference",
+      "expect": {
+        "acceptance": "pass",
+        "regression": "pass",
+        "structural": "pass"
+      },
+      "observed": {
+        "acceptance": "pass",
+        "regression": "pass",
+        "behavior": "pass",
+        "structural": "pass",
+        "acceptance_counts": [
+          7,
+          0,
+          0
+        ]
+      },
+      "ok": true
+    },
+    {
+      "task": "T04-discounts",
+      "case": "quote-places-order",
+      "expect": {
+        "behavior": "fail"
+      },
+      "observed": {
+        "acceptance": "fail",
+        "regression": "pass",
+        "behavior": "fail",
+        "structural": "pass",
+        "acceptance_counts": [
+          7,
+          1,
+          0
+        ]
+      },
+      "ok": true
+    },
+    {
+      "task": "T04-discounts",
+      "case": "off-by-one-threshold",
+      "expect": {
+        "behavior": "fail"
+      },
+      "observed": {
+        "acceptance": "fail",
+        "regression": "fail",
+        "behavior": "fail",
+        "structural": "pass",
+        "acceptance_counts": [
+          7,
+          1,
+          0
+        ]
+      },
+      "ok": true
+    },
+    {
+      "task": "T04-discounts",
+      "case": "direct-import",
+      "expect": {
+        "behavior": "pass",
+        "structural": "violation"
+      },
+      "observed": {
+        "acceptance": "pass",
+        "regression": "pass",
+        "behavior": "pass",
+        "structural": "violation",
+        "acceptance_counts": [
+          7,
+          0,
+          0
+        ]
+      },
+      "ok": true
+    },
+    {
+      "task": "T05-cancellation",
+      "case": "baseline",
+      "expect": {
+        "acceptance": "fail",
+        "regression": "pass",
+        "structural": "pass"
+      },
+      "observed": {
+        "acceptance": "fail",
+        "regression": "pass",
+        "behavior": "fail",
+        "structural": "pass",
+        "acceptance_counts": [
+          4,
+          4,
+          0
+        ]
+      },
+      "ok": true
+    },
+    {
+      "task": "T05-cancellation",
+      "case": "reference",
+      "expect": {
+        "acceptance": "pass",
+        "regression": "pass",
+        "structural": "pass"
+      },
+      "observed": {
+        "acceptance": "pass",
+        "regression": "pass",
+        "behavior": "pass",
+        "structural": "pass",
+        "acceptance_counts": [
+          4,
+          0,
+          0
+        ]
+      },
+      "ok": true
+    },
+    {
+      "task": "T05-cancellation",
+      "case": "cancel-twice-succeeds",
+      "expect": {
+        "behavior": "fail"
+      },
+      "observed": {
+        "acceptance": "fail",
+        "regression": "pass",
+        "behavior": "fail",
+        "structural": "pass",
+        "acceptance_counts": [
+          4,
+          1,
+          0
+        ]
+      },
+      "ok": true
+    },
+    {
+      "task": "T06-pagination",
+      "case": "baseline",
+      "expect": {
+        "acceptance": "fail",
+        "regression": "pass",
+        "structural": "pass"
+      },
+      "observed": {
+        "acceptance": "fail",
+        "regression": "pass",
+        "behavior": "fail",
+        "structural": "pass",
+        "acceptance_counts": [
+          10,
+          10,
+          0
+        ]
+      },
+      "ok": true
+    },
+    {
+      "task": "T06-pagination",
+      "case": "reference",
+      "expect": {
+        "acceptance": "pass",
+        "regression": "pass",
+        "structural": "pass"
+      },
+      "observed": {
+        "acceptance": "pass",
+        "regression": "pass",
+        "behavior": "pass",
+        "structural": "pass",
+        "acceptance_counts": [
+          10,
+          0,
+          0
+        ]
+      },
+      "ok": true
+    },
+    {
+      "task": "T06-pagination",
+      "case": "next-offset-on-last-page",
+      "expect": {
+        "behavior": "fail"
+      },
+      "observed": {
+        "acceptance": "fail",
+        "regression": "pass",
+        "behavior": "fail",
+        "structural": "pass",
+        "acceptance_counts": [
+          10,
+          2,
+          0
+        ]
+      },
+      "ok": true
+    },
+    {
+      "task": "T07-bulk-retrieval",
+      "case": "baseline",
+      "expect": {
+        "acceptance": "fail",
+        "regression": "pass",
+        "structural": "pass"
+      },
+      "observed": {
+        "acceptance": "fail",
+        "regression": "pass",
+        "behavior": "fail",
+        "structural": "pass",
+        "acceptance_counts": [
+          8,
+          8,
+          0
+        ]
+      },
+      "ok": true
+    },
+    {
+      "task": "T07-bulk-retrieval",
+      "case": "reference",
+      "expect": {
+        "acceptance": "pass",
+        "regression": "pass",
+        "structural": "pass"
+      },
+      "observed": {
+        "acceptance": "pass",
+        "regression": "pass",
+        "behavior": "pass",
+        "structural": "pass",
+        "acceptance_counts": [
+          8,
+          0,
+          0
+        ]
+      },
+      "ok": true
+    },
+    {
+      "task": "T07-bulk-retrieval",
+      "case": "keeps-duplicates",
+      "expect": {
+        "behavior": "fail"
+      },
+      "observed": {
+        "acceptance": "fail",
+        "regression": "pass",
+        "behavior": "fail",
+        "structural": "pass",
+        "acceptance_counts": [
+          8,
+          1,
+          0
+        ]
+      },
+      "ok": true
+    },
+    {
+      "task": "T08-status-updates",
+      "case": "baseline",
+      "expect": {
+        "acceptance": "fail",
+        "regression": "pass",
+        "structural": "pass"
+      },
+      "observed": {
+        "acceptance": "fail",
+        "regression": "pass",
+        "behavior": "fail",
+        "structural": "pass",
+        "acceptance_counts": [
+          10,
+          10,
+          0
+        ]
+      },
+      "ok": true
+    },
+    {
+      "task": "T08-status-updates",
+      "case": "reference",
+      "expect": {
+        "acceptance": "pass",
+        "regression": "pass",
+        "structural": "pass"
+      },
+      "observed": {
+        "acceptance": "pass",
+        "regression": "pass",
+        "behavior": "pass",
+        "structural": "pass",
+        "acceptance_counts": [
+          10,
+          0,
+          0
+        ]
+      },
+      "ok": true
+    },
+    {
+      "task": "T08-status-updates",
+      "case": "allows-skipping",
+      "expect": {
+        "behavior": "fail"
+      },
+      "observed": {
+        "acceptance": "fail",
+        "regression": "pass",
+        "behavior": "fail",
+        "structural": "pass",
+        "acceptance_counts": [
+          10,
+          2,
+          0
+        ]
+      },
+      "ok": true
+    },
+    {
+      "task": "T08-status-updates",
+      "case": "direct-import",
+      "expect": {
+        "behavior": "pass",
+        "structural": "violation"
+      },
+      "observed": {
+        "acceptance": "pass",
+        "regression": "pass",
+        "behavior": "pass",
+        "structural": "violation",
+        "acceptance_counts": [
+          10,
+          0,
+          0
+        ]
+      },
+      "ok": true
+    },
+    {
+      "task": "T09-audit-history",
+      "case": "baseline",
+      "expect": {
+        "acceptance": "fail",
+        "regression": "pass",
+        "structural": "pass"
+      },
+      "observed": {
+        "acceptance": "fail",
+        "regression": "pass",
+        "behavior": "fail",
+        "structural": "pass",
+        "acceptance_counts": [
+          3,
+          3,
+          0
+        ]
+      },
+      "ok": true
+    },
+    {
+      "task": "T09-audit-history",
+      "case": "reference",
+      "expect": {
+        "acceptance": "pass",
+        "regression": "pass",
+        "structural": "pass"
+      },
+      "observed": {
+        "acceptance": "pass",
+        "regression": "pass",
+        "behavior": "pass",
+        "structural": "pass",
+        "acceptance_counts": [
+          3,
+          0,
+          0
+        ]
+      },
+      "ok": true
+    },
+    {
+      "task": "T09-audit-history",
+      "case": "pre-discount-total",
+      "expect": {
+        "behavior": "fail"
+      },
+      "observed": {
+        "acceptance": "fail",
+        "regression": "pass",
+        "behavior": "fail",
+        "structural": "pass",
+        "acceptance_counts": [
+          3,
+          1,
+          0
+        ]
+      },
+      "ok": true
+    },
+    {
+      "task": "T10-validation",
+      "case": "baseline",
+      "expect": {
+        "acceptance": "fail",
+        "regression": "pass",
+        "structural": "pass"
+      },
+      "observed": {
+        "acceptance": "fail",
+        "regression": "pass",
+        "behavior": "fail",
+        "structural": "pass",
+        "acceptance_counts": [
+          9,
+          5,
+          0
+        ]
+      },
+      "ok": true
+    },
+    {
+      "task": "T10-validation",
+      "case": "reference",
+      "expect": {
+        "acceptance": "pass",
+        "regression": "pass",
+        "structural": "pass"
+      },
+      "observed": {
+        "acceptance": "pass",
+        "regression": "pass",
+        "behavior": "pass",
+        "structural": "pass",
+        "acceptance_counts": [
+          9,
+          0,
+          0
+        ]
+      },
+      "ok": true
+    },
+    {
+      "task": "T10-validation",
+      "case": "limit-off-by-one",
+      "expect": {
+        "behavior": "fail"
+      },
+      "observed": {
+        "acceptance": "fail",
+        "regression": "pass",
+        "behavior": "fail",
+        "structural": "pass",
+        "acceptance_counts": [
+          9,
+          1,
+          0
+        ]
+      },
+      "ok": true
+    }
+  ],
+  "problems": []
+}

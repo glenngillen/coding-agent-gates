@@ -1,0 +1,247 @@
+{
+  "artifacts": {
+    "cli_stderr": "experiment/runs/models-v5-2026-11-20/stated-S2-fulfilment__B__haiku45__r2/cli-stderr.txt",
+    "evaluation": "experiment/runs/models-v5-2026-11-20/stated-S2-fulfilment__B__haiku45__r2/evaluation.json",
+    "final_diff": "experiment/runs/models-v5-2026-11-20/stated-S2-fulfilment__B__haiku45__r2/final.diff",
+    "hook_events": "experiment/runs/models-v5-2026-11-20/stated-S2-fulfilment__B__haiku45__r2/hook-events.jsonl",
+    "prepared": "experiment/runs/models-v5-2026-11-20/stated-S2-fulfilment__B__haiku45__r2/prepared.json",
+    "record": "experiment/runs/models-v5-2026-11-20/stated-S2-fulfilment__B__haiku45__r2/record.json",
+    "transcript": "experiment/runs/models-v5-2026-11-20/stated-S2-fulfilment__B__haiku45__r2/transcript.jsonl",
+    "turn_structural": "experiment/runs/models-v5-2026-11-20/stated-S2-fulfilment__B__haiku45__r2/turn-structural.json"
+  },
+  "evidence_kind": "real",
+  "identity": {
+    "agent_effort": null,
+    "agent_model_requested": "claude-haiku-4-5",
+    "agent_models_reported": [
+      "claude-haiku-4-5"
+    ],
+    "arm": "B",
+    "baseline_commit": "be30d56c0048b74602a7f2da82013e393c4bb1c1",
+    "baseline_tree_sha256": "b1843c29202f83f87b4eaa31a9f15a4a404e2f82aa0a01fdc317858e264c52fd",
+    "blind_id": "ab9046d9ec76",
+    "environment": {
+      "claude_cli": "2.1.322 (Claude Code)",
+      "import_linter": "2.17",
+      "platform": "macOS-26.6.2-arm64-arm-64bit",
+      "python": "3.12.15"
+    },
+    "finished_at": "2026-11-20T07:15:48+00:00",
+    "frozen_manifest_sha256": "b9fe0be84c81d4b182d991faf898c0fe4bba3a186b551b9a204489019aeb96e3",
+    "guidance": "stated",
+    "instruction_sha256": "2d6231a38f70be5c2260ad9233e579b88bc4fd12e102bfd6f6e2465cec3c0f67",
+    "messages_sha256": "db41ae999cf212d23272ecda30ed2c7400dcd70cb2a786f4a8d364dc5d25adda",
+    "model_key": "haiku45",
+    "protocol": "experiment/protocol-v5.md",
+    "repeat": 2,
+    "run_id": "stated-S2-fulfilment__B__haiku45__r2",
+    "scenario_id": "S2-fulfilment",
+    "scenario_sha256": "6460b508417f0d21fed2a8ca74755c276408edc880db16a96688cfbecefe721a",
+    "seed": "unsupported by the Claude Code CLI; not set",
+    "sequence": 53,
+    "session": "one fresh process per session, --no-session-persistence; steps sent as successive user messages with --input-format stream-json",
+    "settings_sha256": "e226e10f4fd6489385f49aec26bf321fd4947fe21d6558d5e51efc2af950d37e",
+    "started_at": "2026-11-20T07:12:19+00:00",
+    "study": "models-v5-2026-11-20",
+    "study_sha256": "44769201c619bb87898fedcc2792245691a418fb7b9b19faf5c7aadf4f3953b2",
+    "workspace_history": [
+      "be30d56 2026-04-17 Add back-office reports for the ops review",
+      "1b08fe6 2026-03-09 Controllers, wiring and tests for customers, catalogue and orders",
+      "e41c49f 2026-03-04 Application services and pricing policy",
+      "ac276fe 2026-03-02 Domain model and in-memory storage"
+    ]
+  },
+  "infrastructure_retries": [],
+  "ledger": {
+    "agent_entry_id": "572c18e83bcb418b903814de34221ecb",
+    "charged_usd": "0.4219094000000001",
+    "cost_known": true,
+    "reserved_usd": "2.32",
+    "status": "finished"
+  },
+  "notes": [],
+  "outcome": {
+    "baseline_tests_modified": [],
+    "behavior": {
+      "all_steps_accepted": true,
+      "regression": "pass",
+      "steps_accepted": [
+        "s2-step1-packing-slip",
+        "s2-step2-low-stock",
+        "s2-step3-restock",
+        "s2-step4-summary"
+      ]
+    },
+    "final_structural": "pass",
+    "final_structural_raw": "violation",
+    "final_violations": [],
+    "judge_unavailable": false,
+    "legacy_reports_modified": false,
+    "semantic_judge": "pass",
+    "semantic_label": null,
+    "semantic_label_note": "unavailable: no independent human labels for final runs (Decisions, 2026-11-19); semantic_judge is a judge output, not ground truth",
+    "settings_file_check": "unchanged",
+    "steps_reached": 4,
+    "submission": "final snapshot evaluated as a synthetic final submission; no merge was attempted or blocked",
+    "tampering_detected": false,
+    "termination": "completed"
+  },
+  "repair": {
+    "applicable": true,
+    "max_repairs_per_turn": 3,
+    "requests": 0
+  },
+  "schema": "coding-agent-gates/run-record-v2/v1",
+  "settings_integrity": {
+    "actual_sha256": "e226e10f4fd6489385f49aec26bf321fd4947fe21d6558d5e51efc2af950d37e",
+    "detected": false,
+    "expected_sha256": "e226e10f4fd6489385f49aec26bf321fd4947fe21d6558d5e51efc2af950d37e",
+    "note": null,
+    "path": "<run>/settings.json",
+    "schema": "coding-agent-gates/settings-integrity/v1",
+    "status": "unchanged"
+  },
+  "time": {
+    "check_seconds": {
+      "judge_s": null,
+      "sensor_s": 0.704
+    },
+    "session_s": 209.363
+  },
+  "turns": [
+    {
+      "caught": null,
+      "censored": false,
+      "cost_usd": "0.14585990000000004",
+      "cut_short": false,
+      "duration_s": 80.795,
+      "end_structural": "pass",
+      "first_structural": "pass",
+      "new_edges": null,
+      "persisting_violation": false,
+      "reached": true,
+      "repair_requests": 0,
+      "repaired": null,
+      "result_subtype": "success",
+      "semantic_first": null,
+      "slip": false,
+      "step": 1
+    },
+    {
+      "caught": null,
+      "censored": false,
+      "cost_usd": "0.10056920000000003",
+      "cut_short": false,
+      "duration_s": 49.015,
+      "end_structural": "pass",
+      "first_structural": "pass",
+      "new_edges": null,
+      "persisting_violation": false,
+      "reached": true,
+      "repair_requests": 0,
+      "repaired": null,
+      "result_subtype": "success",
+      "semantic_first": null,
+      "slip": false,
+      "step": 2
+    },
+    {
+      "caught": null,
+      "censored": false,
+      "cost_usd": "0.07390780000000003",
+      "cut_short": false,
+      "duration_s": 31.474,
+      "end_structural": "pass",
+      "first_structural": "pass",
+      "new_edges": null,
+      "persisting_violation": false,
+      "reached": true,
+      "repair_requests": 0,
+      "repaired": null,
+      "result_subtype": "success",
+      "semantic_first": null,
+      "slip": false,
+      "step": 3
+    },
+    {
+      "caught": null,
+      "censored": false,
+      "cost_usd": "0.1015725000000000",
+      "cut_short": false,
+      "duration_s": 43.446,
+      "end_structural": "pass",
+      "first_structural": "pass",
+      "new_edges": null,
+      "persisting_violation": false,
+      "reached": true,
+      "repair_requests": 0,
+      "repaired": null,
+      "result_subtype": "success",
+      "semantic_first": null,
+      "slip": false,
+      "step": 4
+    }
+  ],
+  "usage": {
+    "agent": {
+      "by_model": {
+        "claude-haiku-4-5": {
+          "cache_creation_input_tokens": 47079,
+          "cache_read_input_tokens": 2087324,
+          "cost_usd": "0.4219094000000001",
+          "input_tokens": 504,
+          "output_tokens": 23703
+        }
+      },
+      "cost_basis": "total_cost_usd / costUSD reported by the Claude Code CLI: API-equivalent list-price estimates; under a subscription login they are notional, not an invoice",
+      "cost_usd": "0.4219094000000001",
+      "missing": null,
+      "num_turns": 11
+    },
+    "judge": {
+      "development": {
+        "calls": 0,
+        "cost_basis": "total_cost_usd / costUSD reported by the Claude Code CLI: API-equivalent list-price estimates; under a subscription login they are notional, not an invoice",
+        "cost_usd": "0",
+        "known_cost_subtotal_usd": "0",
+        "models": [],
+        "started_calls": 0,
+        "tokens": null,
+        "tokens_missing_calls": {
+          "cache_creation_input_tokens": 0,
+          "cache_read_input_tokens": 0,
+          "input_tokens": 0,
+          "output_tokens": 0
+        },
+        "unknown_cost_calls": 0,
+        "unknown_cost_held_usd": "0",
+        "unknown_cost_unrecorded_charge_calls": 0
+      },
+      "evaluation": {
+        "calls": 1,
+        "cost_basis": "total_cost_usd / costUSD reported by the Claude Code CLI: API-equivalent list-price estimates; under a subscription login they are notional, not an invoice",
+        "cost_usd": "0.0023507600000000003",
+        "known_cost_subtotal_usd": "0.0023507600000000003",
+        "models": [
+          "claude-haiku-5-5"
+        ],
+        "started_calls": 1,
+        "tokens": {
+          "cache_creation_input_tokens": 9440,
+          "cache_read_input_tokens": 7156,
+          "input_tokens": 2,
+          "output_tokens": 782
+        },
+        "tokens_missing_calls": {
+          "cache_creation_input_tokens": 0,
+          "cache_read_input_tokens": 0,
+          "input_tokens": 0,
+          "output_tokens": 0
+        },
+        "unknown_cost_calls": 0,
+        "unknown_cost_held_usd": "0",
+        "unknown_cost_unrecorded_charge_calls": 0
+      }
+    }
+  }
+}

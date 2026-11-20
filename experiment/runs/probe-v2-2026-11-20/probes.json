@@ -1,0 +1,153 @@
+{
+  "schema": "coding-agent-gates/probe-v2/v1",
+  "evidence_kind": "real",
+  "note": "pre-freeze harness probes; not study data",
+  "at": "2026-11-19T13:35:08+00:00",
+  "claude_cli": "2.1.322 (Claude Code)",
+  "probes": [
+    {
+      "probe": "setting-sources-project",
+      "setting_sources": "project",
+      "model": "claude-haiku-5-5",
+      "argv": [
+        "-p",
+        "--model",
+        "claude-haiku-5-5",
+        "--input-format",
+        "stream-json",
+        "--output-format",
+        "stream-json",
+        "--verbose",
+        "--no-session-persistence",
+        "--setting-sources",
+        "project",
+        "--settings",
+        "<example>/.tmp/probe-v2/setting-sources-project-27cef8/settings.json",
+        "--tools",
+        "Read",
+        "--disallowedTools",
+        "mcp__infracost",
+        "--disable-slash-commands",
+        "--permission-mode",
+        "acceptEdits",
+        "--max-budget-usd",
+        "0.20"
+      ],
+      "marker": "MARKER-C0B1A6",
+      "results": [
+        {
+          "subtype": "success",
+          "is_error": false,
+          "num_turns": 1,
+          "total_cost_usd": 0.0006288000000000001,
+          "result": "MARKER-C0B1A6"
+        },
+        {
+          "subtype": "success",
+          "is_error": false,
+          "num_turns": 1,
+          "total_cost_usd": 0.0008136200000000001,
+          "result": "DONE"
+        }
+      ],
+      "result_events": 2,
+      "first_reply": "MARKER-C0B1A6",
+      "marker_in_first_reply": true,
+      "hook_events": [
+        {
+          "hook_event_name": "UserPromptSubmit",
+          "stop_hook_active": null
+        },
+        {
+          "hook_event_name": "Stop",
+          "stop_hook_active": false
+        },
+        {
+          "hook_event_name": "UserPromptSubmit",
+          "stop_hook_active": null
+        },
+        {
+          "hook_event_name": "Stop",
+          "stop_hook_active": false
+        }
+      ],
+      "exit_code": 0,
+      "stderr_tail": "",
+      "seconds": 3.7,
+      "cost_usd": "0.0008136200000000001",
+      "cost_note": "total_cost_usd reported by the CLI for the whole process (cumulative over turns)"
+    },
+    {
+      "probe": "setting-sources-empty",
+      "setting_sources": "",
+      "model": "claude-haiku-5-5",
+      "argv": [
+        "-p",
+        "--model",
+        "claude-haiku-5-5",
+        "--input-format",
+        "stream-json",
+        "--output-format",
+        "stream-json",
+        "--verbose",
+        "--no-session-persistence",
+        "--setting-sources",
+        "",
+        "--settings",
+        "<example>/.tmp/probe-v2/setting-sources-empty-a0907e/settings.json",
+        "--tools",
+        "Read",
+        "--disallowedTools",
+        "mcp__infracost",
+        "--disable-slash-commands",
+        "--permission-mode",
+        "acceptEdits",
+        "--max-budget-usd",
+        "0.20"
+      ],
+      "marker": "MARKER-7F2231",
+      "results": [
+        {
+          "subtype": "success",
+          "is_error": false,
+          "num_turns": 1,
+          "total_cost_usd": 0.00044479000000000003,
+          "result": "I can't give you the marker. The CLAUDE.md file exists in this workspace, but its contents aren't in my context, and I can only get them by reading the file, which you asked me not to do. I won't guess, and \"NONE\" wouldn't be accurate since the file is there."
+        },
+        {
+          "subtype": "success",
+          "is_error": false,
+          "num_turns": 1,
+          "total_cost_usd": 0.0005879800000000001,
+          "result": "DONE"
+        }
+      ],
+      "result_events": 2,
+      "first_reply": "I can't give you the marker. The CLAUDE.md file exists in this workspace, but its contents aren't in my context, and I can only get them by reading the file, which you asked me not to do. I won't guess, and \"NONE\" wouldn't be accurate since the file is there.",
+      "marker_in_first_reply": false,
+      "hook_events": [
+        {
+          "hook_event_name": "UserPromptSubmit",
+          "stop_hook_active": null
+        },
+        {
+          "hook_event_name": "Stop",
+          "stop_hook_active": false
+        },
+        {
+          "hook_event_name": "UserPromptSubmit",
+          "stop_hook_active": null
+        },
+        {
+          "hook_event_name": "Stop",
+          "stop_hook_active": false
+        }
+      ],
+      "exit_code": 0,
+      "stderr_tail": "",
+      "seconds": 5.6,
+      "cost_usd": "0.0005879800000000001",
+      "cost_note": "total_cost_usd reported by the CLI for the whole process (cumulative over turns)"
+    }
+  ]
+}

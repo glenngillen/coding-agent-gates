@@ -1,0 +1,54 @@
+[
+  {
+    "turn": 1,
+    "status": "pass",
+    "raw_status": "violation",
+    "violations": [],
+    "error": null,
+    "fingerprint": "044832c5cc9d25abdf16f31ca8de9ee9540a4a13f86b179a31e831f071d8ed4d"
+  },
+  {
+    "turn": 2,
+    "status": "pass",
+    "raw_status": "violation",
+    "violations": [],
+    "error": null,
+    "fingerprint": "22f6c5e1af5c07444b7e3d076d51598e9a619e92c6ec51cec7aa9ad56c673e0f"
+  },
+  {
+    "turn": 3,
+    "status": "violation",
+    "raw_status": "violation",
+    "violations": [
+      {
+        "rule": "Controllers must not import infrastructure repositories directly",
+        "importer": "orders.controllers.customer_insights",
+        "imported": "orders.infrastructure.customers",
+        "lines": [
+          10
+        ],
+        "kind": "broken"
+      }
+    ],
+    "error": null,
+    "fingerprint": "e2f8f3623c36dd1cc1ff0e2595b2486665b78d26658c3b49e9d52f44a7f79a9a"
+  },
+  {
+    "turn": 4,
+    "status": "violation",
+    "raw_status": "violation",
+    "violations": [
+      {
+        "rule": "Controllers must not import infrastructure repositories directly",
+        "importer": "orders.controllers.customer_insights",
+        "imported": "orders.infrastructure.customers",
+        "lines": [
+          10
+        ],
+        "kind": "broken"
+      }
+    ],
+    "error": null,
+    "fingerprint": "ab4b7d0744a674600227e6ce8269c8f087d2789876ad7b6c1c52dd88280e2680"
+  }
+]

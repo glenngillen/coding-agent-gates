@@ -1,0 +1,73 @@
+{
+  "schema": "coding-agent-gates/arms/v1",
+  "frozen": "2026-11-19",
+  "placement": "end of turn: a Claude Code Stop hook (arms B and C); arm A has no hook",
+  "instruction_file": "experiment/instruction.md",
+  "prompt_suffix": "\n\nWork in this repository until the request is complete, then reply with a short summary of what you changed.",
+  "max_repairs": 3,
+  "agent": {
+    "cli": "claude",
+    "model": "claude-sonnet-5-5",
+    "effort": "medium",
+    "tools": [
+      "Bash",
+      "Read",
+      "Edit",
+      "Write",
+      "Glob",
+      "Grep"
+    ],
+    "allowed_tools": [
+      "Read",
+      "Edit",
+      "Write",
+      "Glob",
+      "Grep",
+      "Bash(.venv/bin/python -m pytest:*)",
+      "Bash(ls:*)",
+      "Bash(git status:*)",
+      "Bash(git diff:*)"
+    ],
+    "disallowed_tools": [
+      "mcp__infracost"
+    ],
+    "disable_slash_commands": true,
+    "permission_mode": "acceptEdits",
+    "permission_prompts": "none",
+    "setting_sources": "",
+    "auto_memory": false,
+    "session_persistence": false,
+    "output_format": "stream-json",
+    "max_budget_usd": "2.50",
+    "wall_timeout_s": 1500,
+    "seed": "unsupported by the Claude Code CLI; not set"
+  },
+  "judge": {
+    "model": "claude-haiku-5-5",
+    "adapter": "gates.claude_cli_judge.ClaudeCliJudgeProvider",
+    "rubric": "semantic/rubric.md"
+  },
+  "development_contract": ".importlinter",
+  "arms": {
+    "A": {
+      "label": "instruction only",
+      "description": "The instruction file and the task. No architecture feedback while working; the final architecture evaluation stays hidden.",
+      "stop_hook": null
+    },
+    "B": {
+      "label": "instruction + structural feedback",
+      "description": "A plus the deterministic import-contract sensor at the end of each turn, through the Stop hook, with up to max_repairs repair requests.",
+      "stop_hook": {
+        "semantic": false
+      }
+    },
+    "C": {
+      "label": "instruction + structural + semantic feedback",
+      "description": "B plus the narrow semantic rubric judged by the live Haiku judge after a structural pass. A semantic violation requests a repair from the same budget. If the judge cannot run, the run is recorded as not runnable; it never falls back to arm B.",
+      "stop_hook": {
+        "semantic": true
+      }
+    }
+  },
+  "agent_environment_note": "The building environment carries an enterprise MCP configuration, so --strict-mcp-config is refused. Its one connected server (infracost) is excluded with --disallowedTools and skills/slash commands with --disable-slash-commands; the same exclusions apply to every arm. Harness check 2026-11-19 found them in the agent's tool list before this exclusion."
+}

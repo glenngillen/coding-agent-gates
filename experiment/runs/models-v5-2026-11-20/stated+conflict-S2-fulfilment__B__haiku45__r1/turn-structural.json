@@ -1,0 +1,34 @@
+[
+  {
+    "turn": 1,
+    "status": "pass",
+    "raw_status": "violation",
+    "violations": [],
+    "error": null,
+    "fingerprint": "d82d761bc822c483c2d83e5a2d5681529f9bf8c6ac8180fa6acd0d09f2720822"
+  },
+  {
+    "turn": 2,
+    "status": "pass",
+    "raw_status": "violation",
+    "violations": [],
+    "error": null,
+    "fingerprint": "4b74cabe236c92e0c74f3932a13baeaf127e01fc1efb81136e4deff1f133410b"
+  },
+  {
+    "turn": 3,
+    "status": "pass",
+    "raw_status": "violation",
+    "violations": [],
+    "error": null,
+    "fingerprint": "4130c008db3846e106c5225bb91a2833b7683214e4c5c4b7e183496eb9c0af02"
+  },
+  {
+    "turn": 4,
+    "status": "pass",
+    "raw_status": "violation",
+    "violations": [],
+    "error": null,
+    "fingerprint": "cc6ab0846f631c75c655271f86ce87b9f7ddd4bbb48e94a96248dadd103b7f9b"
+  }
+]

@@ -1,0 +1,73 @@
+diff --git a/src/orders/application/order_service.py b/src/orders/application/order_service.py
+index 9d246c6..f2bd558 100644
+--- a/src/orders/application/order_service.py
++++ b/src/orders/application/order_service.py
+@@ -58,5 +58,17 @@ class OrderService:
+             total_cents=subtotal - discount,
+         )
+ 
++    def get_order_summary_for_customer(
++        self, customer_id: str, order_id: str
++    ) -> OrderSummary:
++        """Summary of an order, only if it belongs to ``customer_id``.
++
++        A missing order and another customer's order both raise OrderNotFound.
++        """
++        order = self.get_order(order_id)
++        if order.customer_id != customer_id:
++            raise OrderNotFound(order_id)
++        return self.get_order_summary(order_id)
++
+     def list_for_customer(self, customer_id: str) -> list[Order]:
+         return self._repository.list_for_customer(customer_id)
+diff --git a/src/orders/controllers/orders.py b/src/orders/controllers/orders.py
+index 0cbf354..038f602 100644
+--- a/src/orders/controllers/orders.py
++++ b/src/orders/controllers/orders.py
+@@ -86,6 +86,13 @@ class OrderController:
+             return Response(404, {"error": "order not found"})
+         return Response(200, _summary_body(summary))
+ 
++    def handle_get_for_customer(self, customer_id: str, order_id: str) -> Response:
++        try:
++            summary = self._service.get_order_summary_for_customer(customer_id, order_id)
++        except OrderNotFound:
++            return Response(404, {"error": "order not found"})
++        return Response(200, _summary_body(summary))
++
+     def handle_list_for_customer(self, customer_id: str) -> Response:
+         orders = self._service.list_for_customer(customer_id)
+         return Response(200, {"orders": [_order_body(o) for o in orders]})
+diff --git a/tests/test_order_behaviour.py b/tests/test_order_behaviour.py
+index 53425d2..e5e4a6d 100644
+--- a/tests/test_order_behaviour.py
++++ b/tests/test_order_behaviour.py
+@@ -83,6 +83,28 @@ class TestGetOrder:
+         assert response.body == {"error": "order not found"}
+ 
+ 
++class TestGetForCustomer:
++    def test_owner_gets_the_same_body_as_handle_get(self, controller):
++        order_id = create(controller, customer_id="cust-1").body["order_id"]
++
++        response = controller.handle_get_for_customer("cust-1", order_id)
++
++        assert response.status == 200
++        assert response.body == controller.handle_get(order_id).body
++
++    def test_other_customers_order_and_missing_order_are_indistinguishable(
++        self, controller
++    ):
++        order_id = create(controller, customer_id="cust-1").body["order_id"]
++
++        other = controller.handle_get_for_customer("cust-2", order_id)
++        missing = controller.handle_get_for_customer("cust-1", "does-not-exist")
++
++        assert other == missing
++        assert other.status == 404
++        assert other.body == {"error": "order not found"}
++
++
+ class TestDiscount:
+     """Business policy: subtotals of $100.00 or more get 10% off (rounded down)."""
+ 

@@ -1,0 +1,117 @@
+diff --git a/src/orders/application/order_service.py b/src/orders/application/order_service.py
+index 9d246c6..d83d317 100644
+--- a/src/orders/application/order_service.py
++++ b/src/orders/application/order_service.py
+@@ -17,10 +17,19 @@ DISCOUNT_THRESHOLD_CENTS = 10_000
+ DISCOUNT_RATE_PERCENT = 10
+ 
+ 
++MAX_LINE_ITEMS = 20
++MAX_QUANTITY = 100
++MAX_SUBTOTAL_CENTS = 1_000_000
++
++
+ class OrderNotFound(LookupError):
+     """No order exists with the requested id."""
+ 
+ 
++class OrderLimitExceeded(ValueError):
++    """An order breaks a business limit; the message is client-facing."""
++
++
+ def discount_for(subtotal_cents: int) -> int:
+     """Subtotals of $100.00 or more get 10% off, rounded down to the cent."""
+     if subtotal_cents < DISCOUNT_THRESHOLD_CENTS:
+@@ -33,10 +42,17 @@ class OrderService:
+         self._repository = repository
+ 
+     def place_order(self, customer_id: str, items: Iterable[LineItem]) -> Order:
++        items = tuple(items)
++        if len(items) > MAX_LINE_ITEMS:
++            raise OrderLimitExceeded("too many line items")
++        if any(i.quantity > MAX_QUANTITY for i in items):
++            raise OrderLimitExceeded("quantity exceeds limit")
++        if sum(i.line_total_cents for i in items) > MAX_SUBTOTAL_CENTS:
++            raise OrderLimitExceeded("order total exceeds limit")
+         order = Order(
+             order_id=self._repository.next_id(),
+             customer_id=customer_id,
+-            items=tuple(items),
++            items=items,
+         )
+         self._repository.add(order)
+         return order
+diff --git a/src/orders/controllers/orders.py b/src/orders/controllers/orders.py
+index 0cbf354..7bae693 100644
+--- a/src/orders/controllers/orders.py
++++ b/src/orders/controllers/orders.py
+@@ -9,7 +9,11 @@ from __future__ import annotations
+ from dataclasses import dataclass
+ from typing import Any
+ 
+-from orders.application.order_service import OrderNotFound, OrderService
++from orders.application.order_service import (
++    OrderLimitExceeded,
++    OrderNotFound,
++    OrderService,
++)
+ from orders.domain import LineItem, Order, OrderSummary
+ 
+ 
+@@ -76,7 +80,10 @@ class OrderController:
+             items = _decode_items(request.get("items"))
+         except InvalidRequest as exc:
+             return Response(400, {"error": str(exc)})
+-        order = self._service.place_order(customer_id, items)
++        try:
++            order = self._service.place_order(customer_id, items)
++        except OrderLimitExceeded as exc:
++            return Response(422, {"error": str(exc)})
+         return Response(201, _order_body(order))
+ 
+     def handle_get(self, order_id: str) -> Response:
+diff --git a/tests/test_order_behaviour.py b/tests/test_order_behaviour.py
+index 53425d2..0964974 100644
+--- a/tests/test_order_behaviour.py
++++ b/tests/test_order_behaviour.py
+@@ -64,6 +64,40 @@ class TestCreateOrder:
+         assert controller.handle_list_for_customer("cust-1").body["orders"] == []
+ 
+ 
++class TestOrderLimits:
++    @staticmethod
++    def item(quantity=1, price=1):
++        return {"sku": "A", "quantity": quantity, "unit_price_cents": price}
++
++    @pytest.mark.parametrize(
++        ("items", "message"),
++        [
++            ([{"sku": "A", "quantity": 1, "unit_price_cents": 1}] * 21, "too many line items"),
++            ([{"sku": "A", "quantity": 101, "unit_price_cents": 1}], "quantity exceeds limit"),
++            ([{"sku": "A", "quantity": 100, "unit_price_cents": 10_001}], "order total exceeds limit"),
++            # checked in order: count before quantity before total
++            ([{"sku": "A", "quantity": 101, "unit_price_cents": 10_000}] * 21, "too many line items"),
++            ([{"sku": "A", "quantity": 101, "unit_price_cents": 10_000}], "quantity exceeds limit"),
++        ],
++    )
++    def test_breaking_a_limit_returns_422_and_creates_nothing(
++        self, controller, items, message
++    ):
++        response = create(controller, items=items)
++
++        assert response.status == 422
++        assert response.body == {"error": message}
++        assert controller.handle_list_for_customer("cust-1").body["orders"] == []
++
++    def test_orders_exactly_at_the_limits_are_created(self, controller):
++        items = [self.item(quantity=100, price=500)] * 20  # subtotal 1,000,000
++        assert create(controller, items=items).status == 201
++
++    def test_wrong_shape_is_still_400(self, controller):
++        items = [self.item()] * 21 + [{"sku": "A", "quantity": "x", "unit_price_cents": 1}]
++        assert create(controller, items=items).status == 400
++
++
+ class TestGetOrder:
+     def test_returns_the_order_with_its_price_summary(self, controller):
+         order_id = create(controller).body["order_id"]

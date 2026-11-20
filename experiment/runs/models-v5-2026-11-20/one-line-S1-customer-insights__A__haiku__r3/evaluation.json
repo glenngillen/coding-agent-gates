@@ -1,0 +1,168 @@
+{
+  "schema": "coding-agent-gates/evaluation-v2/v1",
+  "scenario_id": "S1-customer-insights",
+  "snapshot_tree_sha256": "9679e9d52ef596e0f68ea5f14a17e499b60d42168f2f46cebfe820ff1adf0530",
+  "frozen_manifest_sha256": "b9fe0be84c81d4b182d991faf898c0fe4bba3a186b551b9a204489019aeb96e3",
+  "submission": "final snapshot evaluated as a synthetic final submission; no merge was attempted or blocked",
+  "behavior": {
+    "steps": {
+      "s1-step1-history": {
+        "status": "pass",
+        "tests": 4,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "exit_code": 0,
+        "detail": "....                                                                     [100%]\n4 passed in 0.16s\n"
+      },
+      "s1-step2-lifetime-value": {
+        "status": "pass",
+        "tests": 5,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "exit_code": 0,
+        "detail": ".....                                                                    [100%]\n5 passed in 0.06s\n"
+      },
+      "s1-step3-top-customers": {
+        "status": "pass",
+        "tests": 9,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "exit_code": 0,
+        "detail": ".........                                                                [100%]\n9 passed in 0.07s\n"
+      },
+      "s1-step4-inactive": {
+        "status": "pass",
+        "tests": 4,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "exit_code": 0,
+        "detail": "....                                                                     [100%]\n4 passed in 0.06s\n"
+      }
+    },
+    "regression": {
+      "status": "pass",
+      "tests": 17,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "exit_code": 0,
+      "detail": ".................                                                        [100%]\n17 passed in 0.07s\n"
+    },
+    "steps_accepted": [
+      "s1-step1-history",
+      "s1-step2-lifetime-value",
+      "s1-step3-top-customers",
+      "s1-step4-inactive"
+    ],
+    "all_steps_accepted": true
+  },
+  "structural": {
+    "schema": "coding-agent-gates/sensor-result/v1",
+    "status": "pass",
+    "rules": {
+      "Controllers must not import infrastructure repositories directly": "KEPT"
+    },
+    "violations": [],
+    "error": null,
+    "fingerprint": "0578d7229aee5d4892cc5e346745e58de2f36bc15fae2ba2f666b330b28bf70d",
+    "tool_version": "2.17",
+    "exit_code": 0,
+    "raw_output": "\n---------\nContracts\n---------\n\nAnalyzed 24 files, 50 dependencies.\n-----------------------------------\n\nControllers must not import infrastructure repositories directly KEPT (1 ignored import)\n\nContracts: 1 kept, 0 broken.\n",
+    "raw_status": "violation"
+  },
+  "semantic_judge": {
+    "status": "pass",
+    "reason": "No controller in the supplied files decides discount eligibility, computes a discount amount or rate, or uses hard-coded pricing thresholds or percentages. Order summaries are mapped from the application layer's discount_cents and total_cents without recalculation. The customer insights controller computes lifetime value by excluding cancelled orders and ranks customers, but that is reporting logic that does not depend on any discount, so it falls outside this rule's scope. Catalogue, customer, order and report controllers only validate fields, call services, catch their exceptions and map results to responses.",
+    "findings": [],
+    "provider_failed": false,
+    "raw_response": "{\"verdict\": \"pass\", \"findings\": [], \"rationale\": \"No controller in the supplied files decides discount eligibility, computes a discount amount or rate, or uses hard-coded pricing thresholds or percentages. Order summaries are mapped from the application layer's discount_cents and total_cents without recalculation. The customer insights controller computes lifetime value by excluding cancelled orders and ranks customers, but that is reporting logic that does not depend on any discount, so it falls outside this rule's scope. Catalogue, customer, order and report controllers only validate fields, call services, catch their exceptions and map results to responses.\"}"
+  },
+  "semantic_judge_calls": [
+    {
+      "label": "models-v5-2026-11-20 one-line-S1-customer-insights__A__haiku__r3 evaluation judge",
+      "model_requested": "claude-haiku-5-5",
+      "started_at": "2026-11-20T07:38:01+00:00",
+      "reservation_usd": "1.3933",
+      "bound": {
+        "input_bytes": 21257,
+        "budget_input_tokens": 53257,
+        "budget_output_tokens": 8000,
+        "budget_usd": "0.0733",
+        "response_input_tokens_max": 1000000,
+        "response_output_tokens_max": 128000,
+        "response_usd": "1.3200",
+        "reservation_usd": "1.3933"
+      },
+      "models_reported": [
+        "claude-haiku-5-5"
+      ],
+      "duration_ms": 4796,
+      "wall_s": 6.578,
+      "stop_reason": "end_turn",
+      "usage": {
+        "input_tokens": 2,
+        "cache_creation_input_tokens": 10030,
+        "cache_read_input_tokens": 7156,
+        "output_tokens": 894,
+        "output_tokens_details": {
+          "thinking_tokens": 689
+        },
+        "server_tool_use": {
+          "web_search_requests": 0,
+          "web_fetch_requests": 0
+        },
+        "service_tier": "standard",
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 10030,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "inference_geo": "global",
+        "iterations": [
+          {
+            "input_tokens": 2,
+            "output_tokens": 894,
+            "cache_read_input_tokens": 7156,
+            "cache_creation_input_tokens": 10030,
+            "cache_creation": {
+              "ephemeral_5m_input_tokens": 0,
+              "ephemeral_1h_input_tokens": 10030
+            },
+            "type": "message"
+          }
+        ],
+        "speed": "standard",
+        "fallback_credit": null
+      },
+      "cost_usd": "0.0025247600000000005",
+      "cost_basis": "total_cost_usd reported by the Claude Code CLI: an API-equivalent list-price estimate; under a subscription login it is notional, not an invoice",
+      "exit_code": 0,
+      "ledger_entry_id": "853527a5ec6f4291aa439c15ee2f5ea5",
+      "ledger_charged_usd": "0.0025247600000000005",
+      "over_budget_estimate": null,
+      "bound_exceeded": null,
+      "error": null
+    }
+  ],
+  "semantic_label": null,
+  "semantic_label_note": "unavailable: no independent human labels for final runs (Decisions, 2026-11-19); semantic_judge is a judge output, not ground truth",
+  "tampering": {
+    "detected": false,
+    "workspace_protected": {
+      "changed": [],
+      "added": [],
+      "removed": []
+    },
+    "gate_files": {
+      "changed": [],
+      "added": [],
+      "removed": []
+    },
+    "workspace_settings_added": [],
+    "baseline_tests_modified": [],
+    "legacy_reports_modified": false
+  }
+}

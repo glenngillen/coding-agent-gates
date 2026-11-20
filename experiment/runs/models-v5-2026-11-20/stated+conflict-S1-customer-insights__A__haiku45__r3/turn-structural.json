@@ -1,0 +1,74 @@
+[
+  {
+    "turn": 1,
+    "status": "violation",
+    "raw_status": "violation",
+    "violations": [
+      {
+        "rule": "Controllers must not import infrastructure repositories directly",
+        "importer": "orders.controllers.customer_insights",
+        "imported": "orders.infrastructure.customers",
+        "lines": [
+          9
+        ],
+        "kind": "broken"
+      }
+    ],
+    "error": null,
+    "fingerprint": "e2ade3cd14beac52d1fa8fd1a7ba8e21b99b033b88867899d18a8be406f4f873"
+  },
+  {
+    "turn": 2,
+    "status": "violation",
+    "raw_status": "violation",
+    "violations": [
+      {
+        "rule": "Controllers must not import infrastructure repositories directly",
+        "importer": "orders.controllers.customer_insights",
+        "imported": "orders.infrastructure.customers",
+        "lines": [
+          9
+        ],
+        "kind": "broken"
+      }
+    ],
+    "error": null,
+    "fingerprint": "1e189e8bcdfd3bfe7f14d2b1e2c620b5d1918203892fb8268d46966e40de8f75"
+  },
+  {
+    "turn": 3,
+    "status": "violation",
+    "raw_status": "violation",
+    "violations": [
+      {
+        "rule": "Controllers must not import infrastructure repositories directly",
+        "importer": "orders.controllers.customer_insights",
+        "imported": "orders.infrastructure.customers",
+        "lines": [
+          9
+        ],
+        "kind": "broken"
+      }
+    ],
+    "error": null,
+    "fingerprint": "79ffde33947dbaa1ab3c36c3dce36ee6de77441c50f3b69f9f01892063d7e526"
+  },
+  {
+    "turn": 4,
+    "status": "violation",
+    "raw_status": "violation",
+    "violations": [
+      {
+        "rule": "Controllers must not import infrastructure repositories directly",
+        "importer": "orders.controllers.customer_insights",
+        "imported": "orders.infrastructure.customers",
+        "lines": [
+          9
+        ],
+        "kind": "broken"
+      }
+    ],
+    "error": null,
+    "fingerprint": "55782bfe306162e9981349b9f51d5461a9de2cff35b87577b191ab11d0cd5e79"
+  }
+]

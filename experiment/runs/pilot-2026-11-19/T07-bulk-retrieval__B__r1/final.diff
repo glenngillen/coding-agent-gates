@@ -1,0 +1,65 @@
+diff --git a/src/orders/controllers/orders.py b/src/orders/controllers/orders.py
+index 0cbf354..5276c3b 100644
+--- a/src/orders/controllers/orders.py
++++ b/src/orders/controllers/orders.py
+@@ -86,6 +86,25 @@ class OrderController:
+             return Response(404, {"error": "order not found"})
+         return Response(200, _summary_body(summary))
+ 
++    def handle_get_many(self, order_ids: Any) -> Response:
++        if (
++            not isinstance(order_ids, list)
++            or not 1 <= len(order_ids) <= 100
++            or not all(isinstance(i, str) for i in order_ids)
++        ):
++            return Response(
++                400, {"error": "order_ids must be a list of 1 to 100 strings"}
++            )
++        orders: list[dict[str, Any]] = []
++        missing: list[str] = []
++        for order_id in dict.fromkeys(order_ids):
++            response = self.handle_get(order_id)
++            if response.status == 200:
++                orders.append(response.body)
++            else:
++                missing.append(order_id)
++        return Response(200, {"orders": orders, "missing": missing})
++
+     def handle_list_for_customer(self, customer_id: str) -> Response:
+         orders = self._service.list_for_customer(customer_id)
+         return Response(200, {"orders": [_order_body(o) for o in orders]})
+diff --git a/tests/test_order_behaviour.py b/tests/test_order_behaviour.py
+index 53425d2..85262f9 100644
+--- a/tests/test_order_behaviour.py
++++ b/tests/test_order_behaviour.py
+@@ -120,3 +120,30 @@ class TestListForCustomer:
+ 
+     def test_customer_without_orders_gets_an_empty_list(self, controller):
+         assert controller.handle_list_for_customer("nobody").body == {"orders": []}
++
++
++class TestGetMany:
++    ERR = {"error": "order_ids must be a list of 1 to 100 strings"}
++
++    @pytest.mark.parametrize(
++        "bad", ["a", None, [], [1], ["a", 2], ["a"] * 101, ("a",)]
++    )
++    def test_invalid_input_is_400(self, controller, bad):
++        response = controller.handle_get_many(bad)
++        assert response.status == 400
++        assert response.body == self.ERR
++
++    def test_hundred_ids_allowed(self, controller):
++        ids = [f"x{i}" for i in range(100)]
++        assert controller.handle_get_many(ids).status == 200
++
++    def test_orders_and_missing_in_order_deduplicated(self, controller):
++        a = create(controller).body["order_id"]
++        b = create(controller).body["order_id"]
++        response = controller.handle_get_many([b, "nope", a, b, "nope", "zzz"])
++        assert response.status == 200
++        assert response.body["orders"] == [
++            controller.handle_get(b).body,
++            controller.handle_get(a).body,
++        ]
++        assert response.body["missing"] == ["nope", "zzz"]

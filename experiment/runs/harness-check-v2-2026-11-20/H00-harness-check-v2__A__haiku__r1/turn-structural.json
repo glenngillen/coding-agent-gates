@@ -1,0 +1,38 @@
+[
+  {
+    "turn": 1,
+    "status": "violation",
+    "raw_status": "violation",
+    "violations": [
+      {
+        "rule": "Controllers must not import infrastructure repositories directly",
+        "importer": "orders.controllers.harness_check",
+        "imported": "orders.infrastructure.repository",
+        "lines": [
+          1
+        ],
+        "kind": "broken"
+      }
+    ],
+    "error": null,
+    "fingerprint": "794fc9d40d49e3fb7e9b343914b811d4ede35c4838b4f6a6ef2cfa9680e110f0"
+  },
+  {
+    "turn": 2,
+    "status": "violation",
+    "raw_status": "violation",
+    "violations": [
+      {
+        "rule": "Controllers must not import infrastructure repositories directly",
+        "importer": "orders.controllers.harness_check",
+        "imported": "orders.infrastructure.repository",
+        "lines": [
+          1
+        ],
+        "kind": "broken"
+      }
+    ],
+    "error": null,
+    "fingerprint": "794fc9d40d49e3fb7e9b343914b811d4ede35c4838b4f6a6ef2cfa9680e110f0"
+  }
+]

@@ -1,0 +1,74 @@
+[
+  {
+    "turn": 1,
+    "status": "violation",
+    "raw_status": "violation",
+    "violations": [
+      {
+        "rule": "Controllers must not import infrastructure repositories directly",
+        "importer": "orders.controllers.customer_insights",
+        "imported": "orders.infrastructure.customers",
+        "lines": [
+          9
+        ],
+        "kind": "broken"
+      }
+    ],
+    "error": null,
+    "fingerprint": "9d0093028a2d70a6b1e8534879b40d9d9c42979445123bc53f3ed809302c4f7c"
+  },
+  {
+    "turn": 2,
+    "status": "violation",
+    "raw_status": "violation",
+    "violations": [
+      {
+        "rule": "Controllers must not import infrastructure repositories directly",
+        "importer": "orders.controllers.customer_insights",
+        "imported": "orders.infrastructure.customers",
+        "lines": [
+          9
+        ],
+        "kind": "broken"
+      }
+    ],
+    "error": null,
+    "fingerprint": "c2ead93355645341f5abe3e6d67649304693c0c09d6f10751a0cf3a85595d702"
+  },
+  {
+    "turn": 3,
+    "status": "violation",
+    "raw_status": "violation",
+    "violations": [
+      {
+        "rule": "Controllers must not import infrastructure repositories directly",
+        "importer": "orders.controllers.customer_insights",
+        "imported": "orders.infrastructure.customers",
+        "lines": [
+          9
+        ],
+        "kind": "broken"
+      }
+    ],
+    "error": null,
+    "fingerprint": "a0cf6e109814d25201275b847ec3a80634c2cc003998303d8b5fa87fd56bdc62"
+  },
+  {
+    "turn": 4,
+    "status": "violation",
+    "raw_status": "violation",
+    "violations": [
+      {
+        "rule": "Controllers must not import infrastructure repositories directly",
+        "importer": "orders.controllers.customer_insights",
+        "imported": "orders.infrastructure.customers",
+        "lines": [
+          9
+        ],
+        "kind": "broken"
+      }
+    ],
+    "error": null,
+    "fingerprint": "781b6428bcdff768779ceb97fcf680b88109e283adcd6bab2cdd5d30ce114a11"
+  }
+]

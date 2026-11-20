@@ -1,0 +1,109 @@
+diff --git a/src/orders/application/order_service.py b/src/orders/application/order_service.py
+index 9d246c6..53ccea5 100644
+--- a/src/orders/application/order_service.py
++++ b/src/orders/application/order_service.py
+@@ -10,7 +10,7 @@ from __future__ import annotations
+ 
+ from collections.abc import Iterable
+ 
+-from orders.domain import LineItem, Order, OrderSummary
++from orders.domain import CustomerTotals, LineItem, Order, OrderSummary
+ from orders.infrastructure.repository import InMemoryOrderRepository
+ 
+ DISCOUNT_THRESHOLD_CENTS = 10_000
+@@ -60,3 +60,16 @@ class OrderService:
+ 
+     def list_for_customer(self, customer_id: str) -> list[Order]:
+         return self._repository.list_for_customer(customer_id)
++
++    def customer_totals(self, customer_id: str) -> CustomerTotals:
++        """Sum each order's own discount (no discount on the combined subtotal)."""
++        orders = self._repository.list_for_customer(customer_id)
++        subtotal = sum(o.subtotal_cents for o in orders)
++        discount = sum(discount_for(o.subtotal_cents) for o in orders)
++        return CustomerTotals(
++            customer_id=customer_id,
++            order_count=len(orders),
++            subtotal_cents=subtotal,
++            discount_cents=discount,
++            total_cents=subtotal - discount,
++        )
+diff --git a/src/orders/controllers/orders.py b/src/orders/controllers/orders.py
+index 0cbf354..6ce094c 100644
+--- a/src/orders/controllers/orders.py
++++ b/src/orders/controllers/orders.py
+@@ -89,3 +89,16 @@ class OrderController:
+     def handle_list_for_customer(self, customer_id: str) -> Response:
+         orders = self._service.list_for_customer(customer_id)
+         return Response(200, {"orders": [_order_body(o) for o in orders]})
++
++    def handle_customer_totals(self, customer_id: str) -> Response:
++        totals = self._service.customer_totals(customer_id)
++        return Response(
++            200,
++            {
++                "customer_id": totals.customer_id,
++                "order_count": totals.order_count,
++                "subtotal_cents": totals.subtotal_cents,
++                "discount_cents": totals.discount_cents,
++                "total_cents": totals.total_cents,
++            },
++        )
+diff --git a/src/orders/domain.py b/src/orders/domain.py
+index b6e0f87..21a72a3 100644
+--- a/src/orders/domain.py
++++ b/src/orders/domain.py
+@@ -34,3 +34,12 @@ class OrderSummary:
+     subtotal_cents: int
+     discount_cents: int
+     total_cents: int
++
++
++@dataclass(frozen=True)
++class CustomerTotals:
++    customer_id: str
++    order_count: int
++    subtotal_cents: int
++    discount_cents: int
++    total_cents: int
+diff --git a/tests/test_order_behaviour.py b/tests/test_order_behaviour.py
+index 53425d2..2aa57d4 100644
+--- a/tests/test_order_behaviour.py
++++ b/tests/test_order_behaviour.py
+@@ -120,3 +120,36 @@ class TestListForCustomer:
+ 
+     def test_customer_without_orders_gets_an_empty_list(self, controller):
+         assert controller.handle_list_for_customer("nobody").body == {"orders": []}
++
++
++class TestCustomerTotals:
++    def test_no_orders_gives_zeros(self, controller):
++        response = controller.handle_customer_totals("nobody")
++
++        assert response.status == 200
++        assert response.body == {
++            "customer_id": "nobody",
++            "order_count": 0,
++            "subtotal_cents": 0,
++            "discount_cents": 0,
++            "total_cents": 0,
++        }
++
++    def test_discounts_are_per_order_not_on_the_combined_subtotal(self, controller):
++        # Two 6000 orders combined would qualify, but each alone does not.
++        create(controller, items=[{"sku": "A", "quantity": 1, "unit_price_cents": 6000}])
++        create(controller, items=[{"sku": "A", "quantity": 1, "unit_price_cents": 6000}])
++        # Qualifies on its own: 12000 -> 1200 off.
++        create(controller, items=[{"sku": "B", "quantity": 2, "unit_price_cents": 6000}])
++        create(controller, customer_id="cust-2")
++
++        response = controller.handle_customer_totals("cust-1")
++
++        assert response.status == 200
++        assert response.body == {
++            "customer_id": "cust-1",
++            "order_count": 3,
++            "subtotal_cents": 24000,
++            "discount_cents": 1200,
++            "total_cents": 22800,
++        }

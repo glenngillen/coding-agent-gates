@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "coding-agent-gates/semantic-verdict/v1",
+  "title": "Semantic judge verdict for rule business-decision-in-controller",
+  "description": "The only response shape gates.semantic accepts. Anything else is treated as inconclusive. Cross-field rules the schema cannot express are enforced by the adapter: findings must be non-empty for violation and empty otherwise; each path must be one of the supplied files; line ranges must lie inside that file; explanations must contain non-whitespace text. There is deliberately no confidence field.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["verdict", "findings", "rationale"],
+  "properties": {
+    "verdict": {"enum": ["pass", "violation", "inconclusive"]},
+    "findings": {
+      "type": "array",
+      "maxItems": 20,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["path", "line_start", "line_end", "rule", "explanation"],
+        "properties": {
+          "path": {"type": "string", "minLength": 1},
+          "line_start": {"type": "integer", "minimum": 1},
+          "line_end": {"type": "integer", "minimum": 1},
+          "rule": {"const": "business-decision-in-controller"},
+          "explanation": {"type": "string", "minLength": 1, "maxLength": 1000}
+        }
+      }
+    },
+    "rationale": {"type": "string", "maxLength": 2000}
+  }
+}

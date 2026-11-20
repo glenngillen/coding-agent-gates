@@ -1,0 +1,65 @@
+{
+  "schema": "coding-agent-gates/workspace-history/v1",
+  "note": "Commits that build the version 2 workspace's Git history. Paths are relative to the workspace; files come from experiment/v2/baseline/ unless 'source' names another file. The last commit leaves the workspace equal to the baseline plus CLAUDE.md, pyproject.toml and .gitignore.",
+  "commits": [
+    {
+      "date": "2026-03-02T09:14:00+00:00",
+      "message": "Domain model and in-memory storage",
+      "paths": [
+        "CLAUDE.md",
+        "pyproject.toml",
+        ".gitignore",
+        "src/orders/__init__.py",
+        "src/orders/domain/__init__.py",
+        "src/orders/domain/catalog.py",
+        "src/orders/domain/customers.py",
+        "src/orders/domain/orders.py",
+        "src/orders/infrastructure/__init__.py",
+        "src/orders/infrastructure/repository.py",
+        "src/orders/infrastructure/customers.py",
+        "src/orders/infrastructure/catalog.py",
+        "src/orders/infrastructure/stock.py"
+      ]
+    },
+    {
+      "date": "2026-03-04T15:40:00+00:00",
+      "message": "Application services and pricing policy",
+      "paths": [
+        "src/orders/application/__init__.py",
+        "src/orders/application/errors.py",
+        "src/orders/application/pricing.py",
+        "src/orders/application/customer_service.py",
+        "src/orders/application/catalog_service.py",
+        "src/orders/application/order_service.py"
+      ]
+    },
+    {
+      "date": "2026-03-09T11:02:00+00:00",
+      "message": "Controllers, wiring and tests for customers, catalogue and orders",
+      "paths": [
+        "src/orders/controllers/__init__.py",
+        "src/orders/controllers/http.py",
+        "src/orders/controllers/customers.py",
+        "src/orders/controllers/catalog.py",
+        "src/orders/controllers/orders.py",
+        {
+          "path": "src/orders/wiring.py",
+          "source": "experiment/v2/history/wiring_before_reports.py"
+        },
+        "tests/conftest.py",
+        "tests/test_customers.py",
+        "tests/test_catalog.py",
+        "tests/test_orders.py"
+      ]
+    },
+    {
+      "date": "2026-04-17T18:25:00+00:00",
+      "message": "Add back-office reports for the ops review",
+      "paths": [
+        "src/orders/controllers/reports.py",
+        "src/orders/wiring.py",
+        "tests/test_reports.py"
+      ]
+    }
+  ]
+}

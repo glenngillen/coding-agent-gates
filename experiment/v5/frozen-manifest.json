@@ -1,0 +1,26 @@
+{
+  "schema": "coding-agent-gates/frozen-manifest/v1",
+  "written_at": "2026-11-20T06:34:29+00:00",
+  "note": "Version 5 frozen before any session: Haiku 4.5 vs Haiku 5.5, pressure on a stated rule, arms A and B.",
+  "patterns": [
+    "experiment/protocol-v5.md",
+    "experiment/v5/study.json",
+    "experiment/v5/instructions/*.md",
+    "experiment/v5/nested-controllers-CLAUDE.md",
+    "experiment/tools/run_study_v5.py"
+  ],
+  "files": {
+    "experiment/protocol-v5.md": "a472c18cea356fd5ab9b96c12adc324a2d62d0afe68fbd93cf25eb80a8a27b10",
+    "experiment/tools/run_study_v5.py": "f824e616de321dafd6848877c024a49e3ba9b8424fdae5f831b4faf1a2291e0e",
+    "experiment/v5/instructions/one-line.md": "1bf083de72baca7c51be72a716c661f68b8c64187e8924f814f00e442b6bc31c",
+    "experiment/v5/instructions/stated-conflict.md": "2d6231a38f70be5c2260ad9233e579b88bc4fd12e102bfd6f6e2465cec3c0f67",
+    "experiment/v5/instructions/stated-shortcut.md": "2d6231a38f70be5c2260ad9233e579b88bc4fd12e102bfd6f6e2465cec3c0f67",
+    "experiment/v5/instructions/stated.md": "2d6231a38f70be5c2260ad9233e579b88bc4fd12e102bfd6f6e2465cec3c0f67",
+    "experiment/v5/nested-controllers-CLAUDE.md": "6ef09fabad5e54059b5af0eb5a4170cce4a9b1d610fb2d6abc6524acf9c1d5e2",
+    "experiment/v5/study.json": "44769201c619bb87898fedcc2792245691a418fb7b9b19faf5c7aadf4f3953b2"
+  },
+  "tree_sha256": "cde7f2277efe49b44bc5abfe520ac98c6eff355d271bf9d9e3a05fe63c13a74a",
+  "depends_on": {
+    "experiment/v2/frozen-manifest.json": "b9fe0be84c81d4b182d991faf898c0fe4bba3a186b551b9a204489019aeb96e3"
+  }
+}

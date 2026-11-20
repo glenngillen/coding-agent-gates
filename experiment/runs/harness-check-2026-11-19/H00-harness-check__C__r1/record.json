@@ -1,0 +1,124 @@
+{
+  "schema": "coding-agent-gates/run-record/v1",
+  "evidence_kind": "real",
+  "identity": {
+    "pilot": "harness-check-2026-11-19",
+    "run_id": "H00-harness-check__C__r1",
+    "task_id": "H00-harness-check",
+    "arm": "C",
+    "repeat": 1,
+    "sequence": null,
+    "position_in_task": null,
+    "blind_id": "8b46d14dd85f",
+    "baseline_commit": "49ee7ca325dcaf6c868b737f958a14b6fb689591",
+    "baseline_tree_sha256": "6852b0bf235559ca6f794fdee59077c8bf7f542c0ae9f2d9459775a254e4f9d8",
+    "final_tree_sha256": null,
+    "prompt_sha256": "488000bceed378bfc2966d19ff4cb8db79da08ce840d136b47485822ca6ff7b4",
+    "task_sha256": null,
+    "instruction_sha256": "9f104cf1da00aef85f6abfc24a23f13fe56deae6d968b88357fedcd0515d9099",
+    "arms_sha256": "b73ef26e51c77164d9052e87fdbd87037d9e19112ffc911d0152ffd612f5e776",
+    "settings_sha256": "bcd48bb03b9fd1abcfb5f679dc137486fee818bb16d226f2973bbb7256536048",
+    "frozen_manifest_sha256": null,
+    "agent_model_requested": "claude-sonnet-5-5",
+    "agent_models_reported": [
+      "claude-sonnet-5-5"
+    ],
+    "agent_effort": "medium",
+    "seed": "unsupported by the Claude Code CLI; not set",
+    "session": "fresh process, --no-session-persistence",
+    "started_at": "2026-11-19T10:12:30+00:00",
+    "finished_at": "2026-11-19T10:13:11+00:00",
+    "environment": {
+      "claude_cli": "2.1.322 (Claude Code)",
+      "python": "3.12.15",
+      "platform": "macOS-26.6.2-arm64-arm-64bit",
+      "import_linter": "2.17"
+    }
+  },
+  "outcome": {
+    "termination": "completed",
+    "completed_within_budget": true,
+    "not_runnable": null,
+    "behavior": null,
+    "structural": null,
+    "semantic_judge": null,
+    "semantic_label": null,
+    "semantic_label_note": "no independent human labels (Decisions, 2026-11-19)",
+    "tampering_detected": null,
+    "baseline_tests_modified": null,
+    "gate_final_state": "passed",
+    "submission": "synthetic final submission; not a merge"
+  },
+  "repair": {
+    "applicable": true,
+    "cycles": 1,
+    "censored": false,
+    "note": null,
+    "checker_invocations": {
+      "sensor": 2,
+      "judge": 1
+    }
+  },
+  "usage": {
+    "agent": {
+      "missing": null,
+      "cost_usd": "0.033942400000000005",
+      "by_model": {
+        "claude-sonnet-5-5": {
+          "input_tokens": 10,
+          "output_tokens": 1230,
+          "cache_read_input_tokens": 74664,
+          "cache_creation_input_tokens": 3539,
+          "cost_usd": "0.033942400000000005"
+        }
+      },
+      "num_turns": 7,
+      "cost_basis": "total_cost_usd / costUSD reported by the Claude Code CLI: API-equivalent list-price estimates; under a subscription login they are notional, not an invoice"
+    },
+    "development_judge": {
+      "calls": 1,
+      "started_calls": 1,
+      "unknown_cost_calls": 0,
+      "cost_usd": "0.00096916",
+      "known_cost_subtotal_usd": "0.00096916",
+      "tokens": {
+        "input_tokens": 2,
+        "output_tokens": 398,
+        "cache_read_input_tokens": 7156,
+        "cache_creation_input_tokens": 3492
+      },
+      "models": [
+        "claude-haiku-5-5"
+      ],
+      "cost_basis": "total_cost_usd / costUSD reported by the Claude Code CLI: API-equivalent list-price estimates; under a subscription login they are notional, not an invoice"
+    },
+    "evaluation_judge": null
+  },
+  "time": {
+    "attempt_s": 40.943,
+    "agent_reported_s": 34.063,
+    "model_api_s": 14.076,
+    "check_sensor_s": 2.221,
+    "check_judge_s": 8.643,
+    "ci_queue_s": null,
+    "ci_queue_note": "not applicable: the end-of-turn placement has no CI queue",
+    "clock": "time.monotonic() around the agent process; CLI-reported durations as given"
+  },
+  "interventions": [],
+  "infrastructure_retries": [],
+  "ledger": {
+    "agent_entry_id": "044678225baa4792bb1712f1a65d070e",
+    "reserved_usd": "7.78",
+    "charged_usd": "0.033942400000000005",
+    "status": "finished"
+  },
+  "artifacts": {
+    "prepared": "experiment/runs/harness-check-2026-11-19/H00-harness-check__C__r1/prepared.json",
+    "transcript": "experiment/runs/harness-check-2026-11-19/H00-harness-check__C__r1/transcript.jsonl",
+    "cli_stderr": "experiment/runs/harness-check-2026-11-19/H00-harness-check__C__r1/cli-stderr.txt",
+    "hook_events": "experiment/runs/harness-check-2026-11-19/H00-harness-check__C__r1/hook-events.jsonl",
+    "final_diff": "experiment/runs/harness-check-2026-11-19/H00-harness-check__C__r1/final.diff",
+    "record": "experiment/runs/harness-check-2026-11-19/H00-harness-check__C__r1/record.json"
+  },
+  "notes": []
+}

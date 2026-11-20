@@ -1,0 +1,22 @@
+# FROZEN independent copy of the architecture contract, used only by the
+# experiment's final evaluator (experiment/evaluator/evaluate.py). It lives
+# outside every agent workspace and is hashed in experiment/frozen-manifest.json,
+# so neither an agent nor an edit to the development gate's .importlinter can
+# change how final snapshots are judged. Its rule is the same as the
+# development contract's: compare the two files if either is changed.
+
+[importlinter]
+root_packages =
+    orders
+
+[importlinter:contract:controllers-not-repositories]
+name = Controllers must not import infrastructure repositories directly
+type = forbidden
+source_modules =
+    orders.controllers
+forbidden_modules =
+    orders.infrastructure
+# Controller -> application service -> repository stays legal. This contract
+# catches only the direct edge; a stricter dependency-inversion policy would
+# need a different contract (see README.md).
+allow_indirect_imports = True

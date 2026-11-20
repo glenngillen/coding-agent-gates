@@ -1,0 +1,152 @@
+src/orders/controllers/customer_insights.py --- Python
+  1 """Customer insight endpoints."""
+  2 
+  3 from __future__ import annotations
+  4 
+  5 from typing import Any
+  6 
+  7 from orders.application.order_service import OrderService
+  8 from orders.controllers.http import InvalidRequest, Response, bad_request, not_found
+  9 from orders.infrastructure.customers import InMemoryCustomerRepository
+ 10 
+ 11 
+ 12 class CustomerInsightsController:
+ 13     def __init__(self, customers: InMemoryCustomerRepository, order_service: OrderService) -> None:
+ 14         self._customers = customers
+ 15         self._order_service = order_service
+ 16 
+ 17     def handle_order_history(self, customer_id: str) -> Response:
+ 18         if self._customers.get(customer_id) is None:
+ 19             return not_found("customer")
+ 20 
+ 21         orders = self._order_service.list_for_customer(customer_id)
+ 22         # Reverse to get newest first
+ 23         orders = list(reversed(orders))
+ 24 
+ 25         order_entries = []
+ 26         for order in orders:
+ 27             summary = self._order_service.summarize(order)
+ 28             order_entries.append({
+ 29                 "order_id": order.order_id,
+ 30                 "status": order.status,
+ 31                 "total_cents": summary.total_cents,
+ 32             })
+ 33 
+ 34         return Response(200, {
+ 35             "customer_id": customer_id,
+ 36             "orders": order_entries,
+ 37         })
+ 38 
+ 39     def handle_lifetime_value(self, customer_id: str) -> Response:
+ 40         if self._customers.get(customer_id) is None:
+ 41             return not_found("customer")
+ 42 
+ 43         orders = self._order_service.list_for_customer(customer_id)
+ 44 
+ 45         order_count = 0
+ 46         lifetime_value_cents = 0
+ 47         for order in orders:
+ 48             if order.status != "cancelled":
+ 49                 summary = self._order_service.summarize(order)
+ 50                 order_count += 1
+ 51                 lifetime_value_cents += summary.total_cents
+ 52 
+ 53         return Response(200, {
+ 54             "customer_id": customer_id,
+ 55             "order_count": order_count,
+ 56             "lifetime_value_cents": lifetime_value_cents,
+ 57         })
+ 58 
+ 59     def handle_top_customers(self, limit: Any) -> Response:
+ 60         try:
+ 61             if type(limit) is not int or limit < 1:
+ 62                 raise InvalidRequest("limit must be a positive integer")
+ 63         except InvalidRequest as exc:
+ 64             return bad_request(exc)
+ 65 
+ 66         customers = self._customers.list_all()
+ 67         customer_values = []
+ 68 
+ 69         for customer in customers:
+ 70             orders = self._order_service.list_for_customer(customer.customer_id)
+ 71             lifetime_value_cents = 0
+ 72             for order in orders:
+ 73                 if order.status != "cancelled":
+ 74                     summary = self._order_service.summarize(order)
+ 75                     lifetime_value_cents += summary.total_cents
+ 76 
+ 77             if lifetime_value_cents > 0:
+ 78                 customer_values.append({
+ 79                     "customer_id": customer.customer_id,
+ 80                     "name": customer.name,
+ 81                     "lifetime_value_cents": lifetime_value_cents,
+ 82                 })
+ 83 
+ 84         customer_values.sort(key=lambda x: (-x["lifetime_value_cents"], x["customer_id"]))
+ 85 
+ 86         return Response(200, {
+ 87             "customers": customer_values[:limit],
+ 88         })
+ 89 
+ 90     def handle_customers_without_orders(self) -> Response:
+ 91         customers = self._customers.list_all()
+ 92         result = []
+ 93 
+ 94         for customer in customers:
+ 95             orders = self._order_service.list_for_customer(customer.customer_id)
+ 96             has_non_cancelled = any(order.status != "cancelled" for order in orders)
+ 97 
+ 98             if not has_non_cancelled:
+ 99                 result.append({
+100                     "customer_id": customer.customer_id,
+101                     "name": customer.name,
+102                     "email": customer.email,
+103                 })
+104 
+105         return Response(200, {
+106             "customers": result,
+107         })
+108 
+
+src/orders/wiring.py --- 1/2 --- Python
+ 8  8 from orders.application.customer_service import CustomerService
+ 9  9 from orders.application.order_service import OrderService
+10 10 from orders.controllers.catalog import CatalogController
+.. 11 from orders.controllers.customer_insights import CustomerInsightsController
+11 12 from orders.controllers.customers import CustomerController
+12 13 from orders.controllers.orders import OrderController
+13 14 from orders.controllers.reports import ReportsController
+
+src/orders/wiring.py --- 2/2 --- Python
+23     catalog: CatalogController        24     catalog: CatalogController
+24     orders: OrderController           25     orders: OrderController
+25     reports: ReportsController        26     reports: ReportsController
+..                                       27     insights: CustomerInsightsContro
+..                                       .. ller
+26                                       28 
+27                                       29 
+28 def build_app() -> Api:               30 def build_app() -> Api:
+29     orders = InMemoryOrderRepository  31     orders = InMemoryOrderRepository
+.. ()                                    .. ()
+30     customers = InMemoryCustomerRepo  32     customers = InMemoryCustomerRepo
+.. sitory()                              .. sitory()
+31     catalog = InMemoryProductCatalog  33     catalog = InMemoryProductCatalog
+.. ()                                    .. ()
+32     stock = InMemoryStockRepository(  34     stock = InMemoryStockRepository(
+.. )                                     .. )
+..                                       35     order_service = OrderService(ord
+..                                       .. ers, customers, catalog, stock)
+33     return Api(                       36     return Api(
+34         customers=CustomerController  37         customers=CustomerController
+.. (CustomerService(customers)),         .. (CustomerService(customers)),
+35         catalog=CatalogController(Ca  38         catalog=CatalogController(Ca
+.. talogService(catalog, stock)),        .. talogService(catalog, stock)),
+36         orders=OrderController(Order  39         orders=OrderController(order
+.. Service(orders, customers, catalog,   .. _service),
+.. stock)),                              .. 
+37         reports=ReportsController(or  40         reports=ReportsController(or
+.. ders),                                .. ders),
+..                                       41         insights=CustomerInsightsCon
+..                                       .. troller(customers, order_service),
+38     )                                 42     )
+

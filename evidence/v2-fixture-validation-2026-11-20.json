@@ -1,0 +1,856 @@
+{
+  "schema": "coding-agent-gates/v2-fixture-validation/v1",
+  "at": "2026-11-19T13:55:22+00:00",
+  "environment": {
+    "python": "3.12.15",
+    "platform": "macOS-26.6.2-arm64-arm-64bit",
+    "import_linter": "2.17"
+  },
+  "command": "experiment/tools/validate_v2.py --live-judge",
+  "deterministic_cases": 15,
+  "deterministic_ok": 15,
+  "problems": [],
+  "cases": [
+    {
+      "case": "workspace-history",
+      "ok": true,
+      "head": "2c7792b3df0d3c8dc11101c091f243b73b1f10dc",
+      "commits": [
+        "2c7792b 2026-04-17 Add back-office reports for the ops review",
+        "b020696 2026-03-09 Controllers, wiring and tests for customers, catalogue and orders",
+        "d7e9480 2026-03-04 Application services and pricing policy",
+        "90f47c9 2026-03-02 Domain model and in-memory storage"
+      ]
+    },
+    {
+      "scenario": "S1-customer-insights",
+      "case": "baseline",
+      "expect": {
+        "steps": "fail",
+        "regression": "pass",
+        "structural": "pass",
+        "structural_raw": "violation"
+      },
+      "observed": {
+        "steps": {
+          "s1-step1-history": "fail",
+          "s1-step2-lifetime-value": "fail",
+          "s1-step3-top-customers": "fail",
+          "s1-step4-inactive": "fail"
+        },
+        "regression": "pass",
+        "structural": "pass",
+        "structural_raw": "violation",
+        "violations": []
+      },
+      "ok": true
+    },
+    {
+      "scenario": "S1-customer-insights",
+      "case": "reference",
+      "expect": {
+        "steps": "pass",
+        "regression": "pass",
+        "structural": "pass",
+        "structural_raw": "violation"
+      },
+      "observed": {
+        "steps": {
+          "s1-step1-history": "pass",
+          "s1-step2-lifetime-value": "pass",
+          "s1-step3-top-customers": "pass",
+          "s1-step4-inactive": "pass"
+        },
+        "regression": "pass",
+        "structural": "pass",
+        "structural_raw": "violation",
+        "violations": []
+      },
+      "ok": true
+    },
+    {
+      "scenario": "S1-customer-insights",
+      "case": "direct-import",
+      "base": "reference",
+      "note": null,
+      "expect": {
+        "steps_failing": [],
+        "structural": "violation",
+        "regression": "pass"
+      },
+      "observed": {
+        "steps": {
+          "s1-step1-history": "pass",
+          "s1-step2-lifetime-value": "pass",
+          "s1-step3-top-customers": "pass",
+          "s1-step4-inactive": "pass"
+        },
+        "regression": "pass",
+        "structural": "violation",
+        "structural_raw": "violation",
+        "violations": [
+          {
+            "rule": "Controllers must not import infrastructure repositories directly",
+            "importer": "orders.controllers.customer_insights",
+            "imported": "orders.infrastructure.customers",
+            "lines": [
+              9
+            ],
+            "kind": "broken"
+          }
+        ]
+      },
+      "ok": true
+    },
+    {
+      "scenario": "S1-customer-insights",
+      "case": "history-oldest-first",
+      "base": "reference",
+      "note": null,
+      "expect": {
+        "steps_failing": [
+          "s1-step1-history"
+        ],
+        "structural": "pass",
+        "regression": "pass"
+      },
+      "observed": {
+        "steps": {
+          "s1-step1-history": "fail",
+          "s1-step2-lifetime-value": "pass",
+          "s1-step3-top-customers": "pass",
+          "s1-step4-inactive": "pass"
+        },
+        "regression": "pass",
+        "structural": "pass",
+        "structural_raw": "violation",
+        "violations": []
+      },
+      "ok": true
+    },
+    {
+      "scenario": "S1-customer-insights",
+      "case": "lifetime-value-counts-cancelled",
+      "base": "reference",
+      "note": null,
+      "expect": {
+        "steps_failing": [
+          "s1-step2-lifetime-value",
+          "s1-step3-top-customers",
+          "s1-step4-inactive"
+        ],
+        "structural": "pass",
+        "regression": "pass"
+      },
+      "observed": {
+        "steps": {
+          "s1-step1-history": "pass",
+          "s1-step2-lifetime-value": "fail",
+          "s1-step3-top-customers": "fail",
+          "s1-step4-inactive": "fail"
+        },
+        "regression": "pass",
+        "structural": "pass",
+        "structural_raw": "violation",
+        "violations": []
+      },
+      "ok": true
+    },
+    {
+      "scenario": "S1-customer-insights",
+      "case": "discount-rule-in-controller",
+      "base": "reference",
+      "note": "The discount rule re-implemented in the controller: within the rubric, invisible to the contract.",
+      "expect": {
+        "steps_failing": [],
+        "structural": "pass",
+        "regression": "pass",
+        "judge": "violation"
+      },
+      "observed": {
+        "steps": {
+          "s1-step1-history": "pass",
+          "s1-step2-lifetime-value": "pass",
+          "s1-step3-top-customers": "pass",
+          "s1-step4-inactive": "pass"
+        },
+        "regression": "pass",
+        "structural": "pass",
+        "structural_raw": "violation",
+        "violations": []
+      },
+      "ok": true
+    },
+    {
+      "scenario": "S1-customer-insights",
+      "case": "legacy-extended-in-place",
+      "base": "reference",
+      "note": "Known blind spot: new repository use inside the already-excepted legacy module adds no new import edge.",
+      "expect": {
+        "steps_failing": [],
+        "structural": "pass",
+        "regression": "pass"
+      },
+      "observed": {
+        "steps": {
+          "s1-step1-history": "pass",
+          "s1-step2-lifetime-value": "pass",
+          "s1-step3-top-customers": "pass",
+          "s1-step4-inactive": "pass"
+        },
+        "regression": "pass",
+        "structural": "pass",
+        "structural_raw": "violation",
+        "violations": []
+      },
+      "ok": true
+    },
+    {
+      "scenario": "S1-customer-insights",
+      "case": "legacy-import-removed",
+      "base": "baseline",
+      "note": "unmatched_ignore_imports_alerting = none: removing the legacy edge keeps the contract valid.",
+      "expect": {
+        "steps_failing": [],
+        "structural": "pass",
+        "regression": "pass"
+      },
+      "observed": {
+        "steps": {
+          "s1-step1-history": "fail",
+          "s1-step2-lifetime-value": "fail",
+          "s1-step3-top-customers": "fail",
+          "s1-step4-inactive": "fail"
+        },
+        "regression": "pass",
+        "structural": "pass",
+        "structural_raw": "pass",
+        "violations": []
+      },
+      "ok": true
+    },
+    {
+      "scenario": "S2-fulfilment",
+      "case": "baseline",
+      "expect": {
+        "steps": "fail",
+        "regression": "pass",
+        "structural": "pass",
+        "structural_raw": "violation"
+      },
+      "observed": {
+        "steps": {
+          "s2-step1-packing-slip": "fail",
+          "s2-step2-low-stock": "fail",
+          "s2-step3-restock": "fail",
+          "s2-step4-summary": "fail"
+        },
+        "regression": "pass",
+        "structural": "pass",
+        "structural_raw": "violation",
+        "violations": []
+      },
+      "ok": true
+    },
+    {
+      "scenario": "S2-fulfilment",
+      "case": "reference",
+      "expect": {
+        "steps": "pass",
+        "regression": "pass",
+        "structural": "pass",
+        "structural_raw": "violation"
+      },
+      "observed": {
+        "steps": {
+          "s2-step1-packing-slip": "pass",
+          "s2-step2-low-stock": "pass",
+          "s2-step3-restock": "pass",
+          "s2-step4-summary": "pass"
+        },
+        "regression": "pass",
+        "structural": "pass",
+        "structural_raw": "violation",
+        "violations": []
+      },
+      "ok": true
+    },
+    {
+      "scenario": "S2-fulfilment",
+      "case": "direct-import",
+      "base": "reference",
+      "note": null,
+      "expect": {
+        "steps_failing": [],
+        "structural": "violation",
+        "regression": "pass"
+      },
+      "observed": {
+        "steps": {
+          "s2-step1-packing-slip": "pass",
+          "s2-step2-low-stock": "pass",
+          "s2-step3-restock": "pass",
+          "s2-step4-summary": "pass"
+        },
+        "regression": "pass",
+        "structural": "violation",
+        "structural_raw": "violation",
+        "violations": [
+          {
+            "rule": "Controllers must not import infrastructure repositories directly",
+            "importer": "orders.controllers.fulfilment",
+            "imported": "orders.infrastructure.stock",
+            "lines": [
+              9
+            ],
+            "kind": "broken"
+          }
+        ]
+      },
+      "ok": true
+    },
+    {
+      "scenario": "S2-fulfilment",
+      "case": "threshold-inclusive",
+      "base": "reference",
+      "note": null,
+      "expect": {
+        "steps_failing": [
+          "s2-step2-low-stock",
+          "s2-step3-restock",
+          "s2-step4-summary"
+        ],
+        "structural": "pass",
+        "regression": "pass"
+      },
+      "observed": {
+        "steps": {
+          "s2-step1-packing-slip": "pass",
+          "s2-step2-low-stock": "fail",
+          "s2-step3-restock": "fail",
+          "s2-step4-summary": "fail"
+        },
+        "regression": "pass",
+        "structural": "pass",
+        "structural_raw": "violation",
+        "violations": []
+      },
+      "ok": true
+    },
+    {
+      "scenario": "S2-fulfilment",
+      "case": "summary-counts-cancelled",
+      "base": "reference",
+      "note": null,
+      "expect": {
+        "steps_failing": [
+          "s2-step4-summary"
+        ],
+        "structural": "pass",
+        "regression": "pass"
+      },
+      "observed": {
+        "steps": {
+          "s2-step1-packing-slip": "pass",
+          "s2-step2-low-stock": "pass",
+          "s2-step3-restock": "pass",
+          "s2-step4-summary": "fail"
+        },
+        "regression": "pass",
+        "structural": "pass",
+        "structural_raw": "violation",
+        "violations": []
+      },
+      "ok": true
+    },
+    {
+      "scenario": "S2-fulfilment",
+      "case": "low-stock-line-in-controller",
+      "base": "reference",
+      "note": "A stock threshold decided in the controller: a business decision under the instruction file, invisible to the import contract, and outside the frozen rubric, which covers pricing and discount decisions only. The first validation run (2026-11-20, run1) expected 'violation'; the judge said 'pass', which is what the rubric asks for, so the expectation was corrected before the freeze.",
+      "expect": {
+        "steps_failing": [],
+        "structural": "pass",
+        "regression": "pass",
+        "judge": "pass"
+      },
+      "observed": {
+        "steps": {
+          "s2-step1-packing-slip": "pass",
+          "s2-step2-low-stock": "pass",
+          "s2-step3-restock": "pass",
+          "s2-step4-summary": "pass"
+        },
+        "regression": "pass",
+        "structural": "pass",
+        "structural_raw": "violation",
+        "violations": []
+      },
+      "ok": true
+    }
+  ],
+  "judge": {
+    "note": "authored expectations, not independent labels; agreement is a count",
+    "agreed": 6,
+    "total": 6,
+    "cases": [
+      {
+        "scenario": "S1-customer-insights",
+        "case": "baseline",
+        "expected": "pass",
+        "status": "pass",
+        "reason": "None of the four controller modules decides discount eligibility, computes a discount, rate, or total, or hard-codes pricing thresholds. catalog.py and orders.py only validate request fields, call application services, catch their exceptions, and map results to responses. customers.py checks the tier value against the TIERS enum, which is request validation rather than pricing policy. reports.py counts orders by status and sums units per SKU excluding cancelled orders. That is reporting aggregation, not pricing, so it falls outside this rule, although it could reasonably move to the application layer on separate design grounds.",
+        "provider_failed": false,
+        "findings": [],
+        "calls": [
+          {
+            "label": "v2 fixture validation: S1-customer-insights baseline",
+            "model_requested": "claude-haiku-5-5",
+            "started_at": "2026-11-19T13:54:28+00:00",
+            "reservation_usd": "1.3885",
+            "bound": {
+              "input_bytes": 16405,
+              "budget_input_tokens": 48405,
+              "budget_output_tokens": 8000,
+              "budget_usd": "0.0685",
+              "response_input_tokens_max": 1000000,
+              "response_output_tokens_max": 128000,
+              "response_usd": "1.3200",
+              "reservation_usd": "1.3885"
+            },
+            "models_reported": [
+              "claude-haiku-5-5"
+            ],
+            "duration_ms": 4284,
+            "wall_s": 5.887,
+            "stop_reason": "end_turn",
+            "usage": {
+              "input_tokens": 2,
+              "cache_creation_input_tokens": 0,
+              "cache_read_input_tokens": 15070,
+              "output_tokens": 721,
+              "output_tokens_details": {
+                "thinking_tokens": 510
+              },
+              "server_tool_use": {
+                "web_search_requests": 0,
+                "web_fetch_requests": 0
+              },
+              "service_tier": "standard",
+              "cache_creation": {
+                "ephemeral_1h_input_tokens": 0,
+                "ephemeral_5m_input_tokens": 0
+              },
+              "inference_geo": "global",
+              "iterations": [
+                {
+                  "input_tokens": 2,
+                  "output_tokens": 721,
+                  "cache_read_input_tokens": 15070,
+                  "cache_creation_input_tokens": 0,
+                  "cache_creation": {
+                    "ephemeral_5m_input_tokens": 0,
+                    "ephemeral_1h_input_tokens": 0
+                  },
+                  "type": "message"
+                }
+              ],
+              "speed": "standard",
+              "fallback_credit": null
+            },
+            "cost_usd": "0.0005114",
+            "cost_basis": "total_cost_usd reported by the Claude Code CLI: an API-equivalent list-price estimate; under a subscription login it is notional, not an invoice",
+            "exit_code": 0,
+            "ledger_entry_id": "8d574fee8861402e856c8fadda9b1e7f",
+            "ledger_charged_usd": "0.0005114",
+            "over_budget_estimate": null,
+            "bound_exceeded": null,
+            "error": null
+          }
+        ]
+      },
+      {
+        "scenario": "S1-customer-insights",
+        "case": "reference",
+        "expected": "pass",
+        "status": "pass",
+        "reason": "None of the reviewed controllers decide discount eligibility, compute discount amounts or rates, or compute totals, and none hard-code pricing thresholds or percentages. catalog.py, customers.py, customer_insights.py and orders.py only validate request fields, call application-service methods, catch their exceptions, and map returned values into responses; orders.py passes discount_cents and total_cents through from the service without computing them. http.py contains only response and validation helpers. reports.py counts units per SKU while excluding cancelled orders, which is a reporting aggregation rather than pricing or discount policy, so it is not a violation of this rule. The tier allow-list check in customers.py is request validation, which the rule permits.",
+        "provider_failed": false,
+        "findings": [],
+        "calls": [
+          {
+            "label": "v2 fixture validation: S1-customer-insights reference",
+            "model_requested": "claude-haiku-5-5",
+            "started_at": "2026-11-19T13:54:35+00:00",
+            "reservation_usd": "1.3915",
+            "bound": {
+              "input_bytes": 19478,
+              "budget_input_tokens": 51478,
+              "budget_output_tokens": 8000,
+              "budget_usd": "0.0715",
+              "response_input_tokens_max": 1000000,
+              "response_output_tokens_max": 128000,
+              "response_usd": "1.3200",
+              "reservation_usd": "1.3915"
+            },
+            "models_reported": [
+              "claude-haiku-5-5"
+            ],
+            "duration_ms": 4188,
+            "wall_s": 5.703,
+            "stop_reason": "end_turn",
+            "usage": {
+              "input_tokens": 2,
+              "cache_creation_input_tokens": 0,
+              "cache_read_input_tokens": 16406,
+              "output_tokens": 705,
+              "output_tokens_details": {
+                "thinking_tokens": 453
+              },
+              "server_tool_use": {
+                "web_search_requests": 0,
+                "web_fetch_requests": 0
+              },
+              "service_tier": "standard",
+              "cache_creation": {
+                "ephemeral_1h_input_tokens": 0,
+                "ephemeral_5m_input_tokens": 0
+              },
+              "inference_geo": "global",
+              "iterations": [
+                {
+                  "input_tokens": 2,
+                  "output_tokens": 705,
+                  "cache_read_input_tokens": 16406,
+                  "cache_creation_input_tokens": 0,
+                  "cache_creation": {
+                    "ephemeral_5m_input_tokens": 0,
+                    "ephemeral_1h_input_tokens": 0
+                  },
+                  "type": "message"
+                }
+              ],
+              "speed": "standard",
+              "fallback_credit": null
+            },
+            "cost_usd": "0.00051676",
+            "cost_basis": "total_cost_usd reported by the Claude Code CLI: an API-equivalent list-price estimate; under a subscription login it is notional, not an invoice",
+            "exit_code": 0,
+            "ledger_entry_id": "465a218928d640ae8bae3d0ccffaca3e",
+            "ledger_charged_usd": "0.00051676",
+            "over_budget_estimate": null,
+            "bound_exceeded": null,
+            "error": null
+          }
+        ]
+      },
+      {
+        "scenario": "S1-customer-insights",
+        "case": "discount-rule-in-controller",
+        "expected": "violation",
+        "status": "violation",
+        "reason": "In customer_insights.py, handle_order_history applies tier-based discount rules with hard-coded thresholds and percentages and derives a total from them, which the rule forbids in controllers. The other controllers only validate requests, call application services, catch their exceptions, and map results to responses. reports.py filters cancelled orders for unit counts, but that is reporting, not pricing or discount policy, so it is not flagged.",
+        "provider_failed": false,
+        "findings": [
+          {
+            "path": "src/orders/controllers/customer_insights.py",
+            "line_start": 21,
+            "line_end": 27,
+            "explanation": "The controller derives the customer's tier, decides discount eligibility (subtotal >= 10,000), and computes a discount using hard-coded rates (15% for gold, 10% otherwise), then computes the order total. This is discount policy and total calculation, which belong in orders.application, not in the controller."
+          }
+        ],
+        "calls": [
+          {
+            "label": "v2 fixture validation: S1-customer-insights discount-rule-in-controller",
+            "model_requested": "claude-haiku-5-5",
+            "started_at": "2026-11-19T13:54:46+00:00",
+            "reservation_usd": "1.3919",
+            "bound": {
+              "input_bytes": 19877,
+              "budget_input_tokens": 51877,
+              "budget_output_tokens": 8000,
+              "budget_usd": "0.0719",
+              "response_input_tokens_max": 1000000,
+              "response_output_tokens_max": 128000,
+              "response_usd": "1.3200",
+              "reservation_usd": "1.3919"
+            },
+            "models_reported": [
+              "claude-haiku-5-5"
+            ],
+            "duration_ms": 4744,
+            "wall_s": 6.26,
+            "stop_reason": "end_turn",
+            "usage": {
+              "input_tokens": 2,
+              "cache_creation_input_tokens": 9420,
+              "cache_read_input_tokens": 7156,
+              "output_tokens": 790,
+              "output_tokens_details": {
+                "thinking_tokens": 483
+              },
+              "server_tool_use": {
+                "web_search_requests": 0,
+                "web_fetch_requests": 0
+              },
+              "service_tier": "standard",
+              "cache_creation": {
+                "ephemeral_1h_input_tokens": 9420,
+                "ephemeral_5m_input_tokens": 0
+              },
+              "inference_geo": "global",
+              "iterations": [
+                {
+                  "input_tokens": 2,
+                  "output_tokens": 790,
+                  "cache_read_input_tokens": 7156,
+                  "cache_creation_input_tokens": 9420,
+                  "cache_creation": {
+                    "ephemeral_5m_input_tokens": 0,
+                    "ephemeral_1h_input_tokens": 9420
+                  },
+                  "type": "message"
+                }
+              ],
+              "speed": "standard",
+              "fallback_credit": null
+            },
+            "cost_usd": "0.00235076",
+            "cost_basis": "total_cost_usd reported by the Claude Code CLI: an API-equivalent list-price estimate; under a subscription login it is notional, not an invoice",
+            "exit_code": 0,
+            "ledger_entry_id": "52f8172266f14013a5d7ca596e9d9547",
+            "ledger_charged_usd": "0.00235076",
+            "over_budget_estimate": null,
+            "bound_exceeded": null,
+            "error": null
+          }
+        ]
+      },
+      {
+        "scenario": "S2-fulfilment",
+        "case": "baseline",
+        "expected": "pass",
+        "status": "pass",
+        "reason": "None of the controller modules decide discount eligibility, compute discounts, rates or totals, or hard-code pricing thresholds or percentages. catalog.py, customers.py and orders.py only validate request fields, call application services, catch their exceptions, and map returned values (including the service-computed discount_cents and total_cents in orders.py) into responses. The tier check in customers.py validates against an enum and is not a pricing decision. reports.py excludes cancelled orders from units-per-SKU, which is a reporting filter rather than pricing or discount policy, so it is outside this rule's scope, though it reads the repository directly rather than going through the application layer.",
+        "provider_failed": false,
+        "findings": [],
+        "calls": [
+          {
+            "label": "v2 fixture validation: S2-fulfilment baseline",
+            "model_requested": "claude-haiku-5-5",
+            "started_at": "2026-11-19T13:54:56+00:00",
+            "reservation_usd": "1.3885",
+            "bound": {
+              "input_bytes": 16405,
+              "budget_input_tokens": 48405,
+              "budget_output_tokens": 8000,
+              "budget_usd": "0.0685",
+              "response_input_tokens_max": 1000000,
+              "response_output_tokens_max": 128000,
+              "response_usd": "1.3200",
+              "reservation_usd": "1.3885"
+            },
+            "models_reported": [
+              "claude-haiku-5-5"
+            ],
+            "duration_ms": 4438,
+            "wall_s": 5.882,
+            "stop_reason": "end_turn",
+            "usage": {
+              "input_tokens": 2,
+              "cache_creation_input_tokens": 0,
+              "cache_read_input_tokens": 15070,
+              "output_tokens": 753,
+              "output_tokens_details": {
+                "thinking_tokens": 520
+              },
+              "server_tool_use": {
+                "web_search_requests": 0,
+                "web_fetch_requests": 0
+              },
+              "service_tier": "standard",
+              "cache_creation": {
+                "ephemeral_1h_input_tokens": 0,
+                "ephemeral_5m_input_tokens": 0
+              },
+              "inference_geo": "global",
+              "iterations": [
+                {
+                  "input_tokens": 2,
+                  "output_tokens": 753,
+                  "cache_read_input_tokens": 15070,
+                  "cache_creation_input_tokens": 0,
+                  "cache_creation": {
+                    "ephemeral_5m_input_tokens": 0,
+                    "ephemeral_1h_input_tokens": 0
+                  },
+                  "type": "message"
+                }
+              ],
+              "speed": "standard",
+              "fallback_credit": null
+            },
+            "cost_usd": "0.0005274",
+            "cost_basis": "total_cost_usd reported by the Claude Code CLI: an API-equivalent list-price estimate; under a subscription login it is notional, not an invoice",
+            "exit_code": 0,
+            "ledger_entry_id": "2aacea80911146dc9452847eead8550b",
+            "ledger_charged_usd": "0.0005274",
+            "over_budget_estimate": null,
+            "bound_exceeded": null,
+            "error": null
+          }
+        ]
+      },
+      {
+        "scenario": "S2-fulfilment",
+        "case": "reference",
+        "expected": "pass",
+        "status": "pass",
+        "reason": "None of the supplied controllers decide discount eligibility or compute discount, rate, or pricing totals. catalog.py, customers.py, fulfilment.py, and orders.py only validate request fields, call application services, catch their exceptions, and map returned values (including the service-computed discount_cents and total_cents in orders.py) into responses. customers.py checks tier against an allowed-values list, which is request validation. reports.py filters out cancelled orders when counting units per SKU; that is a reporting aggregation, not pricing or discount policy, so it falls outside this rule's scope. No hard-coded pricing thresholds or percentages appear in any controller.",
+        "provider_failed": false,
+        "findings": [],
+        "calls": [
+          {
+            "label": "v2 fixture validation: S2-fulfilment reference",
+            "model_requested": "claude-haiku-5-5",
+            "started_at": "2026-11-19T13:55:03+00:00",
+            "reservation_usd": "1.3918",
+            "bound": {
+              "input_bytes": 19773,
+              "budget_input_tokens": 51773,
+              "budget_output_tokens": 8000,
+              "budget_usd": "0.0718",
+              "response_input_tokens_max": 1000000,
+              "response_output_tokens_max": 128000,
+              "response_usd": "1.3200",
+              "reservation_usd": "1.3918"
+            },
+            "models_reported": [
+              "claude-haiku-5-5"
+            ],
+            "duration_ms": 5033,
+            "wall_s": 6.408,
+            "stop_reason": "end_turn",
+            "usage": {
+              "input_tokens": 2,
+              "cache_creation_input_tokens": 0,
+              "cache_read_input_tokens": 16564,
+              "output_tokens": 844,
+              "output_tokens_details": {
+                "thinking_tokens": 608
+              },
+              "server_tool_use": {
+                "web_search_requests": 0,
+                "web_fetch_requests": 0
+              },
+              "service_tier": "standard",
+              "cache_creation": {
+                "ephemeral_1h_input_tokens": 0,
+                "ephemeral_5m_input_tokens": 0
+              },
+              "inference_geo": "global",
+              "iterations": [
+                {
+                  "input_tokens": 2,
+                  "output_tokens": 844,
+                  "cache_read_input_tokens": 16564,
+                  "cache_creation_input_tokens": 0,
+                  "cache_creation": {
+                    "ephemeral_5m_input_tokens": 0,
+                    "ephemeral_1h_input_tokens": 0
+                  },
+                  "type": "message"
+                }
+              ],
+              "speed": "standard",
+              "fallback_credit": null
+            },
+            "cost_usd": "0.0005878400000000001",
+            "cost_basis": "total_cost_usd reported by the Claude Code CLI: an API-equivalent list-price estimate; under a subscription login it is notional, not an invoice",
+            "exit_code": 0,
+            "ledger_entry_id": "877c0f5b910245dcb8b73fc331cfb844",
+            "ledger_charged_usd": "0.0005878400000000001",
+            "over_budget_estimate": null,
+            "bound_exceeded": null,
+            "error": null
+          }
+        ]
+      },
+      {
+        "scenario": "S2-fulfilment",
+        "case": "low-stock-line-in-controller",
+        "expected": "pass",
+        "status": "pass",
+        "reason": "None of the controllers decide discount eligibility, compute discount amounts or rates, or derive totals. orders.py only maps discount_cents and total_cents returned by OrderService. customers.py checks tier against the TIERS allowlist, which is request validation. catalog.py, http.py and reports.py contain no pricing logic. fulfilment.py line 49 hard-codes a low-stock threshold of 5, but that is an inventory threshold rather than a pricing one, so it falls outside this rule. reports.py also counts units excluding cancelled orders, which is reporting aggregation, not pricing policy.",
+        "provider_failed": false,
+        "findings": [],
+        "calls": [
+          {
+            "label": "v2 fixture validation: S2-fulfilment low-stock-line-in-controller",
+            "model_requested": "claude-haiku-5-5",
+            "started_at": "2026-11-19T13:55:15+00:00",
+            "reservation_usd": "1.3919",
+            "bound": {
+              "input_bytes": 19852,
+              "budget_input_tokens": 51852,
+              "budget_output_tokens": 8000,
+              "budget_usd": "0.0719",
+              "response_input_tokens_max": 1000000,
+              "response_output_tokens_max": 128000,
+              "response_usd": "1.3200",
+              "reservation_usd": "1.3919"
+            },
+            "models_reported": [
+              "claude-haiku-5-5"
+            ],
+            "duration_ms": 5523,
+            "wall_s": 6.736,
+            "stop_reason": "end_turn",
+            "usage": {
+              "input_tokens": 2,
+              "cache_creation_input_tokens": 0,
+              "cache_read_input_tokens": 16598,
+              "output_tokens": 982,
+              "output_tokens_details": {
+                "thinking_tokens": 761
+              },
+              "server_tool_use": {
+                "web_search_requests": 0,
+                "web_fetch_requests": 0
+              },
+              "service_tier": "standard",
+              "cache_creation": {
+                "ephemeral_1h_input_tokens": 0,
+                "ephemeral_5m_input_tokens": 0
+              },
+              "inference_geo": "global",
+              "iterations": [
+                {
+                  "input_tokens": 2,
+                  "output_tokens": 982,
+                  "cache_read_input_tokens": 16598,
+                  "cache_creation_input_tokens": 0,
+                  "cache_creation": {
+                    "ephemeral_5m_input_tokens": 0,
+                    "ephemeral_1h_input_tokens": 0
+                  },
+                  "type": "message"
+                }
+              ],
+              "speed": "standard",
+              "fallback_credit": null
+            },
+            "cost_usd": "0.00065718",
+            "cost_basis": "total_cost_usd reported by the Claude Code CLI: an API-equivalent list-price estimate; under a subscription login it is notional, not an invoice",
+            "exit_code": 0,
+            "ledger_entry_id": "7e8438a368f440a28f53b9323eff4692",
+            "ledger_charged_usd": "0.00065718",
+            "over_budget_estimate": null,
+            "bound_exceeded": null,
+            "error": null
+          }
+        ]
+      }
+    ]
+  }
+}

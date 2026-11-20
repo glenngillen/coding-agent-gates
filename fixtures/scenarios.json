@@ -1,0 +1,51 @@
+{
+  "schema": "coding-agent-gates/fixture-scenarios/v1",
+  "note": "Each overlay directory mirrors the example root and is copied over a disposable copy of the example, never over the normal package. Expected results are what the canonical sensor must report for that copy.",
+  "scenarios": [
+    {
+      "id": "baseline",
+      "overlay": null,
+      "expected_status": "pass",
+      "expected_edges": [],
+      "behaviour_tests": "pass",
+      "teaches": "Legal indirect dependency: controller -> application service -> repository."
+    },
+    {
+      "id": "direct_import",
+      "overlay": "fixtures/direct_import",
+      "expected_status": "violation",
+      "expected_edges": [
+        {
+          "importer": "orders.controllers.orders",
+          "imported": "orders.infrastructure.repository"
+        }
+      ],
+      "behaviour_tests": "pass",
+      "teaches": "Behaviour-preserving shortcut: every behavioural test passes; only the structural sensor sees the forbidden edge."
+    },
+    {
+      "id": "semantic_leakage",
+      "overlay": "fixtures/semantic_leakage",
+      "expected_status": "pass",
+      "expected_edges": [],
+      "behaviour_tests": "pass",
+      "teaches": "Structural limit: discount eligibility decided in the controller (_priced_body) passes the import rule; only a semantic rubric can flag it. The file keeps the baseline docstring on purpose, so nothing in the source announces the violation to a judge."
+    },
+    {
+      "id": "runtime_reach_through",
+      "overlay": "fixtures/runtime_reach_through",
+      "expected_status": "pass",
+      "expected_edges": [],
+      "behaviour_tests": "pass",
+      "teaches": "Structural limit: reaching the repository through a runtime object needs no import, so the import contract cannot see it."
+    },
+    {
+      "id": "syntax_error",
+      "overlay": "fixtures/syntax_error",
+      "expected_status": "checker_error",
+      "expected_edges": [],
+      "behaviour_tests": "pass",
+      "teaches": "A half-written module stops lint-imports from parsing the package: the rules were not checked, which is not a pass."
+    }
+  ]
+}

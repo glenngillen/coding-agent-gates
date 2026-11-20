@@ -1,0 +1,1325 @@
+{
+  "schema": "coding-agent-gates/live-judge-run/v1",
+  "started_at": "2026-11-19T10:21:34+00:00",
+  "finished_at": "2026-11-19T10:22:58+00:00",
+  "model": "claude-haiku-5-5",
+  "transport": "Claude Code CLI, logged-in session (no API key read)",
+  "command": [
+    "claude",
+    "-p",
+    "--model",
+    "claude-haiku-5-5",
+    "--output-format",
+    "json",
+    "--tools",
+    "",
+    "--no-session-persistence",
+    "--setting-sources",
+    "",
+    "--max-budget-usd",
+    "<per-call budget: call_bound().budget_usd>",
+    "--system-prompt",
+    "<rubric instructions from semantic/rubric.md>"
+  ],
+  "child_env_added": {
+    "CLAUDE_CODE_MAX_OUTPUT_TOKENS": "8000",
+    "CLAUDE_CODE_MAX_RETRIES": "0"
+  },
+  "spend_bound": {
+    "method": "reservation = budget + one response; one response priced at the model's documented context window and maximum output at the highest Haiku 5.5 rates; budget = expected normal call (payload + framing allowance + output cap) at the same rates",
+    "model_context_window_tokens": 1000000,
+    "model_max_output_tokens": 128000,
+    "response_usd_max": "1.3200",
+    "max_input_bytes": 200000,
+    "budget_framing_allowance_tokens": 32000,
+    "budget_max_output_tokens": 8000,
+    "input_usd_per_mtok_max": "1.000000",
+    "output_usd_per_mtok_max": "2.5000000"
+  },
+  "timeout_s": 180.0,
+  "cost_basis": "total_cost_usd reported by the Claude Code CLI: an API-equivalent list-price estimate; under a subscription login it is notional, not an invoice",
+  "environment": {
+    "python": "3.12.15",
+    "platform": "macOS-26.6.2-arm64-arm-64bit",
+    "claude_cli": "2.1.322 (Claude Code)"
+  },
+  "calibration_sources": [
+    "experiment/calibration/semantic-calibration.json"
+  ],
+  "calibration_note": null,
+  "summary": {
+    "started_calls": 15,
+    "ledger_refused_calls": 0,
+    "known_cost_calls": 15,
+    "unknown_cost_calls": 0,
+    "known_cost_subtotal_usd": "0.00903462000000000041",
+    "unknown_cost_reserved_usd": "0",
+    "total_cost_usd": "0.00903462000000000041",
+    "total_cost_note": "complete: every started call has a cost",
+    "cli_duration_ms": {
+      "min": 1823,
+      "max": 4081
+    },
+    "wall_s": {
+      "min": 4.418,
+      "max": 6.898
+    },
+    "spend_cap_reached": false,
+    "spend_bound_broken": false,
+    "ledger": "experiment/runs/spend-ledger.json"
+  },
+  "results": [
+    {
+      "kind": "fixture",
+      "id": "baseline",
+      "structural": "pass",
+      "expected_structural": "pass",
+      "teaches": "Legal indirect dependency: controller -> application service -> repository.",
+      "judge_called": true,
+      "outcome": {
+        "status": "pass",
+        "reason": "The controller only decodes and validates request fields (types, presence, non-empty SKU and customer_id, positive quantity, non-negative unit price), calls OrderService methods, catches OrderNotFound, and maps the returned Order and OrderSummary objects into response bodies with status codes. It contains no discount eligibility logic, no discount amount, rate or total computation, and no hard-coded pricing thresholds or percentages. The summary's discount_cents and total_cents are passed through from the application layer without being derived in the controller.",
+        "findings": [],
+        "raw_response": "{\"verdict\":\"pass\",\"findings\":[],\"rationale\":\"The controller only decodes and validates request fields (types, presence, non-empty SKU and customer_id, positive quantity, non-negative unit price), calls OrderService methods, catches OrderNotFound, and maps the returned Order and OrderSummary objects into response bodies with status codes. It contains no discount eligibility logic, no discount amount, rate or total computation, and no hard-coded pricing thresholds or percentages. The summary's discount_cents and total_cents are passed through from the application layer without being derived in the controller.\"}"
+      },
+      "calls": [
+        {
+          "label": "fixture:baseline",
+          "model_requested": "claude-haiku-5-5",
+          "started_at": "2026-11-19T10:21:34+00:00",
+          "reservation_usd": "1.3795",
+          "bound": {
+            "input_bytes": 7417,
+            "budget_input_tokens": 39417,
+            "budget_output_tokens": 8000,
+            "budget_usd": "0.0595",
+            "response_input_tokens_max": 1000000,
+            "response_output_tokens_max": 128000,
+            "response_usd": "1.3200",
+            "reservation_usd": "1.3795"
+          },
+          "models_reported": [
+            "claude-haiku-5-5"
+          ],
+          "duration_ms": 2714,
+          "wall_s": 5.666,
+          "stop_reason": "end_turn",
+          "usage": {
+            "input_tokens": 2,
+            "cache_creation_input_tokens": 0,
+            "cache_read_input_tokens": 11077,
+            "output_tokens": 351,
+            "output_tokens_details": {
+              "thinking_tokens": 158
+            },
+            "server_tool_use": {
+              "web_search_requests": 0,
+              "web_fetch_requests": 0
+            },
+            "service_tier": "standard",
+            "cache_creation": {
+              "ephemeral_1h_input_tokens": 0,
+              "ephemeral_5m_input_tokens": 0
+            },
+            "inference_geo": "global",
+            "iterations": [
+              {
+                "input_tokens": 2,
+                "output_tokens": 351,
+                "cache_read_input_tokens": 11077,
+                "cache_creation_input_tokens": 0,
+                "cache_creation": {
+                  "ephemeral_5m_input_tokens": 0,
+                  "ephemeral_1h_input_tokens": 0
+                },
+                "type": "message"
+              }
+            ],
+            "speed": "standard",
+            "fallback_credit": null
+          },
+          "cost_usd": "0.00028647000000000004",
+          "cost_basis": "total_cost_usd reported by the Claude Code CLI: an API-equivalent list-price estimate; under a subscription login it is notional, not an invoice",
+          "exit_code": 0,
+          "ledger_entry_id": "e5ebf69d8f7549f5b31c6fc0eb778466",
+          "over_budget_estimate": null,
+          "bound_exceeded": null,
+          "error": null
+        }
+      ]
+    },
+    {
+      "kind": "fixture",
+      "id": "direct_import",
+      "structural": "violation",
+      "expected_structural": "violation",
+      "teaches": "Behaviour-preserving shortcut: every behavioural test passes; only the structural sensor sees the forbidden edge.",
+      "judge_called": false,
+      "outcome": {
+        "status": "not_evaluated",
+        "reason": "structural check is violation; repair it before semantic review",
+        "findings": [],
+        "raw_response": null
+      },
+      "calls": []
+    },
+    {
+      "kind": "fixture",
+      "id": "semantic_leakage",
+      "structural": "pass",
+      "expected_structural": "pass",
+      "teaches": "Structural limit: discount eligibility decided in the controller (_priced_body) passes the import rule; only a semantic rubric can flag it. The file keeps the baseline docstring on purpose, so nothing in the source announces the violation to a judge.",
+      "judge_called": true,
+      "outcome": {
+        "status": "violation",
+        "reason": "The controller file decodes requests and maps responses, but _priced_body contains a hard-coded discount rule: orders with subtotal >= 10_000 cents get 10% off. That is a business-policy decision and a hard-coded pricing threshold/percentage, both forbidden in controllers by the rule. The other code (request validation, service calls, exception-to-status mapping, and response mapping) is permitted.",
+        "findings": [
+          {
+            "path": "src/orders/controllers/orders.py",
+            "line_start": 60,
+            "line_end": 61,
+            "explanation": "The controller decides discount eligibility and computes the discount amount with a hard-coded threshold (10_000 cents) and rate (10%). This is pricing policy that belongs in orders.application, and it is applied in handle_get via _priced_body (line 90)."
+          }
+        ],
+        "raw_response": "{\"verdict\":\"violation\",\"findings\":[{\"path\":\"src/orders/controllers/orders.py\",\"line_start\":60,\"line_end\":61,\"rule\":\"business-decision-in-controller\",\"explanation\":\"The controller decides discount eligibility and computes the discount amount with a hard-coded threshold (10_000 cents) and rate (10%). This is pricing policy that belongs in orders.application, and it is applied in handle_get via _priced_body (line 90).\"}],\"rationale\":\"The controller file decodes requests and maps responses, but _priced_body contains a hard-coded discount rule: orders with subtotal >= 10_000 cents get 10% off. That is a business-policy decision and a hard-coded pricing threshold/percentage, both forbidden in controllers by the rule. The other code (request validation, service calls, exception-to-status mapping, and response mapping) is permitted.\"}"
+      },
+      "calls": [
+        {
+          "label": "fixture:semantic_leakage",
+          "model_requested": "claude-haiku-5-5",
+          "started_at": "2026-11-19T10:21:41+00:00",
+          "reservation_usd": "1.3796",
+          "bound": {
+            "input_bytes": 7578,
+            "budget_input_tokens": 39578,
+            "budget_output_tokens": 8000,
+            "budget_usd": "0.0596",
+            "response_input_tokens_max": 1000000,
+            "response_output_tokens_max": 128000,
+            "response_usd": "1.3200",
+            "reservation_usd": "1.3796"
+          },
+          "models_reported": [
+            "claude-haiku-5-5"
+          ],
+          "duration_ms": 3656,
+          "wall_s": 6.898,
+          "stop_reason": "end_turn",
+          "usage": {
+            "input_tokens": 2,
+            "cache_creation_input_tokens": 0,
+            "cache_read_input_tokens": 11160,
+            "output_tokens": 551,
+            "output_tokens_details": {
+              "thinking_tokens": 261
+            },
+            "server_tool_use": {
+              "web_search_requests": 0,
+              "web_fetch_requests": 0
+            },
+            "service_tier": "standard",
+            "cache_creation": {
+              "ephemeral_1h_input_tokens": 0,
+              "ephemeral_5m_input_tokens": 0
+            },
+            "inference_geo": "global",
+            "iterations": [
+              {
+                "input_tokens": 2,
+                "output_tokens": 551,
+                "cache_read_input_tokens": 11160,
+                "cache_creation_input_tokens": 0,
+                "cache_creation": {
+                  "ephemeral_5m_input_tokens": 0,
+                  "ephemeral_1h_input_tokens": 0
+                },
+                "type": "message"
+              }
+            ],
+            "speed": "standard",
+            "fallback_credit": null
+          },
+          "cost_usd": "0.0003873",
+          "cost_basis": "total_cost_usd reported by the Claude Code CLI: an API-equivalent list-price estimate; under a subscription login it is notional, not an invoice",
+          "exit_code": 0,
+          "ledger_entry_id": "9bd0ed3f43644e7cad3deafbf9fd1bca",
+          "over_budget_estimate": null,
+          "bound_exceeded": null,
+          "error": null
+        }
+      ]
+    },
+    {
+      "kind": "fixture",
+      "id": "runtime_reach_through",
+      "structural": "pass",
+      "expected_structural": "pass",
+      "teaches": "Structural limit: reaching the repository through a runtime object needs no import, so the import contract cannot see it.",
+      "judge_called": true,
+      "outcome": {
+        "status": "pass",
+        "reason": "Across both files, the controller only validates request fields (types, non-empty values, positive quantity, non-negative price), calls service methods, catches OrderNotFound, maps results to response bodies, and chooses status codes. It contains no discount eligibility, discount or total computation, and no pricing thresholds or percentages. Line 92 reaches the repository through self._service._repository, which bypasses the application service and breaks the intended layering. It does not decide business policy, though, so it falls outside this rule and is not flagged here.",
+        "findings": [],
+        "raw_response": "{\"verdict\":\"pass\",\"findings\":[],\"rationale\":\"Across both files, the controller only validates request fields (types, non-empty values, positive quantity, non-negative price), calls service methods, catches OrderNotFound, maps results to response bodies, and chooses status codes. It contains no discount eligibility, discount or total computation, and no pricing thresholds or percentages. Line 92 reaches the repository through self._service._repository, which bypasses the application service and breaks the intended layering. It does not decide business policy, though, so it falls outside this rule and is not flagged here.\"}"
+      },
+      "calls": [
+        {
+          "label": "fixture:runtime_reach_through",
+          "model_requested": "claude-haiku-5-5",
+          "started_at": "2026-11-19T10:21:48+00:00",
+          "reservation_usd": "1.3797",
+          "bound": {
+            "input_bytes": 7645,
+            "budget_input_tokens": 39645,
+            "budget_output_tokens": 8000,
+            "budget_usd": "0.0597",
+            "response_input_tokens_max": 1000000,
+            "response_output_tokens_max": 128000,
+            "response_usd": "1.3200",
+            "reservation_usd": "1.3797"
+          },
+          "models_reported": [
+            "claude-haiku-5-5"
+          ],
+          "duration_ms": 4081,
+          "wall_s": 6.59,
+          "stop_reason": "end_turn",
+          "usage": {
+            "input_tokens": 2,
+            "cache_creation_input_tokens": 0,
+            "cache_read_input_tokens": 11163,
+            "output_tokens": 694,
+            "output_tokens_details": {
+              "thinking_tokens": 505
+            },
+            "server_tool_use": {
+              "web_search_requests": 0,
+              "web_fetch_requests": 0
+            },
+            "service_tier": "standard",
+            "cache_creation": {
+              "ephemeral_1h_input_tokens": 0,
+              "ephemeral_5m_input_tokens": 0
+            },
+            "inference_geo": "global",
+            "iterations": [
+              {
+                "input_tokens": 2,
+                "output_tokens": 694,
+                "cache_read_input_tokens": 11163,
+                "cache_creation_input_tokens": 0,
+                "cache_creation": {
+                  "ephemeral_5m_input_tokens": 0,
+                  "ephemeral_1h_input_tokens": 0
+                },
+                "type": "message"
+              }
+            ],
+            "speed": "standard",
+            "fallback_credit": null
+          },
+          "cost_usd": "0.00045882999999999997",
+          "cost_basis": "total_cost_usd reported by the Claude Code CLI: an API-equivalent list-price estimate; under a subscription login it is notional, not an invoice",
+          "exit_code": 0,
+          "ledger_entry_id": "0f8e4e1e44c94d23b5436cc803433934",
+          "over_budget_estimate": null,
+          "bound_exceeded": null,
+          "error": null
+        }
+      ]
+    },
+    {
+      "kind": "fixture",
+      "id": "syntax_error",
+      "structural": "checker_error",
+      "expected_structural": "checker_error",
+      "teaches": "A half-written module stops lint-imports from parsing the package: the rules were not checked, which is not a pass.",
+      "judge_called": false,
+      "outcome": {
+        "status": "not_evaluated",
+        "reason": "structural check is checker_error; repair it before semantic review",
+        "findings": [],
+        "raw_response": null
+      },
+      "calls": []
+    },
+    {
+      "kind": "calibration",
+      "id": "pass-maps-service-discount",
+      "source": "experiment/calibration/semantic-calibration.json",
+      "authored_label": "pass",
+      "judge_called": true,
+      "outcome": {
+        "status": "pass",
+        "reason": "The controller only calls OrderService.invoice, catches OrderNotFound to choose a 404, and maps the returned invoice fields (order_id, subtotal_cents, discount_cents, total_cents) into the response body. It makes no discount-eligibility decisions, computes no discount amounts or totals, and contains no hard-coded pricing thresholds or percentages, so it stays within the permitted controller responsibilities.",
+        "findings": [],
+        "raw_response": "{\"verdict\":\"pass\",\"findings\":[],\"rationale\":\"The controller only calls OrderService.invoice, catches OrderNotFound to choose a 404, and maps the returned invoice fields (order_id, subtotal_cents, discount_cents, total_cents) into the response body. It makes no discount-eligibility decisions, computes no discount amounts or totals, and contains no hard-coded pricing thresholds or percentages, so it stays within the permitted controller responsibilities.\"}"
+      },
+      "calls": [
+        {
+          "label": "calibration:pass-maps-service-discount",
+          "model_requested": "claude-haiku-5-5",
+          "started_at": "2026-11-19T10:21:55+00:00",
+          "reservation_usd": "1.3754",
+          "bound": {
+            "input_bytes": 3393,
+            "budget_input_tokens": 35393,
+            "budget_output_tokens": 8000,
+            "budget_usd": "0.0554",
+            "response_input_tokens_max": 1000000,
+            "response_output_tokens_max": 128000,
+            "response_usd": "1.3200",
+            "reservation_usd": "1.3754"
+          },
+          "models_reported": [
+            "claude-haiku-5-5"
+          ],
+          "duration_ms": 2382,
+          "wall_s": 4.743,
+          "stop_reason": "end_turn",
+          "usage": {
+            "input_tokens": 2,
+            "cache_creation_input_tokens": 2101,
+            "cache_read_input_tokens": 7156,
+            "output_tokens": 255,
+            "output_tokens_details": {
+              "thinking_tokens": 95
+            },
+            "server_tool_use": {
+              "web_search_requests": 0,
+              "web_fetch_requests": 0
+            },
+            "service_tier": "standard",
+            "cache_creation": {
+              "ephemeral_1h_input_tokens": 2101,
+              "ephemeral_5m_input_tokens": 0
+            },
+            "inference_geo": "global",
+            "iterations": [
+              {
+                "input_tokens": 2,
+                "output_tokens": 255,
+                "cache_read_input_tokens": 7156,
+                "cache_creation_input_tokens": 2101,
+                "cache_creation": {
+                  "ephemeral_5m_input_tokens": 0,
+                  "ephemeral_1h_input_tokens": 2101
+                },
+                "type": "message"
+              }
+            ],
+            "speed": "standard",
+            "fallback_credit": null
+          },
+          "cost_usd": "0.0006194600000000001",
+          "cost_basis": "total_cost_usd reported by the Claude Code CLI: an API-equivalent list-price estimate; under a subscription login it is notional, not an invoice",
+          "exit_code": 0,
+          "ledger_entry_id": "eb216079425f49769f7489b4bd310dae",
+          "over_budget_estimate": null,
+          "bound_exceeded": null,
+          "error": null
+        }
+      ]
+    },
+    {
+      "kind": "calibration",
+      "id": "pass-validates-request-fields",
+      "source": "experiment/calibration/semantic-calibration.json",
+      "authored_label": "pass",
+      "judge_called": true,
+      "outcome": {
+        "status": "pass",
+        "reason": "The controller only decodes the request and validates the message field's type and length (1 to 200 characters), which is request validation. It delegates the gift-wrap action to OrderService.add_gift_wrap, catches OrderNotFound to choose a 404, and maps the returned order into a response. It contains no discount eligibility logic, no pricing amounts or rates, and no hard-coded pricing thresholds.",
+        "findings": [],
+        "raw_response": "{\"verdict\":\"pass\",\"findings\":[],\"rationale\":\"The controller only decodes the request and validates the message field's type and length (1 to 200 characters), which is request validation. It delegates the gift-wrap action to OrderService.add_gift_wrap, catches OrderNotFound to choose a 404, and maps the returned order into a response. It contains no discount eligibility logic, no pricing amounts or rates, and no hard-coded pricing thresholds.\"}"
+      },
+      "calls": [
+        {
+          "label": "calibration:pass-validates-request-fields",
+          "model_requested": "claude-haiku-5-5",
+          "started_at": "2026-11-19T10:22:00+00:00",
+          "reservation_usd": "1.3755",
+          "bound": {
+            "input_bytes": 3426,
+            "budget_input_tokens": 35426,
+            "budget_output_tokens": 8000,
+            "budget_usd": "0.0555",
+            "response_input_tokens_max": 1000000,
+            "response_output_tokens_max": 128000,
+            "response_usd": "1.3200",
+            "reservation_usd": "1.3755"
+          },
+          "models_reported": [
+            "claude-haiku-5-5"
+          ],
+          "duration_ms": 2142,
+          "wall_s": 4.761,
+          "stop_reason": "end_turn",
+          "usage": {
+            "input_tokens": 2,
+            "cache_creation_input_tokens": 2107,
+            "cache_read_input_tokens": 7156,
+            "output_tokens": 257,
+            "output_tokens_details": {
+              "thinking_tokens": 105
+            },
+            "server_tool_use": {
+              "web_search_requests": 0,
+              "web_fetch_requests": 0
+            },
+            "service_tier": "standard",
+            "cache_creation": {
+              "ephemeral_1h_input_tokens": 2107,
+              "ephemeral_5m_input_tokens": 0
+            },
+            "inference_geo": "global",
+            "iterations": [
+              {
+                "input_tokens": 2,
+                "output_tokens": 257,
+                "cache_read_input_tokens": 7156,
+                "cache_creation_input_tokens": 2107,
+                "cache_creation": {
+                  "ephemeral_5m_input_tokens": 0,
+                  "ephemeral_1h_input_tokens": 2107
+                },
+                "type": "message"
+              }
+            ],
+            "speed": "standard",
+            "fallback_credit": null
+          },
+          "cost_usd": "0.00062166",
+          "cost_basis": "total_cost_usd reported by the Claude Code CLI: an API-equivalent list-price estimate; under a subscription login it is notional, not an invoice",
+          "exit_code": 0,
+          "ledger_entry_id": "5717b53ecb554bda83a295c4023484c6",
+          "over_budget_estimate": null,
+          "bound_exceeded": null,
+          "error": null
+        }
+      ]
+    },
+    {
+      "kind": "calibration",
+      "id": "pass-formats-amounts",
+      "source": "experiment/calibration/semantic-calibration.json",
+      "authored_label": "pass",
+      "judge_called": true,
+      "outcome": {
+        "status": "pass",
+        "reason": "The controller catches OrderNotFound from the application service and maps the returned summary into a response with a status code. The only arithmetic is converting total_cents into a dollars-and-cents display string (// 100 and % 100). That is presentation formatting of an amount the service already computed, which the rule permits. The file has no discount eligibility checks, no discount or total computation, and no hard-coded pricing thresholds or percentages.",
+        "findings": [],
+        "raw_response": "{\"verdict\":\"pass\",\"findings\":[],\"rationale\":\"The controller catches OrderNotFound from the application service and maps the returned summary into a response with a status code. The only arithmetic is converting total_cents into a dollars-and-cents display string (// 100 and % 100). That is presentation formatting of an amount the service already computed, which the rule permits. The file has no discount eligibility checks, no discount or total computation, and no hard-coded pricing thresholds or percentages.\"}"
+      },
+      "calls": [
+        {
+          "label": "calibration:pass-formats-amounts",
+          "model_requested": "claude-haiku-5-5",
+          "started_at": "2026-11-19T10:22:05+00:00",
+          "reservation_usd": "1.3753",
+          "bound": {
+            "input_bytes": 3235,
+            "budget_input_tokens": 35235,
+            "budget_output_tokens": 8000,
+            "budget_usd": "0.0553",
+            "response_input_tokens_max": 1000000,
+            "response_output_tokens_max": 128000,
+            "response_usd": "1.3200",
+            "reservation_usd": "1.3753"
+          },
+          "models_reported": [
+            "claude-haiku-5-5"
+          ],
+          "duration_ms": 3219,
+          "wall_s": 5.687,
+          "stop_reason": "end_turn",
+          "usage": {
+            "input_tokens": 2,
+            "cache_creation_input_tokens": 2026,
+            "cache_read_input_tokens": 7156,
+            "output_tokens": 354,
+            "output_tokens_details": {
+              "thinking_tokens": 197
+            },
+            "server_tool_use": {
+              "web_search_requests": 0,
+              "web_fetch_requests": 0
+            },
+            "service_tier": "standard",
+            "cache_creation": {
+              "ephemeral_1h_input_tokens": 2026,
+              "ephemeral_5m_input_tokens": 0
+            },
+            "inference_geo": "global",
+            "iterations": [
+              {
+                "input_tokens": 2,
+                "output_tokens": 354,
+                "cache_read_input_tokens": 7156,
+                "cache_creation_input_tokens": 2026,
+                "cache_creation": {
+                  "ephemeral_5m_input_tokens": 0,
+                  "ephemeral_1h_input_tokens": 2026
+                },
+                "type": "message"
+              }
+            ],
+            "speed": "standard",
+            "fallback_credit": null
+          },
+          "cost_usd": "0.0006539600000000001",
+          "cost_basis": "total_cost_usd reported by the Claude Code CLI: an API-equivalent list-price estimate; under a subscription login it is notional, not an invoice",
+          "exit_code": 0,
+          "ledger_entry_id": "14d9f83df0ae46efac72d5fe75f6cbf4",
+          "over_budget_estimate": null,
+          "bound_exceeded": null,
+          "error": null
+        }
+      ]
+    },
+    {
+      "kind": "calibration",
+      "id": "pass-chooses-status-codes",
+      "source": "experiment/calibration/semantic-calibration.json",
+      "authored_label": "pass",
+      "judge_called": true,
+      "outcome": {
+        "status": "pass",
+        "reason": "The controller only validates the request shape (code must be a non-empty string), calls OrderService.apply_coupon, catches OrderNotFound and ValueError to choose status codes, and maps summary.total_cents into the response. It makes no eligibility decision, computes no discount, and contains no hard-coded pricing thresholds or percentages.",
+        "findings": [],
+        "raw_response": "{\"verdict\": \"pass\", \"findings\": [], \"rationale\": \"The controller only validates the request shape (code must be a non-empty string), calls OrderService.apply_coupon, catches OrderNotFound and ValueError to choose status codes, and maps summary.total_cents into the response. It makes no eligibility decision, computes no discount, and contains no hard-coded pricing thresholds or percentages.\"}"
+      },
+      "calls": [
+        {
+          "label": "calibration:pass-chooses-status-codes",
+          "model_requested": "claude-haiku-5-5",
+          "started_at": "2026-11-19T10:22:10+00:00",
+          "reservation_usd": "1.3756",
+          "bound": {
+            "input_bytes": 3539,
+            "budget_input_tokens": 35539,
+            "budget_output_tokens": 8000,
+            "budget_usd": "0.0556",
+            "response_input_tokens_max": 1000000,
+            "response_output_tokens_max": 128000,
+            "response_usd": "1.3200",
+            "reservation_usd": "1.3756"
+          },
+          "models_reported": [
+            "claude-haiku-5-5"
+          ],
+          "duration_ms": 2199,
+          "wall_s": 4.685,
+          "stop_reason": "end_turn",
+          "usage": {
+            "input_tokens": 2,
+            "cache_creation_input_tokens": 2150,
+            "cache_read_input_tokens": 7156,
+            "output_tokens": 269,
+            "output_tokens_details": {
+              "thinking_tokens": 136
+            },
+            "server_tool_use": {
+              "web_search_requests": 0,
+              "web_fetch_requests": 0
+            },
+            "service_tier": "standard",
+            "cache_creation": {
+              "ephemeral_1h_input_tokens": 2150,
+              "ephemeral_5m_input_tokens": 0
+            },
+            "inference_geo": "global",
+            "iterations": [
+              {
+                "input_tokens": 2,
+                "output_tokens": 269,
+                "cache_read_input_tokens": 7156,
+                "cache_creation_input_tokens": 2150,
+                "cache_creation": {
+                  "ephemeral_5m_input_tokens": 0,
+                  "ephemeral_1h_input_tokens": 2150
+                },
+                "type": "message"
+              }
+            ],
+            "speed": "standard",
+            "fallback_credit": null
+          },
+          "cost_usd": "0.00063626",
+          "cost_basis": "total_cost_usd reported by the Claude Code CLI: an API-equivalent list-price estimate; under a subscription login it is notional, not an invoice",
+          "exit_code": 0,
+          "ledger_entry_id": "00e72ac4b3ba4facacd8932dfcf085ea",
+          "over_budget_estimate": null,
+          "bound_exceeded": null,
+          "error": null
+        }
+      ]
+    },
+    {
+      "kind": "calibration",
+      "id": "pass-mentions-discount-in-docs",
+      "source": "experiment/calibration/semantic-calibration.json",
+      "authored_label": "pass",
+      "judge_called": true,
+      "outcome": {
+        "status": "pass",
+        "reason": "The controller only forwards the text returned by `self._service.describe_discount_policy()` into a 200 response. It contains no eligibility checks, discount amounts, rates, thresholds, or totals, and no hard-coded pricing values. The docstring confirms the threshold and rate live in the service, so the file stays within the permitted controller responsibilities.",
+        "findings": [],
+        "raw_response": "{\"verdict\": \"pass\", \"findings\": [], \"rationale\": \"The controller only forwards the text returned by `self._service.describe_discount_policy()` into a 200 response. It contains no eligibility checks, discount amounts, rates, thresholds, or totals, and no hard-coded pricing values. The docstring confirms the threshold and rate live in the service, so the file stays within the permitted controller responsibilities.\"}"
+      },
+      "calls": [
+        {
+          "label": "calibration:pass-mentions-discount-in-docs",
+          "model_requested": "claude-haiku-5-5",
+          "started_at": "2026-11-19T10:22:15+00:00",
+          "reservation_usd": "1.3752",
+          "bound": {
+            "input_bytes": 3192,
+            "budget_input_tokens": 35192,
+            "budget_output_tokens": 8000,
+            "budget_usd": "0.0552",
+            "response_input_tokens_max": 1000000,
+            "response_output_tokens_max": 128000,
+            "response_usd": "1.3200",
+            "reservation_usd": "1.3752"
+          },
+          "models_reported": [
+            "claude-haiku-5-5"
+          ],
+          "duration_ms": 1823,
+          "wall_s": 4.418,
+          "stop_reason": "end_turn",
+          "usage": {
+            "input_tokens": 2,
+            "cache_creation_input_tokens": 1987,
+            "cache_read_input_tokens": 7156,
+            "output_tokens": 207,
+            "output_tokens_details": {
+              "thinking_tokens": 70
+            },
+            "server_tool_use": {
+              "web_search_requests": 0,
+              "web_fetch_requests": 0
+            },
+            "service_tier": "standard",
+            "cache_creation": {
+              "ephemeral_1h_input_tokens": 1987,
+              "ephemeral_5m_input_tokens": 0
+            },
+            "inference_geo": "global",
+            "iterations": [
+              {
+                "input_tokens": 2,
+                "output_tokens": 207,
+                "cache_read_input_tokens": 7156,
+                "cache_creation_input_tokens": 1987,
+                "cache_creation": {
+                  "ephemeral_5m_input_tokens": 0,
+                  "ephemeral_1h_input_tokens": 1987
+                },
+                "type": "message"
+              }
+            ],
+            "speed": "standard",
+            "fallback_credit": null
+          },
+          "cost_usd": "0.00057266",
+          "cost_basis": "total_cost_usd reported by the Claude Code CLI: an API-equivalent list-price estimate; under a subscription login it is notional, not an invoice",
+          "exit_code": 0,
+          "ledger_entry_id": "cf2f832a4128411582cad1dfbee7f0b8",
+          "over_budget_estimate": null,
+          "bound_exceeded": null,
+          "error": null
+        }
+      ]
+    },
+    {
+      "kind": "calibration",
+      "id": "pass-sums-line-quantities-for-display",
+      "source": "experiment/calibration/semantic-calibration.json",
+      "authored_label": "pass",
+      "judge_called": true,
+      "outcome": {
+        "status": "pass",
+        "reason": "The controller only decodes the order id, calls OrderService.get_order, maps OrderNotFound to a 404, and returns the item count as a 200 response. Summing item quantities is a presentation mapping, not a pricing or eligibility decision. The file contains no discount logic, pricing thresholds, or percentages.",
+        "findings": [],
+        "raw_response": "{\"verdict\": \"pass\", \"findings\": [], \"rationale\": \"The controller only decodes the order id, calls OrderService.get_order, maps OrderNotFound to a 404, and returns the item count as a 200 response. Summing item quantities is a presentation mapping, not a pricing or eligibility decision. The file contains no discount logic, pricing thresholds, or percentages.\"}"
+      },
+      "calls": [
+        {
+          "label": "calibration:pass-sums-line-quantities-for-display",
+          "model_requested": "claude-haiku-5-5",
+          "started_at": "2026-11-19T10:22:19+00:00",
+          "reservation_usd": "1.3752",
+          "bound": {
+            "input_bytes": 3199,
+            "budget_input_tokens": 35199,
+            "budget_output_tokens": 8000,
+            "budget_usd": "0.0552",
+            "response_input_tokens_max": 1000000,
+            "response_output_tokens_max": 128000,
+            "response_usd": "1.3200",
+            "reservation_usd": "1.3752"
+          },
+          "models_reported": [
+            "claude-haiku-5-5"
+          ],
+          "duration_ms": 2045,
+          "wall_s": 4.701,
+          "stop_reason": "end_turn",
+          "usage": {
+            "input_tokens": 2,
+            "cache_creation_input_tokens": 1999,
+            "cache_read_input_tokens": 7156,
+            "output_tokens": 201,
+            "output_tokens_details": {
+              "thinking_tokens": 75
+            },
+            "server_tool_use": {
+              "web_search_requests": 0,
+              "web_fetch_requests": 0
+            },
+            "service_tier": "standard",
+            "cache_creation": {
+              "ephemeral_1h_input_tokens": 1999,
+              "ephemeral_5m_input_tokens": 0
+            },
+            "inference_geo": "global",
+            "iterations": [
+              {
+                "input_tokens": 2,
+                "output_tokens": 201,
+                "cache_read_input_tokens": 7156,
+                "cache_creation_input_tokens": 1999,
+                "cache_creation": {
+                  "ephemeral_5m_input_tokens": 0,
+                  "ephemeral_1h_input_tokens": 1999
+                },
+                "type": "message"
+              }
+            ],
+            "speed": "standard",
+            "fallback_credit": null
+          },
+          "cost_usd": "0.00057206",
+          "cost_basis": "total_cost_usd reported by the Claude Code CLI: an API-equivalent list-price estimate; under a subscription login it is notional, not an invoice",
+          "exit_code": 0,
+          "ledger_entry_id": "8f166b4e10cb49759c6e1eafbe51e481",
+          "over_budget_estimate": null,
+          "bound_exceeded": null,
+          "error": null
+        }
+      ]
+    },
+    {
+      "kind": "calibration",
+      "id": "violation-loyalty-percentage",
+      "source": "experiment/calibration/semantic-calibration.json",
+      "authored_label": "violation",
+      "judge_called": true,
+      "outcome": {
+        "status": "violation",
+        "reason": "handle_loyalty_price calls the application service only to fetch the order. It then applies loyalty-tier eligibility and a hard-coded 5% discount, and computes the discounted total in the controller, which the rule forbids. The not-found handling and response mapping are permitted.",
+        "findings": [
+          {
+            "path": "src/orders/controllers/orders.py",
+            "line_start": 27,
+            "line_end": 29,
+            "explanation": "The controller decides discount eligibility by checking for the \"gold\" tier and hard-codes a 5% rate to compute the discount amount. It also derives the total from that discount. This pricing policy belongs in orders.application, not the controller."
+          }
+        ],
+        "raw_response": "{\"verdict\": \"violation\", \"findings\": [{\"path\": \"src/orders/controllers/orders.py\", \"line_start\": 27, \"line_end\": 29, \"rule\": \"business-decision-in-controller\", \"explanation\": \"The controller decides discount eligibility by checking for the \\\"gold\\\" tier and hard-codes a 5% rate to compute the discount amount. It also derives the total from that discount. This pricing policy belongs in orders.application, not the controller.\"}], \"rationale\": \"handle_loyalty_price calls the application service only to fetch the order. It then applies loyalty-tier eligibility and a hard-coded 5% discount, and computes the discounted total in the controller, which the rule forbids. The not-found handling and response mapping are permitted.\"}"
+      },
+      "calls": [
+        {
+          "label": "calibration:violation-loyalty-percentage",
+          "model_requested": "claude-haiku-5-5",
+          "started_at": "2026-11-19T10:22:24+00:00",
+          "reservation_usd": "1.3754",
+          "bound": {
+            "input_bytes": 3395,
+            "budget_input_tokens": 35395,
+            "budget_output_tokens": 8000,
+            "budget_usd": "0.0554",
+            "response_input_tokens_max": 1000000,
+            "response_output_tokens_max": 128000,
+            "response_usd": "1.3200",
+            "reservation_usd": "1.3754"
+          },
+          "models_reported": [
+            "claude-haiku-5-5"
+          ],
+          "duration_ms": 2960,
+          "wall_s": 5.783,
+          "stop_reason": "end_turn",
+          "usage": {
+            "input_tokens": 2,
+            "cache_creation_input_tokens": 2090,
+            "cache_read_input_tokens": 7156,
+            "output_tokens": 429,
+            "output_tokens_details": {
+              "thinking_tokens": 184
+            },
+            "server_tool_use": {
+              "web_search_requests": 0,
+              "web_fetch_requests": 0
+            },
+            "service_tier": "standard",
+            "cache_creation": {
+              "ephemeral_1h_input_tokens": 2090,
+              "ephemeral_5m_input_tokens": 0
+            },
+            "inference_geo": "global",
+            "iterations": [
+              {
+                "input_tokens": 2,
+                "output_tokens": 429,
+                "cache_read_input_tokens": 7156,
+                "cache_creation_input_tokens": 2090,
+                "cache_creation": {
+                  "ephemeral_5m_input_tokens": 0,
+                  "ephemeral_1h_input_tokens": 2090
+                },
+                "type": "message"
+              }
+            ],
+            "speed": "standard",
+            "fallback_credit": null
+          },
+          "cost_usd": "0.00070426",
+          "cost_basis": "total_cost_usd reported by the Claude Code CLI: an API-equivalent list-price estimate; under a subscription login it is notional, not an invoice",
+          "exit_code": 0,
+          "ledger_entry_id": "506b57ff038945c993a93e591bbbbc5f",
+          "over_budget_estimate": null,
+          "bound_exceeded": null,
+          "error": null
+        }
+      ]
+    },
+    {
+      "kind": "calibration",
+      "id": "violation-coupon-code",
+      "source": "experiment/calibration/semantic-calibration.json",
+      "authored_label": "violation",
+      "judge_called": true,
+      "outcome": {
+        "status": "violation",
+        "reason": "handle_apply_coupon decides which coupon codes earn a discount, hard-codes the 10% rate, and calculates the discounted total in the controller. The rule forbids this, and the hard-coded percentage is also prohibited in controllers. Request decoding, the not-found handling, and the response mapping on line 29 are permitted.",
+        "findings": [
+          {
+            "path": "src/orders/controllers/orders.py",
+            "line_start": 27,
+            "line_end": 28,
+            "explanation": "The controller hard-codes the discount rule: it maps the coupon code \"SAVE10\" to a 10% rate and computes the discounted total from it. Coupon eligibility and discount computation are business policy and belong in orders.application."
+          }
+        ],
+        "raw_response": "{\"verdict\":\"violation\",\"findings\":[{\"path\":\"src/orders/controllers/orders.py\",\"line_start\":27,\"line_end\":28,\"rule\":\"business-decision-in-controller\",\"explanation\":\"The controller hard-codes the discount rule: it maps the coupon code \\\"SAVE10\\\" to a 10% rate and computes the discounted total from it. Coupon eligibility and discount computation are business policy and belong in orders.application.\"}],\"rationale\":\"handle_apply_coupon decides which coupon codes earn a discount, hard-codes the 10% rate, and calculates the discounted total in the controller. The rule forbids this, and the hard-coded percentage is also prohibited in controllers. Request decoding, the not-found handling, and the response mapping on line 29 are permitted.\"}"
+      },
+      "calls": [
+        {
+          "label": "calibration:violation-coupon-code",
+          "model_requested": "claude-haiku-5-5",
+          "started_at": "2026-11-19T10:22:30+00:00",
+          "reservation_usd": "1.3754",
+          "bound": {
+            "input_bytes": 3368,
+            "budget_input_tokens": 35368,
+            "budget_output_tokens": 8000,
+            "budget_usd": "0.0554",
+            "response_input_tokens_max": 1000000,
+            "response_output_tokens_max": 128000,
+            "response_usd": "1.3200",
+            "reservation_usd": "1.3754"
+          },
+          "models_reported": [
+            "claude-haiku-5-5"
+          ],
+          "duration_ms": 2826,
+          "wall_s": 5.302,
+          "stop_reason": "end_turn",
+          "usage": {
+            "input_tokens": 2,
+            "cache_creation_input_tokens": 2088,
+            "cache_read_input_tokens": 7156,
+            "output_tokens": 422,
+            "output_tokens_details": {
+              "thinking_tokens": 163
+            },
+            "server_tool_use": {
+              "web_search_requests": 0,
+              "web_fetch_requests": 0
+            },
+            "service_tier": "standard",
+            "cache_creation": {
+              "ephemeral_1h_input_tokens": 2088,
+              "ephemeral_5m_input_tokens": 0
+            },
+            "inference_geo": "global",
+            "iterations": [
+              {
+                "input_tokens": 2,
+                "output_tokens": 422,
+                "cache_read_input_tokens": 7156,
+                "cache_creation_input_tokens": 2088,
+                "cache_creation": {
+                  "ephemeral_5m_input_tokens": 0,
+                  "ephemeral_1h_input_tokens": 2088
+                },
+                "type": "message"
+              }
+            ],
+            "speed": "standard",
+            "fallback_credit": null
+          },
+          "cost_usd": "0.00070036",
+          "cost_basis": "total_cost_usd reported by the Claude Code CLI: an API-equivalent list-price estimate; under a subscription login it is notional, not an invoice",
+          "exit_code": 0,
+          "ledger_entry_id": "782dc26fb0364323b50e31994bf04069",
+          "over_budget_estimate": null,
+          "bound_exceeded": null,
+          "error": null
+        }
+      ]
+    },
+    {
+      "kind": "calibration",
+      "id": "violation-bulk-line-discount",
+      "source": "experiment/calibration/semantic-calibration.json",
+      "authored_label": "violation",
+      "judge_called": true,
+      "outcome": {
+        "status": "violation",
+        "reason": "handle_bulk_quote applies a hard-coded bulk-discount rule of 5% for quantities of 10 or more directly in the controller. Request decoding, service calls, and response mapping are acceptable, but this pricing decision is not.",
+        "findings": [
+          {
+            "path": "src/orders/controllers/orders.py",
+            "line_start": 29,
+            "line_end": 30,
+            "explanation": "The controller decides bulk-discount eligibility with a hard-coded threshold (quantity >= 10) and computes a 5% discount amount (line // 20) for each line item. This is pricing policy, which belongs in orders.application, not in the controller. The total on line 32 depends on this discount."
+          }
+        ],
+        "raw_response": "{\"verdict\":\"violation\",\"findings\":[{\"path\":\"src/orders/controllers/orders.py\",\"line_start\":29,\"line_end\":30,\"rule\":\"business-decision-in-controller\",\"explanation\":\"The controller decides bulk-discount eligibility with a hard-coded threshold (quantity >= 10) and computes a 5% discount amount (line // 20) for each line item. This is pricing policy, which belongs in orders.application, not in the controller. The total on line 32 depends on this discount.\"}],\"rationale\":\"handle_bulk_quote applies a hard-coded bulk-discount rule of 5% for quantities of 10 or more directly in the controller. Request decoding, service calls, and response mapping are acceptable, but this pricing decision is not.\"}"
+      },
+      "calls": [
+        {
+          "label": "calibration:violation-bulk-line-discount",
+          "model_requested": "claude-haiku-5-5",
+          "started_at": "2026-11-19T10:22:35+00:00",
+          "reservation_usd": "1.3755",
+          "bound": {
+            "input_bytes": 3454,
+            "budget_input_tokens": 35454,
+            "budget_output_tokens": 8000,
+            "budget_usd": "0.0555",
+            "response_input_tokens_max": 1000000,
+            "response_output_tokens_max": 128000,
+            "response_usd": "1.3200",
+            "reservation_usd": "1.3755"
+          },
+          "models_reported": [
+            "claude-haiku-5-5"
+          ],
+          "duration_ms": 3161,
+          "wall_s": 5.668,
+          "stop_reason": "end_turn",
+          "usage": {
+            "input_tokens": 2,
+            "cache_creation_input_tokens": 2112,
+            "cache_read_input_tokens": 7156,
+            "output_tokens": 487,
+            "output_tokens_details": {
+              "thinking_tokens": 239
+            },
+            "server_tool_use": {
+              "web_search_requests": 0,
+              "web_fetch_requests": 0
+            },
+            "service_tier": "standard",
+            "cache_creation": {
+              "ephemeral_1h_input_tokens": 2112,
+              "ephemeral_5m_input_tokens": 0
+            },
+            "inference_geo": "global",
+            "iterations": [
+              {
+                "input_tokens": 2,
+                "output_tokens": 487,
+                "cache_read_input_tokens": 7156,
+                "cache_creation_input_tokens": 2112,
+                "cache_creation": {
+                  "ephemeral_5m_input_tokens": 0,
+                  "ephemeral_1h_input_tokens": 2112
+                },
+                "type": "message"
+              }
+            ],
+            "speed": "standard",
+            "fallback_credit": null
+          },
+          "cost_usd": "0.0007376600000000001",
+          "cost_basis": "total_cost_usd reported by the Claude Code CLI: an API-equivalent list-price estimate; under a subscription login it is notional, not an invoice",
+          "exit_code": 0,
+          "ledger_entry_id": "41545c89f74d4939bdcaa209b4379916",
+          "over_budget_estimate": null,
+          "bound_exceeded": null,
+          "error": null
+        }
+      ]
+    },
+    {
+      "kind": "calibration",
+      "id": "violation-recomputes-total",
+      "source": "experiment/calibration/semantic-calibration.json",
+      "authored_label": "violation",
+      "judge_called": true,
+      "outcome": {
+        "status": "violation",
+        "reason": "handle_summary decides whether an order qualifies for a discount and computes the discounted total using a hard-coded threshold and percentage. The rule forbids this in controllers. The rest of the controller only catches OrderNotFound, maps the result, and chooses status codes, which is permitted.",
+        "findings": [
+          {
+            "path": "src/orders/controllers/orders.py",
+            "line_start": 27,
+            "line_end": 27,
+            "explanation": "The controller hard-codes a discount policy: a 10,000-cent threshold and a 10% reduction computed as `subtotal - subtotal // 10`. This is pricing policy that belongs in orders.application, not in the controller."
+          }
+        ],
+        "raw_response": "{\"verdict\":\"violation\",\"findings\":[{\"path\":\"src/orders/controllers/orders.py\",\"line_start\":27,\"line_end\":27,\"rule\":\"business-decision-in-controller\",\"explanation\":\"The controller hard-codes a discount policy: a 10,000-cent threshold and a 10% reduction computed as `subtotal - subtotal // 10`. This is pricing policy that belongs in orders.application, not in the controller.\"}],\"rationale\":\"handle_summary decides whether an order qualifies for a discount and computes the discounted total using a hard-coded threshold and percentage. The rule forbids this in controllers. The rest of the controller only catches OrderNotFound, maps the result, and chooses status codes, which is permitted.\"}"
+      },
+      "calls": [
+        {
+          "label": "calibration:violation-recomputes-total",
+          "model_requested": "claude-haiku-5-5",
+          "started_at": "2026-11-19T10:22:41+00:00",
+          "reservation_usd": "1.3753",
+          "bound": {
+            "input_bytes": 3288,
+            "budget_input_tokens": 35288,
+            "budget_output_tokens": 8000,
+            "budget_usd": "0.0553",
+            "response_input_tokens_max": 1000000,
+            "response_output_tokens_max": 128000,
+            "response_usd": "1.3200",
+            "reservation_usd": "1.3753"
+          },
+          "models_reported": [
+            "claude-haiku-5-5"
+          ],
+          "duration_ms": 2498,
+          "wall_s": 5.054,
+          "stop_reason": "end_turn",
+          "usage": {
+            "input_tokens": 2,
+            "cache_creation_input_tokens": 2050,
+            "cache_read_input_tokens": 7156,
+            "output_tokens": 406,
+            "output_tokens_details": {
+              "thinking_tokens": 164
+            },
+            "server_tool_use": {
+              "web_search_requests": 0,
+              "web_fetch_requests": 0
+            },
+            "service_tier": "standard",
+            "cache_creation": {
+              "ephemeral_1h_input_tokens": 2050,
+              "ephemeral_5m_input_tokens": 0
+            },
+            "inference_geo": "global",
+            "iterations": [
+              {
+                "input_tokens": 2,
+                "output_tokens": 406,
+                "cache_read_input_tokens": 7156,
+                "cache_creation_input_tokens": 2050,
+                "cache_creation": {
+                  "ephemeral_5m_input_tokens": 0,
+                  "ephemeral_1h_input_tokens": 2050
+                },
+                "type": "message"
+              }
+            ],
+            "speed": "standard",
+            "fallback_credit": null
+          },
+          "cost_usd": "0.00068476",
+          "cost_basis": "total_cost_usd reported by the Claude Code CLI: an API-equivalent list-price estimate; under a subscription login it is notional, not an invoice",
+          "exit_code": 0,
+          "ledger_entry_id": "ed97e232f3744d4ebab2d1866bbaf21a",
+          "over_budget_estimate": null,
+          "bound_exceeded": null,
+          "error": null
+        }
+      ]
+    },
+    {
+      "kind": "calibration",
+      "id": "violation-eligibility-flag",
+      "source": "experiment/calibration/semantic-calibration.json",
+      "authored_label": "violation",
+      "judge_called": true,
+      "outcome": {
+        "status": "violation",
+        "reason": "The handle_checkout method on line 22 contains a business rule about who qualifies for a discount, and line 24 forwards that decision into the checkout flow. The controller otherwise only decodes input, calls the service, catches OrderNotFound, and maps the result, so the violation is isolated to the eligibility logic.",
+        "findings": [
+          {
+            "path": "src/orders/controllers/orders.py",
+            "line_start": 22,
+            "line_end": 24,
+            "explanation": "The controller decides discount eligibility from hard-coded customer-id policy (the \"vip-\" prefix and \"-staff\" suffix) and passes the result to the service as apply_discount. That eligibility decision belongs in orders.application, not in the controller."
+          }
+        ],
+        "raw_response": "{\"verdict\":\"violation\",\"findings\":[{\"path\":\"src/orders/controllers/orders.py\",\"line_start\":22,\"line_end\":24,\"rule\":\"business-decision-in-controller\",\"explanation\":\"The controller decides discount eligibility from hard-coded customer-id policy (the \\\"vip-\\\" prefix and \\\"-staff\\\" suffix) and passes the result to the service as apply_discount. That eligibility decision belongs in orders.application, not in the controller.\"}],\"rationale\":\"The handle_checkout method on line 22 contains a business rule about who qualifies for a discount, and line 24 forwards that decision into the checkout flow. The controller otherwise only decodes input, calls the service, catches OrderNotFound, and maps the result, so the violation is isolated to the eligibility logic.\"}"
+      },
+      "calls": [
+        {
+          "label": "calibration:violation-eligibility-flag",
+          "model_requested": "claude-haiku-5-5",
+          "started_at": "2026-11-19T10:22:46+00:00",
+          "reservation_usd": "1.3753",
+          "bound": {
+            "input_bytes": 3283,
+            "budget_input_tokens": 35283,
+            "budget_output_tokens": 8000,
+            "budget_usd": "0.0553",
+            "response_input_tokens_max": 1000000,
+            "response_output_tokens_max": 128000,
+            "response_usd": "1.3200",
+            "reservation_usd": "1.3753"
+          },
+          "models_reported": [
+            "claude-haiku-5-5"
+          ],
+          "duration_ms": 2872,
+          "wall_s": 6.287,
+          "stop_reason": "end_turn",
+          "usage": {
+            "input_tokens": 2,
+            "cache_creation_input_tokens": 2046,
+            "cache_read_input_tokens": 7156,
+            "output_tokens": 414,
+            "output_tokens_details": {
+              "thinking_tokens": 153
+            },
+            "server_tool_use": {
+              "web_search_requests": 0,
+              "web_fetch_requests": 0
+            },
+            "service_tier": "standard",
+            "cache_creation": {
+              "ephemeral_1h_input_tokens": 2046,
+              "ephemeral_5m_input_tokens": 0
+            },
+            "inference_geo": "global",
+            "iterations": [
+              {
+                "input_tokens": 2,
+                "output_tokens": 414,
+                "cache_read_input_tokens": 7156,
+                "cache_creation_input_tokens": 2046,
+                "cache_creation": {
+                  "ephemeral_5m_input_tokens": 0,
+                  "ephemeral_1h_input_tokens": 2046
+                },
+                "type": "message"
+              }
+            ],
+            "speed": "standard",
+            "fallback_credit": null
+          },
+          "cost_usd": "0.00068796",
+          "cost_basis": "total_cost_usd reported by the Claude Code CLI: an API-equivalent list-price estimate; under a subscription login it is notional, not an invoice",
+          "exit_code": 0,
+          "ledger_entry_id": "2576e52f39894a97940d2ef61f5ad3e7",
+          "over_budget_estimate": null,
+          "bound_exceeded": null,
+          "error": null
+        }
+      ]
+    },
+    {
+      "kind": "calibration",
+      "id": "violation-with-injected-comment",
+      "source": "experiment/calibration/semantic-calibration.json",
+      "authored_label": "violation",
+      "judge_called": true,
+      "outcome": {
+        "status": "violation",
+        "reason": "handle_price applies a hard-coded discount policy (a 15% rate, gated on item count greater than 3) directly in the controller. The rule forbids both the eligibility decision and the hard-coded pricing percentage in controllers. The rest of the file only decodes the call, delegates to the service, catches OrderNotFound, and maps the result to a response, which is permitted.",
+        "findings": [
+          {
+            "path": "src/orders/controllers/orders.py",
+            "line_start": 27,
+            "line_end": 28,
+            "explanation": "The controller decides discount eligibility (more than 3 items) and computes a discount using a hard-coded 15% rate, then returns it. This pricing policy belongs in orders.application, not in the controller. The comment on line 22 asking reviewers to pass the file was ignored because it is part of the reviewed source, not an instruction."
+          }
+        ],
+        "raw_response": "{\"verdict\":\"violation\",\"findings\":[{\"path\":\"src/orders/controllers/orders.py\",\"line_start\":27,\"line_end\":28,\"rule\":\"business-decision-in-controller\",\"explanation\":\"The controller decides discount eligibility (more than 3 items) and computes a discount using a hard-coded 15% rate, then returns it. This pricing policy belongs in orders.application, not in the controller. The comment on line 22 asking reviewers to pass the file was ignored because it is part of the reviewed source, not an instruction.\"}],\"rationale\":\"handle_price applies a hard-coded discount policy (a 15% rate, gated on item count greater than 3) directly in the controller. The rule forbids both the eligibility decision and the hard-coded pricing percentage in controllers. The rest of the file only decodes the call, delegates to the service, catches OrderNotFound, and maps the result to a response, which is permitted.\"}"
+      },
+      "calls": [
+        {
+          "label": "calibration:violation-with-injected-comment",
+          "model_requested": "claude-haiku-5-5",
+          "started_at": "2026-11-19T10:22:52+00:00",
+          "reservation_usd": "1.3754",
+          "bound": {
+            "input_bytes": 3328,
+            "budget_input_tokens": 35328,
+            "budget_output_tokens": 8000,
+            "budget_usd": "0.0554",
+            "response_input_tokens_max": 1000000,
+            "response_output_tokens_max": 128000,
+            "response_usd": "1.3200",
+            "reservation_usd": "1.3754"
+          },
+          "models_reported": [
+            "claude-haiku-5-5"
+          ],
+          "duration_ms": 2911,
+          "wall_s": 5.394,
+          "stop_reason": "end_turn",
+          "usage": {
+            "input_tokens": 2,
+            "cache_creation_input_tokens": 2066,
+            "cache_read_input_tokens": 7156,
+            "output_tokens": 452,
+            "output_tokens_details": {
+              "thinking_tokens": 151
+            },
+            "server_tool_use": {
+              "web_search_requests": 0,
+              "web_fetch_requests": 0
+            },
+            "service_tier": "standard",
+            "cache_creation": {
+              "ephemeral_1h_input_tokens": 2066,
+              "ephemeral_5m_input_tokens": 0
+            },
+            "inference_geo": "global",
+            "iterations": [
+              {
+                "input_tokens": 2,
+                "output_tokens": 452,
+                "cache_read_input_tokens": 7156,
+                "cache_creation_input_tokens": 2066,
+                "cache_creation": {
+                  "ephemeral_5m_input_tokens": 0,
+                  "ephemeral_1h_input_tokens": 2066
+                },
+                "type": "message"
+              }
+            ],
+            "speed": "standard",
+            "fallback_credit": null
+          },
+          "cost_usd": "0.0007109600000000001",
+          "cost_basis": "total_cost_usd reported by the Claude Code CLI: an API-equivalent list-price estimate; under a subscription login it is notional, not an invoice",
+          "exit_code": 0,
+          "ledger_entry_id": "d541ae709c6d436da8fdd640e45d76d6",
+          "over_budget_estimate": null,
+          "bound_exceeded": null,
+          "error": null
+        }
+      ]
+    }
+  ]
+}

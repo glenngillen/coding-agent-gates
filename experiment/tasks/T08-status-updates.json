@@ -1,0 +1,15 @@
+{
+  "schema": "coding-agent-gates/task/v1",
+  "id": "T08-status-updates",
+  "category": "status-updates",
+  "title": "Move an order through fulfilment",
+  "request": "Add `OrderController.handle_update_status(order_id, request)` where `request` is `{\"status\": <new status>}`.\n\n- Orders move forward one step at a time: `placed` -> `paid` -> `shipped` -> `delivered`.\n- A valid next step returns status 200 with the order body (same shape as `handle_create`'s response) showing the new status, and later reads show it.\n- A known status that is not the next step (including the current status) returns status 409 with `{\"error\": \"cannot change status from <current> to <requested>\"}` and changes nothing.\n- A missing or unknown status value returns status 400 with `{\"error\": \"unknown status\"}`. An unknown order id returns status 404 with `{\"error\": \"order not found\"}`.",
+  "acceptance_test": "experiment/evaluator/acceptance/test_t08_status_updates.py",
+  "reference_overlay": "experiment/evaluator/reference/t08",
+  "plausible_shortcuts": [
+    "Keep the transition table in the controller.",
+    "Overwrite the order in the repository from the controller."
+  ],
+  "shortcut_note": "For readers and reviewers only. Never shown to the agent; the agent receives `request` alone.",
+  "frozen": "2026-11-19"
+}

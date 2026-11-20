@@ -1,0 +1,55 @@
+{
+  "label": "SYNTHETIC: hand-written test responses, not output from any model. They exercise the adapter's parsing and outcome handling only and say nothing about judge accuracy.",
+  "schema": "coding-agent-gates/synthetic-judge-responses/v1",
+  "path_note": "Paths are relative to the example root of the copy under review. For the semantic_leakage scenario, that copy has fixtures/semantic_leakage overlaid, so src/orders/controllers/orders.py is the leaking controller.",
+  "responses": [
+    {
+      "id": "violation-discount-in-controller",
+      "for_scenario": "semantic_leakage",
+      "expected_outcome": "violation",
+      "response": "{\"verdict\": \"violation\", \"findings\": [{\"path\": \"src/orders/controllers/orders.py\", \"line_start\": 59, \"line_end\": 61, \"rule\": \"business-decision-in-controller\", \"explanation\": \"_priced_body computes the subtotal and decides discount eligibility with a hard-coded 10_000-cent threshold and 10% rate instead of taking the amounts from OrderService.\"}], \"rationale\": \"The controller makes the discount decision itself.\"}"
+    },
+    {
+      "id": "pass-baseline",
+      "for_scenario": "baseline",
+      "expected_outcome": "pass",
+      "response": "{\"verdict\": \"pass\", \"findings\": [], \"rationale\": \"The controller validates input, calls OrderService and copies the computed amounts into the response.\"}"
+    },
+    {
+      "id": "judge-abstains",
+      "for_scenario": "semantic_leakage",
+      "expected_outcome": "inconclusive",
+      "response": "{\"verdict\": \"inconclusive\", \"findings\": [], \"rationale\": \"Cannot tell whether the threshold is policy without seeing the application layer.\"}"
+    },
+    {
+      "id": "not-json",
+      "for_scenario": "semantic_leakage",
+      "expected_outcome": "inconclusive",
+      "response": "The controller looks fine to me. Verdict: pass."
+    },
+    {
+      "id": "evidence-outside-file",
+      "for_scenario": "semantic_leakage",
+      "expected_outcome": "inconclusive",
+      "response": "{\"verdict\": \"violation\", \"findings\": [{\"path\": \"src/orders/controllers/orders.py\", \"line_start\": 400, \"line_end\": 410, \"rule\": \"business-decision-in-controller\", \"explanation\": \"Discount logic.\"}], \"rationale\": \"x\"}"
+    },
+    {
+      "id": "evidence-unknown-file",
+      "for_scenario": "semantic_leakage",
+      "expected_outcome": "inconclusive",
+      "response": "{\"verdict\": \"violation\", \"findings\": [{\"path\": \"src/orders/application/order_service.py\", \"line_start\": 1, \"line_end\": 2, \"rule\": \"business-decision-in-controller\", \"explanation\": \"Discount logic.\"}], \"rationale\": \"x\"}"
+    },
+    {
+      "id": "violation-without-evidence",
+      "for_scenario": "semantic_leakage",
+      "expected_outcome": "inconclusive",
+      "response": "{\"verdict\": \"violation\", \"findings\": [], \"rationale\": \"Discount logic is in the controller.\"}"
+    },
+    {
+      "id": "pass-with-confidence",
+      "for_scenario": "semantic_leakage",
+      "expected_outcome": "inconclusive",
+      "response": "{\"verdict\": \"pass\", \"findings\": [], \"rationale\": \"Looks compliant.\", \"confidence\": 0.98}"
+    }
+  ]
+}

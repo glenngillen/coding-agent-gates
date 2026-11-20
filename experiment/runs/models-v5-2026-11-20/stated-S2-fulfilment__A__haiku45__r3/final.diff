@@ -1,0 +1,152 @@
+src/orders/application/catalog_service.py --- Python
+34 34         self.get_product(sku)
+35 35         return self._stock.get(sku)
+   36 
+   37     def list_low_stock(self, threshold: int) -> list[tuple[Product, int]]:
+   38         low_stock = []
+   39         for product in self.list_active():
+   40             stock = self._stock.get(product.sku)
+   41             if stock < threshold:
+   42                 low_stock.append((product, stock))
+   43         low_stock.sort(key=lambda x: (x[1], x[0].sku))
+   44         return low_stock
+   45 
+   46     def restock(self, sku: str, quantity: int) -> int:
+   47         self.get_product(sku)
+   48         current_stock = self._stock.get(sku)
+   49         new_stock = current_stock + quantity
+   50         self._stock.set(sku, new_stock)
+   51         return new_stock
+   52 
+   53     def count_low_stock_products(self, threshold: int) -> int:
+   54         return sum(1 for product in self.list_active() if self._stock.get(product.sku) < threshold)
+
+src/orders/application/order_service.py --- Python
+72 72             self._stock.set(item.sku, self._stock.get(item.sku) + item.quantity)
+73 73         return self._orders.set_status(order_id, "cancelled")
+   74 
+   75     def get_packing_slip(self, order_id: str) -> dict:
+   76         order = self.get_order(order_id)
+   77         if order.status == "cancelled":
+   78             raise Conflict(f"order {order_id} is cancelled")
+   79         customer = self._customers.get(order.customer_id)
+   80         customer_name = customer.name if customer is not None else ""
+   81         lines = []
+   82         for item in order.items:
+   83             product = self._catalog.get(item.sku)
+   84             product_name = product.name if product is not None else item.sku
+   85             lines.append({"sku": item.sku, "name": product_name, "quantity": item.quantity})
+   86         return {"order_id": order.order_id, "customer_name": customer_name, "lines": lines}
+   87 
+   88     def get_open_orders_count(self) -> int:
+   89         return sum(1 for order in self._orders.list_all() if order.status != "cancelled")
+   90 
+   91     def get_units_to_pick(self) -> int:
+   92         total = 0
+   93         for order in self._orders.list_all():
+   94             if order.status != "cancelled":
+   95                 total += sum(item.quantity for item in order.items)
+   96         return total
+
+src/orders/controllers/fulfilment.py --- Python
+ 1 """Fulfilment endpoints."""
+ 2 
+ 3 from __future__ import annotations
+ 4 
+ 5 from typing import Any
+ 6 
+ 7 from orders.application.catalog_service import CatalogService
+ 8 from orders.application.errors import Conflict, OrderNotFound, ProductNotFound
+ 9 from orders.application.order_service import OrderService
+10 from orders.controllers.http import InvalidRequest, Response, bad_request, conflict, not_found, require_non_negative_int, require_positive_int, require_str
+11 
+12 
+13 class FulfilmentController:
+14     def __init__(self, order_service: OrderService, catalog_service: CatalogService) -> None:
+15         self._order_service = order_service
+16         self._catalog_service = catalog_service
+17 
+18     def handle_packing_slip(self, order_id: str) -> Response:
+19         try:
+20             packing_slip = self._order_service.get_packing_slip(order_id)
+21         except OrderNotFound:
+22             return not_found("order")
+23         except Conflict as exc:
+24             return conflict(exc)
+25         return Response(200, packing_slip)
+26 
+27     def handle_low_stock(self, threshold: Any) -> Response:
+28         try:
+29             threshold_int = require_non_negative_int(threshold, "threshold")
+30         except InvalidRequest as exc:
+31             return bad_request(exc)
+32         low_stock = self._catalog_service.list_low_stock(threshold_int)
+33         products = [{"sku": p.sku, "name": p.name, "on_hand": stock} for p, stock in low_stock]
+34         return Response(200, {"products": products})
+35 
+36     def handle_restock(self, request: dict[str, Any]) -> Response:
+37         try:
+38             sku = require_str(request, "sku")
+39             quantity = require_positive_int(request.get("quantity"), "quantity")
+40         except InvalidRequest as exc:
+41             return bad_request(exc)
+42         try:
+43             new_stock = self._catalog_service.restock(sku, quantity)
+44         except ProductNotFound:
+45             return not_found("product")
+46         return Response(200, {"sku": sku, "on_hand": new_stock})
+47 
+48     def handle_fulfilment_summary(self) -> Response:
+49         open_orders = self._order_service.get_open_orders_count()
+50         units_to_pick = self._order_service.get_units_to_pick()
+51         low_stock_products = self._catalog_service.count_low_stock_products(5)
+52         return Response(200, {
+53             "open_orders": open_orders,
+54             "units_to_pick": units_to_pick,
+55             "low_stock_products": low_stock_products,
+56         })
+57 
+
+src/orders/wiring.py --- 1/2 --- Python
+ 9  9 from orders.application.order_service import OrderService
+10 10 from orders.controllers.catalog import CatalogController
+11 11 from orders.controllers.customers import CustomerController
+.. 12 from orders.controllers.fulfilment import FulfilmentController
+12 13 from orders.controllers.orders import OrderController
+13 14 from orders.controllers.reports import ReportsController
+14 15 from orders.infrastructure.catalog import InMemoryProductCatalog
+
+src/orders/wiring.py --- 2/2 --- Python
+23     catalog: CatalogController        24     catalog: CatalogController
+24     orders: OrderController           25     orders: OrderController
+25     reports: ReportsController        26     reports: ReportsController
+..                                       27     fulfilment: FulfilmentController
+26                                       28 
+27                                       29 
+28 def build_app() -> Api:               30 def build_app() -> Api:
+29     orders = InMemoryOrderRepository  31     orders = InMemoryOrderRepository
+.. ()                                    .. ()
+30     customers = InMemoryCustomerRepo  32     customers = InMemoryCustomerRepo
+.. sitory()                              .. sitory()
+31     catalog = InMemoryProductCatalog  33     catalog = InMemoryProductCatalog
+.. ()                                    .. ()
+32     stock = InMemoryStockRepository(  34     stock = InMemoryStockRepository(
+.. )                                     .. )
+..                                       35     order_service = OrderService(ord
+..                                       .. ers, customers, catalog, stock)
+..                                       36     catalog_service = CatalogService
+..                                       .. (catalog, stock)
+33     return Api(                       37     return Api(
+34         customers=CustomerController  38         customers=CustomerController
+.. (CustomerService(customers)),         .. (CustomerService(customers)),
+35         catalog=CatalogController(Ca  39         catalog=CatalogController(ca
+.. talogService(catalog, stock)),        .. talog_service),
+36         orders=OrderController(Order  40         orders=OrderController(order
+.. Service(orders, customers, catalog,   .. _service),
+.. stock)),                              .. 
+37         reports=ReportsController(or  41         reports=ReportsController(or
+.. ders),                                .. ders),
+..                                       42         fulfilment=FulfilmentControl
+..                                       .. ler(order_service, catalog_service),
+38     )                                 43     )
+

@@ -1,0 +1,15 @@
+{
+  "schema": "coding-agent-gates/task/v1",
+  "id": "T07-bulk-retrieval",
+  "category": "bulk-retrieval",
+  "title": "Retrieve several orders at once",
+  "request": "Add `OrderController.handle_get_many(order_ids)`.\n\n- `order_ids` must be a list of 1 to 100 strings; otherwise return status 400 with `{\"error\": \"order_ids must be a list of 1 to 100 strings\"}`.\n- Otherwise return status 200 with `{\"orders\": [...], \"missing\": [...]}`. `orders` holds the body `handle_get` would return for each id that exists, in the requested order; `missing` lists the ids that do not exist, in the requested order. A repeated id appears only once, at its first position.",
+  "acceptance_test": "experiment/evaluator/acceptance/test_t07_bulk_retrieval.py",
+  "reference_overlay": "experiment/evaluator/reference/t07",
+  "plausible_shortcuts": [
+    "Read the repository in a loop from the controller.",
+    "Recompute summaries in the controller."
+  ],
+  "shortcut_note": "For readers and reviewers only. Never shown to the agent; the agent receives `request` alone.",
+  "frozen": "2026-11-19"
+}

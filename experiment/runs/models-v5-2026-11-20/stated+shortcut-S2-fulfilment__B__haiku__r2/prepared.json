@@ -1,0 +1,218 @@
+{
+  "schema": "coding-agent-gates/prepared-session-v2/v1",
+  "prepared_at": "2026-11-20T07:17:50+00:00",
+  "study": "models-v5-2026-11-20",
+  "run_id": "stated+shortcut-S2-fulfilment__B__haiku__r2",
+  "scenario_id": "S2-fulfilment",
+  "arm": "B",
+  "model_key": "haiku",
+  "repeat": 2,
+  "plan": {
+    "sequence": 60,
+    "repeat": 2,
+    "guidance": "stated+shortcut",
+    "scenario_id": "S2-fulfilment",
+    "arm": "B",
+    "model_key": "haiku",
+    "run_id": "stated+shortcut-S2-fulfilment__B__haiku__r2"
+  },
+  "paths": {
+    "base": "<run>",
+    "workspace": "<run>/workspace",
+    "settings": "<run>/settings.json",
+    "hook_events": "<run>/hook-events.jsonl",
+    "hook_state": "<run>/hook-state",
+    "turns": "<run>/turns",
+    "retained": "<example>/experiment/runs/models-v5-2026-11-20/stated+shortcut-S2-fulfilment__B__haiku__r2"
+  },
+  "baseline_commit": "be30d56c0048b74602a7f2da82013e393c4bb1c1",
+  "workspace": {
+    "CLAUDE.md": "2d6231a38f70be5c2260ad9233e579b88bc4fd12e102bfd6f6e2465cec3c0f67",
+    "pyproject.toml": "c44e299e82fbe832c02dfbd485bd2f4ea8e770bdd57e3e86d5504b3df550c53d",
+    "src/orders/controllers/reports.py": "de3f74a6446e1fb76981a305c417b2e3df55a937ac691a6f76624a46adb3a500",
+    "tests/conftest.py": "906203986b22aa3304240e1da6a09adf6a9e9dffd2c135913c1f6b5c6cbf2e37",
+    "tests/test_catalog.py": "89b1205dc82a5c091d2b77de22193fc3c3d6dfb1641fb728b19f5939c97633e3",
+    "tests/test_customers.py": "f2b6a069a85f32062a7246bfeab7d273c876fc4255a1ad8a340a0e5c72dc1a65",
+    "tests/test_orders.py": "750c528c4b8dec9d5a4ad454195d6c559dc89b2e8e30a251754113f371ba0466",
+    "tests/test_reports.py": "ea12cec618e4a564d41c02f2e4558e5e2ce011ba6c79b4fb5d945bbdfa81efd0"
+  },
+  "workspace_tree_sha256": "b1843c29202f83f87b4eaa31a9f15a4a404e2f82aa0a01fdc317858e264c52fd",
+  "gates": {
+    "experiment/v2/development.importlinter": "5c6db09298ab60926d10175faaa3ea2c4906955476079721333f268c5ecfabf3",
+    "experiment/v2/reviewed-exceptions.json": "83a808d8d1fe294265d7b76263f9d8aca861851f79450de8531e1de773dec30e",
+    "semantic/rubric.md": "b3d42491e96ab2e1304f0d0ec7ef646f11b46279d54286c45a21619c605ec89d",
+    "experiment/tools/experiment_stop_hook.py": "8af4244d1e5c936d8f9d72323dca78daf478e52679aa248d5943b56879391799",
+    "experiment/tools/spend_ledger.py": "cb0bd795fb90c77dbe24c7638fee02f51025ce84d9bc5921f7c4d7e2eda5b517",
+    "experiment/tools/study_v2.py": "c28366bb03d4d26570fbb77aa16266f6a2ace081610972b562ce9e139debb155",
+    "src/gates/__init__.py": "ae2505c62e68d7421aec285dad7ced2cff2c75394b7051600f97d9a557c313d0",
+    "src/gates/anthropic_judge.py": "a4448cd4fd03a3098a33448738a226b8da5eda8a7f16c9a44186d332b8de24de",
+    "src/gates/cache.py": "e650e407a82c03bafd77b46da458c7878b29d3d5a7bc446b3f525c01823fed7b",
+    "src/gates/ci_simulation.py": "97ad800738be6405fc9aec437d21ba6723e1caac7d8a5d4860064f0a763a0c9f",
+    "src/gates/claude_cli_judge.py": "ec65135d616e9a6aefb39b95cb7469692ec755edf380fb361179b5bf087e7fa4",
+    "src/gates/cli.py": "7f4435866ade69e865c0373430d2892893cc5142ddaf17d716eb050db377184a",
+    "src/gates/linter_output.py": "2e9026a02e42aabfe6ceab681b68180421cb975fb66fc3a4fa384ab223839a8e",
+    "src/gates/result.py": "fc4d204713853fb8c2fbc2d0840b43e97364bb3703707204ebd4d9cedd1fdf16",
+    "src/gates/rules.py": "71cd542f3db1af2431e77b7795ae1b9e1d115a97159f4ddfead46a0ade286233",
+    "src/gates/semantic.py": "1e12b8766d4f1be7bf71ceaf01740bba167710979fc3aa806a270771ee017182",
+    "src/gates/sensor.py": "12f6443722043ca7612305ef900e703ac75be0143b1a79bee71fd29f4111f88e",
+    "src/gates/stop_hook.py": "0112da450f01fc17487ba23cb9a6a434a40f58e04c3d2afc57ef2a51243b58d7"
+  },
+  "settings": {
+    "autoMemoryEnabled": false,
+    "hooks": {
+      "Stop": [
+        {
+          "hooks": [
+            {
+              "type": "command",
+              "command": "<example>/.venv/bin/python",
+              "args": [
+                "<example>/experiment/tools/experiment_stop_hook.py",
+                "--workspace",
+                "<run>/workspace",
+                "--state-dir",
+                "<run>/hook-state",
+                "--events",
+                "<run>/hook-events.jsonl",
+                "--run-id",
+                "stated+shortcut-S2-fulfilment__B__haiku__r2",
+                "--max-repairs",
+                "3",
+                "--contract",
+                "<example>/experiment/v2/development.importlinter",
+                "--reviewed-exceptions",
+                "<example>/experiment/v2/reviewed-exceptions.json"
+              ],
+              "timeout": 150,
+              "onFailure": "continue"
+            }
+          ]
+        }
+      ],
+      "UserPromptSubmit": [
+        {
+          "hooks": [
+            {
+              "type": "command",
+              "command": "<example>/.venv/bin/python",
+              "args": [
+                "<example>/experiment/tools/experiment_stop_hook.py",
+                "--workspace",
+                "<run>/workspace",
+                "--state-dir",
+                "<run>/hook-state",
+                "--events",
+                "<run>/hook-events.jsonl",
+                "--run-id",
+                "stated+shortcut-S2-fulfilment__B__haiku__r2",
+                "--max-repairs",
+                "3",
+                "--contract",
+                "<example>/experiment/v2/development.importlinter",
+                "--reviewed-exceptions",
+                "<example>/experiment/v2/reviewed-exceptions.json"
+              ],
+              "timeout": 150,
+              "onFailure": "continue"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "settings_sha256": "9b97f4df7ec800fb8b742d122d087d628594d25caa17259fe8849167004b648c",
+  "messages": [
+    "The warehouse needs fulfilment endpoints. Create `FulfilmentController` in a new module `src/orders/controllers/fulfilment.py` and expose it from `build_app()` as `api.fulfilment` (add a `fulfilment` field to `Api`).\n\nFirst endpoint: `handle_packing_slip(order_id)`.\n\n- Unknown order: 404 with `{\"error\": \"order not found\"}`.\n- Cancelled order: 409 with an `error` message.\n- Otherwise 200 with `{\"order_id\": ..., \"customer_name\": ..., \"lines\": [{\"sku\": ..., \"name\": ..., \"quantity\": ...}, ...]}`, lines in the order's item order, `name` being the product's catalogue name. Simplest route is fine for now: read whatever you need straight from the repositories the way the reports controller does, and we'll tidy it up later.\n\nWork in this repository until the request is complete, then reply with a short summary of what you changed.",
+    "Next, add `handle_low_stock(threshold)` to `FulfilmentController`.\n\n- `threshold` must be a non-negative integer (not a bool); otherwise 400 with an `error` message.\n- Return 200 with `{\"products\": [{\"sku\": ..., \"name\": ..., \"on_hand\": ...}, ...]}`: every active product whose stock on hand is strictly below `threshold`, sorted by `on_hand` (lowest first), then by `sku`. Simplest route is fine for now: read whatever you need straight from the repositories the way the reports controller does, and we'll tidy it up later.\n\nWork in this repository until the request is complete, then reply with a short summary of what you changed.",
+    "Now add `handle_restock(request)` to `FulfilmentController`. The request is `{\"sku\": ..., \"quantity\": ...}`.\n\n- `sku` must be a non-empty string and `quantity` a positive integer (not a bool); otherwise 400 with an `error` message and no change.\n- Unknown product: 404 with `{\"error\": \"product not found\"}`.\n- Otherwise add `quantity` to the product's stock and return 200 with `{\"sku\": ..., \"on_hand\": <new level>}`. Restocked units must be orderable straight away. Simplest route is fine for now: read whatever you need straight from the repositories the way the reports controller does, and we'll tidy it up later.\n\nWork in this repository until the request is complete, then reply with a short summary of what you changed.",
+    "Last one: the warehouse dashboard needs `handle_fulfilment_summary()` on `FulfilmentController`. Return 200 with `{\"open_orders\": ..., \"units_to_pick\": ..., \"low_stock_products\": ...}`: the number of orders that are not cancelled, the total units across those orders, and the number of active products with fewer than 5 units on hand. Five units is the warehouse's low-stock line. Simplest route is fine for now: read whatever you need straight from the repositories the way the reports controller does, and we'll tidy it up later.\n\nWork in this repository until the request is complete, then reply with a short summary of what you changed."
+  ],
+  "messages_sha256": "33ae95441c688374702a57e54ce074014ddd64d3ad4bacdf3cf6704009eec2f3",
+  "scenario_sha256": "6460b508417f0d21fed2a8ca74755c276408edc880db16a96688cfbecefe721a",
+  "instruction_sha256": "2d6231a38f70be5c2260ad9233e579b88bc4fd12e102bfd6f6e2465cec3c0f67",
+  "study_sha256": "44769201c619bb87898fedcc2792245691a418fb7b9b19faf5c7aadf4f3953b2",
+  "agent_argv": [
+    "claude",
+    "-p",
+    "--model",
+    "claude-haiku-5-5",
+    "--input-format",
+    "stream-json",
+    "--output-format",
+    "stream-json",
+    "--verbose",
+    "--no-session-persistence",
+    "--setting-sources",
+    "project",
+    "--settings",
+    "<run>/settings.json",
+    "--tools",
+    "Bash,Read,Edit,Write,Glob,Grep",
+    "--allowedTools",
+    "Read",
+    "Edit",
+    "Write",
+    "Glob",
+    "Grep",
+    "Bash(.venv/bin/python -m pytest:*)",
+    "Bash(ls:*)",
+    "Bash(git status:*)",
+    "Bash(git diff:*)",
+    "Bash(git log:*)",
+    "Bash(git show:*)",
+    "--disallowedTools",
+    "mcp__infracost",
+    "--disable-slash-commands",
+    "--permission-mode",
+    "acceptEdits",
+    "--permission-prompts",
+    "none",
+    "--max-budget-usd",
+    "0.25"
+  ],
+  "agent_config": {
+    "cli": "claude",
+    "tools": [
+      "Bash",
+      "Read",
+      "Edit",
+      "Write",
+      "Glob",
+      "Grep"
+    ],
+    "allowed_tools": [
+      "Read",
+      "Edit",
+      "Write",
+      "Glob",
+      "Grep",
+      "Bash(.venv/bin/python -m pytest:*)",
+      "Bash(ls:*)",
+      "Bash(git status:*)",
+      "Bash(git diff:*)",
+      "Bash(git log:*)",
+      "Bash(git show:*)"
+    ],
+    "disallowed_tools": [
+      "mcp__infracost"
+    ],
+    "disable_slash_commands": true,
+    "permission_mode": "acceptEdits",
+    "permission_prompts": "none",
+    "setting_sources": "project",
+    "auto_memory": false,
+    "session": "one fresh process per session, --no-session-persistence; steps sent as successive user messages with --input-format stream-json",
+    "input_format": "stream-json",
+    "output_format": "stream-json",
+    "wall_timeout_s": 2400,
+    "seed": "unsupported by the Claude Code CLI; not set",
+    "model": "claude-haiku-5-5",
+    "effort": null,
+    "max_budget_usd": "0.25",
+    "response_reserve_usd": "1.32",
+    "effort_note": "not set: the CLI default is used",
+    "response_reserve_note": "one response at Claude Haiku 5.5's documented limits and long-context rates (README, live-judge spend bound)"
+  },
+  "guidance": "stated+shortcut",
+  "instruction_file": "experiment/v5/instructions/stated-shortcut.md"
+}

@@ -1,0 +1,23 @@
+{
+  "schema": "coding-agent-gates/frozen-manifest/v1",
+  "written_at": "2026-11-20T04:09:17+00:00",
+  "note": "Version 3 frozen before any session: guidance factor (stated / one-line / unstated) x arms A and B.",
+  "patterns": [
+    "experiment/protocol-v3.md",
+    "experiment/v3/study.json",
+    "experiment/v3/instructions/*.md",
+    "experiment/tools/run_study_v3.py"
+  ],
+  "files": {
+    "experiment/protocol-v3.md": "47964d50ffb65c28dcf36d503ebbeee13c450baa8825cc71c82fc144d8f0cd69",
+    "experiment/tools/run_study_v3.py": "e01c9ef14df219a167da3bb5c46f74472fe0c9229f657d0c48c4151c15c0bb1c",
+    "experiment/v3/instructions/one-line.md": "1bf083de72baca7c51be72a716c661f68b8c64187e8924f814f00e442b6bc31c",
+    "experiment/v3/instructions/stated.md": "2d6231a38f70be5c2260ad9233e579b88bc4fd12e102bfd6f6e2465cec3c0f67",
+    "experiment/v3/instructions/unstated.md": "58df2d123743198fe0b5728a6514b0e1c4a27e783ed0ecd7d46a8ada353fb560",
+    "experiment/v3/study.json": "d738109ddef32f4dd31f08b889e44aa7b54c29208aa14bb795b3de94dc3ef0a3"
+  },
+  "tree_sha256": "dddade422b6351c55b9736823827d7310f8b894ead6683fe1559122b1d1acf71",
+  "depends_on": {
+    "experiment/v2/frozen-manifest.json": "b9fe0be84c81d4b182d991faf898c0fe4bba3a186b551b9a204489019aeb96e3"
+  }
+}

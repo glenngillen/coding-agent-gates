@@ -1,0 +1,657 @@
+{
+  "schema": "coding-agent-gates/run-order-v3/v1",
+  "study": "guidance-v3-2026-11-20",
+  "seed": 2026112003,
+  "method": "run_study_v3.plan_sessions",
+  "written_at": "2026-11-20T04:09:29+00:00",
+  "runs": [
+    {
+      "sequence": 1,
+      "repeat": 1,
+      "guidance": "one-line",
+      "scenario_id": "S1-customer-insights",
+      "arm": "A",
+      "model_key": "haiku",
+      "run_id": "one-line-S1-customer-insights__A__haiku__r1"
+    },
+    {
+      "sequence": 2,
+      "repeat": 1,
+      "guidance": "unstated",
+      "scenario_id": "S1-customer-insights",
+      "arm": "B",
+      "model_key": "haiku",
+      "run_id": "unstated-S1-customer-insights__B__haiku__r1"
+    },
+    {
+      "sequence": 3,
+      "repeat": 1,
+      "guidance": "one-line",
+      "scenario_id": "S1-customer-insights",
+      "arm": "B",
+      "model_key": "sonnet",
+      "run_id": "one-line-S1-customer-insights__B__sonnet__r1"
+    },
+    {
+      "sequence": 4,
+      "repeat": 1,
+      "guidance": "unstated",
+      "scenario_id": "S1-customer-insights",
+      "arm": "B",
+      "model_key": "sonnet",
+      "run_id": "unstated-S1-customer-insights__B__sonnet__r1"
+    },
+    {
+      "sequence": 5,
+      "repeat": 1,
+      "guidance": "unstated",
+      "scenario_id": "S2-fulfilment",
+      "arm": "A",
+      "model_key": "sonnet",
+      "run_id": "unstated-S2-fulfilment__A__sonnet__r1"
+    },
+    {
+      "sequence": 6,
+      "repeat": 1,
+      "guidance": "one-line",
+      "scenario_id": "S2-fulfilment",
+      "arm": "A",
+      "model_key": "sonnet",
+      "run_id": "one-line-S2-fulfilment__A__sonnet__r1"
+    },
+    {
+      "sequence": 7,
+      "repeat": 1,
+      "guidance": "unstated",
+      "scenario_id": "S1-customer-insights",
+      "arm": "A",
+      "model_key": "sonnet",
+      "run_id": "unstated-S1-customer-insights__A__sonnet__r1"
+    },
+    {
+      "sequence": 8,
+      "repeat": 1,
+      "guidance": "stated",
+      "scenario_id": "S1-customer-insights",
+      "arm": "A",
+      "model_key": "haiku",
+      "run_id": "stated-S1-customer-insights__A__haiku__r1"
+    },
+    {
+      "sequence": 9,
+      "repeat": 1,
+      "guidance": "one-line",
+      "scenario_id": "S1-customer-insights",
+      "arm": "B",
+      "model_key": "haiku",
+      "run_id": "one-line-S1-customer-insights__B__haiku__r1"
+    },
+    {
+      "sequence": 10,
+      "repeat": 1,
+      "guidance": "stated",
+      "scenario_id": "S1-customer-insights",
+      "arm": "B",
+      "model_key": "haiku",
+      "run_id": "stated-S1-customer-insights__B__haiku__r1"
+    },
+    {
+      "sequence": 11,
+      "repeat": 1,
+      "guidance": "unstated",
+      "scenario_id": "S2-fulfilment",
+      "arm": "B",
+      "model_key": "sonnet",
+      "run_id": "unstated-S2-fulfilment__B__sonnet__r1"
+    },
+    {
+      "sequence": 12,
+      "repeat": 1,
+      "guidance": "stated",
+      "scenario_id": "S2-fulfilment",
+      "arm": "A",
+      "model_key": "sonnet",
+      "run_id": "stated-S2-fulfilment__A__sonnet__r1"
+    },
+    {
+      "sequence": 13,
+      "repeat": 1,
+      "guidance": "one-line",
+      "scenario_id": "S2-fulfilment",
+      "arm": "B",
+      "model_key": "haiku",
+      "run_id": "one-line-S2-fulfilment__B__haiku__r1"
+    },
+    {
+      "sequence": 14,
+      "repeat": 1,
+      "guidance": "stated",
+      "scenario_id": "S1-customer-insights",
+      "arm": "A",
+      "model_key": "sonnet",
+      "run_id": "stated-S1-customer-insights__A__sonnet__r1"
+    },
+    {
+      "sequence": 15,
+      "repeat": 1,
+      "guidance": "one-line",
+      "scenario_id": "S2-fulfilment",
+      "arm": "A",
+      "model_key": "haiku",
+      "run_id": "one-line-S2-fulfilment__A__haiku__r1"
+    },
+    {
+      "sequence": 16,
+      "repeat": 1,
+      "guidance": "unstated",
+      "scenario_id": "S1-customer-insights",
+      "arm": "A",
+      "model_key": "haiku",
+      "run_id": "unstated-S1-customer-insights__A__haiku__r1"
+    },
+    {
+      "sequence": 17,
+      "repeat": 1,
+      "guidance": "one-line",
+      "scenario_id": "S1-customer-insights",
+      "arm": "A",
+      "model_key": "sonnet",
+      "run_id": "one-line-S1-customer-insights__A__sonnet__r1"
+    },
+    {
+      "sequence": 18,
+      "repeat": 1,
+      "guidance": "stated",
+      "scenario_id": "S1-customer-insights",
+      "arm": "B",
+      "model_key": "sonnet",
+      "run_id": "stated-S1-customer-insights__B__sonnet__r1"
+    },
+    {
+      "sequence": 19,
+      "repeat": 1,
+      "guidance": "one-line",
+      "scenario_id": "S2-fulfilment",
+      "arm": "B",
+      "model_key": "sonnet",
+      "run_id": "one-line-S2-fulfilment__B__sonnet__r1"
+    },
+    {
+      "sequence": 20,
+      "repeat": 1,
+      "guidance": "stated",
+      "scenario_id": "S2-fulfilment",
+      "arm": "B",
+      "model_key": "sonnet",
+      "run_id": "stated-S2-fulfilment__B__sonnet__r1"
+    },
+    {
+      "sequence": 21,
+      "repeat": 1,
+      "guidance": "unstated",
+      "scenario_id": "S2-fulfilment",
+      "arm": "A",
+      "model_key": "haiku",
+      "run_id": "unstated-S2-fulfilment__A__haiku__r1"
+    },
+    {
+      "sequence": 22,
+      "repeat": 1,
+      "guidance": "unstated",
+      "scenario_id": "S2-fulfilment",
+      "arm": "B",
+      "model_key": "haiku",
+      "run_id": "unstated-S2-fulfilment__B__haiku__r1"
+    },
+    {
+      "sequence": 23,
+      "repeat": 1,
+      "guidance": "stated",
+      "scenario_id": "S2-fulfilment",
+      "arm": "A",
+      "model_key": "haiku",
+      "run_id": "stated-S2-fulfilment__A__haiku__r1"
+    },
+    {
+      "sequence": 24,
+      "repeat": 1,
+      "guidance": "stated",
+      "scenario_id": "S2-fulfilment",
+      "arm": "B",
+      "model_key": "haiku",
+      "run_id": "stated-S2-fulfilment__B__haiku__r1"
+    },
+    {
+      "sequence": 25,
+      "repeat": 2,
+      "guidance": "unstated",
+      "scenario_id": "S1-customer-insights",
+      "arm": "B",
+      "model_key": "haiku",
+      "run_id": "unstated-S1-customer-insights__B__haiku__r2"
+    },
+    {
+      "sequence": 26,
+      "repeat": 2,
+      "guidance": "one-line",
+      "scenario_id": "S2-fulfilment",
+      "arm": "A",
+      "model_key": "haiku",
+      "run_id": "one-line-S2-fulfilment__A__haiku__r2"
+    },
+    {
+      "sequence": 27,
+      "repeat": 2,
+      "guidance": "unstated",
+      "scenario_id": "S2-fulfilment",
+      "arm": "A",
+      "model_key": "sonnet",
+      "run_id": "unstated-S2-fulfilment__A__sonnet__r2"
+    },
+    {
+      "sequence": 28,
+      "repeat": 2,
+      "guidance": "one-line",
+      "scenario_id": "S1-customer-insights",
+      "arm": "B",
+      "model_key": "sonnet",
+      "run_id": "one-line-S1-customer-insights__B__sonnet__r2"
+    },
+    {
+      "sequence": 29,
+      "repeat": 2,
+      "guidance": "unstated",
+      "scenario_id": "S1-customer-insights",
+      "arm": "A",
+      "model_key": "haiku",
+      "run_id": "unstated-S1-customer-insights__A__haiku__r2"
+    },
+    {
+      "sequence": 30,
+      "repeat": 2,
+      "guidance": "unstated",
+      "scenario_id": "S1-customer-insights",
+      "arm": "B",
+      "model_key": "sonnet",
+      "run_id": "unstated-S1-customer-insights__B__sonnet__r2"
+    },
+    {
+      "sequence": 31,
+      "repeat": 2,
+      "guidance": "stated",
+      "scenario_id": "S2-fulfilment",
+      "arm": "B",
+      "model_key": "haiku",
+      "run_id": "stated-S2-fulfilment__B__haiku__r2"
+    },
+    {
+      "sequence": 32,
+      "repeat": 2,
+      "guidance": "unstated",
+      "scenario_id": "S2-fulfilment",
+      "arm": "A",
+      "model_key": "haiku",
+      "run_id": "unstated-S2-fulfilment__A__haiku__r2"
+    },
+    {
+      "sequence": 33,
+      "repeat": 2,
+      "guidance": "stated",
+      "scenario_id": "S1-customer-insights",
+      "arm": "B",
+      "model_key": "sonnet",
+      "run_id": "stated-S1-customer-insights__B__sonnet__r2"
+    },
+    {
+      "sequence": 34,
+      "repeat": 2,
+      "guidance": "stated",
+      "scenario_id": "S2-fulfilment",
+      "arm": "A",
+      "model_key": "haiku",
+      "run_id": "stated-S2-fulfilment__A__haiku__r2"
+    },
+    {
+      "sequence": 35,
+      "repeat": 2,
+      "guidance": "stated",
+      "scenario_id": "S1-customer-insights",
+      "arm": "B",
+      "model_key": "haiku",
+      "run_id": "stated-S1-customer-insights__B__haiku__r2"
+    },
+    {
+      "sequence": 36,
+      "repeat": 2,
+      "guidance": "one-line",
+      "scenario_id": "S1-customer-insights",
+      "arm": "A",
+      "model_key": "haiku",
+      "run_id": "one-line-S1-customer-insights__A__haiku__r2"
+    },
+    {
+      "sequence": 37,
+      "repeat": 2,
+      "guidance": "one-line",
+      "scenario_id": "S2-fulfilment",
+      "arm": "B",
+      "model_key": "haiku",
+      "run_id": "one-line-S2-fulfilment__B__haiku__r2"
+    },
+    {
+      "sequence": 38,
+      "repeat": 2,
+      "guidance": "stated",
+      "scenario_id": "S1-customer-insights",
+      "arm": "A",
+      "model_key": "sonnet",
+      "run_id": "stated-S1-customer-insights__A__sonnet__r2"
+    },
+    {
+      "sequence": 39,
+      "repeat": 2,
+      "guidance": "one-line",
+      "scenario_id": "S1-customer-insights",
+      "arm": "B",
+      "model_key": "haiku",
+      "run_id": "one-line-S1-customer-insights__B__haiku__r2"
+    },
+    {
+      "sequence": 40,
+      "repeat": 2,
+      "guidance": "unstated",
+      "scenario_id": "S1-customer-insights",
+      "arm": "A",
+      "model_key": "sonnet",
+      "run_id": "unstated-S1-customer-insights__A__sonnet__r2"
+    },
+    {
+      "sequence": 41,
+      "repeat": 2,
+      "guidance": "unstated",
+      "scenario_id": "S2-fulfilment",
+      "arm": "B",
+      "model_key": "haiku",
+      "run_id": "unstated-S2-fulfilment__B__haiku__r2"
+    },
+    {
+      "sequence": 42,
+      "repeat": 2,
+      "guidance": "stated",
+      "scenario_id": "S2-fulfilment",
+      "arm": "A",
+      "model_key": "sonnet",
+      "run_id": "stated-S2-fulfilment__A__sonnet__r2"
+    },
+    {
+      "sequence": 43,
+      "repeat": 2,
+      "guidance": "one-line",
+      "scenario_id": "S2-fulfilment",
+      "arm": "B",
+      "model_key": "sonnet",
+      "run_id": "one-line-S2-fulfilment__B__sonnet__r2"
+    },
+    {
+      "sequence": 44,
+      "repeat": 2,
+      "guidance": "stated",
+      "scenario_id": "S2-fulfilment",
+      "arm": "B",
+      "model_key": "sonnet",
+      "run_id": "stated-S2-fulfilment__B__sonnet__r2"
+    },
+    {
+      "sequence": 45,
+      "repeat": 2,
+      "guidance": "stated",
+      "scenario_id": "S1-customer-insights",
+      "arm": "A",
+      "model_key": "haiku",
+      "run_id": "stated-S1-customer-insights__A__haiku__r2"
+    },
+    {
+      "sequence": 46,
+      "repeat": 2,
+      "guidance": "unstated",
+      "scenario_id": "S2-fulfilment",
+      "arm": "B",
+      "model_key": "sonnet",
+      "run_id": "unstated-S2-fulfilment__B__sonnet__r2"
+    },
+    {
+      "sequence": 47,
+      "repeat": 2,
+      "guidance": "one-line",
+      "scenario_id": "S1-customer-insights",
+      "arm": "A",
+      "model_key": "sonnet",
+      "run_id": "one-line-S1-customer-insights__A__sonnet__r2"
+    },
+    {
+      "sequence": 48,
+      "repeat": 2,
+      "guidance": "one-line",
+      "scenario_id": "S2-fulfilment",
+      "arm": "A",
+      "model_key": "sonnet",
+      "run_id": "one-line-S2-fulfilment__A__sonnet__r2"
+    },
+    {
+      "sequence": 49,
+      "repeat": 3,
+      "guidance": "stated",
+      "scenario_id": "S1-customer-insights",
+      "arm": "A",
+      "model_key": "haiku",
+      "run_id": "stated-S1-customer-insights__A__haiku__r3"
+    },
+    {
+      "sequence": 50,
+      "repeat": 3,
+      "guidance": "one-line",
+      "scenario_id": "S2-fulfilment",
+      "arm": "A",
+      "model_key": "haiku",
+      "run_id": "one-line-S2-fulfilment__A__haiku__r3"
+    },
+    {
+      "sequence": 51,
+      "repeat": 3,
+      "guidance": "one-line",
+      "scenario_id": "S1-customer-insights",
+      "arm": "A",
+      "model_key": "sonnet",
+      "run_id": "one-line-S1-customer-insights__A__sonnet__r3"
+    },
+    {
+      "sequence": 52,
+      "repeat": 3,
+      "guidance": "unstated",
+      "scenario_id": "S2-fulfilment",
+      "arm": "A",
+      "model_key": "haiku",
+      "run_id": "unstated-S2-fulfilment__A__haiku__r3"
+    },
+    {
+      "sequence": 53,
+      "repeat": 3,
+      "guidance": "stated",
+      "scenario_id": "S2-fulfilment",
+      "arm": "B",
+      "model_key": "haiku",
+      "run_id": "stated-S2-fulfilment__B__haiku__r3"
+    },
+    {
+      "sequence": 54,
+      "repeat": 3,
+      "guidance": "stated",
+      "scenario_id": "S1-customer-insights",
+      "arm": "B",
+      "model_key": "sonnet",
+      "run_id": "stated-S1-customer-insights__B__sonnet__r3"
+    },
+    {
+      "sequence": 55,
+      "repeat": 3,
+      "guidance": "one-line",
+      "scenario_id": "S2-fulfilment",
+      "arm": "B",
+      "model_key": "sonnet",
+      "run_id": "one-line-S2-fulfilment__B__sonnet__r3"
+    },
+    {
+      "sequence": 56,
+      "repeat": 3,
+      "guidance": "unstated",
+      "scenario_id": "S2-fulfilment",
+      "arm": "A",
+      "model_key": "sonnet",
+      "run_id": "unstated-S2-fulfilment__A__sonnet__r3"
+    },
+    {
+      "sequence": 57,
+      "repeat": 3,
+      "guidance": "unstated",
+      "scenario_id": "S2-fulfilment",
+      "arm": "B",
+      "model_key": "sonnet",
+      "run_id": "unstated-S2-fulfilment__B__sonnet__r3"
+    },
+    {
+      "sequence": 58,
+      "repeat": 3,
+      "guidance": "stated",
+      "scenario_id": "S2-fulfilment",
+      "arm": "B",
+      "model_key": "sonnet",
+      "run_id": "stated-S2-fulfilment__B__sonnet__r3"
+    },
+    {
+      "sequence": 59,
+      "repeat": 3,
+      "guidance": "stated",
+      "scenario_id": "S2-fulfilment",
+      "arm": "A",
+      "model_key": "haiku",
+      "run_id": "stated-S2-fulfilment__A__haiku__r3"
+    },
+    {
+      "sequence": 60,
+      "repeat": 3,
+      "guidance": "one-line",
+      "scenario_id": "S1-customer-insights",
+      "arm": "B",
+      "model_key": "sonnet",
+      "run_id": "one-line-S1-customer-insights__B__sonnet__r3"
+    },
+    {
+      "sequence": 61,
+      "repeat": 3,
+      "guidance": "stated",
+      "scenario_id": "S1-customer-insights",
+      "arm": "A",
+      "model_key": "sonnet",
+      "run_id": "stated-S1-customer-insights__A__sonnet__r3"
+    },
+    {
+      "sequence": 62,
+      "repeat": 3,
+      "guidance": "unstated",
+      "scenario_id": "S1-customer-insights",
+      "arm": "B",
+      "model_key": "sonnet",
+      "run_id": "unstated-S1-customer-insights__B__sonnet__r3"
+    },
+    {
+      "sequence": 63,
+      "repeat": 3,
+      "guidance": "stated",
+      "scenario_id": "S1-customer-insights",
+      "arm": "B",
+      "model_key": "haiku",
+      "run_id": "stated-S1-customer-insights__B__haiku__r3"
+    },
+    {
+      "sequence": 64,
+      "repeat": 3,
+      "guidance": "one-line",
+      "scenario_id": "S1-customer-insights",
+      "arm": "B",
+      "model_key": "haiku",
+      "run_id": "one-line-S1-customer-insights__B__haiku__r3"
+    },
+    {
+      "sequence": 65,
+      "repeat": 3,
+      "guidance": "stated",
+      "scenario_id": "S2-fulfilment",
+      "arm": "A",
+      "model_key": "sonnet",
+      "run_id": "stated-S2-fulfilment__A__sonnet__r3"
+    },
+    {
+      "sequence": 66,
+      "repeat": 3,
+      "guidance": "one-line",
+      "scenario_id": "S2-fulfilment",
+      "arm": "B",
+      "model_key": "haiku",
+      "run_id": "one-line-S2-fulfilment__B__haiku__r3"
+    },
+    {
+      "sequence": 67,
+      "repeat": 3,
+      "guidance": "one-line",
+      "scenario_id": "S1-customer-insights",
+      "arm": "A",
+      "model_key": "haiku",
+      "run_id": "one-line-S1-customer-insights__A__haiku__r3"
+    },
+    {
+      "sequence": 68,
+      "repeat": 3,
+      "guidance": "unstated",
+      "scenario_id": "S1-customer-insights",
+      "arm": "B",
+      "model_key": "haiku",
+      "run_id": "unstated-S1-customer-insights__B__haiku__r3"
+    },
+    {
+      "sequence": 69,
+      "repeat": 3,
+      "guidance": "unstated",
+      "scenario_id": "S1-customer-insights",
+      "arm": "A",
+      "model_key": "haiku",
+      "run_id": "unstated-S1-customer-insights__A__haiku__r3"
+    },
+    {
+      "sequence": 70,
+      "repeat": 3,
+      "guidance": "unstated",
+      "scenario_id": "S1-customer-insights",
+      "arm": "A",
+      "model_key": "sonnet",
+      "run_id": "unstated-S1-customer-insights__A__sonnet__r3"
+    },
+    {
+      "sequence": 71,
+      "repeat": 3,
+      "guidance": "one-line",
+      "scenario_id": "S2-fulfilment",
+      "arm": "A",
+      "model_key": "sonnet",
+      "run_id": "one-line-S2-fulfilment__A__sonnet__r3"
+    },
+    {
+      "sequence": 72,
+      "repeat": 3,
+      "guidance": "unstated",
+      "scenario_id": "S2-fulfilment",
+      "arm": "B",
+      "model_key": "haiku",
+      "run_id": "unstated-S2-fulfilment__B__haiku__r3"
+    }
+  ]
+}

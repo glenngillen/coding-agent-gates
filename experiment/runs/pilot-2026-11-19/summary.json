@@ -1,0 +1,1124 @@
+{
+  "schema": "coding-agent-gates/pilot-summary/v1",
+  "pilot": "pilot-2026-11-19",
+  "evidence_kind": "real",
+  "planned_runs": 30,
+  "records": 30,
+  "missing_records": 0,
+  "by_arm": {
+    "A": {
+      "attempted": 10,
+      "started": 10,
+      "termination": {
+        "completed": 10
+      },
+      "completed_within_budget": 10,
+      "behavior": {
+        "pass": 10
+      },
+      "structural": {
+        "pass": 10
+      },
+      "semantic_judge_output": {
+        "pass": 10
+      },
+      "tampering_detected": 0,
+      "settings_file_check": {
+        "not_checked": 10
+      },
+      "baseline_tests_modified": 9,
+      "gate_final_state": {
+        "no_gate": 10
+      },
+      "not_runnable": 0,
+      "accepted": 10,
+      "accepted_definition": "completed within budget AND behaviour pass AND structural pass AND no tampering",
+      "repair_cycles": {
+        "applicable_runs": 0,
+        "converged_runs": 0,
+        "censored_runs": 0,
+        "converged_cycles": {
+          "n": 0,
+          "median": null,
+          "q1": null,
+          "q3": null,
+          "min": null,
+          "max": null
+        },
+        "converged_with_zero_cycles": 0
+      },
+      "checker_invocations": {
+        "sensor": 0,
+        "development_judge_calls": 0
+      },
+      "time_s": {
+        "attempt": {
+          "n": 10,
+          "median": "32.8255",
+          "q1": "30.6338",
+          "q3": "35.8318",
+          "min": "23.238",
+          "max": "40.969"
+        },
+        "model_api": {
+          "n": 10,
+          "median": "26.9525",
+          "q1": "24.534",
+          "q3": "30.7308",
+          "min": "18.278",
+          "max": "35.239"
+        },
+        "check_sensor": {
+          "n": 0,
+          "median": null,
+          "q1": null,
+          "q3": null,
+          "min": null,
+          "max": null
+        },
+        "check_judge": {
+          "n": 0,
+          "median": null,
+          "q1": null,
+          "q3": null,
+          "min": null,
+          "max": null
+        }
+      },
+      "agent_cost_usd": {
+        "n": 10,
+        "median": "0.0875",
+        "q1": "0.0826",
+        "q3": "0.0987",
+        "min": "0.0659",
+        "max": "0.1146"
+      },
+      "agent_usage_missing_runs": 0,
+      "usage_tokens": {
+        "note": "per started run and category; missing usage stays missing (counted in missing_runs), never zero; judge sources apply only to runs that started a call",
+        "agent": {
+          "started_runs": 10,
+          "applicable_runs": 10,
+          "input_tokens": {
+            "observed_runs": 10,
+            "missing_runs": 0,
+            "n": 10,
+            "median": "12",
+            "q1": "12",
+            "q3": "12",
+            "min": "10",
+            "max": "16"
+          },
+          "output_tokens": {
+            "observed_runs": 10,
+            "missing_runs": 0,
+            "n": 10,
+            "median": "3906.5",
+            "q1": "3577.25",
+            "q3": "4858.75",
+            "min": "2589",
+            "max": "5708"
+          },
+          "cache_read_input_tokens": {
+            "observed_runs": 10,
+            "missing_runs": 0,
+            "n": 10,
+            "median": "63274.5",
+            "q1": "60872",
+            "q3": "64680.5",
+            "min": "45939",
+            "max": "98575"
+          },
+          "cache_creation_input_tokens": {
+            "observed_runs": 10,
+            "missing_runs": 0,
+            "n": 10,
+            "median": "10247",
+            "q1": "9947",
+            "q3": "10656.75",
+            "min": "8370",
+            "max": "12712"
+          }
+        },
+        "development_judge": {
+          "started_runs": 10,
+          "applicable_runs": 0,
+          "input_tokens": {
+            "observed_runs": 0,
+            "missing_runs": 0,
+            "n": 0,
+            "median": null,
+            "q1": null,
+            "q3": null,
+            "min": null,
+            "max": null
+          },
+          "output_tokens": {
+            "observed_runs": 0,
+            "missing_runs": 0,
+            "n": 0,
+            "median": null,
+            "q1": null,
+            "q3": null,
+            "min": null,
+            "max": null
+          },
+          "cache_read_input_tokens": {
+            "observed_runs": 0,
+            "missing_runs": 0,
+            "n": 0,
+            "median": null,
+            "q1": null,
+            "q3": null,
+            "min": null,
+            "max": null
+          },
+          "cache_creation_input_tokens": {
+            "observed_runs": 0,
+            "missing_runs": 0,
+            "n": 0,
+            "median": null,
+            "q1": null,
+            "q3": null,
+            "min": null,
+            "max": null
+          }
+        },
+        "evaluation_judge": {
+          "started_runs": 10,
+          "applicable_runs": 10,
+          "input_tokens": {
+            "observed_runs": 10,
+            "missing_runs": 0,
+            "n": 10,
+            "median": "2",
+            "q1": "2",
+            "q3": "2",
+            "min": "2",
+            "max": "2"
+          },
+          "output_tokens": {
+            "observed_runs": 10,
+            "missing_runs": 0,
+            "n": 10,
+            "median": "406.5",
+            "q1": "392.25",
+            "q3": "438",
+            "min": "337",
+            "max": "512"
+          },
+          "cache_read_input_tokens": {
+            "observed_runs": 10,
+            "missing_runs": 0,
+            "n": 10,
+            "median": "7156",
+            "q1": "7156",
+            "q3": "7156",
+            "min": "7156",
+            "max": "11213"
+          },
+          "cache_creation_input_tokens": {
+            "observed_runs": 10,
+            "missing_runs": 0,
+            "n": 10,
+            "median": "4229.5",
+            "q1": "4018.75",
+            "q3": "4311.5",
+            "min": "0",
+            "max": "4547"
+          }
+        }
+      },
+      "agent_turns": {
+        "n": 10,
+        "median": "13",
+        "q1": "11",
+        "q3": "15.25",
+        "min": "8",
+        "max": "18"
+      },
+      "spend_usd": {
+        "known": "0.8953452800000000101",
+        "held_for_unknown_cost": "0",
+        "total_charged": "0.8953452800000000101",
+        "runs_with_unknown_cost": 0,
+        "judge_unknown_cost_calls_without_recorded_hold": 0,
+        "includes": "every attempt (failed, unaccepted and retried runs), development and evaluation judge calls"
+      },
+      "cost_per_accepted_outcome_usd": "0.0895",
+      "cost_per_accepted_outcome_note": null
+    },
+    "B": {
+      "attempted": 10,
+      "started": 10,
+      "termination": {
+        "completed": 10
+      },
+      "completed_within_budget": 10,
+      "behavior": {
+        "pass": 10
+      },
+      "structural": {
+        "pass": 10
+      },
+      "semantic_judge_output": {
+        "pass": 10
+      },
+      "tampering_detected": 0,
+      "settings_file_check": {
+        "not_checked": 10
+      },
+      "baseline_tests_modified": 10,
+      "gate_final_state": {
+        "passed": 10
+      },
+      "not_runnable": 0,
+      "accepted": 10,
+      "accepted_definition": "completed within budget AND behaviour pass AND structural pass AND no tampering",
+      "repair_cycles": {
+        "applicable_runs": 10,
+        "converged_runs": 10,
+        "censored_runs": 0,
+        "converged_cycles": {
+          "n": 10,
+          "median": "0",
+          "q1": "0",
+          "q3": "0",
+          "min": "0",
+          "max": "0"
+        },
+        "converged_with_zero_cycles": 10
+      },
+      "checker_invocations": {
+        "sensor": 10,
+        "development_judge_calls": 0
+      },
+      "time_s": {
+        "attempt": {
+          "n": 10,
+          "median": "36.06",
+          "q1": "30.246",
+          "q3": "38.4818",
+          "min": "24.331",
+          "max": "41.718"
+        },
+        "model_api": {
+          "n": 10,
+          "median": "28.271",
+          "q1": "22.2592",
+          "q3": "33.3975",
+          "min": "19.075",
+          "max": "34.938"
+        },
+        "check_sensor": {
+          "n": 10,
+          "median": "0.5465",
+          "q1": "0.4658",
+          "q3": "0.9138",
+          "min": "0.344",
+          "max": "1.218"
+        },
+        "check_judge": {
+          "n": 0,
+          "median": null,
+          "q1": null,
+          "q3": null,
+          "min": null,
+          "max": null
+        }
+      },
+      "agent_cost_usd": {
+        "n": 10,
+        "median": "0.0905",
+        "q1": "0.0707",
+        "q3": "0.1066",
+        "min": "0.0641",
+        "max": "0.1128"
+      },
+      "agent_usage_missing_runs": 0,
+      "usage_tokens": {
+        "note": "per started run and category; missing usage stays missing (counted in missing_runs), never zero; judge sources apply only to runs that started a call",
+        "agent": {
+          "started_runs": 10,
+          "applicable_runs": 10,
+          "input_tokens": {
+            "observed_runs": 10,
+            "missing_runs": 0,
+            "n": 10,
+            "median": "12",
+            "q1": "12",
+            "q3": "12",
+            "min": "10",
+            "max": "16"
+          },
+          "output_tokens": {
+            "observed_runs": 10,
+            "missing_runs": 0,
+            "n": 10,
+            "median": "4075",
+            "q1": "3116.5",
+            "q3": "5127",
+            "min": "2487",
+            "max": "5659"
+          },
+          "cache_read_input_tokens": {
+            "observed_runs": 10,
+            "missing_runs": 0,
+            "n": 10,
+            "median": "63913",
+            "q1": "62517.25",
+            "q3": "68731.5",
+            "min": "47265",
+            "max": "95383"
+          },
+          "cache_creation_input_tokens": {
+            "observed_runs": 10,
+            "missing_runs": 0,
+            "n": 10,
+            "median": "10651.5",
+            "q1": "9091.5",
+            "q3": "11996.75",
+            "min": "7796",
+            "max": "12571"
+          }
+        },
+        "development_judge": {
+          "started_runs": 10,
+          "applicable_runs": 0,
+          "input_tokens": {
+            "observed_runs": 0,
+            "missing_runs": 0,
+            "n": 0,
+            "median": null,
+            "q1": null,
+            "q3": null,
+            "min": null,
+            "max": null
+          },
+          "output_tokens": {
+            "observed_runs": 0,
+            "missing_runs": 0,
+            "n": 0,
+            "median": null,
+            "q1": null,
+            "q3": null,
+            "min": null,
+            "max": null
+          },
+          "cache_read_input_tokens": {
+            "observed_runs": 0,
+            "missing_runs": 0,
+            "n": 0,
+            "median": null,
+            "q1": null,
+            "q3": null,
+            "min": null,
+            "max": null
+          },
+          "cache_creation_input_tokens": {
+            "observed_runs": 0,
+            "missing_runs": 0,
+            "n": 0,
+            "median": null,
+            "q1": null,
+            "q3": null,
+            "min": null,
+            "max": null
+          }
+        },
+        "evaluation_judge": {
+          "started_runs": 10,
+          "applicable_runs": 10,
+          "input_tokens": {
+            "observed_runs": 10,
+            "missing_runs": 0,
+            "n": 10,
+            "median": "2",
+            "q1": "2",
+            "q3": "2",
+            "min": "2",
+            "max": "2"
+          },
+          "output_tokens": {
+            "observed_runs": 10,
+            "missing_runs": 0,
+            "n": 10,
+            "median": "387.5",
+            "q1": "359.75",
+            "q3": "409.5",
+            "min": "333",
+            "max": "473"
+          },
+          "cache_read_input_tokens": {
+            "observed_runs": 10,
+            "missing_runs": 0,
+            "n": 10,
+            "median": "7156",
+            "q1": "7156",
+            "q3": "10198.75",
+            "min": "7156",
+            "max": "11387"
+          },
+          "cache_creation_input_tokens": {
+            "observed_runs": 10,
+            "missing_runs": 0,
+            "n": 10,
+            "median": "4110",
+            "q1": "987.75",
+            "q3": "4320",
+            "min": "0",
+            "max": "4412"
+          }
+        }
+      },
+      "agent_turns": {
+        "n": 10,
+        "median": "13.5",
+        "q1": "11.25",
+        "q3": "15",
+        "min": "8",
+        "max": "17"
+      },
+      "spend_usd": {
+        "known": "0.90253399000000003006",
+        "held_for_unknown_cost": "0",
+        "total_charged": "0.90253399000000003006",
+        "runs_with_unknown_cost": 0,
+        "judge_unknown_cost_calls_without_recorded_hold": 0,
+        "includes": "every attempt (failed, unaccepted and retried runs), development and evaluation judge calls"
+      },
+      "cost_per_accepted_outcome_usd": "0.0903",
+      "cost_per_accepted_outcome_note": null
+    },
+    "C": {
+      "attempted": 10,
+      "started": 10,
+      "termination": {
+        "completed": 10
+      },
+      "completed_within_budget": 10,
+      "behavior": {
+        "pass": 10
+      },
+      "structural": {
+        "pass": 10
+      },
+      "semantic_judge_output": {
+        "pass": 10
+      },
+      "tampering_detected": 0,
+      "settings_file_check": {
+        "not_checked": 10
+      },
+      "baseline_tests_modified": 10,
+      "gate_final_state": {
+        "passed": 10
+      },
+      "not_runnable": 0,
+      "accepted": 10,
+      "accepted_definition": "completed within budget AND behaviour pass AND structural pass AND no tampering",
+      "repair_cycles": {
+        "applicable_runs": 10,
+        "converged_runs": 10,
+        "censored_runs": 0,
+        "converged_cycles": {
+          "n": 10,
+          "median": "0",
+          "q1": "0",
+          "q3": "0",
+          "min": "0",
+          "max": "0"
+        },
+        "converged_with_zero_cycles": 10
+      },
+      "checker_invocations": {
+        "sensor": 10,
+        "development_judge_calls": 10
+      },
+      "time_s": {
+        "attempt": {
+          "n": 10,
+          "median": "40.543",
+          "q1": "37.2122",
+          "q3": "45.6772",
+          "min": "32.036",
+          "max": "55.541"
+        },
+        "model_api": {
+          "n": 10,
+          "median": "26.6295",
+          "q1": "24.681",
+          "q3": "30.9378",
+          "min": "21.83",
+          "max": "43.929"
+        },
+        "check_sensor": {
+          "n": 10,
+          "median": "0.513",
+          "q1": "0.4098",
+          "q3": "0.6772",
+          "min": "0.257",
+          "max": "0.864"
+        },
+        "check_judge": {
+          "n": 10,
+          "median": "6.2575",
+          "q1": "5.9122",
+          "q3": "6.7848",
+          "min": "5.018",
+          "max": "8.265"
+        }
+      },
+      "agent_cost_usd": {
+        "n": 10,
+        "median": "0.0893",
+        "q1": "0.0781",
+        "q3": "0.1087",
+        "min": "0.0676",
+        "max": "0.1406"
+      },
+      "agent_usage_missing_runs": 0,
+      "usage_tokens": {
+        "note": "per started run and category; missing usage stays missing (counted in missing_runs), never zero; judge sources apply only to runs that started a call",
+        "agent": {
+          "started_runs": 10,
+          "applicable_runs": 10,
+          "input_tokens": {
+            "observed_runs": 10,
+            "missing_runs": 0,
+            "n": 10,
+            "median": "12",
+            "q1": "12",
+            "q3": "14",
+            "min": "12",
+            "max": "14"
+          },
+          "output_tokens": {
+            "observed_runs": 10,
+            "missing_runs": 0,
+            "n": 10,
+            "median": "4178",
+            "q1": "3331.75",
+            "q3": "5109.5",
+            "min": "2591",
+            "max": "7205"
+          },
+          "cache_read_input_tokens": {
+            "observed_runs": 10,
+            "missing_runs": 0,
+            "n": 10,
+            "median": "65125.5",
+            "q1": "63228.75",
+            "q3": "74160.5",
+            "min": "60993",
+            "max": "85025"
+          },
+          "cache_creation_input_tokens": {
+            "observed_runs": 10,
+            "missing_runs": 0,
+            "n": 10,
+            "median": "10696.5",
+            "q1": "9603",
+            "q3": "12783.75",
+            "min": "6954",
+            "max": "15099"
+          }
+        },
+        "development_judge": {
+          "started_runs": 10,
+          "applicable_runs": 10,
+          "input_tokens": {
+            "observed_runs": 10,
+            "missing_runs": 0,
+            "n": 10,
+            "median": "2",
+            "q1": "2",
+            "q3": "2",
+            "min": "2",
+            "max": "2"
+          },
+          "output_tokens": {
+            "observed_runs": 10,
+            "missing_runs": 0,
+            "n": 10,
+            "median": "399",
+            "q1": "357.75",
+            "q3": "435.75",
+            "min": "337",
+            "max": "454"
+          },
+          "cache_read_input_tokens": {
+            "observed_runs": 10,
+            "missing_runs": 0,
+            "n": 10,
+            "median": "7156",
+            "q1": "7156",
+            "q3": "7156",
+            "min": "7156",
+            "max": "7156"
+          },
+          "cache_creation_input_tokens": {
+            "observed_runs": 10,
+            "missing_runs": 0,
+            "n": 10,
+            "median": "3815.5",
+            "q1": "3655.75",
+            "q3": "3909.5",
+            "min": "3537",
+            "max": "4031"
+          }
+        },
+        "evaluation_judge": {
+          "started_runs": 10,
+          "applicable_runs": 10,
+          "input_tokens": {
+            "observed_runs": 10,
+            "missing_runs": 0,
+            "n": 10,
+            "median": "2",
+            "q1": "2",
+            "q3": "2",
+            "min": "2",
+            "max": "2"
+          },
+          "output_tokens": {
+            "observed_runs": 10,
+            "missing_runs": 0,
+            "n": 10,
+            "median": "398",
+            "q1": "387.75",
+            "q3": "417.5",
+            "min": "350",
+            "max": "488"
+          },
+          "cache_read_input_tokens": {
+            "observed_runs": 10,
+            "missing_runs": 0,
+            "n": 10,
+            "median": "7156",
+            "q1": "7156",
+            "q3": "11227",
+            "min": "7156",
+            "max": "11481"
+          },
+          "cache_creation_input_tokens": {
+            "observed_runs": 10,
+            "missing_runs": 0,
+            "n": 10,
+            "median": "4021.5",
+            "q1": "0",
+            "q3": "4294.75",
+            "min": "0",
+            "max": "4440"
+          }
+        }
+      },
+      "agent_turns": {
+        "n": 10,
+        "median": "13.5",
+        "q1": "11",
+        "q3": "15.75",
+        "min": "9",
+        "max": "21"
+      },
+      "spend_usd": {
+        "known": "0.97507735000000005087",
+        "held_for_unknown_cost": "0",
+        "total_charged": "0.97507735000000005087",
+        "runs_with_unknown_cost": 0,
+        "judge_unknown_cost_calls_without_recorded_hold": 0,
+        "includes": "every attempt (failed, unaccepted and retried runs), development and evaluation judge calls"
+      },
+      "cost_per_accepted_outcome_usd": "0.0975",
+      "cost_per_accepted_outcome_note": null
+    }
+  },
+  "paired_by_task": [
+    {
+      "task_id": "T01-lookup",
+      "arms": {
+        "A": {
+          "termination": "completed",
+          "behavior": "pass",
+          "structural": "pass",
+          "semantic_judge": "pass",
+          "gate_final_state": "no_gate",
+          "accepted": true,
+          "repair_cycles": null,
+          "position_in_task": 2
+        },
+        "B": {
+          "termination": "completed",
+          "behavior": "pass",
+          "structural": "pass",
+          "semantic_judge": "pass",
+          "gate_final_state": "passed",
+          "accepted": true,
+          "repair_cycles": 0,
+          "position_in_task": 3
+        },
+        "C": {
+          "termination": "completed",
+          "behavior": "pass",
+          "structural": "pass",
+          "semantic_judge": "pass",
+          "gate_final_state": "passed",
+          "accepted": true,
+          "repair_cycles": 0,
+          "position_in_task": 1
+        }
+      }
+    },
+    {
+      "task_id": "T02-filtering",
+      "arms": {
+        "A": {
+          "termination": "completed",
+          "behavior": "pass",
+          "structural": "pass",
+          "semantic_judge": "pass",
+          "gate_final_state": "no_gate",
+          "accepted": true,
+          "repair_cycles": null,
+          "position_in_task": 3
+        },
+        "B": {
+          "termination": "completed",
+          "behavior": "pass",
+          "structural": "pass",
+          "semantic_judge": "pass",
+          "gate_final_state": "passed",
+          "accepted": true,
+          "repair_cycles": 0,
+          "position_in_task": 2
+        },
+        "C": {
+          "termination": "completed",
+          "behavior": "pass",
+          "structural": "pass",
+          "semantic_judge": "pass",
+          "gate_final_state": "passed",
+          "accepted": true,
+          "repair_cycles": 0,
+          "position_in_task": 1
+        }
+      }
+    },
+    {
+      "task_id": "T03-totals",
+      "arms": {
+        "A": {
+          "termination": "completed",
+          "behavior": "pass",
+          "structural": "pass",
+          "semantic_judge": "pass",
+          "gate_final_state": "no_gate",
+          "accepted": true,
+          "repair_cycles": null,
+          "position_in_task": 1
+        },
+        "B": {
+          "termination": "completed",
+          "behavior": "pass",
+          "structural": "pass",
+          "semantic_judge": "pass",
+          "gate_final_state": "passed",
+          "accepted": true,
+          "repair_cycles": 0,
+          "position_in_task": 2
+        },
+        "C": {
+          "termination": "completed",
+          "behavior": "pass",
+          "structural": "pass",
+          "semantic_judge": "pass",
+          "gate_final_state": "passed",
+          "accepted": true,
+          "repair_cycles": 0,
+          "position_in_task": 3
+        }
+      }
+    },
+    {
+      "task_id": "T04-discounts",
+      "arms": {
+        "A": {
+          "termination": "completed",
+          "behavior": "pass",
+          "structural": "pass",
+          "semantic_judge": "pass",
+          "gate_final_state": "no_gate",
+          "accepted": true,
+          "repair_cycles": null,
+          "position_in_task": 2
+        },
+        "B": {
+          "termination": "completed",
+          "behavior": "pass",
+          "structural": "pass",
+          "semantic_judge": "pass",
+          "gate_final_state": "passed",
+          "accepted": true,
+          "repair_cycles": 0,
+          "position_in_task": 3
+        },
+        "C": {
+          "termination": "completed",
+          "behavior": "pass",
+          "structural": "pass",
+          "semantic_judge": "pass",
+          "gate_final_state": "passed",
+          "accepted": true,
+          "repair_cycles": 0,
+          "position_in_task": 1
+        }
+      }
+    },
+    {
+      "task_id": "T05-cancellation",
+      "arms": {
+        "A": {
+          "termination": "completed",
+          "behavior": "pass",
+          "structural": "pass",
+          "semantic_judge": "pass",
+          "gate_final_state": "no_gate",
+          "accepted": true,
+          "repair_cycles": null,
+          "position_in_task": 2
+        },
+        "B": {
+          "termination": "completed",
+          "behavior": "pass",
+          "structural": "pass",
+          "semantic_judge": "pass",
+          "gate_final_state": "passed",
+          "accepted": true,
+          "repair_cycles": 0,
+          "position_in_task": 3
+        },
+        "C": {
+          "termination": "completed",
+          "behavior": "pass",
+          "structural": "pass",
+          "semantic_judge": "pass",
+          "gate_final_state": "passed",
+          "accepted": true,
+          "repair_cycles": 0,
+          "position_in_task": 1
+        }
+      }
+    },
+    {
+      "task_id": "T06-pagination",
+      "arms": {
+        "A": {
+          "termination": "completed",
+          "behavior": "pass",
+          "structural": "pass",
+          "semantic_judge": "pass",
+          "gate_final_state": "no_gate",
+          "accepted": true,
+          "repair_cycles": null,
+          "position_in_task": 2
+        },
+        "B": {
+          "termination": "completed",
+          "behavior": "pass",
+          "structural": "pass",
+          "semantic_judge": "pass",
+          "gate_final_state": "passed",
+          "accepted": true,
+          "repair_cycles": 0,
+          "position_in_task": 1
+        },
+        "C": {
+          "termination": "completed",
+          "behavior": "pass",
+          "structural": "pass",
+          "semantic_judge": "pass",
+          "gate_final_state": "passed",
+          "accepted": true,
+          "repair_cycles": 0,
+          "position_in_task": 3
+        }
+      }
+    },
+    {
+      "task_id": "T07-bulk-retrieval",
+      "arms": {
+        "A": {
+          "termination": "completed",
+          "behavior": "pass",
+          "structural": "pass",
+          "semantic_judge": "pass",
+          "gate_final_state": "no_gate",
+          "accepted": true,
+          "repair_cycles": null,
+          "position_in_task": 1
+        },
+        "B": {
+          "termination": "completed",
+          "behavior": "pass",
+          "structural": "pass",
+          "semantic_judge": "pass",
+          "gate_final_state": "passed",
+          "accepted": true,
+          "repair_cycles": 0,
+          "position_in_task": 2
+        },
+        "C": {
+          "termination": "completed",
+          "behavior": "pass",
+          "structural": "pass",
+          "semantic_judge": "pass",
+          "gate_final_state": "passed",
+          "accepted": true,
+          "repair_cycles": 0,
+          "position_in_task": 3
+        }
+      }
+    },
+    {
+      "task_id": "T08-status-updates",
+      "arms": {
+        "A": {
+          "termination": "completed",
+          "behavior": "pass",
+          "structural": "pass",
+          "semantic_judge": "pass",
+          "gate_final_state": "no_gate",
+          "accepted": true,
+          "repair_cycles": null,
+          "position_in_task": 3
+        },
+        "B": {
+          "termination": "completed",
+          "behavior": "pass",
+          "structural": "pass",
+          "semantic_judge": "pass",
+          "gate_final_state": "passed",
+          "accepted": true,
+          "repair_cycles": 0,
+          "position_in_task": 2
+        },
+        "C": {
+          "termination": "completed",
+          "behavior": "pass",
+          "structural": "pass",
+          "semantic_judge": "pass",
+          "gate_final_state": "passed",
+          "accepted": true,
+          "repair_cycles": 0,
+          "position_in_task": 1
+        }
+      }
+    },
+    {
+      "task_id": "T09-audit-history",
+      "arms": {
+        "A": {
+          "termination": "completed",
+          "behavior": "pass",
+          "structural": "pass",
+          "semantic_judge": "pass",
+          "gate_final_state": "no_gate",
+          "accepted": true,
+          "repair_cycles": null,
+          "position_in_task": 1
+        },
+        "B": {
+          "termination": "completed",
+          "behavior": "pass",
+          "structural": "pass",
+          "semantic_judge": "pass",
+          "gate_final_state": "passed",
+          "accepted": true,
+          "repair_cycles": 0,
+          "position_in_task": 2
+        },
+        "C": {
+          "termination": "completed",
+          "behavior": "pass",
+          "structural": "pass",
+          "semantic_judge": "pass",
+          "gate_final_state": "passed",
+          "accepted": true,
+          "repair_cycles": 0,
+          "position_in_task": 3
+        }
+      }
+    },
+    {
+      "task_id": "T10-validation",
+      "arms": {
+        "A": {
+          "termination": "completed",
+          "behavior": "pass",
+          "structural": "pass",
+          "semantic_judge": "pass",
+          "gate_final_state": "no_gate",
+          "accepted": true,
+          "repair_cycles": null,
+          "position_in_task": 2
+        },
+        "B": {
+          "termination": "completed",
+          "behavior": "pass",
+          "structural": "pass",
+          "semantic_judge": "pass",
+          "gate_final_state": "passed",
+          "accepted": true,
+          "repair_cycles": 0,
+          "position_in_task": 3
+        },
+        "C": {
+          "termination": "completed",
+          "behavior": "pass",
+          "structural": "pass",
+          "semantic_judge": "pass",
+          "gate_final_state": "passed",
+          "accepted": true,
+          "repair_cycles": 0,
+          "position_in_task": 1
+        }
+      }
+    }
+  ],
+  "judge": {
+    "final_snapshot_judge_output_by_arm": {
+      "A:pass": 10,
+      "B:pass": 10,
+      "C:pass": 10
+    },
+    "evaluation_judge_provider_failures": 0,
+    "arm_c_development_vs_evaluation_disagreements": [],
+    "calibration": {
+      "source": "evidence/live-judge-20261119-calibration.json",
+      "cases": 12,
+      "authored_label_vs_judge": {
+        "pass -> pass": 6,
+        "violation -> violation": 6
+      },
+      "agreements": 12,
+      "note": "agreement with authored labels is a count, not an accuracy rate"
+    },
+    "false_positive_rate": null,
+    "false_negative_rate": null,
+    "rates_note": "unavailable: false-positive and false-negative rates need independent human labels, and none were supplied (Decisions, 2026-11-19)"
+  },
+  "models": [
+    "claude-sonnet-5-5"
+  ],
+  "environments": [
+    "{\"claude_cli\": \"2.1.322 (Claude Code)\", \"import_linter\": \"2.17\", \"platform\": \"macOS-26.6.2-arm64-arm-64bit\", \"python\": \"3.12.15\"}"
+  ],
+  "limits": [
+    "one run per task and arm (10 x 3 x 1): exploratory, not a powered comparison",
+    "one agent model, one effort level, one CLI version, one machine",
+    "semantic outcomes are judge outputs without independent labels",
+    "the rubric covers controller business decisions only; instructed rules outside it are not checked",
+    "tamper detection compared the external --settings file only where settings_file_check is not 'not_checked'",
+    "costs are the CLI's API-equivalent estimates, notional under a subscription login"
+  ]
+}

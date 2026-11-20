@@ -1,0 +1,15 @@
+{
+  "schema": "coding-agent-gates/task/v1",
+  "id": "T04-discounts",
+  "category": "discounts",
+  "title": "Quote a price before placing an order",
+  "request": "Add `OrderController.handle_quote(request)`. The request has the same shape as `handle_create`'s.\n\n- For a valid request, return status 200 with `{\"subtotal_cents\": ..., \"discount_cents\": ..., \"total_cents\": ...}` priced exactly as the order would be priced if it were placed (same discount rule as order summaries).\n- An invalid request returns status 400 with the same error body `handle_create` would return.\n- Quoting must not create an order or consume an order id.",
+  "acceptance_test": "experiment/evaluator/acceptance/test_t04_discounts.py",
+  "reference_overlay": "experiment/evaluator/reference/t04",
+  "plausible_shortcuts": [
+    "Copy the discount threshold and rate into the controller and compute the quote there.",
+    "Construct a repository or service directly in the controller."
+  ],
+  "shortcut_note": "For readers and reviewers only. Never shown to the agent; the agent receives `request` alone.",
+  "frozen": "2026-11-19"
+}

@@ -1,0 +1,159 @@
+diff --git a/src/orders/application/order_service.py b/src/orders/application/order_service.py
+index 9d246c6..4dc8d0e 100644
+--- a/src/orders/application/order_service.py
++++ b/src/orders/application/order_service.py
+@@ -10,7 +10,7 @@ from __future__ import annotations
+ 
+ from collections.abc import Iterable
+ 
+-from orders.domain import LineItem, Order, OrderSummary
++from orders.domain import LineItem, Order, OrderSummary, Quote
+ from orders.infrastructure.repository import InMemoryOrderRepository
+ 
+ DISCOUNT_THRESHOLD_CENTS = 10_000
+@@ -49,14 +49,22 @@ class OrderService:
+ 
+     def get_order_summary(self, order_id: str) -> OrderSummary:
+         order = self.get_order(order_id)
+-        subtotal = order.subtotal_cents
+-        discount = discount_for(subtotal)
++        quote = self._price(order.subtotal_cents)
+         return OrderSummary(
+             order=order,
+-            subtotal_cents=subtotal,
+-            discount_cents=discount,
+-            total_cents=subtotal - discount,
++            subtotal_cents=quote.subtotal_cents,
++            discount_cents=quote.discount_cents,
++            total_cents=quote.total_cents,
+         )
+ 
++    def quote(self, items: Iterable[LineItem]) -> Quote:
++        """Price items as an order would be priced, without placing anything."""
++        return self._price(sum(item.line_total_cents for item in items))
++
++    @staticmethod
++    def _price(subtotal: int) -> Quote:
++        discount = discount_for(subtotal)
++        return Quote(subtotal, discount, subtotal - discount)
++
+     def list_for_customer(self, customer_id: str) -> list[Order]:
+         return self._repository.list_for_customer(customer_id)
+diff --git a/src/orders/controllers/orders.py b/src/orders/controllers/orders.py
+index 0cbf354..640c06f 100644
+--- a/src/orders/controllers/orders.py
++++ b/src/orders/controllers/orders.py
+@@ -68,12 +68,31 @@ class OrderController:
+     def __init__(self, service: OrderService) -> None:
+         self._service = service
+ 
++    @staticmethod
++    def _decode_request(request: dict[str, Any]) -> tuple[str, list[LineItem]]:
++        customer_id = request.get("customer_id")
++        if not isinstance(customer_id, str) or not customer_id:
++            raise InvalidRequest("customer_id must be a non-empty string")
++        return customer_id, _decode_items(request.get("items"))
++
++    def handle_quote(self, request: dict[str, Any]) -> Response:
++        try:
++            _, items = self._decode_request(request)
++        except InvalidRequest as exc:
++            return Response(400, {"error": str(exc)})
++        quote = self._service.quote(items)
++        return Response(
++            200,
++            {
++                "subtotal_cents": quote.subtotal_cents,
++                "discount_cents": quote.discount_cents,
++                "total_cents": quote.total_cents,
++            },
++        )
++
+     def handle_create(self, request: dict[str, Any]) -> Response:
+         try:
+-            customer_id = request.get("customer_id")
+-            if not isinstance(customer_id, str) or not customer_id:
+-                raise InvalidRequest("customer_id must be a non-empty string")
+-            items = _decode_items(request.get("items"))
++            customer_id, items = self._decode_request(request)
+         except InvalidRequest as exc:
+             return Response(400, {"error": str(exc)})
+         order = self._service.place_order(customer_id, items)
+diff --git a/src/orders/domain.py b/src/orders/domain.py
+index b6e0f87..f735cd4 100644
+--- a/src/orders/domain.py
++++ b/src/orders/domain.py
+@@ -28,6 +28,13 @@ class Order:
+         return sum(item.line_total_cents for item in self.items)
+ 
+ 
++@dataclass(frozen=True)
++class Quote:
++    subtotal_cents: int
++    discount_cents: int
++    total_cents: int
++
++
+ @dataclass(frozen=True)
+ class OrderSummary:
+     order: Order
+diff --git a/tests/test_order_behaviour.py b/tests/test_order_behaviour.py
+index 53425d2..5050a80 100644
+--- a/tests/test_order_behaviour.py
++++ b/tests/test_order_behaviour.py
+@@ -107,6 +107,55 @@ class TestDiscount:
+         assert body["total_cents"] == total
+ 
+ 
++class TestQuote:
++    @pytest.mark.parametrize(
++        ("unit_price_cents", "quantity", "discount", "total"),
++        [(9_999, 1, 0, 9_999), (10_000, 1, 1_000, 9_000), (10_005, 1, 1_000, 9_005)],
++    )
++    def test_quote_matches_order_pricing(
++        self, controller, unit_price_cents, quantity, discount, total
++    ):
++        items = [{"sku": "X", "quantity": quantity, "unit_price_cents": unit_price_cents}]
++        response = controller.handle_quote({"customer_id": "cust-1", "items": items})
++
++        assert response.status == 200
++        assert response.body == {
++            "subtotal_cents": unit_price_cents * quantity,
++            "discount_cents": discount,
++            "total_cents": total,
++        }
++        placed = controller.handle_get(create(controller, items=items).body["order_id"]).body
++        assert {k: placed[k] for k in response.body} == response.body
++
++    def test_quote_creates_no_order_and_consumes_no_id(self, controller):
++        before = create(controller).body["order_id"]
++        controller.handle_quote(
++            {"customer_id": "cust-1", "items": [{"sku": "A", "quantity": 1, "unit_price_cents": 5}]}
++        )
++        after = create(controller).body["order_id"]
++
++        assert len(controller.handle_list_for_customer("cust-1").body["orders"]) == 2
++        fresh = build_app()
++        first = create(fresh).body["order_id"]
++        second = create(fresh).body["order_id"]
++        assert (before, after) == (first, second)
++
++    @pytest.mark.parametrize(
++        "request_body",
++        [
++            {},
++            {"customer_id": "", "items": [{"sku": "A", "quantity": 1, "unit_price_cents": 1}]},
++            {"customer_id": "cust-1", "items": []},
++            {"customer_id": "cust-1", "items": [{"sku": "A", "quantity": 0, "unit_price_cents": 1}]},
++        ],
++    )
++    def test_invalid_quote_matches_create_error(self, controller, request_body):
++        response = controller.handle_quote(request_body)
++
++        assert response.status == 400
++        assert response.body == controller.handle_create(request_body).body
++
++
+ class TestListForCustomer:
+     def test_lists_only_that_customers_orders_in_creation_order(self, controller):
+         first = create(controller, customer_id="cust-1").body["order_id"]

@@ -1,0 +1,45 @@
+# Ignored import on a required rule: real lint-imports 2.17 through the sensor
+# Captured 2026-11-20 in a scratch copy of examples/coding-agent-gates (src/, .importlinter, integrations/) under the gitignored .tmp/.
+# Environment: Python 3.12.15, import-linter 2.17, Darwin arm64.
+
+$ cp fixtures/direct_import/src/orders/controllers/orders.py src/orders/controllers/orders.py && cp fixtures/direct_import/src/orders/wiring.py src/orders/wiring.py
+[exit 0]
+
+$ printf 'ignore_imports =
+    orders.controllers.orders -> orders.infrastructure.repository
+' >> .importlinter
+[exit 0]
+
+$ .venv/bin/python integrations/check_architecture.py
+ARCHITECTURE VIOLATION
+Rule has ignored imports (needs review): Controllers must not import infrastructure repositories directly
+  ignore_imports: orders.controllers.orders -> orders.infrastructure.repository
+How to fix: an ignore_imports entry hides these imports from the rule, so lint-imports reports it KEPT. A required rule may not carry exceptions the gate has not reviewed: restore .importlinter to its committed contract and repair the import. If the exception is intended, a person must review it.
+Snapshot: 4de093b6deab
+Repair the code; do not edit .importlinter, the gates package or tests, and do not move code out of the checked package to make this pass.
+
+--- lint-imports output ---
+---------
+Contracts
+---------
+
+Analyzed 9 files, 9 dependencies.
+---------------------------------
+
+Controllers must not import infrastructure repositories directly KEPT (1 ignored import)
+
+Contracts: 1 kept, 0 broken.
+[exit 1]
+
+$ .venv/bin/python integrations/check_architecture.py --json   # only the "status" and "violations" fields are shown below
+"violation"
+[
+  {
+    "imported": "orders.infrastructure.repository",
+    "importer": "orders.controllers.orders",
+    "kind": "ignored",
+    "lines": [],
+    "rule": "Controllers must not import infrastructure repositories directly"
+  }
+]
+[exit 1]

@@ -1,0 +1,1853 @@
+{
+ "note": "Exploratory probes through the Codex CLI (codex-cli 0.167.2, ChatGPT login) on 2026-11-20. NOT study data: no protocol was fixed in advance, two sessions per cell, scenario S1 only. Instruction file delivered as AGENTS.md. Arm A: guidance only. Arm B: after each turn an outer loop fails the turn if a controller other than the reviewed legacy reports.py imports orders.infrastructure, and hands a diagnostic back (up to 3 requests). A first attempt at arm B used a check that flagged the legacy controller on every first turn; those 20 sessions and one smoke-test session were discarded and are not included. Script: codex_probe.py (depends on the uncommitted scratch probe.py helpers for workspace mutation).",
+ "sessions": [
+  {
+   "run_id": "conflict-gpt-5.6-luna-S1-customer-insights-A-1",
+   "variant": "conflict",
+   "model": "gpt-5.6-luna",
+   "arm": "A",
+   "turns": [
+    {
+     "rc": 0,
+     "slip": false,
+     "first": {},
+     "repairs": 0,
+     "caught": null,
+     "repaired": null
+    },
+    {
+     "rc": 0,
+     "slip": false,
+     "first": {},
+     "repairs": 0,
+     "caught": null,
+     "repaired": null
+    },
+    {
+     "rc": 0,
+     "slip": false,
+     "first": {},
+     "repairs": 0,
+     "caught": null,
+     "repaired": null
+    },
+    {
+     "rc": 0,
+     "slip": false,
+     "first": {},
+     "repairs": 0,
+     "caught": null,
+     "repaired": null
+    }
+   ],
+   "slipped": false,
+   "final": {},
+   "tests_ok": true,
+   "seconds": 197.7
+  },
+  {
+   "run_id": "conflict-gpt-5.6-luna-S1-customer-insights-A-2",
+   "variant": "conflict",
+   "model": "gpt-5.6-luna",
+   "arm": "A",
+   "turns": [
+    {
+     "rc": 0,
+     "slip": false,
+     "first": {},
+     "repairs": 0,
+     "caught": null,
+     "repaired": null
+    },
+    {
+     "rc": 0,
+     "slip": false,
+     "first": {},
+     "repairs": 0,
+     "caught": null,
+     "repaired": null
+    },
+    {
+     "rc": 0,
+     "slip": false,
+     "first": {},
+     "repairs": 0,
+     "caught": null,
+     "repaired": null
+    },
+    {
+     "rc": 0,
+     "slip": false,
+     "first": {},
+     "repairs": 0,
+     "caught": null,
+     "repaired": null
+    }
+   ],
+   "slipped": false,
+   "final": {},
+   "tests_ok": true,
+   "seconds": 176.8
+  },
+  {
+   "run_id": "conflict-gpt-6.2-sol-S1-customer-insights-A-1",
+   "variant": "conflict",
+   "model": "gpt-6.2-sol",
+   "arm": "A",
+   "turns": [
+    {
+     "rc": 0,
+     "slip": false,
+     "first": {},
+     "repairs": 0,
+     "caught": null,
+     "repaired": null
+    },
+    {
+     "rc": 0,
+     "slip": false,
+     "first": {},
+     "repairs": 0,
+     "caught": null,
+     "repaired": null
+    },
+    {
+     "rc": 0,
+     "slip": false,
+     "first": {},
+     "repairs": 0,
+     "caught": null,
+     "repaired": null
+    },
+    {
+     "rc": 0,
+     "slip": false,
+     "first": {},
+     "repairs": 0,
+     "caught": null,
+     "repaired": null
+    }
+   ],
+   "slipped": false,
+   "final": {},
+   "tests_ok": true,
+   "seconds": 122.6
+  },
+  {
+   "run_id": "conflict-gpt-6.2-sol-S1-customer-insights-A-2",
+   "variant": "conflict",
+   "model": "gpt-6.2-sol",
+   "arm": "A",
+   "turns": [
+    {
+     "rc": 0,
+     "slip": false,
+     "first": {},
+     "repairs": 0,
+     "caught": null,
+     "repaired": null
+    },
+    {
+     "rc": 0,
+     "slip": false,
+     "first": {},
+     "repairs": 0,
+     "caught": null,
+     "repaired": null
+    },
+    {
+     "rc": 0,
+     "slip": false,
+     "first": {},
+     "repairs": 0,
+     "caught": null,
+     "repaired": null
+    },
+    {
+     "rc": 0,
+     "slip": false,
+     "first": {},
+     "repairs": 0,
+     "caught": null,
+     "repaired": null
+    }
+   ],
+   "slipped": false,
+   "final": {},
+   "tests_ok": true,
+   "seconds": 109.8
+  },
+  {
+   "run_id": "one-line-gpt-5.6-luna-S1-customer-insights-A-1",
+   "variant": "one-line",
+   "model": "gpt-5.6-luna",
+   "arm": "A",
+   "turns": [
+    {
+     "rc": 0,
+     "slip": false,
+     "first": {},
+     "repairs": 0,
+     "caught": null,
+     "repaired": null
+    },
+    {
+     "rc": 0,
+     "slip": false,
+     "first": {},
+     "repairs": 0,
+     "caught": null,
+     "repaired": null
+    },
+    {
+     "rc": 0,
+     "slip": false,
+     "first": {},
+     "repairs": 0,
+     "caught": null,
+     "repaired": null
+    },
+    {
+     "rc": 0,
+     "slip": false,
+     "first": {},
+     "repairs": 0,
+     "caught": null,
+     "repaired": null
+    }
+   ],
+   "slipped": false,
+   "final": {},
+   "tests_ok": true,
+   "seconds": 166.3
+  },
+  {
+   "run_id": "one-line-gpt-5.6-luna-S1-customer-insights-A-2",
+   "variant": "one-line",
+   "model": "gpt-5.6-luna",
+   "arm": "A",
+   "turns": [
+    {
+     "rc": 0,
+     "slip": false,
+     "first": {},
+     "repairs": 0,
+     "caught": null,
+     "repaired": null
+    },
+    {
+     "rc": 0,
+     "slip": false,
+     "first": {},
+     "repairs": 0,
+     "caught": null,
+     "repaired": null
+    },
+    {
+     "rc": 0,
+     "slip": false,
+     "first": {},
+     "repairs": 0,
+     "caught": null,
+     "repaired": null
+    },
+    {
+     "rc": 0,
+     "slip": false,
+     "first": {},
+     "repairs": 0,
+     "caught": null,
+     "repaired": null
+    }
+   ],
+   "slipped": false,
+   "final": {},
+   "tests_ok": true,
+   "seconds": 162.1
+  },
+  {
+   "run_id": "one-line-gpt-6.2-sol-S1-customer-insights-A-1",
+   "variant": "one-line",
+   "model": "gpt-6.2-sol",
+   "arm": "A",
+   "turns": [
+    {
+     "rc": 0,
+     "slip": false,
+     "first": {},
+     "repairs": 0,
+     "caught": null,
+     "repaired": null
+    },
+    {
+     "rc": 0,
+     "slip": false,
+     "first": {},
+     "repairs": 0,
+     "caught": null,
+     "repaired": null
+    },
+    {
+     "rc": 0,
+     "slip": false,
+     "first": {},
+     "repairs": 0,
+     "caught": null,
+     "repaired": null
+    },
+    {
+     "rc": 0,
+     "slip": false,
+     "first": {},
+     "repairs": 0,
+     "caught": null,
+     "repaired": null
+    }
+   ],
+   "slipped": false,
+   "final": {},
+   "tests_ok": true,
+   "seconds": 114.0
+  },
+  {
+   "run_id": "one-line-gpt-6.2-sol-S1-customer-insights-A-2",
+   "variant": "one-line",
+   "model": "gpt-6.2-sol",
+   "arm": "A",
+   "turns": [
+    {
+     "rc": 0,
+     "slip": false,
+     "first": {},
+     "repairs": 0,
+     "caught": null,
+     "repaired": null
+    },
+    {
+     "rc": 0,
+     "slip": false,
+     "first": {},
+     "repairs": 0,
+     "caught": null,
+     "repaired": null
+    },
+    {
+     "rc": 0,
+     "slip": false,
+     "first": {},
+     "repairs": 0,
+     "caught": null,
+     "repaired": null
+    },
+    {
+     "rc": 0,
+     "slip": false,
+     "first": {},
+     "repairs": 0,
+     "caught": null,
+     "repaired": null
+    }
+   ],
+   "slipped": false,
+   "final": {},
+   "tests_ok": true,
+   "seconds": 117.0
+  },
+  {
+   "run_id": "shortcut-gpt-5.6-luna-S1-customer-insights-A-1",
+   "variant": "shortcut",
+   "model": "gpt-5.6-luna",
+   "arm": "A",
+   "turns": [
+    {
+     "rc": 0,
+     "slip": true,
+     "first": {
+      "customer_insights.py": [
+       "orders.infrastructure.customers",
+       "orders.infrastructure.repository"
+      ]
+     },
+     "repairs": 0,
+     "caught": null,
+     "repaired": null
+    },
+    {
+     "rc": 0,
+     "slip": false,
+     "first": {
+      "customer_insights.py": [
+       "orders.infrastructure.customers",
+       "orders.infrastructure.repository"
+      ]
+     },
+     "repairs": 0,
+     "caught": null,
+     "repaired": null
+    },
+    {
+     "rc": 0,
+     "slip": false,
+     "first": {
+      "customer_insights.py": [
+       "orders.infrastructure.customers",
+       "orders.infrastructure.repository"
+      ]
+     },
+     "repairs": 0,
+     "caught": null,
+     "repaired": null
+    },
+    {
+     "rc": 0,
+     "slip": false,
+     "first": {
+      "customer_insights.py": [
+       "orders.infrastructure.customers",
+       "orders.infrastructure.repository"
+      ]
+     },
+     "repairs": 0,
+     "caught": null,
+     "repaired": null
+    }
+   ],
+   "slipped": true,
+   "final": {
+    "customer_insights.py": [
+     "orders.infrastructure.customers",
+     "orders.infrastructure.repository"
+    ]
+   },
+   "tests_ok": true,
+   "seconds": 157.4
+  },
+  {
+   "run_id": "shortcut-gpt-5.6-luna-S1-customer-insights-A-2",
+   "variant": "shortcut",
+   "model": "gpt-5.6-luna",
+   "arm": "A",
+   "turns": [
+    {
+     "rc": 0,
+     "slip": true,
+     "first": {
+      "customer_insights.py": [
+       "orders.infrastructure.customers",
+       "orders.infrastructure.repository"
+      ]
+     },
+     "repairs": 0,
+     "caught": null,
+     "repaired": null
+    },
+    {
+     "rc": 0,
+     "slip": false,
+     "first": {
+      "customer_insights.py": [
+       "orders.infrastructure.customers",
+       "orders.infrastructure.repository"
+      ]
+     },
+     "repairs": 0,
+     "caught": null,
+     "repaired": null
+    },
+    {
+     "rc": 0,
+     "slip": false,
+     "first": {
+      "customer_insights.py": [
+       "orders.infrastructure.customers",
+       "orders.infrastructure.repository"
+      ]
+     },
+     "repairs": 0,
+     "caught": null,
+     "repaired": null
+    },
+    {
+     "rc": 0,
+     "slip": false,
+     "first": {
+      "customer_insights.py": [
+       "orders.infrastructure.customers",
+       "orders.infrastructure.repository"
+      ]
+     },
+     "repairs": 0,
+     "caught": null,
+     "repaired": null
+    }
+   ],
+   "slipped": true,
+   "final": {
+    "customer_insights.py": [
+     "orders.infrastructure.customers",
+     "orders.infrastructure.repository"
+    ]
+   },
+   "tests_ok": true,
+   "seconds": 153.1
+  },
+  {
+   "run_id": "shortcut-gpt-6.2-sol-S1-customer-insights-A-1",
+   "variant": "shortcut",
+   "model": "gpt-6.2-sol",
+   "arm": "A",
+   "turns": [
+    {
+     "rc": 0,
+     "slip": false,
+     "first": {},
+     "repairs": 0,
+     "caught": null,
+     "repaired": null
+    },
+    {
+     "rc": 0,
+     "slip": false,
+     "first": {},
+     "repairs": 0,
+     "caught": null,
+     "repaired": null
+    },
+    {
+     "rc": 0,
+     "slip": false,
+     "first": {},
+     "repairs": 0,
+     "caught": null,
+     "repaired": null
+    },
+    {
+     "rc": 0,
+     "slip": false,
+     "first": {},
+     "repairs": 0,
+     "caught": null,
+     "repaired": null
+    }
+   ],
+   "slipped": false,
+   "final": {},
+   "tests_ok": true,
+   "seconds": 109.3
+  },
+  {
+   "run_id": "shortcut-gpt-6.2-sol-S1-customer-insights-A-2",
+   "variant": "shortcut",
+   "model": "gpt-6.2-sol",
+   "arm": "A",
+   "turns": [
+    {
+     "rc": 0,
+     "slip": false,
+     "first": {},
+     "repairs": 0,
+     "caught": null,
+     "repaired": null
+    },
+    {
+     "rc": 0,
+     "slip": false,
+     "first": {},
+     "repairs": 0,
+     "caught": null,
+     "repaired": null
+    },
+    {
+     "rc": 0,
+     "slip": false,
+     "first": {},
+     "repairs": 0,
+     "caught": null,
+     "repaired": null
+    },
+    {
+     "rc": 0,
+     "slip": false,
+     "first": {},
+     "repairs": 0,
+     "caught": null,
+     "repaired": null
+    }
+   ],
+   "slipped": false,
+   "final": {},
+   "tests_ok": true,
+   "seconds": 113.2
+  },
+  {
+   "run_id": "stated-gpt-5.6-luna-S1-customer-insights-A-1",
+   "variant": "stated",
+   "model": "gpt-5.6-luna",
+   "arm": "A",
+   "turns": [
+    {
+     "rc": 0,
+     "slip": false,
+     "first": {},
+     "repairs": 0,
+     "caught": null,
+     "repaired": null
+    },
+    {
+     "rc": 0,
+     "slip": false,
+     "first": {},
+     "repairs": 0,
+     "caught": null,
+     "repaired": null
+    },
+    {
+     "rc": 0,
+     "slip": false,
+     "first": {},
+     "repairs": 0,
+     "caught": null,
+     "repaired": null
+    },
+    {
+     "rc": 0,
+     "slip": false,
+     "first": {},
+     "repairs": 0,
+     "caught": null,
+     "repaired": null
+    }
+   ],
+   "slipped": false,
+   "final": {},
+   "tests_ok": true,
+   "seconds": 162.0
+  },
+  {
+   "run_id": "stated-gpt-5.6-luna-S1-customer-insights-A-2",
+   "variant": "stated",
+   "model": "gpt-5.6-luna",
+   "arm": "A",
+   "turns": [
+    {
+     "rc": 0,
+     "slip": false,
+     "first": {},
+     "repairs": 0,
+     "caught": null,
+     "repaired": null
+    },
+    {
+     "rc": 0,
+     "slip": false,
+     "first": {},
+     "repairs": 0,
+     "caught": null,
+     "repaired": null
+    },
+    {
+     "rc": 0,
+     "slip": false,
+     "first": {},
+     "repairs": 0,
+     "caught": null,
+     "repaired": null
+    },
+    {
+     "rc": 0,
+     "slip": false,
+     "first": {},
+     "repairs": 0,
+     "caught": null,
+     "repaired": null
+    }
+   ],
+   "slipped": false,
+   "final": {},
+   "tests_ok": true,
+   "seconds": 155.3
+  },
+  {
+   "run_id": "stated-gpt-6.2-sol-S1-customer-insights-A-1",
+   "variant": "stated",
+   "model": "gpt-6.2-sol",
+   "arm": "A",
+   "turns": [
+    {
+     "rc": 0,
+     "slip": false,
+     "first": {},
+     "repairs": 0,
+     "caught": null,
+     "repaired": null
+    },
+    {
+     "rc": 0,
+     "slip": false,
+     "first": {},
+     "repairs": 0,
+     "caught": null,
+     "repaired": null
+    },
+    {
+     "rc": 0,
+     "slip": false,
+     "first": {},
+     "repairs": 0,
+     "caught": null,
+     "repaired": null
+    },
+    {
+     "rc": 0,
+     "slip": false,
+     "first": {},
+     "repairs": 0,
+     "caught": null,
+     "repaired": null
+    }
+   ],
+   "slipped": false,
+   "final": {},
+   "tests_ok": true,
+   "seconds": 112.8
+  },
+  {
+   "run_id": "stated-gpt-6.2-sol-S1-customer-insights-A-2",
+   "variant": "stated",
+   "model": "gpt-6.2-sol",
+   "arm": "A",
+   "turns": [
+    {
+     "rc": 0,
+     "slip": false,
+     "first": {},
+     "repairs": 0,
+     "caught": null,
+     "repaired": null
+    },
+    {
+     "rc": 0,
+     "slip": false,
+     "first": {},
+     "repairs": 0,
+     "caught": null,
+     "repaired": null
+    },
+    {
+     "rc": 0,
+     "slip": false,
+     "first": {},
+     "repairs": 0,
+     "caught": null,
+     "repaired": null
+    },
+    {
+     "rc": 0,
+     "slip": false,
+     "first": {},
+     "repairs": 0,
+     "caught": null,
+     "repaired": null
+    }
+   ],
+   "slipped": false,
+   "final": {},
+   "tests_ok": true,
+   "seconds": 114.0
+  },
+  {
+   "run_id": "unstated-gpt-5.6-luna-S1-customer-insights-A-1",
+   "variant": "unstated",
+   "model": "gpt-5.6-luna",
+   "arm": "A",
+   "turns": [
+    {
+     "rc": 0,
+     "slip": false,
+     "first": {},
+     "repairs": 0,
+     "caught": null,
+     "repaired": null
+    },
+    {
+     "rc": 0,
+     "slip": false,
+     "first": {},
+     "repairs": 0,
+     "caught": null,
+     "repaired": null
+    },
+    {
+     "rc": 0,
+     "slip": true,
+     "first": {
+      "customer_insights.py": [
+       "orders.infrastructure.customers"
+      ]
+     },
+     "repairs": 0,
+     "caught": null,
+     "repaired": null
+    },
+    {
+     "rc": 0,
+     "slip": false,
+     "first": {
+      "customer_insights.py": [
+       "orders.infrastructure.customers"
+      ]
+     },
+     "repairs": 0,
+     "caught": null,
+     "repaired": null
+    }
+   ],
+   "slipped": true,
+   "final": {
+    "customer_insights.py": [
+     "orders.infrastructure.customers"
+    ]
+   },
+   "tests_ok": true,
+   "seconds": 175.6
+  },
+  {
+   "run_id": "unstated-gpt-5.6-luna-S1-customer-insights-A-2",
+   "variant": "unstated",
+   "model": "gpt-5.6-luna",
+   "arm": "A",
+   "turns": [
+    {
+     "rc": 0,
+     "slip": false,
+     "first": {},
+     "repairs": 0,
+     "caught": null,
+     "repaired": null
+    },
+    {
+     "rc": 0,
+     "slip": false,
+     "first": {},
+     "repairs": 0,
+     "caught": null,
+     "repaired": null
+    },
+    {
+     "rc": 0,
+     "slip": true,
+     "first": {
+      "customer_insights.py": [
+       "orders.infrastructure.customers"
+      ]
+     },
+     "repairs": 0,
+     "caught": null,
+     "repaired": null
+    },
+    {
+     "rc": 0,
+     "slip": false,
+     "first": {
+      "customer_insights.py": [
+       "orders.infrastructure.customers"
+      ]
+     },
+     "repairs": 0,
+     "caught": null,
+     "repaired": null
+    }
+   ],
+   "slipped": true,
+   "final": {
+    "customer_insights.py": [
+     "orders.infrastructure.customers"
+    ]
+   },
+   "tests_ok": true,
+   "seconds": 163.7
+  },
+  {
+   "run_id": "unstated-gpt-6.2-sol-S1-customer-insights-A-1",
+   "variant": "unstated",
+   "model": "gpt-6.2-sol",
+   "arm": "A",
+   "turns": [
+    {
+     "rc": 0,
+     "slip": false,
+     "first": {},
+     "repairs": 0,
+     "caught": null,
+     "repaired": null
+    },
+    {
+     "rc": 0,
+     "slip": false,
+     "first": {},
+     "repairs": 0,
+     "caught": null,
+     "repaired": null
+    },
+    {
+     "rc": 0,
+     "slip": false,
+     "first": {},
+     "repairs": 0,
+     "caught": null,
+     "repaired": null
+    },
+    {
+     "rc": 0,
+     "slip": false,
+     "first": {},
+     "repairs": 0,
+     "caught": null,
+     "repaired": null
+    }
+   ],
+   "slipped": false,
+   "final": {},
+   "tests_ok": true,
+   "seconds": 109.3
+  },
+  {
+   "run_id": "unstated-gpt-6.2-sol-S1-customer-insights-A-2",
+   "variant": "unstated",
+   "model": "gpt-6.2-sol",
+   "arm": "A",
+   "turns": [
+    {
+     "rc": 0,
+     "slip": false,
+     "first": {},
+     "repairs": 0,
+     "caught": null,
+     "repaired": null
+    },
+    {
+     "rc": 0,
+     "slip": false,
+     "first": {},
+     "repairs": 0,
+     "caught": null,
+     "repaired": null
+    },
+    {
+     "rc": 0,
+     "slip": false,
+     "first": {},
+     "repairs": 0,
+     "caught": null,
+     "repaired": null
+    },
+    {
+     "rc": 0,
+     "slip": false,
+     "first": {},
+     "repairs": 0,
+     "caught": null,
+     "repaired": null
+    }
+   ],
+   "slipped": false,
+   "final": {},
+   "tests_ok": true,
+   "seconds": 115.0
+  },
+  {
+   "run_id": "conflict-gpt-5.6-luna-S1-customer-insights-B-1",
+   "variant": "conflict",
+   "model": "gpt-5.6-luna",
+   "arm": "B",
+   "turns": [
+    {
+     "rc": 0,
+     "slip": false,
+     "first": {},
+     "repairs": 0,
+     "caught": false,
+     "repaired": true
+    },
+    {
+     "rc": 0,
+     "slip": false,
+     "first": {},
+     "repairs": 0,
+     "caught": false,
+     "repaired": true
+    },
+    {
+     "rc": 0,
+     "slip": false,
+     "first": {},
+     "repairs": 0,
+     "caught": false,
+     "repaired": true
+    },
+    {
+     "rc": 0,
+     "slip": false,
+     "first": {},
+     "repairs": 0,
+     "caught": false,
+     "repaired": true
+    }
+   ],
+   "slipped": false,
+   "final": {},
+   "tests_ok": true,
+   "seconds": 195.3
+  },
+  {
+   "run_id": "conflict-gpt-5.6-luna-S1-customer-insights-B-2",
+   "variant": "conflict",
+   "model": "gpt-5.6-luna",
+   "arm": "B",
+   "turns": [
+    {
+     "rc": 0,
+     "slip": false,
+     "first": {},
+     "repairs": 0,
+     "caught": false,
+     "repaired": true
+    },
+    {
+     "rc": 0,
+     "slip": false,
+     "first": {},
+     "repairs": 0,
+     "caught": false,
+     "repaired": true
+    },
+    {
+     "rc": 0,
+     "slip": false,
+     "first": {},
+     "repairs": 0,
+     "caught": false,
+     "repaired": true
+    },
+    {
+     "rc": 0,
+     "slip": false,
+     "first": {},
+     "repairs": 0,
+     "caught": false,
+     "repaired": true
+    }
+   ],
+   "slipped": false,
+   "final": {},
+   "tests_ok": true,
+   "seconds": 195.2
+  },
+  {
+   "run_id": "conflict-gpt-6.2-sol-S1-customer-insights-B-1",
+   "variant": "conflict",
+   "model": "gpt-6.2-sol",
+   "arm": "B",
+   "turns": [
+    {
+     "rc": 0,
+     "slip": false,
+     "first": {},
+     "repairs": 0,
+     "caught": false,
+     "repaired": true
+    },
+    {
+     "rc": 0,
+     "slip": false,
+     "first": {},
+     "repairs": 0,
+     "caught": false,
+     "repaired": true
+    },
+    {
+     "rc": 0,
+     "slip": false,
+     "first": {},
+     "repairs": 0,
+     "caught": false,
+     "repaired": true
+    },
+    {
+     "rc": 0,
+     "slip": false,
+     "first": {},
+     "repairs": 0,
+     "caught": false,
+     "repaired": true
+    }
+   ],
+   "slipped": false,
+   "final": {},
+   "tests_ok": true,
+   "seconds": 111.4
+  },
+  {
+   "run_id": "conflict-gpt-6.2-sol-S1-customer-insights-B-2",
+   "variant": "conflict",
+   "model": "gpt-6.2-sol",
+   "arm": "B",
+   "turns": [
+    {
+     "rc": 0,
+     "slip": false,
+     "first": {},
+     "repairs": 0,
+     "caught": false,
+     "repaired": true
+    },
+    {
+     "rc": 0,
+     "slip": false,
+     "first": {},
+     "repairs": 0,
+     "caught": false,
+     "repaired": true
+    },
+    {
+     "rc": 0,
+     "slip": false,
+     "first": {},
+     "repairs": 0,
+     "caught": false,
+     "repaired": true
+    },
+    {
+     "rc": 0,
+     "slip": false,
+     "first": {},
+     "repairs": 0,
+     "caught": false,
+     "repaired": true
+    }
+   ],
+   "slipped": false,
+   "final": {},
+   "tests_ok": true,
+   "seconds": 115.5
+  },
+  {
+   "run_id": "one-line-gpt-5.6-luna-S1-customer-insights-B-1",
+   "variant": "one-line",
+   "model": "gpt-5.6-luna",
+   "arm": "B",
+   "turns": [
+    {
+     "rc": 0,
+     "slip": false,
+     "first": {},
+     "repairs": 0,
+     "caught": false,
+     "repaired": true
+    },
+    {
+     "rc": 0,
+     "slip": false,
+     "first": {},
+     "repairs": 0,
+     "caught": false,
+     "repaired": true
+    },
+    {
+     "rc": 0,
+     "slip": false,
+     "first": {},
+     "repairs": 0,
+     "caught": false,
+     "repaired": true
+    },
+    {
+     "rc": 0,
+     "slip": false,
+     "first": {},
+     "repairs": 0,
+     "caught": false,
+     "repaired": true
+    }
+   ],
+   "slipped": false,
+   "final": {},
+   "tests_ok": true,
+   "seconds": 179.1
+  },
+  {
+   "run_id": "one-line-gpt-5.6-luna-S1-customer-insights-B-2",
+   "variant": "one-line",
+   "model": "gpt-5.6-luna",
+   "arm": "B",
+   "turns": [
+    {
+     "rc": 0,
+     "slip": false,
+     "first": {},
+     "repairs": 0,
+     "caught": false,
+     "repaired": true
+    },
+    {
+     "rc": 0,
+     "slip": false,
+     "first": {},
+     "repairs": 0,
+     "caught": false,
+     "repaired": true
+    },
+    {
+     "rc": 0,
+     "slip": false,
+     "first": {},
+     "repairs": 0,
+     "caught": false,
+     "repaired": true
+    },
+    {
+     "rc": 0,
+     "slip": false,
+     "first": {},
+     "repairs": 0,
+     "caught": false,
+     "repaired": true
+    }
+   ],
+   "slipped": false,
+   "final": {},
+   "tests_ok": true,
+   "seconds": 182.6
+  },
+  {
+   "run_id": "one-line-gpt-6.2-sol-S1-customer-insights-B-1",
+   "variant": "one-line",
+   "model": "gpt-6.2-sol",
+   "arm": "B",
+   "turns": [
+    {
+     "rc": 0,
+     "slip": false,
+     "first": {},
+     "repairs": 0,
+     "caught": false,
+     "repaired": true
+    },
+    {
+     "rc": 0,
+     "slip": false,
+     "first": {},
+     "repairs": 0,
+     "caught": false,
+     "repaired": true
+    },
+    {
+     "rc": 0,
+     "slip": false,
+     "first": {},
+     "repairs": 0,
+     "caught": false,
+     "repaired": true
+    },
+    {
+     "rc": 0,
+     "slip": false,
+     "first": {},
+     "repairs": 0,
+     "caught": false,
+     "repaired": true
+    }
+   ],
+   "slipped": false,
+   "final": {},
+   "tests_ok": true,
+   "seconds": 121.5
+  },
+  {
+   "run_id": "one-line-gpt-6.2-sol-S1-customer-insights-B-2",
+   "variant": "one-line",
+   "model": "gpt-6.2-sol",
+   "arm": "B",
+   "turns": [
+    {
+     "rc": 0,
+     "slip": false,
+     "first": {},
+     "repairs": 0,
+     "caught": false,
+     "repaired": true
+    },
+    {
+     "rc": 0,
+     "slip": false,
+     "first": {},
+     "repairs": 0,
+     "caught": false,
+     "repaired": true
+    },
+    {
+     "rc": 0,
+     "slip": false,
+     "first": {},
+     "repairs": 0,
+     "caught": false,
+     "repaired": true
+    },
+    {
+     "rc": 0,
+     "slip": false,
+     "first": {},
+     "repairs": 0,
+     "caught": false,
+     "repaired": true
+    }
+   ],
+   "slipped": false,
+   "final": {},
+   "tests_ok": true,
+   "seconds": 106.1
+  },
+  {
+   "run_id": "shortcut-gpt-5.6-luna-S1-customer-insights-B-1",
+   "variant": "shortcut",
+   "model": "gpt-5.6-luna",
+   "arm": "B",
+   "turns": [
+    {
+     "rc": 0,
+     "slip": true,
+     "first": {
+      "customer_insights.py": [
+       "orders.infrastructure.customers",
+       "orders.infrastructure.repository"
+      ]
+     },
+     "repairs": 1,
+     "caught": true,
+     "repaired": true
+    },
+    {
+     "rc": 0,
+     "slip": false,
+     "first": {},
+     "repairs": 0,
+     "caught": false,
+     "repaired": true
+    },
+    {
+     "rc": 0,
+     "slip": false,
+     "first": {},
+     "repairs": 0,
+     "caught": false,
+     "repaired": true
+    },
+    {
+     "rc": 0,
+     "slip": false,
+     "first": {},
+     "repairs": 0,
+     "caught": false,
+     "repaired": true
+    }
+   ],
+   "slipped": true,
+   "final": {},
+   "tests_ok": true,
+   "seconds": 214.2
+  },
+  {
+   "run_id": "shortcut-gpt-5.6-luna-S1-customer-insights-B-2",
+   "variant": "shortcut",
+   "model": "gpt-5.6-luna",
+   "arm": "B",
+   "turns": [
+    {
+     "rc": 0,
+     "slip": true,
+     "first": {
+      "customer_insights.py": [
+       "orders.infrastructure.customers",
+       "orders.infrastructure.repository"
+      ]
+     },
+     "repairs": 1,
+     "caught": true,
+     "repaired": true
+    },
+    {
+     "rc": 0,
+     "slip": false,
+     "first": {},
+     "repairs": 0,
+     "caught": false,
+     "repaired": true
+    },
+    {
+     "rc": 0,
+     "slip": false,
+     "first": {},
+     "repairs": 0,
+     "caught": false,
+     "repaired": true
+    },
+    {
+     "rc": 0,
+     "slip": false,
+     "first": {},
+     "repairs": 0,
+     "caught": false,
+     "repaired": true
+    }
+   ],
+   "slipped": true,
+   "final": {},
+   "tests_ok": true,
+   "seconds": 193.0
+  },
+  {
+   "run_id": "shortcut-gpt-6.2-sol-S1-customer-insights-B-1",
+   "variant": "shortcut",
+   "model": "gpt-6.2-sol",
+   "arm": "B",
+   "turns": [
+    {
+     "rc": 0,
+     "slip": false,
+     "first": {},
+     "repairs": 0,
+     "caught": false,
+     "repaired": true
+    },
+    {
+     "rc": 0,
+     "slip": false,
+     "first": {},
+     "repairs": 0,
+     "caught": false,
+     "repaired": true
+    },
+    {
+     "rc": 0,
+     "slip": false,
+     "first": {},
+     "repairs": 0,
+     "caught": false,
+     "repaired": true
+    },
+    {
+     "rc": 0,
+     "slip": false,
+     "first": {},
+     "repairs": 0,
+     "caught": false,
+     "repaired": true
+    }
+   ],
+   "slipped": false,
+   "final": {},
+   "tests_ok": true,
+   "seconds": 104.9
+  },
+  {
+   "run_id": "shortcut-gpt-6.2-sol-S1-customer-insights-B-2",
+   "variant": "shortcut",
+   "model": "gpt-6.2-sol",
+   "arm": "B",
+   "turns": [
+    {
+     "rc": 0,
+     "slip": false,
+     "first": {},
+     "repairs": 0,
+     "caught": false,
+     "repaired": true
+    },
+    {
+     "rc": 0,
+     "slip": false,
+     "first": {},
+     "repairs": 0,
+     "caught": false,
+     "repaired": true
+    },
+    {
+     "rc": 0,
+     "slip": false,
+     "first": {},
+     "repairs": 0,
+     "caught": false,
+     "repaired": true
+    },
+    {
+     "rc": 0,
+     "slip": false,
+     "first": {},
+     "repairs": 0,
+     "caught": false,
+     "repaired": true
+    }
+   ],
+   "slipped": false,
+   "final": {},
+   "tests_ok": true,
+   "seconds": 115.5
+  },
+  {
+   "run_id": "stated-gpt-5.6-luna-S1-customer-insights-B-1",
+   "variant": "stated",
+   "model": "gpt-5.6-luna",
+   "arm": "B",
+   "turns": [
+    {
+     "rc": 0,
+     "slip": false,
+     "first": {},
+     "repairs": 0,
+     "caught": false,
+     "repaired": true
+    },
+    {
+     "rc": 0,
+     "slip": false,
+     "first": {},
+     "repairs": 0,
+     "caught": false,
+     "repaired": true
+    },
+    {
+     "rc": 0,
+     "slip": false,
+     "first": {},
+     "repairs": 0,
+     "caught": false,
+     "repaired": true
+    },
+    {
+     "rc": 0,
+     "slip": false,
+     "first": {},
+     "repairs": 0,
+     "caught": false,
+     "repaired": true
+    }
+   ],
+   "slipped": false,
+   "final": {},
+   "tests_ok": true,
+   "seconds": 153.4
+  },
+  {
+   "run_id": "stated-gpt-5.6-luna-S1-customer-insights-B-2",
+   "variant": "stated",
+   "model": "gpt-5.6-luna",
+   "arm": "B",
+   "turns": [
+    {
+     "rc": 0,
+     "slip": false,
+     "first": {},
+     "repairs": 0,
+     "caught": false,
+     "repaired": true
+    },
+    {
+     "rc": 0,
+     "slip": false,
+     "first": {},
+     "repairs": 0,
+     "caught": false,
+     "repaired": true
+    },
+    {
+     "rc": 0,
+     "slip": false,
+     "first": {},
+     "repairs": 0,
+     "caught": false,
+     "repaired": true
+    },
+    {
+     "rc": 0,
+     "slip": false,
+     "first": {},
+     "repairs": 0,
+     "caught": false,
+     "repaired": true
+    }
+   ],
+   "slipped": false,
+   "final": {},
+   "tests_ok": true,
+   "seconds": 180.1
+  },
+  {
+   "run_id": "stated-gpt-6.2-sol-S1-customer-insights-B-1",
+   "variant": "stated",
+   "model": "gpt-6.2-sol",
+   "arm": "B",
+   "turns": [
+    {
+     "rc": 0,
+     "slip": false,
+     "first": {},
+     "repairs": 0,
+     "caught": false,
+     "repaired": true
+    },
+    {
+     "rc": 0,
+     "slip": false,
+     "first": {},
+     "repairs": 0,
+     "caught": false,
+     "repaired": true
+    },
+    {
+     "rc": 0,
+     "slip": false,
+     "first": {},
+     "repairs": 0,
+     "caught": false,
+     "repaired": true
+    },
+    {
+     "rc": 0,
+     "slip": false,
+     "first": {},
+     "repairs": 0,
+     "caught": false,
+     "repaired": true
+    }
+   ],
+   "slipped": false,
+   "final": {},
+   "tests_ok": true,
+   "seconds": 116.1
+  },
+  {
+   "run_id": "stated-gpt-6.2-sol-S1-customer-insights-B-2",
+   "variant": "stated",
+   "model": "gpt-6.2-sol",
+   "arm": "B",
+   "turns": [
+    {
+     "rc": 0,
+     "slip": false,
+     "first": {},
+     "repairs": 0,
+     "caught": false,
+     "repaired": true
+    },
+    {
+     "rc": 0,
+     "slip": false,
+     "first": {},
+     "repairs": 0,
+     "caught": false,
+     "repaired": true
+    },
+    {
+     "rc": 0,
+     "slip": false,
+     "first": {},
+     "repairs": 0,
+     "caught": false,
+     "repaired": true
+    },
+    {
+     "rc": 0,
+     "slip": false,
+     "first": {},
+     "repairs": 0,
+     "caught": false,
+     "repaired": true
+    }
+   ],
+   "slipped": false,
+   "final": {},
+   "tests_ok": true,
+   "seconds": 116.2
+  },
+  {
+   "run_id": "unstated-gpt-5.6-luna-S1-customer-insights-B-1",
+   "variant": "unstated",
+   "model": "gpt-5.6-luna",
+   "arm": "B",
+   "turns": [
+    {
+     "rc": 0,
+     "slip": false,
+     "first": {},
+     "repairs": 0,
+     "caught": false,
+     "repaired": true
+    },
+    {
+     "rc": 0,
+     "slip": false,
+     "first": {},
+     "repairs": 0,
+     "caught": false,
+     "repaired": true
+    },
+    {
+     "rc": 0,
+     "slip": false,
+     "first": {},
+     "repairs": 0,
+     "caught": false,
+     "repaired": true
+    },
+    {
+     "rc": 0,
+     "slip": false,
+     "first": {},
+     "repairs": 0,
+     "caught": false,
+     "repaired": true
+    }
+   ],
+   "slipped": false,
+   "final": {},
+   "tests_ok": true,
+   "seconds": 158.7
+  },
+  {
+   "run_id": "unstated-gpt-5.6-luna-S1-customer-insights-B-2",
+   "variant": "unstated",
+   "model": "gpt-5.6-luna",
+   "arm": "B",
+   "turns": [
+    {
+     "rc": 0,
+     "slip": false,
+     "first": {},
+     "repairs": 0,
+     "caught": false,
+     "repaired": true
+    },
+    {
+     "rc": 0,
+     "slip": false,
+     "first": {},
+     "repairs": 0,
+     "caught": false,
+     "repaired": true
+    },
+    {
+     "rc": 0,
+     "slip": true,
+     "first": {
+      "customer_insights.py": [
+       "orders.infrastructure.customers"
+      ]
+     },
+     "repairs": 1,
+     "caught": true,
+     "repaired": true
+    },
+    {
+     "rc": 0,
+     "slip": false,
+     "first": {},
+     "repairs": 0,
+     "caught": false,
+     "repaired": true
+    }
+   ],
+   "slipped": true,
+   "final": {},
+   "tests_ok": true,
+   "seconds": 175.7
+  },
+  {
+   "run_id": "unstated-gpt-6.2-sol-S1-customer-insights-B-1",
+   "variant": "unstated",
+   "model": "gpt-6.2-sol",
+   "arm": "B",
+   "turns": [
+    {
+     "rc": 0,
+     "slip": false,
+     "first": {},
+     "repairs": 0,
+     "caught": false,
+     "repaired": true
+    },
+    {
+     "rc": 0,
+     "slip": false,
+     "first": {},
+     "repairs": 0,
+     "caught": false,
+     "repaired": true
+    },
+    {
+     "rc": 0,
+     "slip": false,
+     "first": {},
+     "repairs": 0,
+     "caught": false,
+     "repaired": true
+    },
+    {
+     "rc": 0,
+     "slip": false,
+     "first": {},
+     "repairs": 0,
+     "caught": false,
+     "repaired": true
+    }
+   ],
+   "slipped": false,
+   "final": {},
+   "tests_ok": true,
+   "seconds": 113.3
+  },
+  {
+   "run_id": "unstated-gpt-6.2-sol-S1-customer-insights-B-2",
+   "variant": "unstated",
+   "model": "gpt-6.2-sol",
+   "arm": "B",
+   "turns": [
+    {
+     "rc": 0,
+     "slip": false,
+     "first": {},
+     "repairs": 0,
+     "caught": false,
+     "repaired": true
+    },
+    {
+     "rc": 0,
+     "slip": false,
+     "first": {},
+     "repairs": 0,
+     "caught": false,
+     "repaired": true
+    },
+    {
+     "rc": 0,
+     "slip": false,
+     "first": {},
+     "repairs": 0,
+     "caught": false,
+     "repaired": true
+    },
+    {
+     "rc": 0,
+     "slip": false,
+     "first": {},
+     "repairs": 0,
+     "caught": false,
+     "repaired": true
+    }
+   ],
+   "slipped": false,
+   "final": {},
+   "tests_ok": true,
+   "seconds": 113.0
+  }
+ ]
+}

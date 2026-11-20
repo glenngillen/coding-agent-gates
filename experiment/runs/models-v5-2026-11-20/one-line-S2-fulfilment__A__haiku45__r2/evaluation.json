@@ -1,0 +1,140 @@
+{
+  "schema": "coding-agent-gates/evaluation-v2/v1",
+  "scenario_id": "S2-fulfilment",
+  "snapshot_tree_sha256": "5e66d636633959046e6243d7b818c8d06f0084849a4801d7d85b24fb5b10ba8e",
+  "frozen_manifest_sha256": "b9fe0be84c81d4b182d991faf898c0fe4bba3a186b551b9a204489019aeb96e3",
+  "submission": "final snapshot evaluated as a synthetic final submission; no merge was attempted or blocked",
+  "behavior": {
+    "steps": {
+      "s2-step1-packing-slip": {
+        "status": "pass",
+        "tests": 3,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "exit_code": 0,
+        "detail": "...                                                                      [100%]\n3 passed in 0.19s\n"
+      },
+      "s2-step2-low-stock": {
+        "status": "pass",
+        "tests": 8,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "exit_code": 0,
+        "detail": "........                                                                 [100%]\n8 passed in 0.09s\n"
+      },
+      "s2-step3-restock": {
+        "status": "pass",
+        "tests": 10,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "exit_code": 0,
+        "detail": "..........                                                               [100%]\n10 passed in 0.07s\n"
+      },
+      "s2-step4-summary": {
+        "status": "pass",
+        "tests": 3,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "exit_code": 0,
+        "detail": "...                                                                      [100%]\n3 passed in 0.07s\n"
+      }
+    },
+    "regression": {
+      "status": "pass",
+      "tests": 17,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "exit_code": 0,
+      "detail": ".................                                                        [100%]\n17 passed in 0.09s\n"
+    },
+    "steps_accepted": [
+      "s2-step1-packing-slip",
+      "s2-step2-low-stock",
+      "s2-step3-restock",
+      "s2-step4-summary"
+    ],
+    "all_steps_accepted": true
+  },
+  "structural": {
+    "schema": "coding-agent-gates/sensor-result/v1",
+    "status": "violation",
+    "rules": {
+      "Controllers must not import infrastructure repositories directly": "BROKEN"
+    },
+    "violations": [
+      {
+        "rule": "Controllers must not import infrastructure repositories directly",
+        "importer": "orders.controllers.fulfilment",
+        "imported": "orders.infrastructure.catalog",
+        "lines": [
+          10
+        ],
+        "kind": "broken"
+      },
+      {
+        "rule": "Controllers must not import infrastructure repositories directly",
+        "importer": "orders.controllers.fulfilment",
+        "imported": "orders.infrastructure.customers",
+        "lines": [
+          11
+        ],
+        "kind": "broken"
+      },
+      {
+        "rule": "Controllers must not import infrastructure repositories directly",
+        "importer": "orders.controllers.fulfilment",
+        "imported": "orders.infrastructure.repository",
+        "lines": [
+          12
+        ],
+        "kind": "broken"
+      },
+      {
+        "rule": "Controllers must not import infrastructure repositories directly",
+        "importer": "orders.controllers.fulfilment",
+        "imported": "orders.infrastructure.stock",
+        "lines": [
+          13
+        ],
+        "kind": "broken"
+      }
+    ],
+    "error": null,
+    "fingerprint": "1a2d1eaf4fecd5afc9a58cccc9a60b4456029c3cae67d145599ad006ef4303f2",
+    "tool_version": "2.17",
+    "exit_code": 1,
+    "raw_output": "\n---------\nContracts\n---------\n\nAnalyzed 24 files, 53 dependencies.\n-----------------------------------\n\nControllers must not import infrastructure repositories directly BROKEN (1 ignored import)\n\nContracts: 0 kept, 1 broken.\n\n\n----------------\nBroken contracts\n----------------\n\nControllers must not import infrastructure repositories directly\n----------------------------------------------------------------\n\norders.controllers is not allowed to import orders.infrastructure:\n\n-   orders.controllers.fulfilment -> orders.infrastructure.catalog (l.10)\n\n-   orders.controllers.fulfilment -> orders.infrastructure.customers (l.11)\n\n-   orders.controllers.fulfilment -> orders.infrastructure.repository (l.12)\n\n-   orders.controllers.fulfilment -> orders.infrastructure.stock (l.13)\n\n\n",
+    "raw_status": "violation"
+  },
+  "semantic_judge": {
+    "status": "not_evaluated",
+    "reason": "structural check is violation; repair it before semantic review",
+    "findings": [],
+    "provider_failed": false,
+    "raw_response": null
+  },
+  "semantic_judge_calls": [],
+  "semantic_label": null,
+  "semantic_label_note": "unavailable: no independent human labels for final runs (Decisions, 2026-11-19); semantic_judge is a judge output, not ground truth",
+  "tampering": {
+    "detected": false,
+    "workspace_protected": {
+      "changed": [],
+      "added": [],
+      "removed": []
+    },
+    "gate_files": {
+      "changed": [],
+      "added": [],
+      "removed": []
+    },
+    "workspace_settings_added": [],
+    "baseline_tests_modified": [],
+    "legacy_reports_modified": false
+  }
+}

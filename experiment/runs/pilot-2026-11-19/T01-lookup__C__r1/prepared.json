@@ -1,0 +1,165 @@
+{
+  "schema": "coding-agent-gates/prepared-run/v1",
+  "prepared_at": "2026-11-19T10:23:17+00:00",
+  "pilot": "pilot-2026-11-19",
+  "run_id": "T01-lookup__C__r1",
+  "task_id": "T01-lookup",
+  "arm": "C",
+  "repeat": 1,
+  "plan": {
+    "sequence": 1,
+    "task_id": "T01-lookup",
+    "arm": "C",
+    "repeat": 1,
+    "position_in_task": 1,
+    "run_id": "T01-lookup__C__r1"
+  },
+  "paths": {
+    "base": "<run>",
+    "workspace": "<run>/workspace",
+    "settings": "<run>/settings.json",
+    "hook_events": "<run>/hook-events.jsonl",
+    "hook_state": "<run>/hook-state",
+    "retained": "<example>/experiment/runs/pilot-2026-11-19/T01-lookup__C__r1"
+  },
+  "baseline_commit": "49ee7ca325dcaf6c868b737f958a14b6fb689591",
+  "workspace": {
+    "CLAUDE.md": "9f104cf1da00aef85f6abfc24a23f13fe56deae6d968b88357fedcd0515d9099",
+    "pyproject.toml": "c44e299e82fbe832c02dfbd485bd2f4ea8e770bdd57e3e86d5504b3df550c53d",
+    "tests/test_order_behaviour.py": "d6b0e67bd598cfe18fe451d4fccd81ee36fd4d5460f67beb11ca2b2d72898bf5",
+    "tests/test_order_service.py": "98fa9f7ab2d0f5f3b3de34b2277e510494ef9b8d8eba141a2a4abb7a624d3ffc"
+  },
+  "workspace_tree_sha256": "6852b0bf235559ca6f794fdee59077c8bf7f542c0ae9f2d9459775a254e4f9d8",
+  "gates": {
+    ".importlinter": "f0e76b19753b984553aa6bc42b2d58c592ad5f05c52c3b0534f540980ff32944",
+    "semantic/rubric.md": "b3d42491e96ab2e1304f0d0ec7ef646f11b46279d54286c45a21619c605ec89d",
+    "experiment/tools/experiment_stop_hook.py": "b2a938fb929b8def512b163f25dd9eab641e99ee9d3d92ac277abfab3e80d50b",
+    "experiment/tools/spend_ledger.py": "cb0bd795fb90c77dbe24c7638fee02f51025ce84d9bc5921f7c4d7e2eda5b517",
+    "src/gates/__init__.py": "ae2505c62e68d7421aec285dad7ced2cff2c75394b7051600f97d9a557c313d0",
+    "src/gates/anthropic_judge.py": "a4448cd4fd03a3098a33448738a226b8da5eda8a7f16c9a44186d332b8de24de",
+    "src/gates/cache.py": "e650e407a82c03bafd77b46da458c7878b29d3d5a7bc446b3f525c01823fed7b",
+    "src/gates/claude_cli_judge.py": "3433135081d894bbb52839c43300043ff8783edea1a91788bef6f338c43d5457",
+    "src/gates/cli.py": "7f4435866ade69e865c0373430d2892893cc5142ddaf17d716eb050db377184a",
+    "src/gates/linter_output.py": "e1748093e29a1f52d62c32e76d0c666bdcce130a54523cd4dae7af621f9e810a",
+    "src/gates/result.py": "e8416e90617ef2d0337057c585355d829f8ad0e8fd1a14493b2127cda783c718",
+    "src/gates/rules.py": "71cd542f3db1af2431e77b7795ae1b9e1d115a97159f4ddfead46a0ade286233",
+    "src/gates/semantic.py": "1e12b8766d4f1be7bf71ceaf01740bba167710979fc3aa806a270771ee017182",
+    "src/gates/sensor.py": "0954b4771862541275b82d8f612746f92d33ad539db96e056df6ebaffeb8c4e8",
+    "src/gates/stop_hook.py": "0112da450f01fc17487ba23cb9a6a434a40f58e04c3d2afc57ef2a51243b58d7"
+  },
+  "settings": {
+    "autoMemoryEnabled": false,
+    "hooks": {
+      "Stop": [
+        {
+          "hooks": [
+            {
+              "type": "command",
+              "command": "<example>/.venv/bin/python",
+              "args": [
+                "<example>/experiment/tools/experiment_stop_hook.py",
+                "--workspace",
+                "<run>/workspace",
+                "--state-dir",
+                "<run>/hook-state",
+                "--events",
+                "<run>/hook-events.jsonl",
+                "--run-id",
+                "T01-lookup__C__r1",
+                "--max-repairs",
+                "3",
+                "--semantic",
+                "--ledger",
+                "<example>/experiment/runs/spend-ledger.json"
+              ],
+              "timeout": 330,
+              "onFailure": "continue"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "settings_sha256": "ace213272bac0aa7b6f7cfb3bc717b18751a2ee533efed0a71f59b1a307b0aaf",
+  "prompt": "Add `OrderController.handle_get_for_customer(customer_id, order_id)`.\n\n- If the order exists and belongs to `customer_id`, return status 200 with the same body `handle_get(order_id)` returns (order fields plus `subtotal_cents`, `discount_cents` and `total_cents`).\n- If the order does not exist, or belongs to a different customer, return status 404 with body `{\"error\": \"order not found\"}`. The two cases must be indistinguishable to the caller.\n\nWork in this repository until the request is complete, then reply with a short summary of what you changed.",
+  "prompt_sha256": "8435f32584aa7e0f5b644251ce1b428daca196e8eae8e811e7416ca93797259a",
+  "task_sha256": "5d77fc39c52adcc343080bc0d1e9c3356a6a8c34163cfe0e0b6f7dac186da03a",
+  "instruction_sha256": "9f104cf1da00aef85f6abfc24a23f13fe56deae6d968b88357fedcd0515d9099",
+  "arms_sha256": "d4d7f4c7eb43b6c2d27b12836e66df4aa78b2b1c3593db075e9f47862430716d",
+  "agent_argv": [
+    "claude",
+    "-p",
+    "--model",
+    "claude-sonnet-5-5",
+    "--effort",
+    "medium",
+    "--output-format",
+    "stream-json",
+    "--verbose",
+    "--no-session-persistence",
+    "--setting-sources",
+    "",
+    "--settings",
+    "<run>/settings.json",
+    "--append-system-prompt-file",
+    "<run>/workspace/CLAUDE.md",
+    "--tools",
+    "Bash,Read,Edit,Write,Glob,Grep",
+    "--allowedTools",
+    "Read",
+    "Edit",
+    "Write",
+    "Glob",
+    "Grep",
+    "Bash(.venv/bin/python -m pytest:*)",
+    "Bash(ls:*)",
+    "Bash(git status:*)",
+    "Bash(git diff:*)",
+    "--disallowedTools",
+    "mcp__infracost",
+    "--disable-slash-commands",
+    "--permission-mode",
+    "acceptEdits",
+    "--permission-prompts",
+    "none",
+    "--max-budget-usd",
+    "2.50"
+  ],
+  "agent_config": {
+    "cli": "claude",
+    "model": "claude-sonnet-5-5",
+    "effort": "medium",
+    "tools": [
+      "Bash",
+      "Read",
+      "Edit",
+      "Write",
+      "Glob",
+      "Grep"
+    ],
+    "allowed_tools": [
+      "Read",
+      "Edit",
+      "Write",
+      "Glob",
+      "Grep",
+      "Bash(.venv/bin/python -m pytest:*)",
+      "Bash(ls:*)",
+      "Bash(git status:*)",
+      "Bash(git diff:*)"
+    ],
+    "disallowed_tools": [
+      "mcp__infracost"
+    ],
+    "disable_slash_commands": true,
+    "permission_mode": "acceptEdits",
+    "permission_prompts": "none",
+    "setting_sources": "",
+    "auto_memory": false,
+    "session_persistence": false,
+    "output_format": "stream-json",
+    "max_budget_usd": "2.50",
+    "wall_timeout_s": 1500,
+    "seed": "unsupported by the Claude Code CLI; not set"
+  }
+}

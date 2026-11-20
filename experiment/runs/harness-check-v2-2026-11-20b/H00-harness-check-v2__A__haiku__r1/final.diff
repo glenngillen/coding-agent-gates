@@ -1,0 +1,7 @@
+diff --git a/src/orders/controllers/harness_check.py b/src/orders/controllers/harness_check.py
+new file mode 100644
+index 0000000..bdec293
+--- /dev/null
++++ b/src/orders/controllers/harness_check.py
+@@ -0,0 +1 @@
++from orders.infrastructure.repository import InMemoryOrderRepository  # harness check

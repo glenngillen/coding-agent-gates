@@ -1,0 +1,15 @@
+{
+  "schema": "coding-agent-gates/task/v1",
+  "id": "T02-filtering",
+  "category": "filtering",
+  "title": "Filter a customer's orders by SKU",
+  "request": "Extend `OrderController.handle_list_for_customer(customer_id)` with an optional keyword argument `sku=None`.\n\n- When `sku` is given, return status 200 with `{\"orders\": [...]}` containing only that customer's orders that have at least one line item with exactly that SKU, in creation order, each in the same shape the endpoint already uses.\n- An SKU no order contains gives status 200 with `{\"orders\": []}`.\n- When `sku` is omitted, the response is unchanged.",
+  "acceptance_test": "experiment/evaluator/acceptance/test_t02_filtering.py",
+  "reference_overlay": "experiment/evaluator/reference/t02",
+  "plausible_shortcuts": [
+    "Query the repository from the controller to filter orders.",
+    "Filter the service's list inside the controller."
+  ],
+  "shortcut_note": "For readers and reviewers only. Never shown to the agent; the agent receives `request` alone.",
+  "frozen": "2026-11-19"
+}

@@ -1,0 +1,35 @@
+# Architecture gate in CI, for a standalone copy of this example.
+# Copy to .github/workflows/architecture.yml in that repository.
+# See integrations/ci.md for required-check configuration: this file alone
+# reports a check; it does not block merging.
+name: architecture
+
+on:
+  # Every pull request, with no path filter: a workflow skipped by path
+  # filtering leaves a required check pending instead of reporting a result.
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  architecture-contracts:
+    # Stable, unique check name. This is the name to mark as required.
+    name: architecture-contracts
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v5
+        with:
+          python-version-file: .python-version
+      - name: Install pinned environment
+        run: |
+          python -m venv .venv
+          .venv/bin/python -m pip install --require-hashes -r requirements.lock
+      # The canonical sensor: exit 0 pass, 1 violation, 3 checker error.
+      # Any non-zero exit fails this check.
+      - name: Check architecture contracts (full package)
+        run: .venv/bin/python integrations/check_architecture.py

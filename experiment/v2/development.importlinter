@@ -1,0 +1,24 @@
+# Version 2 study contract. Kept outside every agent workspace.
+#
+# The legacy reports controller already imports the order repository. That
+# edge is a reviewed exception (experiment/v2/reviewed-exceptions.json): the
+# study's gate accepts exactly this ignore_imports entry and nothing else, so
+# any new controller -> infrastructure edge is still a violation.
+# unmatched_ignore_imports_alerting = none keeps the contract valid if an agent
+# removes the legacy import.
+
+[importlinter]
+root_packages =
+    orders
+
+[importlinter:contract:controllers-not-repositories]
+name = Controllers must not import infrastructure repositories directly
+type = forbidden
+source_modules =
+    orders.controllers
+forbidden_modules =
+    orders.infrastructure
+allow_indirect_imports = True
+ignore_imports =
+    orders.controllers.reports -> orders.infrastructure.repository
+unmatched_ignore_imports_alerting = none

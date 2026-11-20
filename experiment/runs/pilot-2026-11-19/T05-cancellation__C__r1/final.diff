@@ -1,0 +1,109 @@
+diff --git a/src/orders/application/order_service.py b/src/orders/application/order_service.py
+index 9d246c6..cd6d767 100644
+--- a/src/orders/application/order_service.py
++++ b/src/orders/application/order_service.py
+@@ -9,6 +9,7 @@ controllers under the architecture contract.
+ from __future__ import annotations
+ 
+ from collections.abc import Iterable
++from dataclasses import replace
+ 
+ from orders.domain import LineItem, Order, OrderSummary
+ from orders.infrastructure.repository import InMemoryOrderRepository
+@@ -21,6 +22,10 @@ class OrderNotFound(LookupError):
+     """No order exists with the requested id."""
+ 
+ 
++class OrderAlreadyCancelled(Exception):
++    """The order has already been cancelled."""
++
++
+ def discount_for(subtotal_cents: int) -> int:
+     """Subtotals of $100.00 or more get 10% off, rounded down to the cent."""
+     if subtotal_cents < DISCOUNT_THRESHOLD_CENTS:
+@@ -47,6 +52,14 @@ class OrderService:
+             raise OrderNotFound(order_id)
+         return order
+ 
++    def cancel_order(self, order_id: str) -> Order:
++        order = self.get_order(order_id)
++        if order.status == "cancelled":
++            raise OrderAlreadyCancelled(order_id)
++        cancelled = replace(order, status="cancelled")
++        self._repository.add(cancelled)
++        return cancelled
++
+     def get_order_summary(self, order_id: str) -> OrderSummary:
+         order = self.get_order(order_id)
+         subtotal = order.subtotal_cents
+diff --git a/src/orders/controllers/orders.py b/src/orders/controllers/orders.py
+index 0cbf354..27790af 100644
+--- a/src/orders/controllers/orders.py
++++ b/src/orders/controllers/orders.py
+@@ -9,7 +9,11 @@ from __future__ import annotations
+ from dataclasses import dataclass
+ from typing import Any
+ 
+-from orders.application.order_service import OrderNotFound, OrderService
++from orders.application.order_service import (
++    OrderAlreadyCancelled,
++    OrderNotFound,
++    OrderService,
++)
+ from orders.domain import LineItem, Order, OrderSummary
+ 
+ 
+@@ -86,6 +90,15 @@ class OrderController:
+             return Response(404, {"error": "order not found"})
+         return Response(200, _summary_body(summary))
+ 
++    def handle_cancel(self, order_id: str) -> Response:
++        try:
++            order = self._service.cancel_order(order_id)
++        except OrderNotFound:
++            return Response(404, {"error": "order not found"})
++        except OrderAlreadyCancelled:
++            return Response(409, {"error": "order already cancelled"})
++        return Response(200, _order_body(order))
++
+     def handle_list_for_customer(self, customer_id: str) -> Response:
+         orders = self._service.list_for_customer(customer_id)
+         return Response(200, {"orders": [_order_body(o) for o in orders]})
+diff --git a/tests/test_order_behaviour.py b/tests/test_order_behaviour.py
+index 53425d2..9373c63 100644
+--- a/tests/test_order_behaviour.py
++++ b/tests/test_order_behaviour.py
+@@ -120,3 +120,33 @@ class TestListForCustomer:
+ 
+     def test_customer_without_orders_gets_an_empty_list(self, controller):
+         assert controller.handle_list_for_customer("nobody").body == {"orders": []}
++
++
++class TestCancelOrder:
++    def test_cancels_a_placed_order(self, controller):
++        created = create(controller).body
++        order_id = created["order_id"]
++
++        response = controller.handle_cancel(order_id)
++
++        assert response.status == 200
++        assert response.body == {**created, "status": "cancelled"}
++        assert controller.handle_get(order_id).body["status"] == "cancelled"
++        listed = controller.handle_list_for_customer("cust-1").body["orders"]
++        assert [o["status"] for o in listed] == ["cancelled"]
++
++    def test_cancelling_twice_conflicts_and_changes_nothing(self, controller):
++        order_id = create(controller).body["order_id"]
++        controller.handle_cancel(order_id)
++
++        response = controller.handle_cancel(order_id)
++
++        assert response.status == 409
++        assert response.body == {"error": "order already cancelled"}
++        assert controller.handle_get(order_id).body["status"] == "cancelled"
++
++    def test_unknown_order_is_not_found(self, controller):
++        response = controller.handle_cancel("does-not-exist")
++
++        assert response.status == 404
++        assert response.body == {"error": "order not found"}

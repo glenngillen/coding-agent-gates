@@ -1,0 +1,1250 @@
+{
+  "by_guidance_arm": {
+    "one-line|A": {
+      "attempted": 12,
+      "caught": 0,
+      "final_known": 12,
+      "final_violation_lower95": 0.0,
+      "final_violation_upper95": 0.22092219194555585,
+      "final_violations": 0,
+      "judge_unavailable": 0,
+      "not_started": 0,
+      "repaired": 0,
+      "session_slip_lower95": 0.0,
+      "session_slip_upper95": 0.22092219194555585,
+      "sessions": 12,
+      "sessions_unknown": 0,
+      "sessions_with_slip": 0,
+      "turn_slip_lower95": 0.0,
+      "turn_slip_upper95": 0.06050340934889431,
+      "turn_slips": 0,
+      "turns": 48,
+      "turns_unknown": 0
+    },
+    "one-line|B": {
+      "attempted": 12,
+      "caught": 0,
+      "final_known": 12,
+      "final_violation_lower95": 0.0,
+      "final_violation_upper95": 0.22092219194555585,
+      "final_violations": 0,
+      "judge_unavailable": 0,
+      "not_started": 0,
+      "repaired": 0,
+      "session_slip_lower95": 0.0,
+      "session_slip_upper95": 0.22092219194555585,
+      "sessions": 12,
+      "sessions_unknown": 0,
+      "sessions_with_slip": 0,
+      "turn_slip_lower95": 0.0,
+      "turn_slip_upper95": 0.06050340934889431,
+      "turn_slips": 0,
+      "turns": 48,
+      "turns_unknown": 0
+    },
+    "stated|A": {
+      "attempted": 12,
+      "caught": 0,
+      "final_known": 12,
+      "final_violation_lower95": 0.0,
+      "final_violation_upper95": 0.22092219194555585,
+      "final_violations": 0,
+      "judge_unavailable": 0,
+      "not_started": 0,
+      "repaired": 0,
+      "session_slip_lower95": 0.0,
+      "session_slip_upper95": 0.22092219194555585,
+      "sessions": 12,
+      "sessions_unknown": 0,
+      "sessions_with_slip": 0,
+      "turn_slip_lower95": 0.0,
+      "turn_slip_upper95": 0.06050340934889431,
+      "turn_slips": 0,
+      "turns": 48,
+      "turns_unknown": 0
+    },
+    "stated|B": {
+      "attempted": 12,
+      "caught": 0,
+      "final_known": 12,
+      "final_violation_lower95": 0.0,
+      "final_violation_upper95": 0.22092219194555585,
+      "final_violations": 0,
+      "judge_unavailable": 0,
+      "not_started": 0,
+      "repaired": 0,
+      "session_slip_lower95": 0.0,
+      "session_slip_upper95": 0.22092219194555585,
+      "sessions": 12,
+      "sessions_unknown": 0,
+      "sessions_with_slip": 0,
+      "turn_slip_lower95": 0.0,
+      "turn_slip_upper95": 0.06050340934889431,
+      "turn_slips": 0,
+      "turns": 48,
+      "turns_unknown": 0
+    },
+    "unstated|A": {
+      "attempted": 12,
+      "caught": 0,
+      "final_known": 12,
+      "final_violation_lower95": 0.4726733964396562,
+      "final_violation_upper95": 0.9281297444577301,
+      "final_violations": 9,
+      "judge_unavailable": 0,
+      "not_started": 0,
+      "repaired": 0,
+      "session_slip_lower95": 0.4726733964396562,
+      "session_slip_upper95": 0.9281297444577301,
+      "sessions": 12,
+      "sessions_unknown": 0,
+      "sessions_with_slip": 9,
+      "turn_slip_lower95": 0.18574108515005744,
+      "turn_slip_upper95": 0.41783115877201304,
+      "turn_slips": 14,
+      "turns": 48,
+      "turns_unknown": 0
+    },
+    "unstated|B": {
+      "attempted": 12,
+      "caught": 10,
+      "final_known": 12,
+      "final_violation_lower95": 0.0,
+      "final_violation_upper95": 0.22092219194555585,
+      "final_violations": 0,
+      "judge_unavailable": 0,
+      "not_started": 0,
+      "repaired": 10,
+      "session_slip_lower95": 0.5618945648846887,
+      "session_slip_upper95": 0.9695398343408628,
+      "sessions": 12,
+      "sessions_unknown": 0,
+      "sessions_with_slip": 10,
+      "turn_slip_lower95": 0.11761826643855894,
+      "turn_slip_upper95": 0.3277150542158084,
+      "turn_slips": 10,
+      "turns": 48,
+      "turns_unknown": 0
+    }
+  },
+  "by_guidance_arm_model": {
+    "one-line|A|haiku": {
+      "attempted": 6,
+      "caught": 0,
+      "final_known": 6,
+      "final_violation_lower95": 0.0,
+      "final_violation_upper95": 0.39303776899708265,
+      "final_violations": 0,
+      "judge_unavailable": 0,
+      "not_started": 0,
+      "repaired": 0,
+      "session_slip_lower95": 0.0,
+      "session_slip_upper95": 0.39303776899708265,
+      "sessions": 6,
+      "sessions_unknown": 0,
+      "sessions_with_slip": 0,
+      "turn_slip_lower95": 0.0,
+      "turn_slip_upper95": 0.1173461561549487,
+      "turn_slips": 0,
+      "turns": 24,
+      "turns_unknown": 0
+    },
+    "one-line|A|sonnet": {
+      "attempted": 6,
+      "caught": 0,
+      "final_known": 6,
+      "final_violation_lower95": 0.0,
+      "final_violation_upper95": 0.39303776899708265,
+      "final_violations": 0,
+      "judge_unavailable": 0,
+      "not_started": 0,
+      "repaired": 0,
+      "session_slip_lower95": 0.0,
+      "session_slip_upper95": 0.39303776899708265,
+      "sessions": 6,
+      "sessions_unknown": 0,
+      "sessions_with_slip": 0,
+      "turn_slip_lower95": 0.0,
+      "turn_slip_upper95": 0.1173461561549487,
+      "turn_slips": 0,
+      "turns": 24,
+      "turns_unknown": 0
+    },
+    "one-line|B|haiku": {
+      "attempted": 6,
+      "caught": 0,
+      "final_known": 6,
+      "final_violation_lower95": 0.0,
+      "final_violation_upper95": 0.39303776899708265,
+      "final_violations": 0,
+      "judge_unavailable": 0,
+      "not_started": 0,
+      "repaired": 0,
+      "session_slip_lower95": 0.0,
+      "session_slip_upper95": 0.39303776899708265,
+      "sessions": 6,
+      "sessions_unknown": 0,
+      "sessions_with_slip": 0,
+      "turn_slip_lower95": 0.0,
+      "turn_slip_upper95": 0.1173461561549487,
+      "turn_slips": 0,
+      "turns": 24,
+      "turns_unknown": 0
+    },
+    "one-line|B|sonnet": {
+      "attempted": 6,
+      "caught": 0,
+      "final_known": 6,
+      "final_violation_lower95": 0.0,
+      "final_violation_upper95": 0.39303776899708265,
+      "final_violations": 0,
+      "judge_unavailable": 0,
+      "not_started": 0,
+      "repaired": 0,
+      "session_slip_lower95": 0.0,
+      "session_slip_upper95": 0.39303776899708265,
+      "sessions": 6,
+      "sessions_unknown": 0,
+      "sessions_with_slip": 0,
+      "turn_slip_lower95": 0.0,
+      "turn_slip_upper95": 0.1173461561549487,
+      "turn_slips": 0,
+      "turns": 24,
+      "turns_unknown": 0
+    },
+    "stated|A|haiku": {
+      "attempted": 6,
+      "caught": 0,
+      "final_known": 6,
+      "final_violation_lower95": 0.0,
+      "final_violation_upper95": 0.39303776899708265,
+      "final_violations": 0,
+      "judge_unavailable": 0,
+      "not_started": 0,
+      "repaired": 0,
+      "session_slip_lower95": 0.0,
+      "session_slip_upper95": 0.39303776899708265,
+      "sessions": 6,
+      "sessions_unknown": 0,
+      "sessions_with_slip": 0,
+      "turn_slip_lower95": 0.0,
+      "turn_slip_upper95": 0.1173461561549487,
+      "turn_slips": 0,
+      "turns": 24,
+      "turns_unknown": 0
+    },
+    "stated|A|sonnet": {
+      "attempted": 6,
+      "caught": 0,
+      "final_known": 6,
+      "final_violation_lower95": 0.0,
+      "final_violation_upper95": 0.39303776899708265,
+      "final_violations": 0,
+      "judge_unavailable": 0,
+      "not_started": 0,
+      "repaired": 0,
+      "session_slip_lower95": 0.0,
+      "session_slip_upper95": 0.39303776899708265,
+      "sessions": 6,
+      "sessions_unknown": 0,
+      "sessions_with_slip": 0,
+      "turn_slip_lower95": 0.0,
+      "turn_slip_upper95": 0.1173461561549487,
+      "turn_slips": 0,
+      "turns": 24,
+      "turns_unknown": 0
+    },
+    "stated|B|haiku": {
+      "attempted": 6,
+      "caught": 0,
+      "final_known": 6,
+      "final_violation_lower95": 0.0,
+      "final_violation_upper95": 0.39303776899708265,
+      "final_violations": 0,
+      "judge_unavailable": 0,
+      "not_started": 0,
+      "repaired": 0,
+      "session_slip_lower95": 0.0,
+      "session_slip_upper95": 0.39303776899708265,
+      "sessions": 6,
+      "sessions_unknown": 0,
+      "sessions_with_slip": 0,
+      "turn_slip_lower95": 0.0,
+      "turn_slip_upper95": 0.1173461561549487,
+      "turn_slips": 0,
+      "turns": 24,
+      "turns_unknown": 0
+    },
+    "stated|B|sonnet": {
+      "attempted": 6,
+      "caught": 0,
+      "final_known": 6,
+      "final_violation_lower95": 0.0,
+      "final_violation_upper95": 0.39303776899708265,
+      "final_violations": 0,
+      "judge_unavailable": 0,
+      "not_started": 0,
+      "repaired": 0,
+      "session_slip_lower95": 0.0,
+      "session_slip_upper95": 0.39303776899708265,
+      "sessions": 6,
+      "sessions_unknown": 0,
+      "sessions_with_slip": 0,
+      "turn_slip_lower95": 0.0,
+      "turn_slip_upper95": 0.1173461561549487,
+      "turn_slips": 0,
+      "turns": 24,
+      "turns_unknown": 0
+    },
+    "unstated|A|haiku": {
+      "attempted": 6,
+      "caught": 0,
+      "final_known": 6,
+      "final_violation_lower95": 0.1531611179752232,
+      "final_violation_upper95": 0.8468388820247768,
+      "final_violations": 3,
+      "judge_unavailable": 0,
+      "not_started": 0,
+      "repaired": 0,
+      "session_slip_lower95": 0.1531611179752232,
+      "session_slip_upper95": 0.8468388820247768,
+      "sessions": 6,
+      "sessions_unknown": 0,
+      "sessions_with_slip": 3,
+      "turn_slip_lower95": 0.08588541243180764,
+      "turn_slip_upper95": 0.3891393473598982,
+      "turn_slips": 5,
+      "turns": 24,
+      "turns_unknown": 0
+    },
+    "unstated|A|sonnet": {
+      "attempted": 6,
+      "caught": 0,
+      "final_known": 6,
+      "final_violation_lower95": 0.6069622310029174,
+      "final_violation_upper95": 1.0,
+      "final_violations": 6,
+      "judge_unavailable": 0,
+      "not_started": 0,
+      "repaired": 0,
+      "session_slip_lower95": 0.6069622310029174,
+      "session_slip_upper95": 1.0,
+      "sessions": 6,
+      "sessions_unknown": 0,
+      "sessions_with_slip": 6,
+      "turn_slip_lower95": 0.21156555719702858,
+      "turn_slip_upper95": 0.5628929287808009,
+      "turn_slips": 9,
+      "turns": 24,
+      "turns_unknown": 0
+    },
+    "unstated|B|haiku": {
+      "attempted": 6,
+      "caught": 4,
+      "final_known": 6,
+      "final_violation_lower95": 0.0,
+      "final_violation_upper95": 0.39303776899708265,
+      "final_violations": 0,
+      "judge_unavailable": 0,
+      "not_started": 0,
+      "repaired": 4,
+      "session_slip_lower95": 0.27133837251975257,
+      "session_slip_upper95": 0.9371501082916456,
+      "sessions": 6,
+      "sessions_unknown": 0,
+      "sessions_with_slip": 4,
+      "turn_slip_lower95": 0.05900834386487536,
+      "turn_slip_upper95": 0.34180734940411617,
+      "turn_slips": 4,
+      "turns": 24,
+      "turns_unknown": 0
+    },
+    "unstated|B|sonnet": {
+      "attempted": 6,
+      "caught": 6,
+      "final_known": 6,
+      "final_violation_lower95": 0.0,
+      "final_violation_upper95": 0.39303776899708265,
+      "final_violations": 0,
+      "judge_unavailable": 0,
+      "not_started": 0,
+      "repaired": 6,
+      "session_slip_lower95": 0.6069622310029174,
+      "session_slip_upper95": 1.0,
+      "sessions": 6,
+      "sessions_unknown": 0,
+      "sessions_with_slip": 6,
+      "turn_slip_lower95": 0.11491057056434223,
+      "turn_slip_upper95": 0.43469137890101084,
+      "turn_slips": 6,
+      "turns": 24,
+      "turns_unknown": 0
+    }
+  },
+  "by_guidance_arm_scenario": {
+    "one-line|A|S1-customer-insights": {
+      "attempted": 6,
+      "caught": 0,
+      "final_known": 6,
+      "final_violation_lower95": 0.0,
+      "final_violation_upper95": 0.39303776899708265,
+      "final_violations": 0,
+      "judge_unavailable": 0,
+      "not_started": 0,
+      "repaired": 0,
+      "session_slip_lower95": 0.0,
+      "session_slip_upper95": 0.39303776899708265,
+      "sessions": 6,
+      "sessions_unknown": 0,
+      "sessions_with_slip": 0,
+      "turn_slip_lower95": 0.0,
+      "turn_slip_upper95": 0.1173461561549487,
+      "turn_slips": 0,
+      "turns": 24,
+      "turns_unknown": 0
+    },
+    "one-line|A|S2-fulfilment": {
+      "attempted": 6,
+      "caught": 0,
+      "final_known": 6,
+      "final_violation_lower95": 0.0,
+      "final_violation_upper95": 0.39303776899708265,
+      "final_violations": 0,
+      "judge_unavailable": 0,
+      "not_started": 0,
+      "repaired": 0,
+      "session_slip_lower95": 0.0,
+      "session_slip_upper95": 0.39303776899708265,
+      "sessions": 6,
+      "sessions_unknown": 0,
+      "sessions_with_slip": 0,
+      "turn_slip_lower95": 0.0,
+      "turn_slip_upper95": 0.1173461561549487,
+      "turn_slips": 0,
+      "turns": 24,
+      "turns_unknown": 0
+    },
+    "one-line|B|S1-customer-insights": {
+      "attempted": 6,
+      "caught": 0,
+      "final_known": 6,
+      "final_violation_lower95": 0.0,
+      "final_violation_upper95": 0.39303776899708265,
+      "final_violations": 0,
+      "judge_unavailable": 0,
+      "not_started": 0,
+      "repaired": 0,
+      "session_slip_lower95": 0.0,
+      "session_slip_upper95": 0.39303776899708265,
+      "sessions": 6,
+      "sessions_unknown": 0,
+      "sessions_with_slip": 0,
+      "turn_slip_lower95": 0.0,
+      "turn_slip_upper95": 0.1173461561549487,
+      "turn_slips": 0,
+      "turns": 24,
+      "turns_unknown": 0
+    },
+    "one-line|B|S2-fulfilment": {
+      "attempted": 6,
+      "caught": 0,
+      "final_known": 6,
+      "final_violation_lower95": 0.0,
+      "final_violation_upper95": 0.39303776899708265,
+      "final_violations": 0,
+      "judge_unavailable": 0,
+      "not_started": 0,
+      "repaired": 0,
+      "session_slip_lower95": 0.0,
+      "session_slip_upper95": 0.39303776899708265,
+      "sessions": 6,
+      "sessions_unknown": 0,
+      "sessions_with_slip": 0,
+      "turn_slip_lower95": 0.0,
+      "turn_slip_upper95": 0.1173461561549487,
+      "turn_slips": 0,
+      "turns": 24,
+      "turns_unknown": 0
+    },
+    "stated|A|S1-customer-insights": {
+      "attempted": 6,
+      "caught": 0,
+      "final_known": 6,
+      "final_violation_lower95": 0.0,
+      "final_violation_upper95": 0.39303776899708265,
+      "final_violations": 0,
+      "judge_unavailable": 0,
+      "not_started": 0,
+      "repaired": 0,
+      "session_slip_lower95": 0.0,
+      "session_slip_upper95": 0.39303776899708265,
+      "sessions": 6,
+      "sessions_unknown": 0,
+      "sessions_with_slip": 0,
+      "turn_slip_lower95": 0.0,
+      "turn_slip_upper95": 0.1173461561549487,
+      "turn_slips": 0,
+      "turns": 24,
+      "turns_unknown": 0
+    },
+    "stated|A|S2-fulfilment": {
+      "attempted": 6,
+      "caught": 0,
+      "final_known": 6,
+      "final_violation_lower95": 0.0,
+      "final_violation_upper95": 0.39303776899708265,
+      "final_violations": 0,
+      "judge_unavailable": 0,
+      "not_started": 0,
+      "repaired": 0,
+      "session_slip_lower95": 0.0,
+      "session_slip_upper95": 0.39303776899708265,
+      "sessions": 6,
+      "sessions_unknown": 0,
+      "sessions_with_slip": 0,
+      "turn_slip_lower95": 0.0,
+      "turn_slip_upper95": 0.1173461561549487,
+      "turn_slips": 0,
+      "turns": 24,
+      "turns_unknown": 0
+    },
+    "stated|B|S1-customer-insights": {
+      "attempted": 6,
+      "caught": 0,
+      "final_known": 6,
+      "final_violation_lower95": 0.0,
+      "final_violation_upper95": 0.39303776899708265,
+      "final_violations": 0,
+      "judge_unavailable": 0,
+      "not_started": 0,
+      "repaired": 0,
+      "session_slip_lower95": 0.0,
+      "session_slip_upper95": 0.39303776899708265,
+      "sessions": 6,
+      "sessions_unknown": 0,
+      "sessions_with_slip": 0,
+      "turn_slip_lower95": 0.0,
+      "turn_slip_upper95": 0.1173461561549487,
+      "turn_slips": 0,
+      "turns": 24,
+      "turns_unknown": 0
+    },
+    "stated|B|S2-fulfilment": {
+      "attempted": 6,
+      "caught": 0,
+      "final_known": 6,
+      "final_violation_lower95": 0.0,
+      "final_violation_upper95": 0.39303776899708265,
+      "final_violations": 0,
+      "judge_unavailable": 0,
+      "not_started": 0,
+      "repaired": 0,
+      "session_slip_lower95": 0.0,
+      "session_slip_upper95": 0.39303776899708265,
+      "sessions": 6,
+      "sessions_unknown": 0,
+      "sessions_with_slip": 0,
+      "turn_slip_lower95": 0.0,
+      "turn_slip_upper95": 0.1173461561549487,
+      "turn_slips": 0,
+      "turns": 24,
+      "turns_unknown": 0
+    },
+    "unstated|A|S1-customer-insights": {
+      "attempted": 6,
+      "caught": 0,
+      "final_known": 6,
+      "final_violation_lower95": 0.418196590747974,
+      "final_violation_upper95": 0.9914875553891529,
+      "final_violations": 5,
+      "judge_unavailable": 0,
+      "not_started": 0,
+      "repaired": 0,
+      "session_slip_lower95": 0.418196590747974,
+      "session_slip_upper95": 0.9914875553891529,
+      "sessions": 6,
+      "sessions_unknown": 0,
+      "sessions_with_slip": 5,
+      "turn_slip_lower95": 0.08588541243180764,
+      "turn_slip_upper95": 0.3891393473598982,
+      "turn_slips": 5,
+      "turns": 24,
+      "turns_unknown": 0
+    },
+    "unstated|A|S2-fulfilment": {
+      "attempted": 6,
+      "caught": 0,
+      "final_known": 6,
+      "final_violation_lower95": 0.27133837251975257,
+      "final_violation_upper95": 0.9371501082916456,
+      "final_violations": 4,
+      "judge_unavailable": 0,
+      "not_started": 0,
+      "repaired": 0,
+      "session_slip_lower95": 0.27133837251975257,
+      "session_slip_upper95": 0.9371501082916456,
+      "sessions": 6,
+      "sessions_unknown": 0,
+      "sessions_with_slip": 4,
+      "turn_slip_lower95": 0.21156555719702858,
+      "turn_slip_upper95": 0.5628929287808009,
+      "turn_slips": 9,
+      "turns": 24,
+      "turns_unknown": 0
+    },
+    "unstated|B|S1-customer-insights": {
+      "attempted": 6,
+      "caught": 5,
+      "final_known": 6,
+      "final_violation_lower95": 0.0,
+      "final_violation_upper95": 0.39303776899708265,
+      "final_violations": 0,
+      "judge_unavailable": 0,
+      "not_started": 0,
+      "repaired": 5,
+      "session_slip_lower95": 0.418196590747974,
+      "session_slip_upper95": 0.9914875553891529,
+      "sessions": 6,
+      "sessions_unknown": 0,
+      "sessions_with_slip": 5,
+      "turn_slip_lower95": 0.08588541243180764,
+      "turn_slip_upper95": 0.3891393473598982,
+      "turn_slips": 5,
+      "turns": 24,
+      "turns_unknown": 0
+    },
+    "unstated|B|S2-fulfilment": {
+      "attempted": 6,
+      "caught": 5,
+      "final_known": 6,
+      "final_violation_lower95": 0.0,
+      "final_violation_upper95": 0.39303776899708265,
+      "final_violations": 0,
+      "judge_unavailable": 0,
+      "not_started": 0,
+      "repaired": 5,
+      "session_slip_lower95": 0.418196590747974,
+      "session_slip_upper95": 0.9914875553891529,
+      "sessions": 6,
+      "sessions_unknown": 0,
+      "sessions_with_slip": 5,
+      "turn_slip_lower95": 0.08588541243180764,
+      "turn_slip_upper95": 0.3891393473598982,
+      "turn_slips": 5,
+      "turns": 24,
+      "turns_unknown": 0
+    }
+  },
+  "missing": [],
+  "slips": [
+    {
+      "arm": "A",
+      "caught": null,
+      "final_structural": "violation",
+      "guidance": "unstated",
+      "model_key": "haiku",
+      "new_edges": [
+        [
+          "orders.controllers.customer_insights",
+          "orders.infrastructure.customers"
+        ]
+      ],
+      "repair_requests": null,
+      "repaired": null,
+      "run_id": "unstated-S1-customer-insights__A__haiku__r1",
+      "scenario_id": "S1-customer-insights",
+      "step": 3
+    },
+    {
+      "arm": "A",
+      "caught": null,
+      "final_structural": "violation",
+      "guidance": "unstated",
+      "model_key": "haiku",
+      "new_edges": [
+        [
+          "orders.controllers.customer_insights",
+          "orders.infrastructure.customers"
+        ]
+      ],
+      "repair_requests": null,
+      "repaired": null,
+      "run_id": "unstated-S1-customer-insights__A__haiku__r2",
+      "scenario_id": "S1-customer-insights",
+      "step": 3
+    },
+    {
+      "arm": "A",
+      "caught": null,
+      "final_structural": "violation",
+      "guidance": "unstated",
+      "model_key": "sonnet",
+      "new_edges": [
+        [
+          "orders.controllers.customer_insights",
+          "orders.infrastructure.customers"
+        ]
+      ],
+      "repair_requests": null,
+      "repaired": null,
+      "run_id": "unstated-S1-customer-insights__A__sonnet__r1",
+      "scenario_id": "S1-customer-insights",
+      "step": 3
+    },
+    {
+      "arm": "A",
+      "caught": null,
+      "final_structural": "violation",
+      "guidance": "unstated",
+      "model_key": "sonnet",
+      "new_edges": [
+        [
+          "orders.controllers.customer_insights",
+          "orders.infrastructure.customers"
+        ]
+      ],
+      "repair_requests": null,
+      "repaired": null,
+      "run_id": "unstated-S1-customer-insights__A__sonnet__r2",
+      "scenario_id": "S1-customer-insights",
+      "step": 3
+    },
+    {
+      "arm": "A",
+      "caught": null,
+      "final_structural": "violation",
+      "guidance": "unstated",
+      "model_key": "sonnet",
+      "new_edges": [
+        [
+          "orders.controllers.customer_insights",
+          "orders.infrastructure.customers"
+        ]
+      ],
+      "repair_requests": null,
+      "repaired": null,
+      "run_id": "unstated-S1-customer-insights__A__sonnet__r3",
+      "scenario_id": "S1-customer-insights",
+      "step": 3
+    },
+    {
+      "arm": "B",
+      "caught": true,
+      "final_structural": "pass",
+      "guidance": "unstated",
+      "model_key": "haiku",
+      "new_edges": [
+        [
+          "orders.controllers.customer_insights",
+          "orders.infrastructure.customers"
+        ]
+      ],
+      "repair_requests": 1,
+      "repaired": true,
+      "run_id": "unstated-S1-customer-insights__B__haiku__r2",
+      "scenario_id": "S1-customer-insights",
+      "step": 3
+    },
+    {
+      "arm": "B",
+      "caught": true,
+      "final_structural": "pass",
+      "guidance": "unstated",
+      "model_key": "haiku",
+      "new_edges": [
+        [
+          "orders.controllers.customer_insights",
+          "orders.infrastructure.customers"
+        ]
+      ],
+      "repair_requests": 1,
+      "repaired": true,
+      "run_id": "unstated-S1-customer-insights__B__haiku__r3",
+      "scenario_id": "S1-customer-insights",
+      "step": 3
+    },
+    {
+      "arm": "B",
+      "caught": true,
+      "final_structural": "pass",
+      "guidance": "unstated",
+      "model_key": "sonnet",
+      "new_edges": [
+        [
+          "orders.controllers.customer_insights",
+          "orders.infrastructure.customers"
+        ]
+      ],
+      "repair_requests": 1,
+      "repaired": true,
+      "run_id": "unstated-S1-customer-insights__B__sonnet__r1",
+      "scenario_id": "S1-customer-insights",
+      "step": 3
+    },
+    {
+      "arm": "B",
+      "caught": true,
+      "final_structural": "pass",
+      "guidance": "unstated",
+      "model_key": "sonnet",
+      "new_edges": [
+        [
+          "orders.controllers.customer_insights",
+          "orders.infrastructure.customers"
+        ]
+      ],
+      "repair_requests": 1,
+      "repaired": true,
+      "run_id": "unstated-S1-customer-insights__B__sonnet__r2",
+      "scenario_id": "S1-customer-insights",
+      "step": 3
+    },
+    {
+      "arm": "B",
+      "caught": true,
+      "final_structural": "pass",
+      "guidance": "unstated",
+      "model_key": "sonnet",
+      "new_edges": [
+        [
+          "orders.controllers.customer_insights",
+          "orders.infrastructure.customers"
+        ]
+      ],
+      "repair_requests": 1,
+      "repaired": true,
+      "run_id": "unstated-S1-customer-insights__B__sonnet__r3",
+      "scenario_id": "S1-customer-insights",
+      "step": 3
+    },
+    {
+      "arm": "A",
+      "caught": null,
+      "final_structural": "violation",
+      "guidance": "unstated",
+      "model_key": "haiku",
+      "new_edges": [
+        [
+          "orders.controllers.fulfilment",
+          "orders.infrastructure.catalog"
+        ],
+        [
+          "orders.controllers.fulfilment",
+          "orders.infrastructure.customers"
+        ]
+      ],
+      "repair_requests": null,
+      "repaired": null,
+      "run_id": "unstated-S2-fulfilment__A__haiku__r1",
+      "scenario_id": "S2-fulfilment",
+      "step": 1
+    },
+    {
+      "arm": "A",
+      "caught": null,
+      "final_structural": "violation",
+      "guidance": "unstated",
+      "model_key": "haiku",
+      "new_edges": [
+        [
+          "orders.controllers.fulfilment",
+          "orders.infrastructure.stock"
+        ]
+      ],
+      "repair_requests": null,
+      "repaired": null,
+      "run_id": "unstated-S2-fulfilment__A__haiku__r1",
+      "scenario_id": "S2-fulfilment",
+      "step": 2
+    },
+    {
+      "arm": "A",
+      "caught": null,
+      "final_structural": "violation",
+      "guidance": "unstated",
+      "model_key": "haiku",
+      "new_edges": [
+        [
+          "orders.controllers.fulfilment",
+          "orders.infrastructure.repository"
+        ]
+      ],
+      "repair_requests": null,
+      "repaired": null,
+      "run_id": "unstated-S2-fulfilment__A__haiku__r1",
+      "scenario_id": "S2-fulfilment",
+      "step": 4
+    },
+    {
+      "arm": "A",
+      "caught": null,
+      "final_structural": "violation",
+      "guidance": "unstated",
+      "model_key": "sonnet",
+      "new_edges": [
+        [
+          "orders.controllers.fulfilment",
+          "orders.infrastructure.catalog"
+        ],
+        [
+          "orders.controllers.fulfilment",
+          "orders.infrastructure.customers"
+        ],
+        [
+          "orders.controllers.fulfilment",
+          "orders.infrastructure.repository"
+        ]
+      ],
+      "repair_requests": null,
+      "repaired": null,
+      "run_id": "unstated-S2-fulfilment__A__sonnet__r1",
+      "scenario_id": "S2-fulfilment",
+      "step": 1
+    },
+    {
+      "arm": "A",
+      "caught": null,
+      "final_structural": "violation",
+      "guidance": "unstated",
+      "model_key": "sonnet",
+      "new_edges": [
+        [
+          "orders.controllers.fulfilment",
+          "orders.infrastructure.stock"
+        ]
+      ],
+      "repair_requests": null,
+      "repaired": null,
+      "run_id": "unstated-S2-fulfilment__A__sonnet__r1",
+      "scenario_id": "S2-fulfilment",
+      "step": 2
+    },
+    {
+      "arm": "A",
+      "caught": null,
+      "final_structural": "violation",
+      "guidance": "unstated",
+      "model_key": "sonnet",
+      "new_edges": [
+        [
+          "orders.controllers.fulfilment",
+          "orders.infrastructure.catalog"
+        ],
+        [
+          "orders.controllers.fulfilment",
+          "orders.infrastructure.customers"
+        ],
+        [
+          "orders.controllers.fulfilment",
+          "orders.infrastructure.repository"
+        ]
+      ],
+      "repair_requests": null,
+      "repaired": null,
+      "run_id": "unstated-S2-fulfilment__A__sonnet__r2",
+      "scenario_id": "S2-fulfilment",
+      "step": 1
+    },
+    {
+      "arm": "A",
+      "caught": null,
+      "final_structural": "violation",
+      "guidance": "unstated",
+      "model_key": "sonnet",
+      "new_edges": [
+        [
+          "orders.controllers.fulfilment",
+          "orders.infrastructure.stock"
+        ]
+      ],
+      "repair_requests": null,
+      "repaired": null,
+      "run_id": "unstated-S2-fulfilment__A__sonnet__r2",
+      "scenario_id": "S2-fulfilment",
+      "step": 2
+    },
+    {
+      "arm": "A",
+      "caught": null,
+      "final_structural": "violation",
+      "guidance": "unstated",
+      "model_key": "sonnet",
+      "new_edges": [
+        [
+          "orders.controllers.fulfilment",
+          "orders.infrastructure.catalog"
+        ],
+        [
+          "orders.controllers.fulfilment",
+          "orders.infrastructure.customers"
+        ],
+        [
+          "orders.controllers.fulfilment",
+          "orders.infrastructure.repository"
+        ]
+      ],
+      "repair_requests": null,
+      "repaired": null,
+      "run_id": "unstated-S2-fulfilment__A__sonnet__r3",
+      "scenario_id": "S2-fulfilment",
+      "step": 1
+    },
+    {
+      "arm": "A",
+      "caught": null,
+      "final_structural": "violation",
+      "guidance": "unstated",
+      "model_key": "sonnet",
+      "new_edges": [
+        [
+          "orders.controllers.fulfilment",
+          "orders.infrastructure.stock"
+        ]
+      ],
+      "repair_requests": null,
+      "repaired": null,
+      "run_id": "unstated-S2-fulfilment__A__sonnet__r3",
+      "scenario_id": "S2-fulfilment",
+      "step": 2
+    },
+    {
+      "arm": "B",
+      "caught": true,
+      "final_structural": "pass",
+      "guidance": "unstated",
+      "model_key": "haiku",
+      "new_edges": [
+        [
+          "orders.controllers.fulfilment",
+          "orders.infrastructure.catalog"
+        ],
+        [
+          "orders.controllers.fulfilment",
+          "orders.infrastructure.customers"
+        ],
+        [
+          "orders.controllers.fulfilment",
+          "orders.infrastructure.repository"
+        ]
+      ],
+      "repair_requests": 1,
+      "repaired": true,
+      "run_id": "unstated-S2-fulfilment__B__haiku__r2",
+      "scenario_id": "S2-fulfilment",
+      "step": 1
+    },
+    {
+      "arm": "B",
+      "caught": true,
+      "final_structural": "pass",
+      "guidance": "unstated",
+      "model_key": "haiku",
+      "new_edges": [
+        [
+          "orders.controllers.fulfilment",
+          "orders.infrastructure.catalog"
+        ],
+        [
+          "orders.controllers.fulfilment",
+          "orders.infrastructure.customers"
+        ]
+      ],
+      "repair_requests": 1,
+      "repaired": true,
+      "run_id": "unstated-S2-fulfilment__B__haiku__r3",
+      "scenario_id": "S2-fulfilment",
+      "step": 1
+    },
+    {
+      "arm": "B",
+      "caught": true,
+      "final_structural": "pass",
+      "guidance": "unstated",
+      "model_key": "sonnet",
+      "new_edges": [
+        [
+          "orders.controllers.fulfilment",
+          "orders.infrastructure.catalog"
+        ],
+        [
+          "orders.controllers.fulfilment",
+          "orders.infrastructure.customers"
+        ],
+        [
+          "orders.controllers.fulfilment",
+          "orders.infrastructure.repository"
+        ]
+      ],
+      "repair_requests": 1,
+      "repaired": true,
+      "run_id": "unstated-S2-fulfilment__B__sonnet__r1",
+      "scenario_id": "S2-fulfilment",
+      "step": 1
+    },
+    {
+      "arm": "B",
+      "caught": true,
+      "final_structural": "pass",
+      "guidance": "unstated",
+      "model_key": "sonnet",
+      "new_edges": [
+        [
+          "orders.controllers.fulfilment",
+          "orders.infrastructure.catalog"
+        ],
+        [
+          "orders.controllers.fulfilment",
+          "orders.infrastructure.customers"
+        ],
+        [
+          "orders.controllers.fulfilment",
+          "orders.infrastructure.repository"
+        ]
+      ],
+      "repair_requests": 1,
+      "repaired": true,
+      "run_id": "unstated-S2-fulfilment__B__sonnet__r2",
+      "scenario_id": "S2-fulfilment",
+      "step": 1
+    },
+    {
+      "arm": "B",
+      "caught": true,
+      "final_structural": "pass",
+      "guidance": "unstated",
+      "model_key": "sonnet",
+      "new_edges": [
+        [
+          "orders.controllers.fulfilment",
+          "orders.infrastructure.catalog"
+        ],
+        [
+          "orders.controllers.fulfilment",
+          "orders.infrastructure.customers"
+        ],
+        [
+          "orders.controllers.fulfilment",
+          "orders.infrastructure.repository"
+        ]
+      ],
+      "repair_requests": 1,
+      "repaired": true,
+      "run_id": "unstated-S2-fulfilment__B__sonnet__r3",
+      "scenario_id": "S2-fulfilment",
+      "step": 1
+    }
+  ],
+  "terminations": {
+    "completed": 72
+  },
+  "time_and_spend": {
+    "one-line|A": {
+      "agent_cost_usd": "1.851724850000000162",
+      "median_session_s": 84.416,
+      "repair_requests": 0,
+      "sessions": 12
+    },
+    "one-line|A|haiku": {
+      "agent_cost_usd": "0.124784750000000002",
+      "median_session_s": 75.90950000000001,
+      "repair_requests": 0,
+      "sessions": 6
+    },
+    "one-line|A|sonnet": {
+      "agent_cost_usd": "1.72694010000000016",
+      "median_session_s": 89.91650000000001,
+      "repair_requests": 0,
+      "sessions": 6
+    },
+    "one-line|B": {
+      "agent_cost_usd": "1.926970319999999997",
+      "median_session_s": 84.624,
+      "repair_requests": 0,
+      "sessions": 12
+    },
+    "one-line|B|haiku": {
+      "agent_cost_usd": "0.121387519999999997",
+      "median_session_s": 76.02600000000001,
+      "repair_requests": 0,
+      "sessions": 6
+    },
+    "one-line|B|sonnet": {
+      "agent_cost_usd": "1.80558280000000000",
+      "median_session_s": 91.4305,
+      "repair_requests": 0,
+      "sessions": 6
+    },
+    "stated|A": {
+      "agent_cost_usd": "1.769888070000000075",
+      "median_session_s": 85.256,
+      "repair_requests": 0,
+      "sessions": 12
+    },
+    "stated|A|haiku": {
+      "agent_cost_usd": "0.129983370000000005",
+      "median_session_s": 85.5865,
+      "repair_requests": 0,
+      "sessions": 6
+    },
+    "stated|A|sonnet": {
+      "agent_cost_usd": "1.63990470000000007",
+      "median_session_s": 84.9205,
+      "repair_requests": 0,
+      "sessions": 6
+    },
+    "stated|B": {
+      "agent_cost_usd": "1.855896760000000009",
+      "median_session_s": 82.8945,
+      "repair_requests": 0,
+      "sessions": 12
+    },
+    "stated|B|haiku": {
+      "agent_cost_usd": "0.127483260000000009",
+      "median_session_s": 81.366,
+      "repair_requests": 0,
+      "sessions": 6
+    },
+    "stated|B|sonnet": {
+      "agent_cost_usd": "1.72841350000000000",
+      "median_session_s": 91.5435,
+      "repair_requests": 0,
+      "sessions": 6
+    },
+    "unstated|A": {
+      "agent_cost_usd": "1.686618459999999960",
+      "median_session_s": 81.6175,
+      "repair_requests": 0,
+      "sessions": 12
+    },
+    "unstated|A|haiku": {
+      "agent_cost_usd": "0.117068360000000000",
+      "median_session_s": 75.237,
+      "repair_requests": 0,
+      "sessions": 6
+    },
+    "unstated|A|sonnet": {
+      "agent_cost_usd": "1.56955009999999996",
+      "median_session_s": 86.1445,
+      "repair_requests": 0,
+      "sessions": 6
+    },
+    "unstated|B": {
+      "agent_cost_usd": "2.178759120000000051",
+      "median_session_s": 95.0515,
+      "repair_requests": 10,
+      "sessions": 12
+    },
+    "unstated|B|haiku": {
+      "agent_cost_usd": "0.128729619999999991",
+      "median_session_s": 81.603,
+      "repair_requests": 4,
+      "sessions": 6
+    },
+    "unstated|B|sonnet": {
+      "agent_cost_usd": "2.05002950000000006",
+      "median_session_s": 113.3605,
+      "repair_requests": 6,
+      "sessions": 6
+    }
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "schema": "coding-agent-gates/task/v1",
+  "id": "T09-audit-history",
+  "category": "audit-history",
+  "title": "Keep an audit log of order activity",
+  "request": "Add an audit log and `OrderController.handle_audit_log()`, which returns status 200 with `{\"events\": [...]}` in the order the events happened.\n\n- Each successful order creation appends `{\"sequence\": n, \"event\": \"order_placed\", \"order_id\": ..., \"customer_id\": ..., \"total_cents\": ...}`, where `total_cents` is the order's total after discount.\n- Each successful `handle_get` appends `{\"sequence\": n, \"event\": \"order_viewed\", \"order_id\": ...}`. Failed requests (400 or 404) record nothing.\n- `sequence` starts at 1 and increases by 1 for each event. The log is per application instance (`build_app()`).",
+  "acceptance_test": "experiment/evaluator/acceptance/test_t09_audit_history.py",
+  "reference_overlay": "experiment/evaluator/reference/t09",
+  "plausible_shortcuts": [
+    "Keep the event list in the controller and compute totals there.",
+    "Have the controller write audit records straight into storage."
+  ],
+  "shortcut_note": "For readers and reviewers only. Never shown to the agent; the agent receives `request` alone.",
+  "frozen": "2026-11-19"
+}

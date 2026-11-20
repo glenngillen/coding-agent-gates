@@ -1,0 +1,544 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "coding-agent-gates/run-record/v1",
+  "title": "Run record: one attempted run of the coding-agent gate experiment",
+  "description": "Written by experiment/tools/run_pilot.py, one per attempted run (including runs refused by the spend cap or not runnable). Outcomes are separate fields, never a combined score. Missing data is null with a reason, never zero. The semantic label is always null: no independent human labels exist.",
+  "type": "object",
+  "required": [
+    "schema",
+    "evidence_kind",
+    "identity",
+    "outcome",
+    "repair",
+    "usage",
+    "time",
+    "interventions",
+    "infrastructure_retries",
+    "ledger",
+    "artifacts",
+    "notes"
+  ],
+  "properties": {
+    "schema": {
+      "const": "coding-agent-gates/run-record/v1"
+    },
+    "evidence_kind": {
+      "enum": [
+        "real",
+        "synthetic-test"
+      ],
+      "description": "'real' for pilot runs; 'synthetic-test' only in unit tests. Summaries refuse to mix them."
+    },
+    "identity": {
+      "type": "object",
+      "description": "What ran, from which inputs, where and when.",
+      "properties": {
+        "pilot": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Pilot name (directory under experiment/runs/)."
+        },
+        "run_id": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "<task>__<arm>__r<repeat>."
+        },
+        "task_id": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Frozen task id."
+        },
+        "arm": {
+          "enum": [
+            "A",
+            "B",
+            "C",
+            null
+          ]
+        },
+        "repeat": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "description": "Repeat number (1 in the pilot)."
+        },
+        "sequence": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "description": "Position in the frozen run order (order.json)."
+        },
+        "position_in_task": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "description": "1-3: the arm's randomized position within its task."
+        },
+        "blind_id": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Opaque id for blinded adjudication; reveals nothing about the arm."
+        },
+        "baseline_commit": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Git commit of the clean workspace."
+        },
+        "baseline_tree_sha256": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Hash of the prepared workspace's files."
+        },
+        "final_tree_sha256": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Hash of the final snapshot's files."
+        },
+        "prompt_sha256": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Hash of the exact prompt sent."
+        },
+        "task_sha256": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Hash of the task file."
+        },
+        "instruction_sha256": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Hash of the instruction file (CLAUDE.md)."
+        },
+        "arms_sha256": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Hash of experiment/arms.json."
+        },
+        "settings_sha256": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Hash of the run's --settings file (the arm's hooks)."
+        },
+        "frozen_manifest_sha256": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Hash of experiment/frozen-manifest.json at evaluation."
+        },
+        "agent_model_requested": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "--model passed to the CLI."
+        },
+        "agent_models_reported": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "type": "string"
+          },
+          "description": "modelUsage keys the CLI reported: the models that actually answered."
+        },
+        "agent_effort": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "--effort passed to the CLI."
+        },
+        "seed": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Seeds are not supported by the CLI; recorded as such."
+        },
+        "session": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Session isolation used."
+        },
+        "started_at": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "UTC ISO-8601."
+        },
+        "finished_at": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "UTC ISO-8601."
+        },
+        "environment": {
+          "type": "object",
+          "description": "CLI, Python, Import Linter and platform versions."
+        }
+      }
+    },
+    "outcome": {
+      "type": "object",
+      "description": "Each outcome recorded separately.",
+      "properties": {
+        "termination": {
+          "enum": [
+            "completed",
+            "budget_exhausted",
+            "wall_timeout",
+            "cli_error",
+            "not_started_cap",
+            "not_runnable",
+            null
+          ],
+          "description": "How the run is classified. not_started_cap: refused by the spend ledger before starting (censored). not_runnable: could not run as its arm specifies, even if the agent process itself succeeded (see agent_termination)."
+        },
+        "completed_within_budget": {
+          "type": [
+            "boolean",
+            "null"
+          ],
+          "description": "True only for termination 'completed'."
+        },
+        "not_runnable": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Why the run could not run as its arm specifies (for example, the judge was unavailable in arm C)."
+        },
+        "agent_started": {
+          "type": [
+            "boolean",
+            "null"
+          ],
+          "description": "Whether the agent process ran. True for a not-runnable arm C run whose agent ran but whose development judge was unavailable."
+        },
+        "agent_termination": {
+          "enum": [
+            "completed",
+            "budget_exhausted",
+            "wall_timeout",
+            "cli_error",
+            null
+          ],
+          "description": "How the agent process itself ended, independent of the run's classification; null when it never started."
+        },
+        "behavior": {
+          "enum": [
+            "pass",
+            "fail",
+            "error",
+            null
+          ],
+          "description": "Independent evaluator: frozen acceptance and regression tests on the final snapshot."
+        },
+        "structural": {
+          "enum": [
+            "pass",
+            "violation",
+            "checker_error",
+            null
+          ],
+          "description": "Independent evaluator's own frozen contract on the final snapshot."
+        },
+        "semantic_judge": {
+          "enum": [
+            "pass",
+            "violation",
+            "inconclusive",
+            "not_evaluated",
+            null
+          ],
+          "description": "The live judge's output on the final snapshot: a judge output, not a label."
+        },
+        "semantic_label": {
+          "type": "null",
+          "description": "Always null: no independent human labels."
+        },
+        "semantic_label_note": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Why the label is null."
+        },
+        "tampering_detected": {
+          "type": [
+            "boolean",
+            "null"
+          ],
+          "description": "Instruction, workspace configuration or out-of-workspace gate files changed, workspace settings added, or (records with a settings check) the external --settings file changed, deleted or unreadable."
+        },
+        "settings_file_check": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            "unchanged",
+            "changed",
+            "missing",
+            "unreadable",
+            "not_recorded",
+            "not_checked",
+            null
+          ],
+          "description": "Result of comparing the external --settings file with its preparation hash (evaluator/settings_integrity.py). 'not_checked' (or absent) in records written before the check existed, including pilot-2026-11-19."
+        },
+        "baseline_tests_modified": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "type": "string"
+          },
+          "description": "Baseline test files changed or deleted (reported separately from tampering)."
+        },
+        "gate_final_state": {
+          "enum": [
+            "no_gate",
+            "passed",
+            "unresolved",
+            "semantic_inconclusive",
+            "interrupted",
+            "missing",
+            null
+          ],
+          "description": "The development gate's last word: no_gate (arm A), passed, unresolved (repair budget exhausted or adapter failure), semantic_inconclusive, interrupted (ended while a repair was requested), missing (the hook never ran)."
+        },
+        "submission": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Always a synthetic final submission, not a merge."
+        }
+      }
+    },
+    "repair": {
+      "type": "object",
+      "description": "Feedback-driven repair cycles after the first candidate.",
+      "properties": {
+        "applicable": {
+          "type": [
+            "boolean",
+            "null"
+          ],
+          "description": "False for arm A."
+        },
+        "cycles": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "description": "Repair requests made (Stop-hook blocks). A lower bound when censored."
+        },
+        "censored": {
+          "type": [
+            "boolean",
+            "null"
+          ],
+          "description": "True when the loop did not converge to a gate pass."
+        },
+        "note": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Explanation for censoring or non-applicability."
+        },
+        "checker_invocations": {
+          "type": "object",
+          "description": "Sensor runs and judge calls during development, counted separately."
+        }
+      }
+    },
+    "usage": {
+      "type": "object",
+      "description": "Reported usage per category. Missing usage stays null with a reason.",
+      "properties": {
+        "agent": {
+          "type": "object",
+          "properties": {
+            "cost_usd": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "pattern": "^[0-9]+(\\.[0-9]+)?$",
+              "description": "CLI total_cost_usd. Decimal US dollars as a string."
+            },
+            "missing": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "description": "Why usage is missing."
+            },
+            "by_model": {
+              "type": [
+                "object",
+                "null"
+              ]
+            },
+            "num_turns": {
+              "type": [
+                "integer",
+                "null"
+              ],
+              "description": "CLI-reported turns."
+            },
+            "cost_basis": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "description": "API-equivalent estimate; notional under a subscription login."
+            }
+          }
+        },
+        "development_judge": {
+          "type": [
+            "object",
+            "null"
+          ],
+          "description": "Judge calls made by arm C's hook (null for arms without a hook). Fields: calls, started_calls, unknown_cost_calls, cost_usd (null while any started call has unknown cost), known_cost_subtotal_usd, unknown_cost_held_usd (the ledger charge kept for unknown-cost calls: each call's reservation unless it recorded ledger_charged_usd), unknown_cost_unrecorded_charge_calls, tokens (sums over calls that reported each category), tokens_missing_calls (per category, started calls that did not report it), models, cost_basis. Records written before 2026-11-19's correction lack unknown_cost_held_usd and tokens_missing_calls."
+        },
+        "evaluation_judge": {
+          "type": [
+            "object",
+            "null"
+          ],
+          "description": "Judge calls made by the independent evaluator. Fields: calls, started_calls, unknown_cost_calls, cost_usd (null while any started call has unknown cost), known_cost_subtotal_usd, unknown_cost_held_usd (the ledger charge kept for unknown-cost calls: each call's reservation unless it recorded ledger_charged_usd), unknown_cost_unrecorded_charge_calls, tokens (sums over calls that reported each category), tokens_missing_calls (per category, started calls that did not report it), models, cost_basis. Records written before 2026-11-19's correction lack unknown_cost_held_usd and tokens_missing_calls."
+        }
+      }
+    },
+    "time": {
+      "type": "object",
+      "description": "Monotonic seconds around the agent process plus CLI-reported durations.",
+      "properties": {
+        "attempt_s": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "description": "time.monotonic() around the agent process."
+        },
+        "agent_reported_s": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "description": "CLI duration_ms / 1000."
+        },
+        "model_api_s": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "description": "CLI duration_api_ms / 1000 (model time where observable)."
+        },
+        "check_sensor_s": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "description": "Sum of development sensor time."
+        },
+        "check_judge_s": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "description": "Sum of development judge time."
+        },
+        "ci_queue_s": {
+          "type": "null",
+          "description": "Not applicable at the end-of-turn placement."
+        },
+        "ci_queue_note": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": ""
+        },
+        "clock": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": ""
+        }
+      }
+    },
+    "interventions": {
+      "type": "array",
+      "description": "Documented human interventions during the run (none permitted in the pilot)."
+    },
+    "infrastructure_retries": {
+      "type": "array",
+      "description": "Earlier attempts of this cell that failed for infrastructure reasons, with their artifacts, agent ledger entry and judge usage (usage.development_judge, usage.evaluation_judge). Never silently dropped; all of it counts towards total spend."
+    },
+    "ledger": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "description": "The agent run's spend-ledger entry: id, reservation, charge, status."
+    },
+    "artifacts": {
+      "type": "object",
+      "description": "Paths (relative to the example root) of retained, redacted raw evidence."
+    },
+    "settings_integrity": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "description": "The settings-integrity check's full output (schema coding-agent-gates/settings-integrity/v1), or null when it was not run."
+    },
+    "notes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}

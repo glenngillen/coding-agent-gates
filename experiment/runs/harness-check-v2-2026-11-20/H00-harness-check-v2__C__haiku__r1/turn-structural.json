@@ -1,0 +1,18 @@
+[
+  {
+    "turn": 1,
+    "status": "pass",
+    "raw_status": "violation",
+    "violations": [],
+    "error": null,
+    "fingerprint": "d8d0b0a63eddde5cf03171ada36de5da474d69cd618c0c52759296dc34c0123b"
+  },
+  {
+    "turn": 2,
+    "status": "pass",
+    "raw_status": "violation",
+    "violations": [],
+    "error": null,
+    "fingerprint": "d8d0b0a63eddde5cf03171ada36de5da474d69cd618c0c52759296dc34c0123b"
+  }
+]

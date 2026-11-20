@@ -1,0 +1,175 @@
+{
+  "schema": "coding-agent-gates/evaluation-v2/v1",
+  "scenario_id": "S1-customer-insights",
+  "snapshot_tree_sha256": "6707f2fae000dd67ec5b52696f66899651a3bcaa17b60dcb8ac8f6c54dc3be35",
+  "frozen_manifest_sha256": "b9fe0be84c81d4b182d991faf898c0fe4bba3a186b551b9a204489019aeb96e3",
+  "submission": "final snapshot evaluated as a synthetic final submission; no merge was attempted or blocked",
+  "behavior": {
+    "steps": {
+      "s1-step1-history": {
+        "status": "pass",
+        "tests": 4,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "exit_code": 0,
+        "detail": "....                                                                     [100%]\n4 passed in 0.06s\n"
+      },
+      "s1-step2-lifetime-value": {
+        "status": "pass",
+        "tests": 5,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "exit_code": 0,
+        "detail": ".....                                                                    [100%]\n5 passed in 0.07s\n"
+      },
+      "s1-step3-top-customers": {
+        "status": "pass",
+        "tests": 9,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "exit_code": 0,
+        "detail": ".........                                                                [100%]\n9 passed in 0.08s\n"
+      },
+      "s1-step4-inactive": {
+        "status": "pass",
+        "tests": 4,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "exit_code": 0,
+        "detail": "....                                                                     [100%]\n4 passed in 0.06s\n"
+      }
+    },
+    "regression": {
+      "status": "pass",
+      "tests": 17,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "exit_code": 0,
+      "detail": ".................                                                        [100%]\n17 passed in 0.07s\n"
+    },
+    "steps_accepted": [
+      "s1-step1-history",
+      "s1-step2-lifetime-value",
+      "s1-step3-top-customers",
+      "s1-step4-inactive"
+    ],
+    "all_steps_accepted": true
+  },
+  "structural": {
+    "schema": "coding-agent-gates/sensor-result/v1",
+    "status": "pass",
+    "rules": {
+      "Controllers must not import infrastructure repositories directly": "KEPT"
+    },
+    "violations": [],
+    "error": null,
+    "fingerprint": "24b9adf463a32a3e03757c879f9103327b39a1d115f5904bd2d3eab984aa7c6f",
+    "tool_version": "2.17",
+    "exit_code": 0,
+    "raw_output": "\n---------\nContracts\n---------\n\nAnalyzed 24 files, 50 dependencies.\n-----------------------------------\n\nControllers must not import infrastructure repositories directly KEPT (1 ignored import)\n\nContracts: 1 kept, 0 broken.\n",
+    "raw_status": "violation"
+  },
+  "semantic_judge": {
+    "status": "violation",
+    "reason": "catalog.py, customers.py, orders.py and http.py only validate request fields, call application services, catch their exceptions and map results to responses. customer_insights.py delegates the non-cancelled filtering, ranking and totals to OrderService. reports.py's handle_units_by_sku, however, decides which orders are eligible (excluding status \"cancelled\") and aggregates units in the controller, which the rule forbids. The finding is limited to that policy decision; no discount or pricing thresholds appear in any file.",
+    "findings": [
+      {
+        "path": "src/orders/controllers/reports.py",
+        "line_start": 20,
+        "line_end": 27,
+        "explanation": "handle_units_by_sku hard-codes the \"cancelled\" status (line 24) to decide which orders count toward units sold, and performs the aggregation itself. That eligibility decision is business policy and belongs in orders.application. customer_insights.py delegates the equivalent non-cancelled filter to the application service, so this is also inconsistent with the rest of the controllers."
+      }
+    ],
+    "provider_failed": false,
+    "raw_response": "{\"verdict\":\"violation\",\"findings\":[{\"path\":\"src/orders/controllers/reports.py\",\"line_start\":20,\"line_end\":27,\"rule\":\"business-decision-in-controller\",\"explanation\":\"handle_units_by_sku hard-codes the \\\"cancelled\\\" status (line 24) to decide which orders count toward units sold, and performs the aggregation itself. That eligibility decision is business policy and belongs in orders.application. customer_insights.py delegates the equivalent non-cancelled filter to the application service, so this is also inconsistent with the rest of the controllers.\"}],\"rationale\":\"catalog.py, customers.py, orders.py and http.py only validate request fields, call application services, catch their exceptions and map results to responses. customer_insights.py delegates the non-cancelled filtering, ranking and totals to OrderService. reports.py's handle_units_by_sku, however, decides which orders are eligible (excluding status \\\"cancelled\\\") and aggregates units in the controller, which the rule forbids. The finding is limited to that policy decision; no discount or pricing thresholds appear in any file.\"}"
+  },
+  "semantic_judge_calls": [
+    {
+      "label": "handbook-v4-2026-11-20 one-line-S1-customer-insights__A__haiku__r1 evaluation judge",
+      "model_requested": "claude-haiku-5-5",
+      "started_at": "2026-11-20T05:26:38+00:00",
+      "reservation_usd": "1.3923",
+      "bound": {
+        "input_bytes": 20268,
+        "budget_input_tokens": 52268,
+        "budget_output_tokens": 8000,
+        "budget_usd": "0.0723",
+        "response_input_tokens_max": 1000000,
+        "response_output_tokens_max": 128000,
+        "response_usd": "1.3200",
+        "reservation_usd": "1.3923"
+      },
+      "models_reported": [
+        "claude-haiku-5-5"
+      ],
+      "duration_ms": 9240,
+      "wall_s": 10.717,
+      "stop_reason": "end_turn",
+      "usage": {
+        "input_tokens": 2,
+        "cache_creation_input_tokens": 9606,
+        "cache_read_input_tokens": 7156,
+        "output_tokens": 1861,
+        "output_tokens_details": {
+          "thinking_tokens": 1498
+        },
+        "server_tool_use": {
+          "web_search_requests": 0,
+          "web_fetch_requests": 0
+        },
+        "service_tier": "standard",
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 9606,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "inference_geo": "global",
+        "iterations": [
+          {
+            "input_tokens": 2,
+            "output_tokens": 1861,
+            "cache_read_input_tokens": 7156,
+            "cache_creation_input_tokens": 9606,
+            "cache_creation": {
+              "ephemeral_5m_input_tokens": 0,
+              "ephemeral_1h_input_tokens": 9606
+            },
+            "type": "message"
+          }
+        ],
+        "speed": "standard",
+        "fallback_credit": null
+      },
+      "cost_usd": "0.00292346",
+      "cost_basis": "total_cost_usd reported by the Claude Code CLI: an API-equivalent list-price estimate; under a subscription login it is notional, not an invoice",
+      "exit_code": 0,
+      "ledger_entry_id": "ba2d169f18d9483dbee3d45cd88fc341",
+      "ledger_charged_usd": "0.00292346",
+      "over_budget_estimate": null,
+      "bound_exceeded": null,
+      "error": null
+    }
+  ],
+  "semantic_label": null,
+  "semantic_label_note": "unavailable: no independent human labels for final runs (Decisions, 2026-11-19); semantic_judge is a judge output, not ground truth",
+  "tampering": {
+    "detected": false,
+    "workspace_protected": {
+      "changed": [],
+      "added": [],
+      "removed": []
+    },
+    "gate_files": {
+      "changed": [],
+      "added": [],
+      "removed": []
+    },
+    "workspace_settings_added": [],
+    "baseline_tests_modified": [],
+    "legacy_reports_modified": false
+  }
+}

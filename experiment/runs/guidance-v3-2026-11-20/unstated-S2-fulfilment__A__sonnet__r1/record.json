@@ -1,0 +1,295 @@
+{
+  "artifacts": {
+    "cli_stderr": "experiment/runs/guidance-v3-2026-11-20/unstated-S2-fulfilment__A__sonnet__r1/cli-stderr.txt",
+    "evaluation": "experiment/runs/guidance-v3-2026-11-20/unstated-S2-fulfilment__A__sonnet__r1/evaluation.json",
+    "final_diff": "experiment/runs/guidance-v3-2026-11-20/unstated-S2-fulfilment__A__sonnet__r1/final.diff",
+    "hook_events": null,
+    "prepared": "experiment/runs/guidance-v3-2026-11-20/unstated-S2-fulfilment__A__sonnet__r1/prepared.json",
+    "record": "experiment/runs/guidance-v3-2026-11-20/unstated-S2-fulfilment__A__sonnet__r1/record.json",
+    "transcript": "experiment/runs/guidance-v3-2026-11-20/unstated-S2-fulfilment__A__sonnet__r1/transcript.jsonl",
+    "turn_structural": "experiment/runs/guidance-v3-2026-11-20/unstated-S2-fulfilment__A__sonnet__r1/turn-structural.json"
+  },
+  "evidence_kind": "real",
+  "identity": {
+    "agent_effort": "medium",
+    "agent_model_requested": "claude-sonnet-5-5",
+    "agent_models_reported": [
+      "claude-sonnet-5-5"
+    ],
+    "arm": "A",
+    "baseline_commit": "fefab2d981188dafd43b1e51d62f13138c88ab1b",
+    "baseline_tree_sha256": "07bac1e5b38f8a110f5b7e97a3f00f29ef33da1800e86c1dc35b84eabb72fd26",
+    "blind_id": "8f44ceb0fbd1",
+    "environment": {
+      "claude_cli": "2.1.322 (Claude Code)",
+      "import_linter": "2.17",
+      "platform": "macOS-26.6.2-arm64-arm-64bit",
+      "python": "3.12.15"
+    },
+    "finished_at": "2026-11-20T04:12:36+00:00",
+    "frozen_manifest_sha256": "b9fe0be84c81d4b182d991faf898c0fe4bba3a186b551b9a204489019aeb96e3",
+    "guidance": "unstated",
+    "instruction_sha256": "58df2d123743198fe0b5728a6514b0e1c4a27e783ed0ecd7d46a8ada353fb560",
+    "messages_sha256": "db41ae999cf212d23272ecda30ed2c7400dcd70cb2a786f4a8d364dc5d25adda",
+    "model_key": "sonnet",
+    "protocol": "experiment/protocol-v3.md",
+    "repeat": 1,
+    "run_id": "unstated-S2-fulfilment__A__sonnet__r1",
+    "scenario_id": "S2-fulfilment",
+    "scenario_sha256": "6460b508417f0d21fed2a8ca74755c276408edc880db16a96688cfbecefe721a",
+    "seed": "unsupported by the Claude Code CLI; not set",
+    "sequence": 5,
+    "session": "one fresh process per session, --no-session-persistence; steps sent as successive user messages with --input-format stream-json",
+    "settings_sha256": "930912b39eb0312c2210e78d13c25de2565ecec3a44d702865fb16f2c0274c91",
+    "started_at": "2026-11-20T04:11:09+00:00",
+    "study": "guidance-v3-2026-11-20",
+    "study_sha256": "d738109ddef32f4dd31f08b889e44aa7b54c29208aa14bb795b3de94dc3ef0a3",
+    "workspace_history": [
+      "fefab2d 2026-04-17 Add back-office reports for the ops review",
+      "a6b72c9 2026-03-09 Controllers, wiring and tests for customers, catalogue and orders",
+      "8b374a3 2026-03-04 Application services and pricing policy",
+      "c176aac 2026-03-02 Domain model and in-memory storage"
+    ]
+  },
+  "infrastructure_retries": [],
+  "ledger": {
+    "agent_entry_id": "cdca67cf288d4f1195ddc030b4e3185c",
+    "charged_usd": "0.2703228",
+    "cost_known": true,
+    "reserved_usd": "6.28",
+    "status": "finished"
+  },
+  "notes": [],
+  "outcome": {
+    "baseline_tests_modified": [],
+    "behavior": {
+      "all_steps_accepted": true,
+      "regression": "pass",
+      "steps_accepted": [
+        "s2-step1-packing-slip",
+        "s2-step2-low-stock",
+        "s2-step3-restock",
+        "s2-step4-summary"
+      ]
+    },
+    "final_structural": "violation",
+    "final_structural_raw": "violation",
+    "final_violations": [
+      {
+        "imported": "orders.infrastructure.catalog",
+        "importer": "orders.controllers.fulfilment",
+        "kind": "broken",
+        "lines": [
+          10
+        ],
+        "rule": "Controllers must not import infrastructure repositories directly"
+      },
+      {
+        "imported": "orders.infrastructure.customers",
+        "importer": "orders.controllers.fulfilment",
+        "kind": "broken",
+        "lines": [
+          11
+        ],
+        "rule": "Controllers must not import infrastructure repositories directly"
+      },
+      {
+        "imported": "orders.infrastructure.repository",
+        "importer": "orders.controllers.fulfilment",
+        "kind": "broken",
+        "lines": [
+          12
+        ],
+        "rule": "Controllers must not import infrastructure repositories directly"
+      },
+      {
+        "imported": "orders.infrastructure.stock",
+        "importer": "orders.controllers.fulfilment",
+        "kind": "broken",
+        "lines": [
+          9
+        ],
+        "rule": "Controllers must not import infrastructure repositories directly"
+      }
+    ],
+    "judge_unavailable": false,
+    "legacy_reports_modified": false,
+    "semantic_judge": "not_evaluated",
+    "semantic_label": null,
+    "semantic_label_note": "unavailable: no independent human labels for final runs (Decisions, 2026-11-19); semantic_judge is a judge output, not ground truth",
+    "settings_file_check": "unchanged",
+    "steps_reached": 4,
+    "submission": "final snapshot evaluated as a synthetic final submission; no merge was attempted or blocked",
+    "tampering_detected": false,
+    "termination": "completed"
+  },
+  "repair": {
+    "applicable": false,
+    "max_repairs_per_turn": 3,
+    "requests": null
+  },
+  "schema": "coding-agent-gates/run-record-v2/v1",
+  "settings_integrity": {
+    "actual_sha256": "930912b39eb0312c2210e78d13c25de2565ecec3a44d702865fb16f2c0274c91",
+    "detected": false,
+    "expected_sha256": "930912b39eb0312c2210e78d13c25de2565ecec3a44d702865fb16f2c0274c91",
+    "note": null,
+    "path": "<run>/settings.json",
+    "schema": "coding-agent-gates/settings-integrity/v1",
+    "status": "unchanged"
+  },
+  "time": {
+    "check_seconds": {
+      "judge_s": null,
+      "sensor_s": null
+    },
+    "session_s": 87.371
+  },
+  "turns": [
+    {
+      "caught": null,
+      "censored": false,
+      "cost_usd": "0.0934084",
+      "cut_short": false,
+      "duration_s": 27.084,
+      "end_structural": "violation",
+      "first_structural": "violation",
+      "new_edges": [
+        [
+          "orders.controllers.fulfilment",
+          "orders.infrastructure.catalog"
+        ],
+        [
+          "orders.controllers.fulfilment",
+          "orders.infrastructure.customers"
+        ],
+        [
+          "orders.controllers.fulfilment",
+          "orders.infrastructure.repository"
+        ]
+      ],
+      "persisting_violation": false,
+      "reached": true,
+      "repair_requests": null,
+      "repaired": null,
+      "result_subtype": "success",
+      "semantic_first": null,
+      "slip": true,
+      "step": 1
+    },
+    {
+      "caught": null,
+      "censored": false,
+      "cost_usd": "0.0849408",
+      "cut_short": false,
+      "duration_s": 28.605,
+      "end_structural": "violation",
+      "first_structural": "violation",
+      "new_edges": [
+        [
+          "orders.controllers.fulfilment",
+          "orders.infrastructure.stock"
+        ]
+      ],
+      "persisting_violation": true,
+      "reached": true,
+      "repair_requests": null,
+      "repaired": null,
+      "result_subtype": "success",
+      "semantic_first": null,
+      "slip": true,
+      "step": 2
+    },
+    {
+      "caught": null,
+      "censored": false,
+      "cost_usd": "0.05080729999999999",
+      "cut_short": false,
+      "duration_s": 16.49,
+      "end_structural": "violation",
+      "first_structural": "violation",
+      "new_edges": [],
+      "persisting_violation": true,
+      "reached": true,
+      "repair_requests": null,
+      "repaired": null,
+      "result_subtype": "success",
+      "semantic_first": null,
+      "slip": false,
+      "step": 3
+    },
+    {
+      "caught": null,
+      "censored": false,
+      "cost_usd": "0.04116630000000001",
+      "cut_short": false,
+      "duration_s": 13.708,
+      "end_structural": "violation",
+      "first_structural": "violation",
+      "new_edges": [],
+      "persisting_violation": true,
+      "reached": true,
+      "repair_requests": null,
+      "repaired": null,
+      "result_subtype": "success",
+      "semantic_first": null,
+      "slip": false,
+      "step": 4
+    }
+  ],
+  "usage": {
+    "agent": {
+      "by_model": {
+        "claude-sonnet-5-5": {
+          "cache_creation_input_tokens": 27008,
+          "cache_read_input_tokens": 376648,
+          "cost_usd": "0.2703228",
+          "input_tokens": 38,
+          "output_tokens": 12455
+        }
+      },
+      "cost_basis": "total_cost_usd / costUSD reported by the Claude Code CLI: API-equivalent list-price estimates; under a subscription login they are notional, not an invoice",
+      "cost_usd": "0.2703228",
+      "missing": null,
+      "num_turns": 5
+    },
+    "judge": {
+      "development": {
+        "calls": 0,
+        "cost_basis": "total_cost_usd / costUSD reported by the Claude Code CLI: API-equivalent list-price estimates; under a subscription login they are notional, not an invoice",
+        "cost_usd": "0",
+        "known_cost_subtotal_usd": "0",
+        "models": [],
+        "started_calls": 0,
+        "tokens": null,
+        "tokens_missing_calls": {
+          "cache_creation_input_tokens": 0,
+          "cache_read_input_tokens": 0,
+          "input_tokens": 0,
+          "output_tokens": 0
+        },
+        "unknown_cost_calls": 0,
+        "unknown_cost_held_usd": "0",
+        "unknown_cost_unrecorded_charge_calls": 0
+      },
+      "evaluation": {
+        "calls": 0,
+        "cost_basis": "total_cost_usd / costUSD reported by the Claude Code CLI: API-equivalent list-price estimates; under a subscription login they are notional, not an invoice",
+        "cost_usd": "0",
+        "known_cost_subtotal_usd": "0",
+        "models": [],
+        "started_calls": 0,
+        "tokens": null,
+        "tokens_missing_calls": {
+          "cache_creation_input_tokens": 0,
+          "cache_read_input_tokens": 0,
+          "input_tokens": 0,
+          "output_tokens": 0
+        },
+        "unknown_cost_calls": 0,
+        "unknown_cost_held_usd": "0",
+        "unknown_cost_unrecorded_charge_calls": 0
+      }
+    }
+  }
+}

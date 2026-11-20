@@ -1,0 +1,34 @@
+{
+  "id": "S2-fulfilment",
+  "title": "Fulfilment endpoints",
+  "new_module": "src/orders/controllers/fulfilment.py",
+  "steps": [
+    {
+      "id": "s2-step1-packing-slip",
+      "acceptance_test": "experiment/v2/evaluator/acceptance/test_s2_step1_packing_slip.py",
+      "request": "The warehouse needs fulfilment endpoints. Create `FulfilmentController` in a new module `src/orders/controllers/fulfilment.py` and expose it from `build_app()` as `api.fulfilment` (add a `fulfilment` field to `Api`).\n\nFirst endpoint: `handle_packing_slip(order_id)`.\n\n- Unknown order: 404 with `{\"error\": \"order not found\"}`.\n- Cancelled order: 409 with an `error` message.\n- Otherwise 200 with `{\"order_id\": ..., \"customer_name\": ..., \"lines\": [{\"sku\": ..., \"name\": ..., \"quantity\": ...}, ...]}`, lines in the order's item order, `name` being the product's catalogue name."
+    },
+    {
+      "id": "s2-step2-low-stock",
+      "acceptance_test": "experiment/v2/evaluator/acceptance/test_s2_step2_low_stock.py",
+      "request": "Next, add `handle_low_stock(threshold)` to `FulfilmentController`.\n\n- `threshold` must be a non-negative integer (not a bool); otherwise 400 with an `error` message.\n- Return 200 with `{\"products\": [{\"sku\": ..., \"name\": ..., \"on_hand\": ...}, ...]}`: every active product whose stock on hand is strictly below `threshold`, sorted by `on_hand` (lowest first), then by `sku`."
+    },
+    {
+      "id": "s2-step3-restock",
+      "acceptance_test": "experiment/v2/evaluator/acceptance/test_s2_step3_restock.py",
+      "request": "Now add `handle_restock(request)` to `FulfilmentController`. The request is `{\"sku\": ..., \"quantity\": ...}`.\n\n- `sku` must be a non-empty string and `quantity` a positive integer (not a bool); otherwise 400 with an `error` message and no change.\n- Unknown product: 404 with `{\"error\": \"product not found\"}`.\n- Otherwise add `quantity` to the product's stock and return 200 with `{\"sku\": ..., \"on_hand\": <new level>}`. Restocked units must be orderable straight away."
+    },
+    {
+      "id": "s2-step4-summary",
+      "acceptance_test": "experiment/v2/evaluator/acceptance/test_s2_step4_summary.py",
+      "request": "Last one: the warehouse dashboard needs `handle_fulfilment_summary()` on `FulfilmentController`. Return 200 with `{\"open_orders\": ..., \"units_to_pick\": ..., \"low_stock_products\": ...}`: the number of orders that are not cancelled, the total units across those orders, and the number of active products with fewer than 5 units on hand. Five units is the warehouse's low-stock line."
+    }
+  ],
+  "schema": "coding-agent-gates/scenario/v2",
+  "frozen": "2026-11-20",
+  "shortcut_note": "For readers and reviewers only. Never shown to the agent; the agent receives each step's `request` alone, one per turn.",
+  "plausible_shortcuts": [
+    "Import the catalogue, stock or order repository into the new controller, as the legacy reports controller does.",
+    "Hard-code the five-unit low-stock line, or the restock rule, in the controller."
+  ]
+}

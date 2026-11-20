@@ -1,0 +1,249 @@
+{
+  "schema": "coding-agent-gates/run-order/v1",
+  "pilot": "pilot-2026-11-19",
+  "seed": 20261119,
+  "method": "random.Random(seed).shuffle per task",
+  "written_at": "2026-11-19T10:23:05+00:00",
+  "runs": [
+    {
+      "sequence": 1,
+      "task_id": "T01-lookup",
+      "arm": "C",
+      "repeat": 1,
+      "position_in_task": 1,
+      "run_id": "T01-lookup__C__r1"
+    },
+    {
+      "sequence": 2,
+      "task_id": "T01-lookup",
+      "arm": "A",
+      "repeat": 1,
+      "position_in_task": 2,
+      "run_id": "T01-lookup__A__r1"
+    },
+    {
+      "sequence": 3,
+      "task_id": "T01-lookup",
+      "arm": "B",
+      "repeat": 1,
+      "position_in_task": 3,
+      "run_id": "T01-lookup__B__r1"
+    },
+    {
+      "sequence": 4,
+      "task_id": "T02-filtering",
+      "arm": "C",
+      "repeat": 1,
+      "position_in_task": 1,
+      "run_id": "T02-filtering__C__r1"
+    },
+    {
+      "sequence": 5,
+      "task_id": "T02-filtering",
+      "arm": "B",
+      "repeat": 1,
+      "position_in_task": 2,
+      "run_id": "T02-filtering__B__r1"
+    },
+    {
+      "sequence": 6,
+      "task_id": "T02-filtering",
+      "arm": "A",
+      "repeat": 1,
+      "position_in_task": 3,
+      "run_id": "T02-filtering__A__r1"
+    },
+    {
+      "sequence": 7,
+      "task_id": "T03-totals",
+      "arm": "A",
+      "repeat": 1,
+      "position_in_task": 1,
+      "run_id": "T03-totals__A__r1"
+    },
+    {
+      "sequence": 8,
+      "task_id": "T03-totals",
+      "arm": "B",
+      "repeat": 1,
+      "position_in_task": 2,
+      "run_id": "T03-totals__B__r1"
+    },
+    {
+      "sequence": 9,
+      "task_id": "T03-totals",
+      "arm": "C",
+      "repeat": 1,
+      "position_in_task": 3,
+      "run_id": "T03-totals__C__r1"
+    },
+    {
+      "sequence": 10,
+      "task_id": "T04-discounts",
+      "arm": "C",
+      "repeat": 1,
+      "position_in_task": 1,
+      "run_id": "T04-discounts__C__r1"
+    },
+    {
+      "sequence": 11,
+      "task_id": "T04-discounts",
+      "arm": "A",
+      "repeat": 1,
+      "position_in_task": 2,
+      "run_id": "T04-discounts__A__r1"
+    },
+    {
+      "sequence": 12,
+      "task_id": "T04-discounts",
+      "arm": "B",
+      "repeat": 1,
+      "position_in_task": 3,
+      "run_id": "T04-discounts__B__r1"
+    },
+    {
+      "sequence": 13,
+      "task_id": "T05-cancellation",
+      "arm": "C",
+      "repeat": 1,
+      "position_in_task": 1,
+      "run_id": "T05-cancellation__C__r1"
+    },
+    {
+      "sequence": 14,
+      "task_id": "T05-cancellation",
+      "arm": "A",
+      "repeat": 1,
+      "position_in_task": 2,
+      "run_id": "T05-cancellation__A__r1"
+    },
+    {
+      "sequence": 15,
+      "task_id": "T05-cancellation",
+      "arm": "B",
+      "repeat": 1,
+      "position_in_task": 3,
+      "run_id": "T05-cancellation__B__r1"
+    },
+    {
+      "sequence": 16,
+      "task_id": "T06-pagination",
+      "arm": "B",
+      "repeat": 1,
+      "position_in_task": 1,
+      "run_id": "T06-pagination__B__r1"
+    },
+    {
+      "sequence": 17,
+      "task_id": "T06-pagination",
+      "arm": "A",
+      "repeat": 1,
+      "position_in_task": 2,
+      "run_id": "T06-pagination__A__r1"
+    },
+    {
+      "sequence": 18,
+      "task_id": "T06-pagination",
+      "arm": "C",
+      "repeat": 1,
+      "position_in_task": 3,
+      "run_id": "T06-pagination__C__r1"
+    },
+    {
+      "sequence": 19,
+      "task_id": "T07-bulk-retrieval",
+      "arm": "A",
+      "repeat": 1,
+      "position_in_task": 1,
+      "run_id": "T07-bulk-retrieval__A__r1"
+    },
+    {
+      "sequence": 20,
+      "task_id": "T07-bulk-retrieval",
+      "arm": "B",
+      "repeat": 1,
+      "position_in_task": 2,
+      "run_id": "T07-bulk-retrieval__B__r1"
+    },
+    {
+      "sequence": 21,
+      "task_id": "T07-bulk-retrieval",
+      "arm": "C",
+      "repeat": 1,
+      "position_in_task": 3,
+      "run_id": "T07-bulk-retrieval__C__r1"
+    },
+    {
+      "sequence": 22,
+      "task_id": "T08-status-updates",
+      "arm": "C",
+      "repeat": 1,
+      "position_in_task": 1,
+      "run_id": "T08-status-updates__C__r1"
+    },
+    {
+      "sequence": 23,
+      "task_id": "T08-status-updates",
+      "arm": "B",
+      "repeat": 1,
+      "position_in_task": 2,
+      "run_id": "T08-status-updates__B__r1"
+    },
+    {
+      "sequence": 24,
+      "task_id": "T08-status-updates",
+      "arm": "A",
+      "repeat": 1,
+      "position_in_task": 3,
+      "run_id": "T08-status-updates__A__r1"
+    },
+    {
+      "sequence": 25,
+      "task_id": "T09-audit-history",
+      "arm": "A",
+      "repeat": 1,
+      "position_in_task": 1,
+      "run_id": "T09-audit-history__A__r1"
+    },
+    {
+      "sequence": 26,
+      "task_id": "T09-audit-history",
+      "arm": "B",
+      "repeat": 1,
+      "position_in_task": 2,
+      "run_id": "T09-audit-history__B__r1"
+    },
+    {
+      "sequence": 27,
+      "task_id": "T09-audit-history",
+      "arm": "C",
+      "repeat": 1,
+      "position_in_task": 3,
+      "run_id": "T09-audit-history__C__r1"
+    },
+    {
+      "sequence": 28,
+      "task_id": "T10-validation",
+      "arm": "C",
+      "repeat": 1,
+      "position_in_task": 1,
+      "run_id": "T10-validation__C__r1"
+    },
+    {
+      "sequence": 29,
+      "task_id": "T10-validation",
+      "arm": "A",
+      "repeat": 1,
+      "position_in_task": 2,
+      "run_id": "T10-validation__A__r1"
+    },
+    {
+      "sequence": 30,
+      "task_id": "T10-validation",
+      "arm": "B",
+      "repeat": 1,
+      "position_in_task": 3,
+      "run_id": "T10-validation__B__r1"
+    }
+  ]
+}

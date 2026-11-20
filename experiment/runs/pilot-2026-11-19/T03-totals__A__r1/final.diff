@@ -1,0 +1,104 @@
+diff --git a/src/orders/application/order_service.py b/src/orders/application/order_service.py
+index 9d246c6..21f38e6 100644
+--- a/src/orders/application/order_service.py
++++ b/src/orders/application/order_service.py
+@@ -10,7 +10,7 @@ from __future__ import annotations
+ 
+ from collections.abc import Iterable
+ 
+-from orders.domain import LineItem, Order, OrderSummary
++from orders.domain import CustomerTotals, LineItem, Order, OrderSummary
+ from orders.infrastructure.repository import InMemoryOrderRepository
+ 
+ DISCOUNT_THRESHOLD_CENTS = 10_000
+@@ -60,3 +60,16 @@ class OrderService:
+ 
+     def list_for_customer(self, customer_id: str) -> list[Order]:
+         return self._repository.list_for_customer(customer_id)
++
++    def customer_totals(self, customer_id: str) -> CustomerTotals:
++        """Sum per-order subtotals and per-order discounts (no combined discount)."""
++        orders = self._repository.list_for_customer(customer_id)
++        subtotal = sum(o.subtotal_cents for o in orders)
++        discount = sum(discount_for(o.subtotal_cents) for o in orders)
++        return CustomerTotals(
++            customer_id=customer_id,
++            order_count=len(orders),
++            subtotal_cents=subtotal,
++            discount_cents=discount,
++            total_cents=subtotal - discount,
++        )
+diff --git a/src/orders/controllers/orders.py b/src/orders/controllers/orders.py
+index 0cbf354..1b825c1 100644
+--- a/src/orders/controllers/orders.py
++++ b/src/orders/controllers/orders.py
+@@ -89,3 +89,16 @@ class OrderController:
+     def handle_list_for_customer(self, customer_id: str) -> Response:
+         orders = self._service.list_for_customer(customer_id)
+         return Response(200, {"orders": [_order_body(o) for o in orders]})
++
++    def handle_customer_totals(self, customer_id: str) -> Response:
++        t = self._service.customer_totals(customer_id)
++        return Response(
++            200,
++            {
++                "customer_id": t.customer_id,
++                "order_count": t.order_count,
++                "subtotal_cents": t.subtotal_cents,
++                "discount_cents": t.discount_cents,
++                "total_cents": t.total_cents,
++            },
++        )
+diff --git a/src/orders/domain.py b/src/orders/domain.py
+index b6e0f87..ea635ba 100644
+--- a/src/orders/domain.py
++++ b/src/orders/domain.py
+@@ -28,6 +28,15 @@ class Order:
+         return sum(item.line_total_cents for item in self.items)
+ 
+ 
++@dataclass(frozen=True)
++class CustomerTotals:
++    customer_id: str
++    order_count: int
++    subtotal_cents: int
++    discount_cents: int
++    total_cents: int
++
++
+ @dataclass(frozen=True)
+ class OrderSummary:
+     order: Order
+diff --git a/tests/test_order_service.py b/tests/test_order_service.py
+index 51fa098..b7d9709 100644
+--- a/tests/test_order_service.py
++++ b/tests/test_order_service.py
+@@ -44,6 +44,28 @@ def test_summary_applies_the_discount_policy():
+     assert summary.total_cents == 10_800
+ 
+ 
++def test_customer_totals_sum_per_order_discounts():
++    service = make_service()
++    service.place_order("c", [LineItem("A", 1, 6_000)])  # no discount
++    service.place_order("c", [LineItem("A", 2, 6_000)])  # 1200 discount
++    service.place_order("other", [LineItem("A", 1, 50_000)])
++
++    t = service.customer_totals("c")
++
++    assert (t.order_count, t.subtotal_cents, t.discount_cents, t.total_cents) == (
++        2,
++        18_000,
++        1_200,
++        16_800,
++    )
++
++
++def test_customer_totals_empty():
++    t = make_service().customer_totals("nobody")
++
++    assert (t.order_count, t.subtotal_cents, t.discount_cents, t.total_cents) == (0, 0, 0, 0)
++
++
+ class TestProperties:
+     @given(st.integers(min_value=0, max_value=10**12))
+     def test_discount_is_bounded_and_only_applies_at_or_above_threshold(self, subtotal):

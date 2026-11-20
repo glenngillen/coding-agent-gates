@@ -1,0 +1,115 @@
+{
+  "schema": "coding-agent-gates/ci-simulation/v1",
+  "label": "LOCAL SIMULATION of a GitHub Actions job. Not a hosted run: no GitHub runner, check run, required status check or merge decision was involved.",
+  "started_at": "2026-11-19T11:05:31+00:00",
+  "command": "integrations/simulate_ci.py --workflow integrations/github-actions.yaml --job architecture-contracts --layout standalone --overlay fixtures/direct_import --output evidence/ci-sim-example-violation-2026-11-19.json",
+  "workflow": {
+    "path": "examples/coding-agent-gates/integrations/github-actions.yaml",
+    "sha256": "1d598ec4e6a5d2585c79322f776447fb45faf99fbbcee3ebd02cba17681c4a7f"
+  },
+  "source": {
+    "layout": "standalone",
+    "source_commit": "cde460db27209d849d0099131a0d9708fa932632",
+    "source_uncommitted_changes": true,
+    "example_path_in_copy": ".",
+    "files_copied": 371,
+    "overlay": "fixtures/direct_import",
+    "overlay_files": [
+      {
+        "path": "src/orders/controllers/orders.py",
+        "sha256": "a2ef42b3f9ce263f17b36842a7c3c72d4c610321d321a5e364d33e310ed7d74e"
+      },
+      {
+        "path": "src/orders/wiring.py",
+        "sha256": "b724eaccdfaeca8fb93aaf092ecc9c50bec6a02af933bc9fbd3683a5919dceff"
+      }
+    ],
+    "example_tree_sha256": "dc84c575eb64f042e96643b33b70c2fa1cf2e3d880536dec2978e20fe5bc535e"
+  },
+  "environment": {
+    "platform": "macOS-26.6.2-arm64-arm-64bit",
+    "machine": "arm64",
+    "python_requested": "3.12",
+    "python_interpreter": "/run/current-system/sw/bin/python3.12",
+    "bash": "GNU bash, version 5.3.20(1)-release (aarch64-apple-darwin25.6.0)",
+    "git": "git version 2.56.0"
+  },
+  "not_reproduced": [
+    "runs-on image (ubuntu-latest): steps ran on the local OS instead",
+    "actions/checkout: replaced by a clean copy of the working tree's tracked and unignored files",
+    "actions/setup-python: replaced by a local interpreter whose version matches python-version-file",
+    "GITHUB_* environment variables, GITHUB_TOKEN and the permissions block",
+    "the triggering event (pull_request/push) and its merge commit",
+    "required-check configuration and any effect on merging"
+  ],
+  "job": {
+    "workflow_name": "architecture",
+    "job_id": "architecture-contracts",
+    "check_name": "architecture-contracts",
+    "timeout_minutes": 10.0,
+    "conclusion": "failure",
+    "failing_step": "Check architecture contracts (full package)",
+    "duration_s": 17.773,
+    "steps": [
+      {
+        "name": "Run actions/checkout@v6",
+        "kind": "checkout",
+        "uses": "actions/checkout@v6",
+        "command": null,
+        "working_directory": ".",
+        "outcome": "success",
+        "exit": 0,
+        "duration_s": 0.0,
+        "output_lines": 1,
+        "output_sha256": "51133b1b57336a918d64a8b3daa680cba2280f3c7c12f7120cebd894062643a9",
+        "output_tail": "Satisfied by the clean copy made before the job started.",
+        "snapshots": []
+      },
+      {
+        "name": "Run actions/setup-python@v5",
+        "kind": "setup-python",
+        "uses": "actions/setup-python@v5",
+        "command": null,
+        "working_directory": ".",
+        "outcome": "success",
+        "exit": 0,
+        "duration_s": 0.034,
+        "output_lines": 1,
+        "output_sha256": "1ef002e0967e14b61ced87316bb13ab211db798905a475dc04a0ab4ac75b8877",
+        "output_tail": "Python 3.12.15 (/nix/store/vgwdsgh9h5wrchrs4l5nx1g1z4h8acf1-python3-3.12.15/bin/python3.12) matches 3.12 from .python-version.",
+        "snapshots": []
+      },
+      {
+        "name": "Install pinned environment",
+        "kind": "run",
+        "uses": null,
+        "command": "python -m venv .venv\n.venv/bin/python -m pip install --require-hashes -r requirements.lock\n",
+        "working_directory": ".",
+        "outcome": "success",
+        "exit": 0,
+        "duration_s": 16.549,
+        "output_lines": 85,
+        "output_sha256": "270535b9a82e9726ae5dff882d7060c5cbf90815300daefb1ed9d3c9d6496721",
+        "output_tail": "  Using cached anthropic-2.10.0-py3-none-any.whl (2.5 MB)\nCollecting anyio==4.16.0 (from -r requirements.lock (line 13))\n  Using cached anyio-4.16.0-py3-none-any.whl (134 kB)\nCollecting cfgv==3.5.0 (from -r requirements.lock (line 19))\n  Using cached cfgv-3.5.0-py2.py3-none-any.whl (7.4 kB)\nCollecting click==8.5.1 (from -r requirements.lock (line 23))\n  Using cached click-8.5.1-py3-none-any.whl (126 kB)\nCollecting distlib==0.4.4 (from -r requirements.lock (line 31))\n  Using cached distlib-0.4.4-py2.py3-none-any.whl (472 kB)\nCollecting docstring-parser==0.18.0 (from -r requirements.lock (line 35))\n  Using cached docstring_parser-0.18.0-py3-none-any.whl (22 kB)\nCollecting filelock==4.2.12 (from -r requirements.lock (line 39))\n  Using cached filelock-4.2.12-py3-none-any.whl (222 kB)\nCollecting grimp==3.20 (from -r requirements.lock (line 45))\n  Using cached grimp-3.20-cp312-cp312-macosx_11_0_arm64.whl (2.1 MB)\nCollecting h11==0.16.0 (from -r requirements.lock (line 139))\n  Using cached h11-0.16.0-py3-none-any.whl (37 kB)\nCollecting httpcore2==2.16.2 (from -r requirements.lock (line 143))\n  Using cached httpcore2-2.16.2-py3-none-any.whl (85 kB)\nCollecting httpx2==2.16.2 (from -r requirements.lock (line 147))\n  Using cached httpx2-2.16.2-py3-none-any.whl (97 kB)\nCollecting hypothesis==6.170.15 (from -r requirements.lock (line 155))\n  Using cached hypothesis-6.170.15-cp312-cp312-macosx_11_0_arm64.whl (794 kB)\nCollecting identify==2.6.20 (from -r requirements.lock (line 240))\n  Using cached identify-2.6.20-py2.py3-none-any.whl (99 kB)\nCollecting idna==3.20 (from -r requirements.lock (line 244))\n  Using cached idna-3.20-py3-none-any.whl (69 kB)\nCollecting import-linter==2.17 (from -r requirements.lock (line 250))\n  Using cached import_linter-2.17-py3-none-any.whl (652 kB)\nCollecting iniconfig==2.3.1 (from -r requirements.lock (line 254))\n  Using cached iniconfig-2.3.1-py3-none-any.whl (7.6 kB)\nCollecting jiter==0.19.0 (from -r requirements.lock (line 258))\n  Using cached jiter-0.19.0-cp312-cp312-macosx_11_0_arm64.whl (314 kB)\nCollecting markdown-it-py==4.3.0 (from -r requirements.lock (line 365))\n  Using cached markdown_it_py-4.3.0-py3-none-any.whl (96 kB)\nCollecting mdurl==0.1.2 (from -r requirements.lock (line 369))\n  Using cached mdurl-0.1.2-py3-none-any.whl (10.0 kB)\nCollecting nodeenv==1.12.0 (from -r requirements.lock (line 373))\n  Using cached nodeenv-1.12.0-py3-none-any.whl (39 kB)\nCollecting opentelemetry-api==1.45.2 (from -r requirements.lock (line 377))\n  Using cached opentelemetry_api-1.45.2-py3-none-any.whl (60 kB)\nCollecting packaging==26.3 (from -r requirements.lock (line 381))\n  Using cached packaging-26.3-py3-none-any.whl (129 kB)\nCollecting platformdirs==4.14.7 (from -r requirements.lock (line 387))\n  Using cached platformdirs-4.14.7-py3-none-any.whl (89 kB)\nCollecting pluggy==1.7.0 (from -r requirements.lock (line 391))\n  Using cached pluggy-1.7.0-py3-none-any.whl (27 kB)\nCollecting pre-commit==4.7.0 (from -r requirements.lock (line 395))\n  Using cached pre_commit-4.7.0-py2.py3-none-any.whl (226 kB)\nCollecting pydantic==2.14.3 (from -r requirements.lock (line 399))\n  Using cached pydantic-2.14.3-py3-none-any.whl (494 kB)\nCollecting pydantic-core==2.50.4 (from -r requirements.lock (line 403))\n  Using cached pydantic_core-2.50.4-cp312-cp312-macosx_11_0_arm64.whl (2.1 MB)\nCollecting pygments==2.21.0 (from -r requirements.lock (line 545))\n  Using cached pygments-2.21.0-py3-none-any.whl (1.3 MB)\nCollecting pytest==9.2.0 (from -r requirements.lock (line 551))\n  Using cached pytest-9.2.0-py3-none-any.whl (411 kB)\nCollecting python-discovery==1.9.6 (from -r requirements.lock (line 555))\n  Using cached python_discovery-1.9.6-py3-none-any.whl (98 kB)\nCollecting pyyaml==6.0.3 (from -r requirements.lock (line 559))\n  Using cached pyyaml-6.0.3-cp312-cp312-macosx_11_0_arm64.whl (173 kB)\nCollecting rich==15.0.0 (from -r requirements.lock (line 634))\n  Using cached rich-15.0.0-py3-none-any.whl (310 kB)\nCollecting sniffio==1.3.1 (from -r requirements.lock (line 638))\n  Using cached sniffio-1.3.1-py3-none-any.whl (10 kB)\nCollecting sortedcontainers==2.4.0 (from -r requirements.lock (line 642))\n  Using cached sortedcontainers-2.4.0-py2.py3-none-any.whl (29 kB)\nCollecting truststore==0.10.5 (from -r requirements.lock (line 646))\n  Using cached truststore-0.10.5-py3-none-any.whl (19 kB)\nCollecting typing-extensions==4.16.0 (from -r requirements.lock (line 652))\n  Using cached typing_extensions-4.16.0-py3-none-any.whl (45 kB)\nCollecting typing-inspection==0.4.5 (from -r requirements.lock (line 663))\n  Using cached typing_inspection-0.4.5-py3-none-any.whl (14 kB)\nCollecting virtualenv==21.15.9 (from -r requirements.lock (line 667))\n  Using cached virtualenv-21.15.9-py3-none-any.whl (5.7 MB)\nInstalling collected packages: sortedcontainers, distlib, typing-extensions, truststore, sniffio, pyyaml, pygments, pluggy, platformdirs, packaging, nodeenv, mdurl, jiter, iniconfig, idna, identify, hypothesis, h11, grimp, filelock, docstring-parser, click, cfgv, annotated-types, typing-inspection, python-discovery, pytest, pydantic-core, opentelemetry-api, markdown-it-py, httpcore2, anyio, virtualenv, rich, pydantic, httpx2, pre-commit, import-linter, anthropic\nSuccessfully installed annotated-types-0.8.0 anthropic-2.10.0 anyio-4.16.0 cfgv-3.5.0 click-8.5.1 distlib-0.4.4 docstring-parser-0.18.0 filelock-4.2.12 grimp-3.20 h11-0.16.0 httpcore2-2.16.2 httpx2-2.16.2 hypothesis-6.170.15 identify-2.6.20 idna-3.20 import-linter-2.17 iniconfig-2.3.1 jiter-0.19.0 markdown-it-py-4.3.0 mdurl-0.1.2 nodeenv-1.12.0 opentelemetry-api-1.45.2 packaging-26.3 platformdirs-4.14.7 pluggy-1.7.0 pre-commit-4.7.0 pydantic-2.14.3 pydantic-core-2.50.4 pygments-2.21.0 pytest-9.2.0 python-discovery-1.9.6 pyyaml-6.0.3 rich-15.0.0 sniffio-1.3.1 sortedcontainers-2.4.0 truststore-0.10.5 typing-extensions-4.16.0 typing-inspection-0.4.5 virtualenv-21.15.9\n\n[notice] A new release of pip is available: 25.0.1 -> 26.3\n[notice] To update, run: python -m pip install --upgrade pip",
+        "snapshots": []
+      },
+      {
+        "name": "Check architecture contracts (full package)",
+        "kind": "run",
+        "uses": null,
+        "command": ".venv/bin/python integrations/check_architecture.py",
+        "working_directory": ".",
+        "outcome": "failure",
+        "exit": 1,
+        "duration_s": 1.191,
+        "output_lines": 30,
+        "output_sha256": "2b1718292f43691d63524538c684328aaff915136dec874b3661e9428a62934f",
+        "output_tail": "ARCHITECTURE VIOLATION\nRule broken: Controllers must not import infrastructure repositories directly\n  orders.controllers.orders -> orders.infrastructure.repository (line 16)\nHow to fix: Controllers may decode requests, call orders.application services and map responses. Route the data access through the application service (add a service method if needed) and remove the controller's import of orders.infrastructure.\nSnapshot: 3ee1fecf56ac\nRepair the code; do not edit .importlinter, the gates package or tests, and do not move code out of the checked package to make this pass.\n\n--- lint-imports output ---\n---------\nContracts\n---------\n\nAnalyzed 9 files, 9 dependencies.\n---------------------------------\n\nControllers must not import infrastructure repositories directly BROKEN\n\nContracts: 0 kept, 1 broken.\n\n\n----------------\nBroken contracts\n----------------\n\nControllers must not import infrastructure repositories directly\n----------------------------------------------------------------\n\norders.controllers is not allowed to import orders.infrastructure:\n\n-   orders.controllers.orders -> orders.infrastructure.repository (l.16)",
+        "snapshots": [
+          "3ee1fecf56ac"
+        ]
+      }
+    ]
+  },
+  "workspace_kept": null
+}

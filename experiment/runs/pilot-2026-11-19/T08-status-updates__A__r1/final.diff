@@ -1,0 +1,162 @@
+diff --git a/src/orders/application/order_service.py b/src/orders/application/order_service.py
+index 9d246c6..70e704b 100644
+--- a/src/orders/application/order_service.py
++++ b/src/orders/application/order_service.py
+@@ -9,18 +9,33 @@ controllers under the architecture contract.
+ from __future__ import annotations
+ 
+ from collections.abc import Iterable
++from dataclasses import replace
+ 
+ from orders.domain import LineItem, Order, OrderSummary
+ from orders.infrastructure.repository import InMemoryOrderRepository
+ 
+ DISCOUNT_THRESHOLD_CENTS = 10_000
+ DISCOUNT_RATE_PERCENT = 10
++STATUS_FLOW = ("placed", "paid", "shipped", "delivered")
+ 
+ 
+ class OrderNotFound(LookupError):
+     """No order exists with the requested id."""
+ 
+ 
++class UnknownStatus(ValueError):
++    """The requested status is not a known order status."""
++
++
++class InvalidStatusChange(ValueError):
++    """The requested status is not the next step from the current one."""
++
++    def __init__(self, current: str, requested: str) -> None:
++        super().__init__(f"cannot change status from {current} to {requested}")
++        self.current = current
++        self.requested = requested
++
++
+ def discount_for(subtotal_cents: int) -> int:
+     """Subtotals of $100.00 or more get 10% off, rounded down to the cent."""
+     if subtotal_cents < DISCOUNT_THRESHOLD_CENTS:
+@@ -58,5 +73,17 @@ class OrderService:
+             total_cents=subtotal - discount,
+         )
+ 
++    def update_status(self, order_id: str, new_status: str) -> Order:
++        """Move an order forward exactly one step in STATUS_FLOW."""
++        order = self.get_order(order_id)
++        if new_status not in STATUS_FLOW:
++            raise UnknownStatus(new_status)
++        index = STATUS_FLOW.index(order.status)
++        if index + 1 >= len(STATUS_FLOW) or STATUS_FLOW[index + 1] != new_status:
++            raise InvalidStatusChange(order.status, new_status)
++        updated = replace(order, status=new_status)
++        self._repository.add(updated)
++        return updated
++
+     def list_for_customer(self, customer_id: str) -> list[Order]:
+         return self._repository.list_for_customer(customer_id)
+diff --git a/src/orders/controllers/orders.py b/src/orders/controllers/orders.py
+index 0cbf354..50e4a49 100644
+--- a/src/orders/controllers/orders.py
++++ b/src/orders/controllers/orders.py
+@@ -9,7 +9,12 @@ from __future__ import annotations
+ from dataclasses import dataclass
+ from typing import Any
+ 
+-from orders.application.order_service import OrderNotFound, OrderService
++from orders.application.order_service import (
++    InvalidStatusChange,
++    OrderNotFound,
++    OrderService,
++    UnknownStatus,
++)
+ from orders.domain import LineItem, Order, OrderSummary
+ 
+ 
+@@ -86,6 +91,25 @@ class OrderController:
+             return Response(404, {"error": "order not found"})
+         return Response(200, _summary_body(summary))
+ 
++    def handle_update_status(self, order_id: str, request: dict[str, Any]) -> Response:
++        status = request.get("status") if isinstance(request, dict) else None
++        if not isinstance(status, str):
++            # Shape check only; whether the string is a known status is the
++            # service's decision. Still report 404 for unknown orders first.
++            status = None
++        try:
++            if status is None:
++                self._service.get_order(order_id)
++                return Response(400, {"error": "unknown status"})
++            order = self._service.update_status(order_id, status)
++        except OrderNotFound:
++            return Response(404, {"error": "order not found"})
++        except UnknownStatus:
++            return Response(400, {"error": "unknown status"})
++        except InvalidStatusChange as exc:
++            return Response(409, {"error": str(exc)})
++        return Response(200, _order_body(order))
++
+     def handle_list_for_customer(self, customer_id: str) -> Response:
+         orders = self._service.list_for_customer(customer_id)
+         return Response(200, {"orders": [_order_body(o) for o in orders]})
+diff --git a/tests/test_order_behaviour.py b/tests/test_order_behaviour.py
+index 53425d2..96f7737 100644
+--- a/tests/test_order_behaviour.py
++++ b/tests/test_order_behaviour.py
+@@ -120,3 +120,57 @@ class TestListForCustomer:
+ 
+     def test_customer_without_orders_gets_an_empty_list(self, controller):
+         assert controller.handle_list_for_customer("nobody").body == {"orders": []}
++
++
++class TestUpdateStatus:
++    def test_moves_forward_one_step_at_a_time_and_persists(self, controller):
++        order_id = create(controller).body["order_id"]
++
++        for status in ["paid", "shipped", "delivered"]:
++            response = controller.handle_update_status(order_id, {"status": status})
++            assert response.status == 200
++            assert response.body["status"] == status
++            assert response.body["order_id"] == order_id
++            assert controller.handle_get(order_id).body["status"] == status
++
++    @pytest.mark.parametrize("requested", ["placed", "shipped", "delivered"])
++    def test_non_next_step_is_a_conflict(self, controller, requested):
++        order_id = create(controller).body["order_id"]
++
++        response = controller.handle_update_status(order_id, {"status": requested})
++
++        assert response.status == 409
++        assert response.body == {
++            "error": f"cannot change status from placed to {requested}"
++        }
++        assert controller.handle_get(order_id).body["status"] == "placed"
++
++    def test_delivered_order_cannot_change(self, controller):
++        order_id = create(controller).body["order_id"]
++        for status in ["paid", "shipped", "delivered"]:
++            controller.handle_update_status(order_id, {"status": status})
++
++        response = controller.handle_update_status(order_id, {"status": "delivered"})
++
++        assert response.status == 409
++        assert response.body == {
++            "error": "cannot change status from delivered to delivered"
++        }
++
++    @pytest.mark.parametrize(
++        "request_body", [{}, {"status": "bogus"}, {"status": None}, {"status": 3}]
++    )
++    def test_missing_or_unknown_status_is_rejected(self, controller, request_body):
++        order_id = create(controller).body["order_id"]
++
++        response = controller.handle_update_status(order_id, request_body)
++
++        assert response.status == 400
++        assert response.body == {"error": "unknown status"}
++        assert controller.handle_get(order_id).body["status"] == "placed"
++
++    def test_unknown_order_is_not_found(self, controller):
++        response = controller.handle_update_status("nope", {"status": "paid"})
++
++        assert response.status == 404
++        assert response.body == {"error": "order not found"}

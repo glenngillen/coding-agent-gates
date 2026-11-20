@@ -1,0 +1,127 @@
+{
+  "_template": "UNPOPULATED TEMPLATE. Every value is intentionally null. This file is not a run record and contains no data; experiment/tools/run_pilot.py writes one real record per attempted run under experiment/runs/<pilot>/<run_id>/record.json. Field meanings: experiment/run-record.schema.json.",
+  "schema": "coding-agent-gates/run-record/v1",
+  "evidence_kind": null,
+  "identity": {
+    "pilot": null,
+    "run_id": null,
+    "task_id": null,
+    "arm": null,
+    "repeat": null,
+    "sequence": null,
+    "position_in_task": null,
+    "blind_id": null,
+    "baseline_commit": null,
+    "baseline_tree_sha256": null,
+    "final_tree_sha256": null,
+    "prompt_sha256": null,
+    "task_sha256": null,
+    "instruction_sha256": null,
+    "arms_sha256": null,
+    "settings_sha256": null,
+    "frozen_manifest_sha256": null,
+    "agent_model_requested": null,
+    "agent_models_reported": null,
+    "agent_effort": null,
+    "seed": null,
+    "session": null,
+    "started_at": null,
+    "finished_at": null,
+    "environment": {
+      "claude_cli": null,
+      "python": null,
+      "import_linter": null,
+      "platform": null
+    }
+  },
+  "outcome": {
+    "termination": null,
+    "completed_within_budget": null,
+    "not_runnable": null,
+    "agent_started": null,
+    "agent_termination": null,
+    "behavior": null,
+    "structural": null,
+    "semantic_judge": null,
+    "semantic_label": null,
+    "semantic_label_note": null,
+    "tampering_detected": null,
+    "settings_file_check": null,
+    "baseline_tests_modified": null,
+    "gate_final_state": null,
+    "submission": null
+  },
+  "repair": {
+    "applicable": null,
+    "cycles": null,
+    "censored": null,
+    "note": null,
+    "checker_invocations": {
+      "sensor": null,
+      "judge": null
+    }
+  },
+  "usage": {
+    "agent": {
+      "missing": null,
+      "cost_usd": null,
+      "by_model": null,
+      "cost_basis": null
+    },
+    "development_judge": {
+      "calls": null,
+      "started_calls": null,
+      "unknown_cost_calls": null,
+      "cost_usd": null,
+      "known_cost_subtotal_usd": null,
+      "unknown_cost_held_usd": null,
+      "unknown_cost_unrecorded_charge_calls": null,
+      "tokens": null,
+      "tokens_missing_calls": null,
+      "models": [],
+      "cost_basis": null
+    },
+    "evaluation_judge": {
+      "calls": null,
+      "started_calls": null,
+      "unknown_cost_calls": null,
+      "cost_usd": null,
+      "known_cost_subtotal_usd": null,
+      "unknown_cost_held_usd": null,
+      "unknown_cost_unrecorded_charge_calls": null,
+      "tokens": null,
+      "tokens_missing_calls": null,
+      "models": [],
+      "cost_basis": null
+    }
+  },
+  "time": {
+    "attempt_s": null,
+    "agent_reported_s": null,
+    "model_api_s": null,
+    "check_sensor_s": null,
+    "check_judge_s": null,
+    "ci_queue_s": null,
+    "ci_queue_note": null,
+    "clock": null
+  },
+  "interventions": [],
+  "infrastructure_retries": [],
+  "ledger": {
+    "agent_entry_id": null,
+    "reserved_usd": null,
+    "charged_usd": null,
+    "status": null
+  },
+  "artifacts": {
+    "prepared": null,
+    "settings": null,
+    "transcript": null,
+    "cli_stderr": null,
+    "hook_events": null,
+    "final_diff": null,
+    "evaluation": null
+  },
+  "settings_integrity": null,
+  "notes": []
+}

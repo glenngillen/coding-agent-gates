@@ -1,0 +1,121 @@
+{
+  "schema": "coding-agent-gates/study-v3/v1",
+  "frozen": "2026-11-20",
+  "protocol": "experiment/protocol-v3.md",
+  "based_on": "experiment/v2/study.json: same agent configuration, scenarios, workspace history, baseline, contracts, acceptance tests, evaluator, Stop hook and slip definitions. Only the guidance factor, the arms (A and B), the per-session budget caps, the seed and the worker count differ.",
+  "placement": "end of turn: the experiment Stop hook (arm B), also registered on UserPromptSubmit so the repair budget resets each turn; arm A has no hooks",
+  "guidance": {
+    "stated": {
+      "instruction_file": "experiment/v3/instructions/stated.md",
+      "label": "rule stated",
+      "description": "Byte-identical to the version 2 instruction file: an Architecture section that forbids controller imports from orders.infrastructure and places business decisions in the application layer."
+    },
+    "one-line": {
+      "instruction_file": "experiment/v3/instructions/one-line.md",
+      "label": "one-line hint",
+      "description": "The Architecture section is replaced by one sentence: the code is layered (controllers, application, infrastructure, domain); keep to the layering. The import rule is not spelled out."
+    },
+    "unstated": {
+      "instruction_file": "experiment/v3/instructions/unstated.md",
+      "label": "rule unstated",
+      "description": "The Architecture section is removed. Nothing in the workspace instruction file mentions layers or imports. The code, its history and the legacy reports controller are unchanged."
+    }
+  },
+  "instruction_delivery": "workspace CLAUDE.md only, loaded by Claude Code with --setting-sources project; not passed with --append-system-prompt-file",
+  "prompt_suffix": "\n\nWork in this repository until the request is complete, then reply with a short summary of what you changed.",
+  "max_repairs": 3,
+  "scenarios": [
+    "S1-customer-insights",
+    "S2-fulfilment"
+  ],
+  "repeats": 3,
+  "seed": 2026112003,
+  "workers": 4,
+  "models": {
+    "sonnet": {
+      "model": "claude-sonnet-5-5",
+      "effort": "medium",
+      "max_budget_usd": "1.00",
+      "response_reserve_usd": "5.28",
+      "response_reserve_note": "one response at Claude Sonnet 5.5's documented limits and highest rates (run_pilot.py, sources.md T20)"
+    },
+    "haiku": {
+      "model": "claude-haiku-5-5",
+      "effort": null,
+      "max_budget_usd": "0.25",
+      "response_reserve_usd": "1.32",
+      "effort_note": "not set: the CLI default is used",
+      "response_reserve_note": "one response at Claude Haiku 5.5's documented limits and long-context rates (README, live-judge spend bound)"
+    }
+  },
+  "agent": {
+    "cli": "claude",
+    "tools": [
+      "Bash",
+      "Read",
+      "Edit",
+      "Write",
+      "Glob",
+      "Grep"
+    ],
+    "allowed_tools": [
+      "Read",
+      "Edit",
+      "Write",
+      "Glob",
+      "Grep",
+      "Bash(.venv/bin/python -m pytest:*)",
+      "Bash(ls:*)",
+      "Bash(git status:*)",
+      "Bash(git diff:*)",
+      "Bash(git log:*)",
+      "Bash(git show:*)"
+    ],
+    "disallowed_tools": [
+      "mcp__infracost"
+    ],
+    "disable_slash_commands": true,
+    "permission_mode": "acceptEdits",
+    "permission_prompts": "none",
+    "setting_sources": "project",
+    "auto_memory": false,
+    "session": "one fresh process per session, --no-session-persistence; steps sent as successive user messages with --input-format stream-json",
+    "input_format": "stream-json",
+    "output_format": "stream-json",
+    "wall_timeout_s": 2400,
+    "seed": "unsupported by the Claude Code CLI; not set"
+  },
+  "judge": {
+    "model": "claude-haiku-5-5",
+    "adapter": "gates.claude_cli_judge.ClaudeCliJudgeProvider",
+    "rubric": "semantic/rubric.md"
+  },
+  "development_contract": "experiment/v2/development.importlinter",
+  "evaluator_contract": "experiment/v2/evaluator/.importlinter",
+  "reviewed_exceptions": "experiment/v2/reviewed-exceptions.json",
+  "arms": {
+    "A": {
+      "label": "instruction only",
+      "description": "The workspace CLAUDE.md for the session's guidance level and the steps. No architecture feedback while working.",
+      "stop_hook": null
+    },
+    "B": {
+      "label": "instruction + structural gate",
+      "description": "A plus the deterministic import-contract sensor at the end of each turn, with up to max_repairs repair requests per turn. The diagnostic names the rule and how to fix it.",
+      "stop_hook": {
+        "semantic": false
+      }
+    }
+  },
+  "budget": {
+    "currency": "USD",
+    "basis": "CLI-reported total_cost_usd (API-equivalent list price; notional under a subscription login)",
+    "sessions": 72,
+    "agent_cap_sum_usd": "45.00",
+    "agent_cap_sum_note": "36 Sonnet sessions x US$1.00 + 36 Haiku sessions x US$0.25, the per-session --max-budget-usd caps (exploratory sessions cost about US$0.30 and US$0.02)",
+    "judge_allowance_usd": "1.00",
+    "judge_allowance_note": "one evaluation judge call per session on the final controllers; no development-time judge (there is no arm C)",
+    "declared_usd": "46.00",
+    "enforcement": "the shared spend ledger reserves each session's cap plus one maximal response before it starts and refuses any session that would pass the shared US$100 cap; refused sessions are recorded as not_started_cap"
+  }
+}

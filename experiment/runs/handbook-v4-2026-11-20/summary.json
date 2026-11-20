@@ -1,0 +1,170 @@
+{
+  "by_guidance_arm": {
+    "handbook|A": {
+      "attempted": 12,
+      "caught": 0,
+      "final_known": 12,
+      "final_violation_lower95": 0.0,
+      "final_violation_upper95": 0.22092219194555585,
+      "final_violations": 0,
+      "judge_unavailable": 0,
+      "not_started": 0,
+      "repaired": 0,
+      "session_slip_lower95": 0.0,
+      "session_slip_upper95": 0.22092219194555585,
+      "sessions": 12,
+      "sessions_unknown": 0,
+      "sessions_with_slip": 0,
+      "turn_slip_lower95": 0.0,
+      "turn_slip_upper95": 0.06050340934889431,
+      "turn_slips": 0,
+      "turns": 48,
+      "turns_unknown": 0
+    },
+    "handbook|B": {
+      "attempted": 12,
+      "caught": 0,
+      "final_known": 12,
+      "final_violation_lower95": 0.0,
+      "final_violation_upper95": 0.22092219194555585,
+      "final_violations": 0,
+      "judge_unavailable": 0,
+      "not_started": 0,
+      "repaired": 0,
+      "session_slip_lower95": 0.0,
+      "session_slip_upper95": 0.22092219194555585,
+      "sessions": 12,
+      "sessions_unknown": 0,
+      "sessions_with_slip": 0,
+      "turn_slip_lower95": 0.0,
+      "turn_slip_upper95": 0.06050340934889431,
+      "turn_slips": 0,
+      "turns": 48,
+      "turns_unknown": 0
+    },
+    "one-line|A": {
+      "attempted": 12,
+      "caught": 0,
+      "final_known": 12,
+      "final_violation_lower95": 0.0,
+      "final_violation_upper95": 0.22092219194555585,
+      "final_violations": 0,
+      "judge_unavailable": 0,
+      "not_started": 0,
+      "repaired": 0,
+      "session_slip_lower95": 0.0,
+      "session_slip_upper95": 0.22092219194555585,
+      "sessions": 12,
+      "sessions_unknown": 0,
+      "sessions_with_slip": 0,
+      "turn_slip_lower95": 0.0,
+      "turn_slip_upper95": 0.06050340934889431,
+      "turn_slips": 0,
+      "turns": 48,
+      "turns_unknown": 0
+    },
+    "one-line|B": {
+      "attempted": 12,
+      "caught": 0,
+      "final_known": 12,
+      "final_violation_lower95": 0.0,
+      "final_violation_upper95": 0.22092219194555585,
+      "final_violations": 0,
+      "judge_unavailable": 0,
+      "not_started": 0,
+      "repaired": 0,
+      "session_slip_lower95": 0.0,
+      "session_slip_upper95": 0.22092219194555585,
+      "sessions": 12,
+      "sessions_unknown": 0,
+      "sessions_with_slip": 0,
+      "turn_slip_lower95": 0.0,
+      "turn_slip_upper95": 0.06050340934889431,
+      "turn_slips": 0,
+      "turns": 48,
+      "turns_unknown": 0
+    }
+  },
+  "cost": {
+    "handbook|A|haiku": {
+      "judge": {
+        "pass": 6
+      },
+      "mean_cost_usd": "0.066765659999999999",
+      "median_session_s": 93.964,
+      "sessions": 6,
+      "total_cost_usd": "0.400593959999999994"
+    },
+    "handbook|A|sonnet": {
+      "judge": {
+        "pass": 6
+      },
+      "mean_cost_usd": "0.63303234999999995",
+      "median_session_s": 105.489,
+      "sessions": 6,
+      "total_cost_usd": "3.7981940999999997"
+    },
+    "handbook|B|haiku": {
+      "judge": {
+        "pass": 6
+      },
+      "mean_cost_usd": "0.0693873350000000025",
+      "median_session_s": 103.345,
+      "sessions": 6,
+      "total_cost_usd": "0.416324010000000015"
+    },
+    "handbook|B|sonnet": {
+      "judge": {
+        "pass": 6
+      },
+      "mean_cost_usd": "0.6316006333333333333333333333",
+      "median_session_s": 104.5375,
+      "sessions": 6,
+      "total_cost_usd": "3.7896038000000000"
+    },
+    "one-line|A|haiku": {
+      "judge": {
+        "pass": 4,
+        "violation": 2
+      },
+      "mean_cost_usd": "0.02172429499999999916666666667",
+      "median_session_s": 83.87049999999999,
+      "sessions": 6,
+      "total_cost_usd": "0.130345769999999995"
+    },
+    "one-line|A|sonnet": {
+      "judge": {
+        "pass": 5,
+        "violation": 1
+      },
+      "mean_cost_usd": "0.2971183000000000166666666667",
+      "median_session_s": 94.7805,
+      "sessions": 6,
+      "total_cost_usd": "1.78270980000000010"
+    },
+    "one-line|B|haiku": {
+      "judge": {
+        "pass": 4,
+        "violation": 2
+      },
+      "mean_cost_usd": "0.02110565666666666483333333333",
+      "median_session_s": 84.571,
+      "sessions": 6,
+      "total_cost_usd": "0.126633939999999989"
+    },
+    "one-line|B|sonnet": {
+      "judge": {
+        "pass": 6
+      },
+      "mean_cost_usd": "0.3035833833333333516666666667",
+      "median_session_s": 99.9255,
+      "sessions": 6,
+      "total_cost_usd": "1.82150030000000011"
+    }
+  },
+  "missing": [],
+  "slips": [],
+  "terminations": {
+    "completed": 48
+  }
+}

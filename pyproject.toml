@@ -1,0 +1,36 @@
+# Companion example for "From prompt rules to failing tests: building sensors and
+# gates for coding agents". Not a distributable package: the source tree under
+# src/ is put on the path for tests, and the environment is installed from the
+# hash-pinned requirements.lock (see README.md).
+[project]
+name = "coding-agent-gates"
+version = "0.1.0"
+description = "Order-service example with an architecture sensor at three gate placements."
+requires-python = ">=3.11"
+dependencies = []
+
+[project.optional-dependencies]
+# Regenerate requirements.lock after changing these (command in README.md).
+dev = [
+  "import-linter==2.17",
+  "anthropic==2.10.0",
+  "hypothesis==6.170.15",
+  "pre-commit==4.7.0",
+  "pytest==9.2.0",
+]
+
+[tool.pytest.ini_options]
+# Unit tier only: pure tests with mocked process, filesystem and model boundaries.
+# Integration tests that run real lint-imports/Git, the intentionally failing
+# fixtures and the frozen experiment acceptance tests live outside tests/unit and
+# must never be collected by the default run (several fail against the baseline
+# by design).
+testpaths = ["tests/unit"]
+# */support hold shared helpers and fixtures (no tests); src holds both packages;
+# experiment holds the evaluator package; experiment/tools the experiment scripts.
+pythonpath = ["src", "experiment", "experiment/tools", "tests/unit/support", "tests/integration/support"]
+# basetemp keeps pytest temp dirs inside the gitignored .tmp/ of this example.
+addopts = ["--strict-markers", "--import-mode=importlib", "-p", "no:cacheprovider", "--basetemp=.tmp/pytest"]
+markers = [
+  "integration: runs real tools or Git; CI only, never part of the unit run",
+]

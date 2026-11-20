@@ -1,0 +1,284 @@
+src/orders/application/customer_service.py --- Python
+26 26             raise CustomerNotFound(customer_id)
+27 27         return customer
+   28 
+   29     def list_all(self) -> list[Customer]:
+   30         return self._customers.list_all()
+
+src/orders/application/order_service.py --- Python
+64 64             raise CustomerNotFound(customer_id)
+65 65         return self._orders.list_for_customer(customer_id)
+.. 66 
+.. 67     def order_history(self, customer_id: str) -> list[OrderSummary]:
+.. 68         """All of a customer's orders, newest first, including cancelled ones."""
+.. 69         if self._customers.get(customer_id) is None:
+.. 70             raise CustomerNotFound(customer_id)
+.. 71         # Creation order is preserved by the repository; newest first is its reverse.
+.. 72         return [self.summarize(o) for o in reversed(self._orders.list_for_customer(customer_id))]
+66 73 
+67 74     def cancel_order(self, order_id: str) -> Order:
+68 75         order = self.get_order(order_id)
+
+src/orders/controllers/customer_insights.py --- Python
+ 1 """Customer insight endpoints for the account team."""
+ 2 
+ 3 from __future__ import annotations
+ 4 
+ 5 from typing import Any
+ 6 
+ 7 from orders.application.customer_service import CustomerService
+ 8 from orders.application.errors import CustomerNotFound
+ 9 from orders.application.order_service import OrderService
+10 from orders.controllers.http import InvalidRequest, Response, bad_request, not_found, require_positive_int
+11 
+12 
+13 class CustomerInsightsController:
+14     def __init__(self, orders: OrderService, customers: CustomerService) -> None:
+15         self._orders = orders
+16         self._customers = customers
+17 
+18     def handle_order_history(self, customer_id: str) -> Response:
+19         try:
+20             summaries = self._orders.order_history(customer_id)
+21         except CustomerNotFound:
+22             return not_found("customer")
+23         order_entries: list[dict[str, Any]] = [
+24             {"order_id": s.order.order_id, "status": s.order.status, "total_cents": s.total_cents}
+25             for s in summaries
+26         ]
+27         return Response(200, {"customer_id": customer_id, "orders": order_entries})
+28 
+29     def handle_lifetime_value(self, customer_id: str) -> Response:
+30         """Non-cancelled order count and the sum of their totals (discounts included)."""
+31         try:
+32             order_count, value = self._lifetime_value(customer_id)
+33         except CustomerNotFound:
+34             return not_found("customer")
+35         return Response(200, {
+36             "customer_id": customer_id,
+37             "order_count": order_count,
+38             "lifetime_value_cents": value,
+39         })
+40 
+41     def handle_top_customers(self, limit: Any) -> Response:
+42         """Customers ranked by lifetime value, highest first; zero-value customers are omitted."""
+43         try:
+44             limit = require_positive_int(limit, "limit")
+45         except InvalidRequest as exc:
+46             return bad_request(exc)
+47         ranked = []
+48         for customer in self._customers.list_all():
+49             _, value = self._lifetime_value(customer.customer_id)
+50             if value > 0:
+51                 ranked.append((value, customer))
+52         ranked.sort(key=lambda pair: (-pair[0], pair[1].customer_id))
+53         return Response(200, {"customers": [
+54             {"customer_id": c.customer_id, "name": c.name, "lifetime_value_cents": value}
+55             for value, c in ranked[:limit]
+56         ]})
+57 
+58     def handle_customers_without_orders(self) -> Response:
+59         """Registered customers with no orders that are not cancelled, in registration order."""
+60         customers = [
+61             {"customer_id": c.customer_id, "name": c.name, "email": c.email}
+62             for c in self._customers.list_all()
+63             if self._lifetime_value(c.customer_id)[0] == 0
+64         ]
+65         return Response(200, {"customers": customers})
+66 
+67     def _lifetime_value(self, customer_id: str) -> tuple[int, int]:
+68         """Return (non-cancelled order count, sum of their totals). Raises CustomerNotFound."""
+69         summaries = self._orders.order_history(customer_id)
+70         active = [s for s in summaries if s.order.status != "cancelled"]
+71         return len(active), sum(s.total_cents for s in active)
+72 
+
+src/orders/wiring.py --- 1/2 --- Python
+ 8  8 from orders.application.customer_service import CustomerService
+ 9  9 from orders.application.order_service import OrderService
+10 10 from orders.controllers.catalog import CatalogController
+.. 11 from orders.controllers.customer_insights import CustomerInsightsController
+11 12 from orders.controllers.customers import CustomerController
+12 13 from orders.controllers.orders import OrderController
+13 14 from orders.controllers.reports import ReportsController
+
+src/orders/wiring.py --- 2/2 --- Python
+23     catalog: CatalogController        24     catalog: CatalogController
+24     orders: OrderController           25     orders: OrderController
+25     reports: ReportsController        26     reports: ReportsController
+..                                       27     insights: CustomerInsightsContro
+..                                       .. ller
+26                                       28 
+27                                       29 
+28 def build_app() -> Api:               30 def build_app() -> Api:
+29     orders = InMemoryOrderRepository  31     orders = InMemoryOrderRepository
+.. ()                                    .. ()
+30     customers = InMemoryCustomerRepo  32     customers = InMemoryCustomerRepo
+.. sitory()                              .. sitory()
+31     catalog = InMemoryProductCatalog  33     catalog = InMemoryProductCatalog
+.. ()                                    .. ()
+32     stock = InMemoryStockRepository(  34     stock = InMemoryStockRepository(
+.. )                                     .. )
+..                                       35     order_service = OrderService(ord
+..                                       .. ers, customers, catalog, stock)
+..                                       36     customer_service = CustomerServi
+..                                       .. ce(customers)
+33     return Api(                       37     return Api(
+34         customers=CustomerController  38         customers=CustomerController
+.. (CustomerService(customers)),         .. (customer_service),
+35         catalog=CatalogController(Ca  39         catalog=CatalogController(Ca
+.. talogService(catalog, stock)),        .. talogService(catalog, stock)),
+36         orders=OrderController(Order  40         orders=OrderController(order
+.. Service(orders, customers, catalog,   .. _service),
+.. stock)),                              .. 
+37         reports=ReportsController(or  41         reports=ReportsController(or
+.. ders),                                .. ders),
+..                                       42         insights=CustomerInsightsCon
+..                                       .. troller(order_service, customer_serv
+..                                       .. ice),
+38     )                                 43     )
+
+tests/test_customer_insights.py --- Python
+  1 def order(api, customer_id, *items):
+  2     return api.orders.handle_create({"customer_id": customer_id,
+  3                                      "items": [{"sku": s, "quantity": q} for s, q in items]})
+  4 
+  5 
+  6 def test_unknown_customer_is_not_found(shop):
+  7     response = shop.insights.handle_order_history("nobody")
+  8     assert response.status == 404
+  9     assert response.body == {"error": "customer not found"}
+ 10 
+ 11 
+ 12 def test_customer_with_no_orders_has_empty_history(shop):
+ 13     response = shop.insights.handle_order_history("c1")
+ 14     assert response.status == 200
+ 15     assert response.body == {"customer_id": "c1", "orders": []}
+ 16 
+ 17 
+ 18 def test_orders_are_newest_first_and_include_cancelled(shop):
+ 19     first = order(shop, "c1", ("BOOK", 1)).body["order_id"]
+ 20     second = order(shop, "c1", ("PEN", 2)).body["order_id"]
+ 21     shop.orders.handle_cancel(second)
+ 22     third = order(shop, "c1", ("PEN", 1)).body["order_id"]
+ 23     order(shop, "c2", ("BOOK", 1))  # another customer's order must not appear
+ 24 
+ 25     response = shop.insights.handle_order_history("c1")
+ 26 
+ 27     assert response.status == 200
+ 28     assert response.body == {"customer_id": "c1", "orders": [
+ 29         {"order_id": third, "status": "placed", "total_cents": 300},
+ 30         {"order_id": second, "status": "cancelled", "total_cents": 600},
+ 31         {"order_id": first, "status": "placed", "total_cents": 2_500},
+ 32     ]}
+ 33 
+ 34 
+ 35 def test_lifetime_value_unknown_customer_is_not_found(shop):
+ 36     response = shop.insights.handle_lifetime_value("nobody")
+ 37     assert response.status == 404
+ 38     assert response.body == {"error": "customer not found"}
+ 39 
+ 40 
+ 41 def test_lifetime_value_with_no_orders_is_zero(shop):
+ 42     response = shop.insights.handle_lifetime_value("c1")
+ 43     assert response.status == 200
+ 44     assert response.body == {"customer_id": "c1", "order_count": 0, "lifetime_value_cents": 0}
+ 45 
+ 46 
+ 47 def test_lifetime_value_excludes_cancelled_orders(shop):
+ 48     order(shop, "c1", ("BOOK", 1))                       # 2_500
+ 49     cancelled = order(shop, "c1", ("PEN", 2)).body["order_id"]  # 600, cancelled
+ 50     shop.orders.handle_cancel(cancelled)
+ 51     order(shop, "c1", ("PEN", 1))                        # 300
+ 52     order(shop, "c2", ("BOOK", 1))                       # other customer
+ 53 
+ 54     response = shop.insights.handle_lifetime_value("c1")
+ 55 
+ 56     assert response.status == 200
+ 57     assert response.body == {"customer_id": "c1", "order_count": 2, "lifetime_value_cents": 2_800}
+ 58 
+ 59 
+ 60 def test_lifetime_value_sums_discounted_totals(shop):
+ 61     # Gold customer c2: 2 x LAMP = 12_000 subtotal, 15% off -> 10_200; plus one BOOK at 2_500.
+ 62     order(shop, "c2", ("LAMP", 2))
+ 63     order(shop, "c2", ("BOOK", 1))
+ 64 
+ 65     response = shop.insights.handle_lifetime_value("c2")
+ 66 
+ 67     assert response.body == {"customer_id": "c2", "order_count": 2, "lifetime_value_cents": 12_700}
+ 68 
+ 69 
+ 70 def test_top_customers_rejects_invalid_limit(shop):
+ 71     for bad in (0, -1, True, False, "3", 2.0, None):
+ 72         response = shop.insights.handle_top_customers(bad)
+ 73         assert response.status == 400, bad
+ 74         assert "limit" in response.body["error"]
+ 75 
+ 76 
+ 77 def test_top_customers_ranks_by_lifetime_value_and_omits_zero(shop):
+ 78     api = shop
+ 79     api.customers.handle_register({"customer_id": "c3", "name": "Linus", "email": "l@example.com"})
+ 80     order(api, "c1", ("BOOK", 1))                                # c1: 2_500
+ 81     order(api, "c2", ("LAMP", 2))                                # c2: 10_200 (gold discount)
+ 82     order(api, "c1", ("PEN", 1))                                 # c1: 2_800 total
+ 83     cancelled = order(api, "c3", ("PEN", 1)).body["order_id"]    # c3: only cancelled -> omitted
+ 84     api.orders.handle_cancel(cancelled)
+ 85 
+ 86     response = api.insights.handle_top_customers(10)
+ 87 
+ 88     assert response.status == 200
+ 89     assert response.body == {"customers": [
+ 90         {"customer_id": "c2", "name": "Grace", "lifetime_value_cents": 10_200},
+ 91         {"customer_id": "c1", "name": "Ada", "lifetime_value_cents": 2_800},
+ 92     ]}
+ 93 
+ 94 
+ 95 def test_top_customers_respects_limit_and_breaks_ties_by_customer_id(shop):
+ 96     api = shop
+ 97     api.customers.handle_register({"customer_id": "c0", "name": "Zed", "email": "z@example.com"})
+ 98     order(api, "c1", ("BOOK", 1))  # 2_500
+ 99     order(api, "c0", ("BOOK", 1))  # 2_500, ties with c1 -> c0 sorts first
+100 
+101     response = api.insights.handle_top_customers(1)
+102 
+103     assert response.body == {"customers": [
+104         {"customer_id": "c0", "name": "Zed", "lifetime_value_cents": 2_500},
+105     ]}
+106 
+107 
+108 def test_customers_without_orders_in_registration_order(shop):
+109     api = shop
+110     api.customers.handle_register({"customer_id": "c0", "name": "Zed", "email": "z@example.com"})
+111     order(api, "c1", ("BOOK", 1))                                 # c1 has an active order
+112     only_cancelled = order(api, "c2", ("PEN", 1)).body["order_id"]
+113     api.orders.handle_cancel(only_cancelled)                      # c2 has no active orders
+114 
+115     response = api.insights.handle_customers_without_orders()
+116 
+117     # Registration order is c1, c2, c0; c1 is excluded because it has an active order.
+118     assert response.status == 200
+119     assert response.body == {"customers": [
+120         {"customer_id": "c2", "name": "Grace", "email": "grace@example.com"},
+121         {"customer_id": "c0", "name": "Zed", "email": "z@example.com"},
+122     ]}
+123 
+124 
+125 def test_customers_without_orders_empty_when_all_have_orders(shop):
+126     order(shop, "c1", ("BOOK", 1))
+127     order(shop, "c2", ("BOOK", 1))
+128 
+129     assert shop.insights.handle_customers_without_orders().body == {"customers": []}
+130 
+131 
+132 def test_totals_include_discount_and_match_order_summary(shop):
+133     # Gold customer c2: 2 x LAMP = 12_000 subtotal, 15% discount -> 10_200.
+134     created = order(shop, "c2", ("LAMP", 2)).body["order_id"]
+135 
+136     history = shop.insights.handle_order_history("c2").body["orders"]
+137     summary = shop.orders.handle_get(created).body
+138 
+139     assert history == [{"order_id": created, "status": "placed",
+140                         "total_cents": summary["total_cents"]}]
+141     assert history[0]["total_cents"] == 10_200
+142 
+

@@ -1,0 +1,113 @@
+{
+  "schema": "coding-agent-gates/evaluation-v2/v1",
+  "scenario_id": "S1-customer-insights",
+  "snapshot_tree_sha256": "1bb370b9d0a655952272ac2eb3ff7f644aeaf28041deeca7e58495b91a58b741",
+  "frozen_manifest_sha256": "b9fe0be84c81d4b182d991faf898c0fe4bba3a186b551b9a204489019aeb96e3",
+  "submission": "final snapshot evaluated as a synthetic final submission; no merge was attempted or blocked",
+  "behavior": {
+    "steps": {
+      "s1-step1-history": {
+        "status": "pass",
+        "tests": 4,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "exit_code": 0,
+        "detail": "....                                                                     [100%]\n4 passed in 0.13s\n"
+      },
+      "s1-step2-lifetime-value": {
+        "status": "pass",
+        "tests": 5,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "exit_code": 0,
+        "detail": ".....                                                                    [100%]\n5 passed in 0.06s\n"
+      },
+      "s1-step3-top-customers": {
+        "status": "pass",
+        "tests": 9,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "exit_code": 0,
+        "detail": ".........                                                                [100%]\n9 passed in 0.06s\n"
+      },
+      "s1-step4-inactive": {
+        "status": "pass",
+        "tests": 4,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "exit_code": 0,
+        "detail": "....                                                                     [100%]\n4 passed in 0.06s\n"
+      }
+    },
+    "regression": {
+      "status": "pass",
+      "tests": 17,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "exit_code": 0,
+      "detail": ".................                                                        [100%]\n17 passed in 0.07s\n"
+    },
+    "steps_accepted": [
+      "s1-step1-history",
+      "s1-step2-lifetime-value",
+      "s1-step3-top-customers",
+      "s1-step4-inactive"
+    ],
+    "all_steps_accepted": true
+  },
+  "structural": {
+    "schema": "coding-agent-gates/sensor-result/v1",
+    "status": "violation",
+    "rules": {
+      "Controllers must not import infrastructure repositories directly": "BROKEN"
+    },
+    "violations": [
+      {
+        "rule": "Controllers must not import infrastructure repositories directly",
+        "importer": "orders.controllers.customer_insights",
+        "imported": "orders.infrastructure.customers",
+        "lines": [
+          9
+        ],
+        "kind": "broken"
+      }
+    ],
+    "error": null,
+    "fingerprint": "747e0fa28e9233e0eb0b69ffb9a4f2eabd96a89c38db387d029951f936b26bcf",
+    "tool_version": "2.17",
+    "exit_code": 1,
+    "raw_output": "\n---------\nContracts\n---------\n\nAnalyzed 24 files, 49 dependencies.\n-----------------------------------\n\nControllers must not import infrastructure repositories directly BROKEN (1 ignored import)\n\nContracts: 0 kept, 1 broken.\n\n\n----------------\nBroken contracts\n----------------\n\nControllers must not import infrastructure repositories directly\n----------------------------------------------------------------\n\norders.controllers is not allowed to import orders.infrastructure:\n\n-   orders.controllers.customer_insights -> orders.infrastructure.customers (l.9)\n\n\n",
+    "raw_status": "violation"
+  },
+  "semantic_judge": {
+    "status": "not_evaluated",
+    "reason": "structural check is violation; repair it before semantic review",
+    "findings": [],
+    "provider_failed": false,
+    "raw_response": null
+  },
+  "semantic_judge_calls": [],
+  "semantic_label": null,
+  "semantic_label_note": "unavailable: no independent human labels for final runs (Decisions, 2026-11-19); semantic_judge is a judge output, not ground truth",
+  "tampering": {
+    "detected": false,
+    "workspace_protected": {
+      "changed": [],
+      "added": [],
+      "removed": []
+    },
+    "gate_files": {
+      "changed": [],
+      "added": [],
+      "removed": []
+    },
+    "workspace_settings_added": [],
+    "baseline_tests_modified": [],
+    "legacy_reports_modified": false
+  }
+}

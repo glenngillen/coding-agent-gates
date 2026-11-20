@@ -1,0 +1,74 @@
+[
+  {
+    "turn": 1,
+    "status": "violation",
+    "raw_status": "violation",
+    "violations": [
+      {
+        "rule": "Controllers must not import infrastructure repositories directly",
+        "importer": "orders.controllers.customer_insights",
+        "imported": "orders.infrastructure.customers",
+        "lines": [
+          9
+        ],
+        "kind": "broken"
+      }
+    ],
+    "error": null,
+    "fingerprint": "3791296c4edfaac9cd3d594d019aabb5230fca6a3a97c2b0622b19076a20995a"
+  },
+  {
+    "turn": 2,
+    "status": "violation",
+    "raw_status": "violation",
+    "violations": [
+      {
+        "rule": "Controllers must not import infrastructure repositories directly",
+        "importer": "orders.controllers.customer_insights",
+        "imported": "orders.infrastructure.customers",
+        "lines": [
+          9
+        ],
+        "kind": "broken"
+      }
+    ],
+    "error": null,
+    "fingerprint": "014230ec472fbca1a2a814deab0cea514d6dda1fb6ae9baed7774df1f7e305e9"
+  },
+  {
+    "turn": 3,
+    "status": "violation",
+    "raw_status": "violation",
+    "violations": [
+      {
+        "rule": "Controllers must not import infrastructure repositories directly",
+        "importer": "orders.controllers.customer_insights",
+        "imported": "orders.infrastructure.customers",
+        "lines": [
+          9
+        ],
+        "kind": "broken"
+      }
+    ],
+    "error": null,
+    "fingerprint": "df968e14408207a21c924058019c018ed128996973166130386f7921b94aac4e"
+  },
+  {
+    "turn": 4,
+    "status": "violation",
+    "raw_status": "violation",
+    "violations": [
+      {
+        "rule": "Controllers must not import infrastructure repositories directly",
+        "importer": "orders.controllers.customer_insights",
+        "imported": "orders.infrastructure.customers",
+        "lines": [
+          9
+        ],
+        "kind": "broken"
+      }
+    ],
+    "error": null,
+    "fingerprint": "747e0fa28e9233e0eb0b69ffb9a4f2eabd96a89c38db387d029951f936b26bcf"
+  }
+]

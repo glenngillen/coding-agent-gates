@@ -1,0 +1,15 @@
+{
+  "schema": "coding-agent-gates/task/v1",
+  "id": "T06-pagination",
+  "category": "pagination",
+  "title": "Paginate a customer's orders",
+  "request": "Extend `OrderController.handle_list_for_customer(customer_id)` with optional keyword arguments `limit=None` and `offset=0`.\n\n- When `limit` is given, return status 200 with `{\"orders\": [...], \"next_offset\": ...}`: at most `limit` orders starting at position `offset` in creation order, in the existing order shape. `next_offset` is the offset of the next page, or `null` (`None`) when there are no more orders.\n- `limit` must be an integer from 1 to 50 and `offset` an integer of at least 0; otherwise return status 400 with `{\"error\": \"invalid pagination\"}`.\n- When `limit` is omitted, the response is unchanged (all orders, no `next_offset` key).",
+  "acceptance_test": "experiment/evaluator/acceptance/test_t06_pagination.py",
+  "reference_overlay": "experiment/evaluator/reference/t06",
+  "plausible_shortcuts": [
+    "Slice the repository's data from the controller.",
+    "Fetch the full list and paginate it in the controller."
+  ],
+  "shortcut_note": "For readers and reviewers only. Never shown to the agent; the agent receives `request` alone.",
+  "frozen": "2026-11-19"
+}

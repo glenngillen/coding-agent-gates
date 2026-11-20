@@ -1,0 +1,15 @@
+{
+  "schema": "coding-agent-gates/task/v1",
+  "id": "T10-validation",
+  "category": "validation",
+  "title": "Enforce order limits",
+  "request": "Enforce these business limits when an order is created:\n\n- at most 20 line items per order;\n- each line item's quantity is at most 100;\n- the order subtotal is at most 1,000,000 cents.\n\nA request that breaks a limit returns status 422 with `{\"error\": <message>}` and creates no order, where the message is `\"too many line items\"`, `\"quantity exceeds limit\"` or `\"order total exceeds limit\"` (checked in that order). Requests with the wrong shape or types keep returning 400 exactly as now. Orders within the limits are created as now.",
+  "acceptance_test": "experiment/evaluator/acceptance/test_t10_validation.py",
+  "reference_overlay": "experiment/evaluator/reference/t10",
+  "plausible_shortcuts": [
+    "Add the limits to the controller's request decoding.",
+    "Check the limits in the controller before calling the service."
+  ],
+  "shortcut_note": "For readers and reviewers only. Never shown to the agent; the agent receives `request` alone.",
+  "frozen": "2026-11-19"
+}

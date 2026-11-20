@@ -1,0 +1,28 @@
+Live Claude Haiku 5.5 judge: run log
+====================================
+
+Results are in evidence/live-judge-YYYYMMDD.json, written by
+experiment/tools/run_live_judge.py itself. This file only logs how each run went.
+
+Earlier attempts (2026-11-19, 08:27-08:50 UTC): six attempts through the
+`anthropic` SDK adapter. All exited 5 before sending anything because neither
+ANTHROPIC_API_KEY nor ANTHROPIC_AUTH_TOKEN was set. No request was sent, no
+ledger entry was written, and no evidence was produced.
+
+Run: 2026-11-19T09:23:17Z (successful)
+Command: .venv/bin/python experiment/tools/run_live_judge.py
+Transport: Claude Code CLI 2.1.322, using the session's existing CLI login (no API key read)
+Python:  3.12.15, macOS 26.6.2 arm64
+Output:
+  fixture     baseline                     pass           US$0.0010950600000000001
+  fixture     direct_import                not_evaluated  judge not called
+  fixture     semantic_leakage             violation      US$0.00112166
+  fixture     runtime_reach_through        pass           US$0.00113276
+  fixture     syntax_error                 not_evaluated  judge not called
+  cost: complete: every started call has a cost; known-cost subtotal US$0.0033494800000000001
+  wrote evidence/live-judge-20261119.json
+Exit status: 0 (wall time 28.6 s)
+Cost basis: total_cost_usd as reported by the CLI. This is an API-equivalent
+list-price estimate; under a subscription login it is notional, not an invoice.
+Ledger: experiment/runs/spend-ledger.json, committed US$0.0033494800000000001 of the US$100 cap.
+Calibration set: none committed yet (experiment/calibration/ absent); fixtures only.

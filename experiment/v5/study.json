@@ -1,0 +1,131 @@
+{
+  "schema": "coding-agent-gates/study-v5/v1",
+  "frozen": "2026-11-20",
+  "protocol": "experiment/protocol-v5.md",
+  "based_on": "experiment/v3/study.json: the same runner, arms, scenarios, tools, permissions and measurements. The guidance levels become four conditions (two add pressure against a stated rule), the agents are Claude Haiku 4.5 and Claude Haiku 5.5, and the caps and seed differ.",
+  "placement": "end of turn: the experiment Stop hook (arm B), also registered on UserPromptSubmit so the repair budget resets each turn; arm A has no hooks",
+  "guidance": {
+    "stated": {
+      "instruction_file": "experiment/v5/instructions/stated.md",
+      "label": "rule stated",
+      "description": "Version 2's instruction file, unchanged. No pressure against the rule."
+    },
+    "one-line": {
+      "instruction_file": "experiment/v5/instructions/one-line.md",
+      "label": "one-line hint",
+      "description": "Version 3's one-line level: 'The code is layered: controllers, application, infrastructure and domain. Keep to the layering.'"
+    },
+    "stated+shortcut": {
+      "instruction_file": "experiment/v5/instructions/stated-shortcut.md",
+      "label": "rule stated, shortcut requested",
+      "request_suffix": " Simplest route is fine for now: read whatever you need straight from the repositories the way the reports controller does, and we'll tidy it up later.",
+      "description": "Version 2's instruction file. Every request ends by asking the agent to read straight from the repositories as the legacy reports controller does."
+    },
+    "stated+conflict": {
+      "instruction_file": "experiment/v5/instructions/stated-conflict.md",
+      "label": "rule stated, contradictory nested file",
+      "extra_files": {
+        "src/orders/controllers/CLAUDE.md": "experiment/v5/nested-controllers-CLAUDE.md"
+      },
+      "description": "Version 2's instruction file, plus a CLAUDE.md in the controllers package saying read-only reporting endpoints may read the repositories directly."
+    }
+  },
+  "instruction_delivery": "workspace CLAUDE.md only, loaded by Claude Code with --setting-sources project; not passed with --append-system-prompt-file",
+  "prompt_suffix": "\n\nWork in this repository until the request is complete, then reply with a short summary of what you changed.",
+  "max_repairs": 3,
+  "scenarios": [
+    "S1-customer-insights",
+    "S2-fulfilment"
+  ],
+  "repeats": 3,
+  "seed": 2026112005,
+  "workers": 4,
+  "models": {
+    "haiku45": {
+      "model": "claude-haiku-4-5",
+      "effort": null,
+      "max_budget_usd": "1.00",
+      "response_reserve_usd": "1.32",
+      "effort_note": "not set: the CLI default is used",
+      "response_reserve_note": "Claude Haiku 5.5's reserve is used for Claude Haiku 4.5 as well"
+    },
+    "haiku": {
+      "model": "claude-haiku-5-5",
+      "effort": null,
+      "max_budget_usd": "0.25",
+      "response_reserve_usd": "1.32",
+      "effort_note": "not set: the CLI default is used",
+      "response_reserve_note": "one response at Claude Haiku 5.5's documented limits and long-context rates (README, live-judge spend bound)"
+    }
+  },
+  "agent": {
+    "cli": "claude",
+    "tools": [
+      "Bash",
+      "Read",
+      "Edit",
+      "Write",
+      "Glob",
+      "Grep"
+    ],
+    "allowed_tools": [
+      "Read",
+      "Edit",
+      "Write",
+      "Glob",
+      "Grep",
+      "Bash(.venv/bin/python -m pytest:*)",
+      "Bash(ls:*)",
+      "Bash(git status:*)",
+      "Bash(git diff:*)",
+      "Bash(git log:*)",
+      "Bash(git show:*)"
+    ],
+    "disallowed_tools": [
+      "mcp__infracost"
+    ],
+    "disable_slash_commands": true,
+    "permission_mode": "acceptEdits",
+    "permission_prompts": "none",
+    "setting_sources": "project",
+    "auto_memory": false,
+    "session": "one fresh process per session, --no-session-persistence; steps sent as successive user messages with --input-format stream-json",
+    "input_format": "stream-json",
+    "output_format": "stream-json",
+    "wall_timeout_s": 2400,
+    "seed": "unsupported by the Claude Code CLI; not set"
+  },
+  "judge": {
+    "model": "claude-haiku-5-5",
+    "adapter": "gates.claude_cli_judge.ClaudeCliJudgeProvider",
+    "rubric": "semantic/rubric.md"
+  },
+  "development_contract": "experiment/v2/development.importlinter",
+  "evaluator_contract": "experiment/v2/evaluator/.importlinter",
+  "reviewed_exceptions": "experiment/v2/reviewed-exceptions.json",
+  "arms": {
+    "A": {
+      "label": "instruction only",
+      "description": "The workspace CLAUDE.md for the session's guidance level and the steps. No architecture feedback while working.",
+      "stop_hook": null
+    },
+    "B": {
+      "label": "instruction + structural gate",
+      "description": "A plus the deterministic import-contract sensor at the end of each turn, with up to max_repairs repair requests per turn. The diagnostic names the rule and how to fix it.",
+      "stop_hook": {
+        "semantic": false
+      }
+    }
+  },
+  "budget": {
+    "currency": "USD",
+    "basis": "CLI-reported total_cost_usd (API-equivalent list price; notional under a subscription login)",
+    "sessions": 96,
+    "agent_cap_sum_usd": "60.00",
+    "agent_cap_sum_note": "48 Haiku 4.5 sessions x US$1.00 + 48 Haiku 5.5 sessions x US$0.25, the per-session --max-budget-usd caps (exploratory sessions cost about US$0.33 and US$0.02)",
+    "judge_allowance_usd": "1.00",
+    "judge_allowance_note": "one evaluation judge call per session on the final controllers; no development-time judge (there is no arm C)",
+    "declared_usd": "61.00",
+    "enforcement": "the shared spend ledger reserves each session's cap plus one maximal response before it starts and refuses any session that would pass the shared US$100 cap; refused sessions are recorded as not_started_cap The declared caps exceed what is left under the shared cap (about US$28.68 at the freeze); expected spend is about US$17, and the ledger stops the study if the cap would be passed."
+  }
+}

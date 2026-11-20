@@ -1,0 +1,126 @@
+diff --git a/src/orders/application/order_service.py b/src/orders/application/order_service.py
+index 9d246c6..9be20ce 100644
+--- a/src/orders/application/order_service.py
++++ b/src/orders/application/order_service.py
+@@ -17,10 +17,17 @@ DISCOUNT_THRESHOLD_CENTS = 10_000
+ DISCOUNT_RATE_PERCENT = 10
+ 
+ 
++MAX_PAGE_SIZE = 50
++
++
+ class OrderNotFound(LookupError):
+     """No order exists with the requested id."""
+ 
+ 
++class InvalidPagination(ValueError):
++    """Requested page limit or offset is outside the allowed range."""
++
++
+ def discount_for(subtotal_cents: int) -> int:
+     """Subtotals of $100.00 or more get 10% off, rounded down to the cent."""
+     if subtotal_cents < DISCOUNT_THRESHOLD_CENTS:
+@@ -60,3 +67,14 @@ class OrderService:
+ 
+     def list_for_customer(self, customer_id: str) -> list[Order]:
+         return self._repository.list_for_customer(customer_id)
++
++    def list_page_for_customer(
++        self, customer_id: str, limit: int, offset: int
++    ) -> tuple[list[Order], int | None]:
++        """Return one page in creation order and the next page's offset."""
++        if not 1 <= limit <= MAX_PAGE_SIZE or offset < 0:
++            raise InvalidPagination((limit, offset))
++        orders = self._repository.list_for_customer(customer_id)
++        page = orders[offset : offset + limit]
++        next_offset = offset + limit if offset + limit < len(orders) else None
++        return page, next_offset
+diff --git a/src/orders/controllers/orders.py b/src/orders/controllers/orders.py
+index 0cbf354..ad03ecd 100644
+--- a/src/orders/controllers/orders.py
++++ b/src/orders/controllers/orders.py
+@@ -9,7 +9,7 @@ from __future__ import annotations
+ from dataclasses import dataclass
+ from typing import Any
+ 
+-from orders.application.order_service import OrderNotFound, OrderService
++from orders.application.order_service import InvalidPagination, OrderNotFound, OrderService
+ from orders.domain import LineItem, Order, OrderSummary
+ 
+ 
+@@ -86,6 +86,21 @@ class OrderController:
+             return Response(404, {"error": "order not found"})
+         return Response(200, _summary_body(summary))
+ 
+-    def handle_list_for_customer(self, customer_id: str) -> Response:
+-        orders = self._service.list_for_customer(customer_id)
+-        return Response(200, {"orders": [_order_body(o) for o in orders]})
++    def handle_list_for_customer(
++        self, customer_id: str, limit: Any = None, offset: Any = 0
++    ) -> Response:
++        if limit is None:
++            orders = self._service.list_for_customer(customer_id)
++            return Response(200, {"orders": [_order_body(o) for o in orders]})
++        if type(limit) is not int or type(offset) is not int:
++            return Response(400, {"error": "invalid pagination"})
++        try:
++            page, next_offset = self._service.list_page_for_customer(
++                customer_id, limit, offset
++            )
++        except InvalidPagination:
++            return Response(400, {"error": "invalid pagination"})
++        return Response(
++            200,
++            {"orders": [_order_body(o) for o in page], "next_offset": next_offset},
++        )
+diff --git a/tests/test_order_behaviour.py b/tests/test_order_behaviour.py
+index 53425d2..7a6823f 100644
+--- a/tests/test_order_behaviour.py
++++ b/tests/test_order_behaviour.py
+@@ -120,3 +120,46 @@ class TestListForCustomer:
+ 
+     def test_customer_without_orders_gets_an_empty_list(self, controller):
+         assert controller.handle_list_for_customer("nobody").body == {"orders": []}
++
++
++class TestPagination:
++    def _make(self, controller, n):
++        for _ in range(n):
++            create(controller)
++
++    def test_pages_in_creation_order(self, controller):
++        self._make(controller, 5)
++        r = controller.handle_list_for_customer("cust-1", limit=2)
++        assert r.status == 200
++        assert [o["order_id"] for o in r.body["orders"]] == ["ord-0001", "ord-0002"]
++        assert r.body["next_offset"] == 2
++        r = controller.handle_list_for_customer("cust-1", limit=2, offset=4)
++        assert [o["order_id"] for o in r.body["orders"]] == ["ord-0005"]
++        assert r.body["next_offset"] is None
++
++    def test_exact_end_has_no_next(self, controller):
++        self._make(controller, 4)
++        r = controller.handle_list_for_customer("cust-1", limit=2, offset=2)
++        assert r.body["next_offset"] is None
++
++    def test_offset_past_end_is_empty(self, controller):
++        self._make(controller, 1)
++        r = controller.handle_list_for_customer("cust-1", limit=5, offset=9)
++        assert r.status == 200
++        assert r.body == {"orders": [], "next_offset": None}
++
++    @pytest.mark.parametrize(
++        "limit,offset",
++        [(0, 0), (51, 0), (-1, 0), (1, -1), ("2", 0), (1.5, 0), (True, 0), (1, "0"), (1, None)],
++    )
++    def test_invalid_pagination(self, controller, limit, offset):
++        r = controller.handle_list_for_customer("cust-1", limit=limit, offset=offset)
++        assert (r.status, r.body) == (400, {"error": "invalid pagination"})
++
++    def test_limit_50_allowed(self, controller):
++        assert controller.handle_list_for_customer("c", limit=50).status == 200
++
++    def test_without_limit_unchanged(self, controller):
++        self._make(controller, 3)
++        r = controller.handle_list_for_customer("cust-1")
++        assert len(r.body["orders"]) == 3 and "next_offset" not in r.body

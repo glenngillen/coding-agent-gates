@@ -1,0 +1,8 @@
+{
+  "probe": "parent-memory-check",
+  "setting_sources": "project",
+  "cwd": "examples/coding-agent-gates/.tmp/probe-v2/local-md-check/ws (inside the worktree, below its CLAUDE.local.md)",
+  "question": "Without using any tools, list every instruction file or memory you were given in your context (for example CLAUDE.md, CLAUDE.local.md, user or auto memory), with the first heading or first line of each. If a file mentions 'Synapse' or 'building-loop', say so explicitly.",
+  "reply": "I have one instruction file:\n\n1. **`CLAUDE.md`** at `<example>/.tmp/probe-v2/local-md-check/ws/CLAUDE.md`\n   - First heading: `# Project rules`\n   - Content: \"The marker word is ALPHA-7.\"\n   - It does not mention Synapse or building-loop.\n\nI have no CLAUDE.local.md or user/auto memory files. The session also includes a git status snapshot and account context, but those aren't instruction files.",
+  "cost_usd": 0.0004972900000000001
+}

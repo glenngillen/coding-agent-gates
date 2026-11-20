@@ -1,0 +1,168 @@
+{
+  "schema": "coding-agent-gates/evaluation-v2/v1",
+  "scenario_id": "S2-fulfilment",
+  "snapshot_tree_sha256": "cf83d5a23be59d48543bf820e0b2644c0192be12046429bb8cf6b483b6735e38",
+  "frozen_manifest_sha256": "b9fe0be84c81d4b182d991faf898c0fe4bba3a186b551b9a204489019aeb96e3",
+  "submission": "final snapshot evaluated as a synthetic final submission; no merge was attempted or blocked",
+  "behavior": {
+    "steps": {
+      "s2-step1-packing-slip": {
+        "status": "pass",
+        "tests": 3,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "exit_code": 0,
+        "detail": "...                                                                      [100%]\n3 passed in 0.06s\n"
+      },
+      "s2-step2-low-stock": {
+        "status": "pass",
+        "tests": 8,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "exit_code": 0,
+        "detail": "........                                                                 [100%]\n8 passed in 0.06s\n"
+      },
+      "s2-step3-restock": {
+        "status": "pass",
+        "tests": 10,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "exit_code": 0,
+        "detail": "..........                                                               [100%]\n10 passed in 0.07s\n"
+      },
+      "s2-step4-summary": {
+        "status": "pass",
+        "tests": 3,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "exit_code": 0,
+        "detail": "...                                                                      [100%]\n3 passed in 0.06s\n"
+      }
+    },
+    "regression": {
+      "status": "pass",
+      "tests": 17,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "exit_code": 0,
+      "detail": ".................                                                        [100%]\n17 passed in 0.08s\n"
+    },
+    "steps_accepted": [
+      "s2-step1-packing-slip",
+      "s2-step2-low-stock",
+      "s2-step3-restock",
+      "s2-step4-summary"
+    ],
+    "all_steps_accepted": true
+  },
+  "structural": {
+    "schema": "coding-agent-gates/sensor-result/v1",
+    "status": "pass",
+    "rules": {
+      "Controllers must not import infrastructure repositories directly": "KEPT"
+    },
+    "violations": [],
+    "error": null,
+    "fingerprint": "e44829952575bbba40a9736093a220deb007193002eec834e7d45d0e3952df55",
+    "tool_version": "2.17",
+    "exit_code": 0,
+    "raw_output": "\n---------\nContracts\n---------\n\nAnalyzed 25 files, 55 dependencies.\n-----------------------------------\n\nControllers must not import infrastructure repositories directly KEPT (1 ignored import)\n\nContracts: 1 kept, 0 broken.\n",
+    "raw_status": "violation"
+  },
+  "semantic_judge": {
+    "status": "pass",
+    "reason": "None of the six controller modules decides discount eligibility, computes a discount, rate or pricing total, or hard-codes pricing thresholds or percentages. The order controller only decodes items, calls OrderService.place_order and get_order_summary, and maps the returned totals into responses. The customer controller's tier check validates the request field against the TIERS enum and does not affect price. The reports controller's exclusion of cancelled orders is a reporting filter, not pricing policy, so it falls outside this rule's scope.",
+    "findings": [],
+    "provider_failed": false,
+    "raw_response": "{\"verdict\":\"pass\",\"findings\":[],\"rationale\":\"None of the six controller modules decides discount eligibility, computes a discount, rate or pricing total, or hard-codes pricing thresholds or percentages. The order controller only decodes items, calls OrderService.place_order and get_order_summary, and maps the returned totals into responses. The customer controller's tier check validates the request field against the TIERS enum and does not affect price. The reports controller's exclusion of cancelled orders is a reporting filter, not pricing policy, so it falls outside this rule's scope.\"}"
+  },
+  "semantic_judge_calls": [
+    {
+      "label": "handbook-v4-2026-11-20 one-line-S2-fulfilment__A__sonnet__r2 evaluation judge",
+      "model_requested": "claude-haiku-5-5",
+      "started_at": "2026-11-20T05:37:11+00:00",
+      "reservation_usd": "1.3920",
+      "bound": {
+        "input_bytes": 19951,
+        "budget_input_tokens": 51951,
+        "budget_output_tokens": 8000,
+        "budget_usd": "0.0720",
+        "response_input_tokens_max": 1000000,
+        "response_output_tokens_max": 128000,
+        "response_usd": "1.3200",
+        "reservation_usd": "1.3920"
+      },
+      "models_reported": [
+        "claude-haiku-5-5"
+      ],
+      "duration_ms": 3880,
+      "wall_s": 5.603,
+      "stop_reason": "end_turn",
+      "usage": {
+        "input_tokens": 2,
+        "cache_creation_input_tokens": 9485,
+        "cache_read_input_tokens": 7156,
+        "output_tokens": 605,
+        "output_tokens_details": {
+          "thinking_tokens": 418
+        },
+        "server_tool_use": {
+          "web_search_requests": 0,
+          "web_fetch_requests": 0
+        },
+        "service_tier": "standard",
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 9485,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "inference_geo": "global",
+        "iterations": [
+          {
+            "input_tokens": 2,
+            "output_tokens": 605,
+            "cache_read_input_tokens": 7156,
+            "cache_creation_input_tokens": 9485,
+            "cache_creation": {
+              "ephemeral_5m_input_tokens": 0,
+              "ephemeral_1h_input_tokens": 9485
+            },
+            "type": "message"
+          }
+        ],
+        "speed": "standard",
+        "fallback_credit": null
+      },
+      "cost_usd": "0.00227126",
+      "cost_basis": "total_cost_usd reported by the Claude Code CLI: an API-equivalent list-price estimate; under a subscription login it is notional, not an invoice",
+      "exit_code": 0,
+      "ledger_entry_id": "0c0c7b8612d04301b98c533b45f07850",
+      "ledger_charged_usd": "0.00227126",
+      "over_budget_estimate": null,
+      "bound_exceeded": null,
+      "error": null
+    }
+  ],
+  "semantic_label": null,
+  "semantic_label_note": "unavailable: no independent human labels for final runs (Decisions, 2026-11-19); semantic_judge is a judge output, not ground truth",
+  "tampering": {
+    "detected": false,
+    "workspace_protected": {
+      "changed": [],
+      "added": [],
+      "removed": []
+    },
+    "gate_files": {
+      "changed": [],
+      "added": [],
+      "removed": []
+    },
+    "workspace_settings_added": [],
+    "baseline_tests_modified": [],
+    "legacy_reports_modified": false
+  }
+}

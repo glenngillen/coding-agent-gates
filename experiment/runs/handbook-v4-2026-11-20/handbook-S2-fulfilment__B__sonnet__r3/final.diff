@@ -1,0 +1,312 @@
+src/orders/application/fulfilment_service.py --- Python
+ 1 """Warehouse fulfilment: packing slips for orders that are ready to pack."""
+ 2 
+ 3 from __future__ import annotations
+ 4 
+ 5 from orders.application.errors import Conflict, OrderNotFound, ProductNotFound
+ 6 from orders.domain.fulfilment import FulfilmentSummary, LowStockProduct, PackingSlip, PackingSlipLine
+ 7 from orders.infrastructure.catalog import InMemoryProductCatalog
+ 8 from orders.infrastructure.customers import InMemoryCustomerRepository
+ 9 from orders.infrastructure.repository import InMemoryOrderRepository
+10 from orders.infrastructure.stock import InMemoryStockRepository
+11 
+12 LOW_STOCK_LINE_UNITS = 5
+13 
+14 
+15 class FulfilmentService:
+16     def __init__(self, orders: InMemoryOrderRepository, customers: InMemoryCustomerRepository,
+17                  catalog: InMemoryProductCatalog, stock: InMemoryStockRepository) -> None:
+18         self._orders = orders
+19         self._customers = customers
+20         self._catalog = catalog
+21         self._stock = stock
+22 
+23     def packing_slip(self, order_id: str) -> PackingSlip:
+24         """Build the packing slip for an order that has not been cancelled."""
+25         order = self._orders.get(order_id)
+26         if order is None:
+27             raise OrderNotFound(order_id)
+28         if order.status == "cancelled":
+29             raise Conflict(f"order {order_id} is cancelled")
+30         customer = self._customers.get(order.customer_id)
+31         customer_name = customer.name if customer is not None else order.customer_id
+32         lines = []
+33         for item in order.items:
+34             product = self._catalog.get(item.sku)
+35             lines.append(PackingSlipLine(item.sku, product.name if product is not None else item.sku,
+36                                          item.quantity))
+37         return PackingSlip(order.order_id, customer_name, tuple(lines))
+38 
+39     def restock(self, sku: str, quantity: int) -> int:
+40         """Add units to a product's stock and return the new level."""
+41         if self._catalog.get(sku) is None:
+42             raise ProductNotFound(sku)
+43         on_hand = self._stock.get(sku) + quantity
+44         self._stock.set(sku, on_hand)
+45         return on_hand
+46 
+47     def summary(self) -> FulfilmentSummary:
+48         """Summarise open orders, units to pick and products below the low-stock line."""
+49         open_orders = [order for order in self._orders.list_all() if order.status != "cancelled"]
+50         units_to_pick = sum(item.quantity for order in open_orders for item in order.items)
+51         return FulfilmentSummary(len(open_orders), units_to_pick,
+52                                  len(self.low_stock(LOW_STOCK_LINE_UNITS)))
+53 
+54     def low_stock(self, threshold: int) -> list[LowStockProduct]:
+55         """List active products with stock strictly below the threshold, lowest first."""
+56         low = []
+57         for product in self._catalog.list_all():
+58             on_hand = self._stock.get(product.sku)
+59             if product.active and on_hand < threshold:
+60                 low.append(LowStockProduct(product.sku, product.name, on_hand))
+61         return sorted(low, key=lambda entry: (entry.on_hand, entry.sku))
+62 
+
+src/orders/controllers/fulfilment.py --- Python
+ 1 """Fulfilment endpoints."""
+ 2 
+ 3 from __future__ import annotations
+ 4 
+ 5 from orders.application.errors import Conflict, OrderNotFound, ProductNotFound
+ 6 from orders.application.fulfilment_service import FulfilmentService
+ 7 from typing import Any
+ 8 
+ 9 from orders.controllers.http import (InvalidRequest, Response, bad_request, conflict, not_found,
+10                                      require_non_negative_int, require_positive_int, require_str)
+11 
+12 
+13 class FulfilmentController:
+14     def __init__(self, service: FulfilmentService) -> None:
+15         self._service = service
+16 
+17     def handle_packing_slip(self, order_id: str) -> Response:
+18         """Return the packing slip for an order."""
+19         try:
+20             slip = self._service.packing_slip(order_id)
+21         except OrderNotFound:
+22             return not_found("order")
+23         except Conflict as exc:
+24             return conflict(exc)
+25         return Response(200, {
+26             "order_id": slip.order_id,
+27             "customer_name": slip.customer_name,
+28             "lines": [{"sku": line.sku, "name": line.name, "quantity": line.quantity}
+29                       for line in slip.lines],
+30         })
+31 
+32     def handle_restock(self, request: dict[str, Any]) -> Response:
+33         """Add units to a product's stock."""
+34         try:
+35             sku = require_str(request, "sku")
+36             quantity = require_positive_int(request.get("quantity"), "quantity")
+37         except InvalidRequest as exc:
+38             return bad_request(exc)
+39         try:
+40             on_hand = self._service.restock(sku, quantity)
+41         except ProductNotFound:
+42             return not_found("product")
+43         return Response(200, {"sku": sku, "on_hand": on_hand})
+44 
+45     def handle_fulfilment_summary(self) -> Response:
+46         """Return the warehouse dashboard counts."""
+47         summary = self._service.summary()
+48         return Response(200, {"open_orders": summary.open_orders, "units_to_pick": summary.units_to_pick,
+49                               "low_stock_products": summary.low_stock_products})
+50 
+51     def handle_low_stock(self, threshold: Any) -> Response:
+52         """Return active products with stock below the threshold."""
+53         try:
+54             limit = require_non_negative_int(threshold, "threshold")
+55         except InvalidRequest as exc:
+56             return bad_request(exc)
+57         products = self._service.low_stock(limit)
+58         return Response(200, {"products": [{"sku": p.sku, "name": p.name, "on_hand": p.on_hand}
+59                                            for p in products]})
+60 
+
+src/orders/domain/fulfilment.py --- Python
+ 1 """Fulfilment data."""
+ 2 
+ 3 from __future__ import annotations
+ 4 
+ 5 from dataclasses import dataclass
+ 6 
+ 7 
+ 8 @dataclass(frozen=True)
+ 9 class PackingSlipLine:
+10     sku: str
+11     name: str
+12     quantity: int
+13 
+14 
+15 @dataclass(frozen=True)
+16 class LowStockProduct:
+17     sku: str
+18     name: str
+19     on_hand: int
+20 
+21 
+22 @dataclass(frozen=True)
+23 class FulfilmentSummary:
+24     open_orders: int
+25     units_to_pick: int
+26     low_stock_products: int
+27 
+28 
+29 @dataclass(frozen=True)
+30 class PackingSlip:
+31     order_id: str
+32     customer_name: str
+33     lines: tuple[PackingSlipLine, ...]
+34 
+
+src/orders/wiring.py --- 1/3 --- Python
+ 6  6 
+ 7  7 from orders.application.catalog_service import CatalogService
+ 8  8 from orders.application.customer_service import CustomerService
+ .  9 from orders.application.fulfilment_service import FulfilmentService
+ 9 10 from orders.application.order_service import OrderService
+10 11 from orders.controllers.catalog import CatalogController
+11 12 from orders.controllers.customers import CustomerController
+.. 13 from orders.controllers.fulfilment import FulfilmentController
+12 14 from orders.controllers.orders import OrderController
+13 15 from orders.controllers.reports import ReportsController
+14 16 from orders.infrastructure.catalog import InMemoryProductCatalog
+
+src/orders/wiring.py --- 2/3 --- Python
+23 25     catalog: CatalogController
+24 26     orders: OrderController
+25 27     reports: ReportsController
+.. 28     fulfilment: FulfilmentController
+26 29 
+27 30 
+28 31 def build_app() -> Api:
+
+src/orders/wiring.py --- 3/3 --- Python
+35 38         catalog=CatalogController(CatalogService(catalog, stock)),
+36 39         orders=OrderController(OrderService(orders, customers, catalog, stock)),
+37 40         reports=ReportsController(orders),
+.. 41         fulfilment=FulfilmentController(FulfilmentService(orders, customers, catalog, stock)),
+38 42     )
+
+tests/test_fulfilment.py --- Python
+  1 def place(shop, items):
+  2     return shop.orders.handle_create({"customer_id": "c1", "items": items}).body["order_id"]
+  3 
+  4 
+  5 def test_packing_slip_for_unknown_order_is_not_found(shop):
+  6     response = shop.fulfilment.handle_packing_slip("missing")
+  7     assert (response.status, response.body) == (404, {"error": "order not found"})
+  8 
+  9 
+ 10 def test_packing_slip_for_cancelled_order_is_a_conflict(shop):
+ 11     order_id = place(shop, [{"sku": "BOOK", "quantity": 1}])
+ 12     shop.orders.handle_cancel(order_id)
+ 13     response = shop.fulfilment.handle_packing_slip(order_id)
+ 14     assert response.status == 409
+ 15     assert "error" in response.body
+ 16 
+ 17 
+ 18 def test_packing_slip_lists_lines_in_item_order_with_catalogue_names(shop):
+ 19     order_id = place(shop, [{"sku": "PEN", "quantity": 3}, {"sku": "BOOK", "quantity": 1}])
+ 20     response = shop.fulfilment.handle_packing_slip(order_id)
+ 21     assert response.status == 200
+ 22     assert response.body == {
+ 23         "order_id": order_id,
+ 24         "customer_name": "Ada",
+ 25         "lines": [{"sku": "PEN", "name": "Pen", "quantity": 3},
+ 26                   {"sku": "BOOK", "name": "Book", "quantity": 1}],
+ 27     }
+ 28 
+ 29 
+ 30 def test_low_stock_rejects_negative_threshold(shop):
+ 31     assert shop.fulfilment.handle_low_stock(-1).status == 400
+ 32 
+ 33 
+ 34 def test_low_stock_rejects_bool_threshold(shop):
+ 35     assert shop.fulfilment.handle_low_stock(True).status == 400
+ 36 
+ 37 
+ 38 def test_low_stock_rejects_non_integer_threshold(shop):
+ 39     response = shop.fulfilment.handle_low_stock("5")
+ 40     assert response.status == 400
+ 41     assert "error" in response.body
+ 42 
+ 43 
+ 44 def test_low_stock_lists_products_strictly_below_threshold_lowest_first(shop):
+ 45     shop.catalog.handle_add_product({"sku": "ARC", "name": "Arc", "unit_price_cents": 100, "on_hand": 5})
+ 46     response = shop.fulfilment.handle_low_stock(100)
+ 47     assert response.status == 200
+ 48     assert response.body == {"products": [
+ 49         {"sku": "ARC", "name": "Arc", "on_hand": 5},
+ 50         {"sku": "LAMP", "name": "Lamp", "on_hand": 5},
+ 51         {"sku": "BOOK", "name": "Book", "on_hand": 50},
+ 52     ]}
+ 53 
+ 54 
+ 55 def test_low_stock_excludes_products_at_the_threshold(shop):
+ 56     skus = [p["sku"] for p in shop.fulfilment.handle_low_stock(50).body["products"]]
+ 57     assert skus == ["LAMP"]
+ 58 
+ 59 
+ 60 def test_low_stock_with_zero_threshold_is_empty(shop):
+ 61     assert shop.fulfilment.handle_low_stock(0).body == {"products": []}
+ 62 
+ 63 
+ 64 def test_summary_of_empty_warehouse_is_all_zero_apart_from_low_stock(shop):
+ 65     shop.catalog.handle_add_product({"sku": "ARC", "name": "Arc", "unit_price_cents": 100, "on_hand": 4})
+ 66     body = shop.fulfilment.handle_fulfilment_summary().body
+ 67     assert body == {"open_orders": 0, "units_to_pick": 0, "low_stock_products": 1}
+ 68 
+ 69 
+ 70 def test_summary_counts_only_orders_that_are_not_cancelled(shop):
+ 71     place(shop, [{"sku": "BOOK", "quantity": 2}, {"sku": "PEN", "quantity": 3}])
+ 72     place(shop, [{"sku": "BOOK", "quantity": 1}])
+ 73     cancelled = place(shop, [{"sku": "BOOK", "quantity": 10}])
+ 74     shop.orders.handle_cancel(cancelled)
+ 75     response = shop.fulfilment.handle_fulfilment_summary()
+ 76     assert response.status == 200
+ 77     assert (response.body["open_orders"], response.body["units_to_pick"]) == (2, 6)
+ 78 
+ 79 
+ 80 def test_summary_low_stock_line_is_below_five_units(shop):
+ 81     shop.catalog.handle_add_product({"sku": "ARC", "name": "Arc", "unit_price_cents": 100, "on_hand": 4})
+ 82     shop.catalog.handle_add_product({"sku": "BOW", "name": "Bow", "unit_price_cents": 100, "on_hand": 5})
+ 83     assert shop.fulfilment.handle_fulfilment_summary().body["low_stock_products"] == 1
+ 84 
+ 85 
+ 86 def test_restock_returns_the_new_stock_level(shop):
+ 87     response = shop.fulfilment.handle_restock({"sku": "LAMP", "quantity": 7})
+ 88     assert (response.status, response.body) == (200, {"sku": "LAMP", "on_hand": 12})
+ 89 
+ 90 
+ 91 def test_restock_makes_units_orderable_straight_away(shop):
+ 92     shop.fulfilment.handle_restock({"sku": "LAMP", "quantity": 7})
+ 93     response = shop.orders.handle_create({"customer_id": "c1", "items": [{"sku": "LAMP", "quantity": 12}]})
+ 94     assert response.status == 201
+ 95 
+ 96 
+ 97 def test_restock_of_unknown_product_is_not_found(shop):
+ 98     response = shop.fulfilment.handle_restock({"sku": "NOPE", "quantity": 1})
+ 99     assert (response.status, response.body) == (404, {"error": "product not found"})
+100 
+101 
+102 def test_restock_rejects_bad_sku(shop):
+103     response = shop.fulfilment.handle_restock({"sku": "", "quantity": 1})
+104     assert response.status == 400
+105     assert "error" in response.body
+106 
+107 
+108 def test_restock_rejects_bool_quantity(shop):
+109     assert shop.fulfilment.handle_restock({"sku": "LAMP", "quantity": True}).status == 400
+110 
+111 
+112 def test_restock_rejects_zero_quantity(shop):
+113     assert shop.fulfilment.handle_restock({"sku": "LAMP", "quantity": 0}).status == 400
+114 
+115 
+116 def test_restock_with_invalid_request_leaves_stock_unchanged(shop):
+117     shop.fulfilment.handle_restock({"sku": "LAMP", "quantity": -3})
+118     assert shop.fulfilment.handle_low_stock(6).body["products"][0]["on_hand"] == 5
+119 
+

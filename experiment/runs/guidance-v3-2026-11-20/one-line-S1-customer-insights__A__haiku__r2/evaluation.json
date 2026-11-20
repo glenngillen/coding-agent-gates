@@ -1,0 +1,193 @@
+{
+  "schema": "coding-agent-gates/evaluation-v2/v1",
+  "scenario_id": "S1-customer-insights",
+  "snapshot_tree_sha256": "50a5120127bbfc59dbc7cd630982c3fb2bdf1c5d09f93e1e89d3dd3ca50d6b64",
+  "frozen_manifest_sha256": "b9fe0be84c81d4b182d991faf898c0fe4bba3a186b551b9a204489019aeb96e3",
+  "submission": "final snapshot evaluated as a synthetic final submission; no merge was attempted or blocked",
+  "behavior": {
+    "steps": {
+      "s1-step1-history": {
+        "status": "pass",
+        "tests": 4,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "exit_code": 0,
+        "detail": "....                                                                     [100%]\n4 passed in 0.05s\n"
+      },
+      "s1-step2-lifetime-value": {
+        "status": "pass",
+        "tests": 5,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "exit_code": 0,
+        "detail": ".....                                                                    [100%]\n5 passed in 0.06s\n"
+      },
+      "s1-step3-top-customers": {
+        "status": "pass",
+        "tests": 9,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "exit_code": 0,
+        "detail": ".........                                                                [100%]\n9 passed in 0.06s\n"
+      },
+      "s1-step4-inactive": {
+        "status": "pass",
+        "tests": 4,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "exit_code": 0,
+        "detail": "....                                                                     [100%]\n4 passed in 0.06s\n"
+      }
+    },
+    "regression": {
+      "status": "pass",
+      "tests": 17,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "exit_code": 0,
+      "detail": ".................                                                        [100%]\n17 passed in 0.07s\n"
+    },
+    "steps_accepted": [
+      "s1-step1-history",
+      "s1-step2-lifetime-value",
+      "s1-step3-top-customers",
+      "s1-step4-inactive"
+    ],
+    "all_steps_accepted": true
+  },
+  "structural": {
+    "schema": "coding-agent-gates/sensor-result/v1",
+    "status": "pass",
+    "rules": {
+      "Controllers must not import infrastructure repositories directly": "KEPT"
+    },
+    "violations": [],
+    "error": null,
+    "fingerprint": "e00f150d0d01c1e932b4af4f267049131241fea27011d6e9b0dea5f1174d7e3a",
+    "tool_version": "2.17",
+    "exit_code": 0,
+    "raw_output": "\n---------\nContracts\n---------\n\nAnalyzed 24 files, 50 dependencies.\n-----------------------------------\n\nControllers must not import infrastructure repositories directly KEPT (1 ignored import)\n\nContracts: 1 kept, 0 broken.\n",
+    "raw_status": "violation"
+  },
+  "semantic_judge": {
+    "status": "violation",
+    "reason": "Most controllers only decode requests, call application services, and map results. The customer_insights controller, however, computes lifetime value, ranks customers and defines 'customers without orders' by applying its own cancelled-order exclusion and zero-value filtering rules. The reports controller applies the same cancelled-order exclusion when aggregating units. These are business decisions, not request validation or response mapping, so they should move to orders.application. The other controllers (catalog, customers, orders, http) contain only validation, service calls, exception-to-status mapping and response shaping.",
+    "findings": [
+      {
+        "path": "src/orders/controllers/customer_insights.py",
+        "line_start": 66,
+        "line_end": 70,
+        "explanation": "The controller decides what counts toward a customer's lifetime value by excluding cancelled orders, then sums the order totals. That is a business policy about how totals are computed and belongs in orders.application."
+      },
+      {
+        "path": "src/orders/controllers/customer_insights.py",
+        "line_start": 42,
+        "line_end": 55,
+        "explanation": "The controller decides which customers qualify for the top-customers ranking by excluding zero-value customers and applying the ranking order. This is business policy and should live in the application layer."
+      },
+      {
+        "path": "src/orders/controllers/customer_insights.py",
+        "line_start": 57,
+        "line_end": 64,
+        "explanation": "The controller defines what 'customer without orders' means (no orders other than cancelled ones) and filters on it. That definition is business policy and belongs in the application layer."
+      },
+      {
+        "path": "src/orders/controllers/reports.py",
+        "line_start": 20,
+        "line_end": 27,
+        "explanation": "The controller decides which orders count toward units-by-SKU by excluding cancelled orders and aggregating quantities. That is business policy, so it belongs in an application service rather than the controller."
+      }
+    ],
+    "provider_failed": false,
+    "raw_response": "{\"verdict\":\"violation\",\"findings\":[{\"path\":\"src/orders/controllers/customer_insights.py\",\"line_start\":66,\"line_end\":70,\"rule\":\"business-decision-in-controller\",\"explanation\":\"The controller decides what counts toward a customer's lifetime value by excluding cancelled orders, then sums the order totals. That is a business policy about how totals are computed and belongs in orders.application.\"},{\"path\":\"src/orders/controllers/customer_insights.py\",\"line_start\":42,\"line_end\":55,\"rule\":\"business-decision-in-controller\",\"explanation\":\"The controller decides which customers qualify for the top-customers ranking by excluding zero-value customers and applying the ranking order. This is business policy and should live in the application layer.\"},{\"path\":\"src/orders/controllers/customer_insights.py\",\"line_start\":57,\"line_end\":64,\"rule\":\"business-decision-in-controller\",\"explanation\":\"The controller defines what 'customer without orders' means (no orders other than cancelled ones) and filters on it. That definition is business policy and belongs in the application layer.\"},{\"path\":\"src/orders/controllers/reports.py\",\"line_start\":20,\"line_end\":27,\"rule\":\"business-decision-in-controller\",\"explanation\":\"The controller decides which orders count toward units-by-SKU by excluding cancelled orders and aggregating quantities. That is business policy, so it belongs in an application service rather than the controller.\"}],\"rationale\":\"Most controllers only decode requests, call application services, and map results. The customer_insights controller, however, computes lifetime value, ranks customers and defines 'customers without orders' by applying its own cancelled-order exclusion and zero-value filtering rules. The reports controller applies the same cancelled-order exclusion when aggregating units. These are business decisions, not request validation or response mapping, so they should move to orders.application. The other controllers (catalog, customers, orders, http) contain only validation, service calls, exception-to-status mapping and response shaping.\"}"
+  },
+  "semantic_judge_calls": [
+    {
+      "label": "guidance-v3-2026-11-20 one-line-S1-customer-insights__A__haiku__r2 evaluation judge",
+      "model_requested": "claude-haiku-5-5",
+      "started_at": "2026-11-20T04:24:41+00:00",
+      "reservation_usd": "1.3935",
+      "bound": {
+        "input_bytes": 21443,
+        "budget_input_tokens": 53443,
+        "budget_output_tokens": 8000,
+        "budget_usd": "0.0735",
+        "response_input_tokens_max": 1000000,
+        "response_output_tokens_max": 128000,
+        "response_usd": "1.3200",
+        "reservation_usd": "1.3935"
+      },
+      "models_reported": [
+        "claude-haiku-5-5"
+      ],
+      "duration_ms": 10279,
+      "wall_s": 11.677,
+      "stop_reason": "end_turn",
+      "usage": {
+        "input_tokens": 2,
+        "cache_creation_input_tokens": 10064,
+        "cache_read_input_tokens": 7156,
+        "output_tokens": 2133,
+        "output_tokens_details": {
+          "thinking_tokens": 1488
+        },
+        "server_tool_use": {
+          "web_search_requests": 0,
+          "web_fetch_requests": 0
+        },
+        "service_tier": "standard",
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 10064,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "inference_geo": "global",
+        "iterations": [
+          {
+            "input_tokens": 2,
+            "output_tokens": 2133,
+            "cache_read_input_tokens": 7156,
+            "cache_creation_input_tokens": 10064,
+            "cache_creation": {
+              "ephemeral_5m_input_tokens": 0,
+              "ephemeral_1h_input_tokens": 10064
+            },
+            "type": "message"
+          }
+        ],
+        "speed": "standard",
+        "fallback_credit": null
+      },
+      "cost_usd": "0.00315106",
+      "cost_basis": "total_cost_usd reported by the Claude Code CLI: an API-equivalent list-price estimate; under a subscription login it is notional, not an invoice",
+      "exit_code": 0,
+      "ledger_entry_id": "c54c8e89d77348e4acc4f3276f6de345",
+      "ledger_charged_usd": "0.00315106",
+      "over_budget_estimate": null,
+      "bound_exceeded": null,
+      "error": null
+    }
+  ],
+  "semantic_label": null,
+  "semantic_label_note": "unavailable: no independent human labels for final runs (Decisions, 2026-11-19); semantic_judge is a judge output, not ground truth",
+  "tampering": {
+    "detected": false,
+    "workspace_protected": {
+      "changed": [],
+      "added": [],
+      "removed": []
+    },
+    "gate_files": {
+      "changed": [],
+      "added": [],
+      "removed": []
+    },
+    "workspace_settings_added": [],
+    "baseline_tests_modified": [],
+    "legacy_reports_modified": false
+  }
+}

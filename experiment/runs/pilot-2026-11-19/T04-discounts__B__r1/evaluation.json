@@ -1,0 +1,132 @@
+{
+  "schema": "coding-agent-gates/evaluation/v1",
+  "task_id": "T04-discounts",
+  "snapshot_tree_sha256": "7bfae4312eb5d3c5d8ac7f373a77ea81a9b6fb5ca4b9c007b32a95b47f2927ee",
+  "frozen_manifest_sha256": "abde6a02aa1149bd812cb4c38fb26e59815e3dc54a6dd55cf4fa890f3f0264bc",
+  "submission": "final snapshot evaluated as a synthetic final submission; no merge was attempted or blocked",
+  "behavior": {
+    "status": "pass",
+    "acceptance": {
+      "status": "pass",
+      "tests": 7,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "exit_code": 0,
+      "detail": ".......                                                                  [100%]\n7 passed in 0.77s\n"
+    },
+    "regression": {
+      "status": "pass",
+      "tests": 18,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "exit_code": 0,
+      "detail": "..................                                                       [100%]\n18 passed in 0.58s\n"
+    }
+  },
+  "structural": {
+    "schema": "coding-agent-gates/sensor-result/v1",
+    "status": "pass",
+    "rules": {
+      "Controllers must not import infrastructure repositories directly": "KEPT"
+    },
+    "violations": [],
+    "error": null,
+    "fingerprint": "af9022009e7c328277205b6f76b93dd985292dc800280c4dc7595d2220f395ce",
+    "tool_version": "2.17",
+    "exit_code": 0,
+    "raw_output": "\n---------\nContracts\n---------\n\nAnalyzed 9 files, 8 dependencies.\n---------------------------------\n\nControllers must not import infrastructure repositories directly KEPT\n\nContracts: 1 kept, 0 broken.\n"
+  },
+  "semantic_judge": {
+    "status": "pass",
+    "reason": "The controller modules only decode and validate request fields (types, presence, positive quantity, non-negative price), call OrderService methods (place_order, quote, get_order_summary, list_for_customer), catch OrderNotFound and InvalidRequest, and map returned objects and amounts into response bodies. handle_quote passes discount_cents and total_cents through from the service's quote without computing them. The code contains no discount eligibility checks, no discount or total computation, and no hard-coded pricing thresholds or percentages. The controller does not import a repository or infrastructure module.",
+    "findings": [],
+    "provider_failed": false,
+    "raw_response": "{\"verdict\": \"pass\", \"findings\": [], \"rationale\": \"The controller modules only decode and validate request fields (types, presence, positive quantity, non-negative price), call OrderService methods (place_order, quote, get_order_summary, list_for_customer), catch OrderNotFound and InvalidRequest, and map returned objects and amounts into response bodies. handle_quote passes discount_cents and total_cents through from the service's quote without computing them. The code contains no discount eligibility checks, no discount or total computation, and no hard-coded pricing thresholds or percentages. The controller does not import a repository or infrastructure module.\"}"
+  },
+  "semantic_judge_calls": [
+    {
+      "label": "pilot-2026-11-19 T04-discounts__B__r1 evaluation judge",
+      "model_requested": "claude-haiku-5-5",
+      "started_at": "2026-11-19T10:26:56+00:00",
+      "reservation_usd": "1.3806",
+      "bound": {
+        "input_bytes": 8540,
+        "budget_input_tokens": 40540,
+        "budget_output_tokens": 8000,
+        "budget_usd": "0.0606",
+        "response_input_tokens_max": 1000000,
+        "response_output_tokens_max": 128000,
+        "response_usd": "1.3200",
+        "reservation_usd": "1.3806"
+      },
+      "models_reported": [
+        "claude-haiku-5-5"
+      ],
+      "duration_ms": 3256,
+      "wall_s": 8.229,
+      "stop_reason": "end_turn",
+      "usage": {
+        "input_tokens": 2,
+        "cache_creation_input_tokens": 4400,
+        "cache_read_input_tokens": 7156,
+        "output_tokens": 408,
+        "output_tokens_details": {
+          "thinking_tokens": 201
+        },
+        "server_tool_use": {
+          "web_search_requests": 0,
+          "web_fetch_requests": 0
+        },
+        "service_tier": "standard",
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 4400,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "inference_geo": "global",
+        "iterations": [
+          {
+            "input_tokens": 2,
+            "output_tokens": 408,
+            "cache_read_input_tokens": 7156,
+            "cache_creation_input_tokens": 4400,
+            "cache_creation": {
+              "ephemeral_5m_input_tokens": 0,
+              "ephemeral_1h_input_tokens": 4400
+            },
+            "type": "message"
+          }
+        ],
+        "speed": "standard",
+        "fallback_credit": null
+      },
+      "cost_usd": "0.00115576",
+      "cost_basis": "total_cost_usd reported by the Claude Code CLI: an API-equivalent list-price estimate; under a subscription login it is notional, not an invoice",
+      "exit_code": 0,
+      "ledger_entry_id": "e619aa2a2511443badec5368bc64229d",
+      "over_budget_estimate": null,
+      "bound_exceeded": null,
+      "error": null
+    }
+  ],
+  "semantic_label": null,
+  "semantic_label_note": "unavailable: no independent human labels for final runs (Decisions, 2026-11-19); semantic_judge is a judge output, not ground truth",
+  "tampering": {
+    "detected": false,
+    "workspace_protected": {
+      "changed": [],
+      "added": [],
+      "removed": []
+    },
+    "gate_files": {
+      "changed": [],
+      "added": [],
+      "removed": []
+    },
+    "workspace_settings_added": [],
+    "baseline_tests_modified": [
+      "tests/test_order_behaviour.py"
+    ]
+  }
+}

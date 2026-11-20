@@ -1,0 +1,9 @@
+{
+  "schema": "coding-agent-gates/reviewed-exceptions/v1",
+  "note": "Exceptions a person has reviewed for the version 2 study. The study gate and the v2 evaluator accept an ignored import on a required rule only when every ignore_imports entry for that rule is listed here.",
+  "exceptions": {
+    "Controllers must not import infrastructure repositories directly": [
+      "orders.controllers.reports -> orders.infrastructure.repository"
+    ]
+  }
+}

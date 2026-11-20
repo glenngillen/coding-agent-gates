@@ -1,0 +1,132 @@
+diff --git a/src/orders/application/order_service.py b/src/orders/application/order_service.py
+index 9d246c6..7fb567a 100644
+--- a/src/orders/application/order_service.py
++++ b/src/orders/application/order_service.py
+@@ -11,6 +11,7 @@ from __future__ import annotations
+ from collections.abc import Iterable
+ 
+ from orders.domain import LineItem, Order, OrderSummary
++from orders.infrastructure.audit_log import InMemoryAuditLog
+ from orders.infrastructure.repository import InMemoryOrderRepository
+ 
+ DISCOUNT_THRESHOLD_CENTS = 10_000
+@@ -29,8 +30,13 @@ def discount_for(subtotal_cents: int) -> int:
+ 
+ 
+ class OrderService:
+-    def __init__(self, repository: InMemoryOrderRepository) -> None:
++    def __init__(
++        self,
++        repository: InMemoryOrderRepository,
++        audit_log: InMemoryAuditLog | None = None,
++    ) -> None:
+         self._repository = repository
++        self._audit_log = audit_log if audit_log is not None else InMemoryAuditLog()
+ 
+     def place_order(self, customer_id: str, items: Iterable[LineItem]) -> Order:
+         order = Order(
+@@ -39,8 +45,18 @@ class OrderService:
+             items=tuple(items),
+         )
+         self._repository.add(order)
++        subtotal = order.subtotal_cents
++        self._audit_log.append(
++            "order_placed",
++            order_id=order.order_id,
++            customer_id=order.customer_id,
++            total_cents=subtotal - discount_for(subtotal),
++        )
+         return order
+ 
++    def audit_events(self) -> list[dict]:
++        return self._audit_log.events()
++
+     def get_order(self, order_id: str) -> Order:
+         order = self._repository.get(order_id)
+         if order is None:
+@@ -51,6 +67,7 @@ class OrderService:
+         order = self.get_order(order_id)
+         subtotal = order.subtotal_cents
+         discount = discount_for(subtotal)
++        self._audit_log.append("order_viewed", order_id=order.order_id)
+         return OrderSummary(
+             order=order,
+             subtotal_cents=subtotal,
+diff --git a/src/orders/controllers/orders.py b/src/orders/controllers/orders.py
+index 0cbf354..db2f757 100644
+--- a/src/orders/controllers/orders.py
++++ b/src/orders/controllers/orders.py
+@@ -86,6 +86,9 @@ class OrderController:
+             return Response(404, {"error": "order not found"})
+         return Response(200, _summary_body(summary))
+ 
++    def handle_audit_log(self) -> Response:
++        return Response(200, {"events": self._service.audit_events()})
++
+     def handle_list_for_customer(self, customer_id: str) -> Response:
+         orders = self._service.list_for_customer(customer_id)
+         return Response(200, {"orders": [_order_body(o) for o in orders]})
+diff --git a/src/orders/infrastructure/audit_log.py b/src/orders/infrastructure/audit_log.py
+new file mode 100644
+index 0000000..9fabbee
+--- /dev/null
++++ b/src/orders/infrastructure/audit_log.py
+@@ -0,0 +1,17 @@
++"""In-memory append-only audit log. Stands in for durable storage; no I/O."""
++
++from __future__ import annotations
++
++from typing import Any
++
++
++class InMemoryAuditLog:
++    def __init__(self) -> None:
++        self._events: list[dict[str, Any]] = []
++
++    def append(self, event: str, **fields: Any) -> None:
++        sequence = len(self._events) + 1
++        self._events.append({"sequence": sequence, "event": event, **fields})
++
++    def events(self) -> list[dict[str, Any]]:
++        return [dict(e) for e in self._events]
+diff --git a/tests/test_order_behaviour.py b/tests/test_order_behaviour.py
+index 53425d2..16cc646 100644
+--- a/tests/test_order_behaviour.py
++++ b/tests/test_order_behaviour.py
+@@ -120,3 +120,36 @@ class TestListForCustomer:
+ 
+     def test_customer_without_orders_gets_an_empty_list(self, controller):
+         assert controller.handle_list_for_customer("nobody").body == {"orders": []}
++
++
++class TestAuditLog:
++    def test_empty_log(self, controller):
++        response = controller.handle_audit_log()
++        assert response.status == 200
++        assert response.body == {"events": []}
++
++    def test_records_placements_and_views_in_order(self, controller):
++        items = [{"sku": "X", "quantity": 1, "unit_price_cents": 10_000}]
++        order_id = create(controller, items=items).body["order_id"]
++        controller.handle_get(order_id)
++
++        assert controller.handle_audit_log().body["events"] == [
++            {
++                "sequence": 1,
++                "event": "order_placed",
++                "order_id": order_id,
++                "customer_id": "cust-1",
++                "total_cents": 9_000,
++            },
++            {"sequence": 2, "event": "order_viewed", "order_id": order_id},
++        ]
++
++    def test_failed_requests_record_nothing(self, controller):
++        controller.handle_create({})
++        controller.handle_get("missing")
++
++        assert controller.handle_audit_log().body == {"events": []}
++
++    def test_log_is_per_app_instance(self, controller):
++        create(controller)
++        assert build_app().handle_audit_log().body == {"events": []}

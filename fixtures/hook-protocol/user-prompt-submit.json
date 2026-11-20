@@ -1,0 +1,8 @@
+{
+  "session_id": "fixture-session-1",
+  "transcript_path": "/tmp/transcript.jsonl",
+  "cwd": "/work/coding-agent-gates",
+  "permission_mode": "default",
+  "hook_event_name": "UserPromptSubmit",
+  "prompt": "Please try the repair again."
+}

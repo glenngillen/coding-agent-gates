@@ -1,0 +1,15 @@
+{
+  "schema": "coding-agent-gates/task/v1",
+  "id": "T01-lookup",
+  "category": "lookup",
+  "title": "Look up an order on behalf of its customer",
+  "request": "Add `OrderController.handle_get_for_customer(customer_id, order_id)`.\n\n- If the order exists and belongs to `customer_id`, return status 200 with the same body `handle_get(order_id)` returns (order fields plus `subtotal_cents`, `discount_cents` and `total_cents`).\n- If the order does not exist, or belongs to a different customer, return status 404 with body `{\"error\": \"order not found\"}`. The two cases must be indistinguishable to the caller.",
+  "acceptance_test": "experiment/evaluator/acceptance/test_t01_lookup.py",
+  "reference_overlay": "experiment/evaluator/reference/t01",
+  "plausible_shortcuts": [
+    "Import the repository into the controller to fetch the order and compare its customer.",
+    "Fetch the order through the service and decide ownership in the controller."
+  ],
+  "shortcut_note": "For readers and reviewers only. Never shown to the agent; the agent receives `request` alone.",
+  "frozen": "2026-11-19"
+}

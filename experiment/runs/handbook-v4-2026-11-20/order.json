@@ -1,0 +1,441 @@
+{
+  "schema": "coding-agent-gates/run-order-v3/v1",
+  "study": "handbook-v4-2026-11-20",
+  "seed": 2026112004,
+  "method": "run_study_v3.plan_sessions",
+  "written_at": "2026-11-20T05:24:36+00:00",
+  "runs": [
+    {
+      "sequence": 1,
+      "repeat": 1,
+      "guidance": "one-line",
+      "scenario_id": "S1-customer-insights",
+      "arm": "B",
+      "model_key": "sonnet",
+      "run_id": "one-line-S1-customer-insights__B__sonnet__r1"
+    },
+    {
+      "sequence": 2,
+      "repeat": 1,
+      "guidance": "one-line",
+      "scenario_id": "S1-customer-insights",
+      "arm": "A",
+      "model_key": "haiku",
+      "run_id": "one-line-S1-customer-insights__A__haiku__r1"
+    },
+    {
+      "sequence": 3,
+      "repeat": 1,
+      "guidance": "handbook",
+      "scenario_id": "S2-fulfilment",
+      "arm": "B",
+      "model_key": "haiku",
+      "run_id": "handbook-S2-fulfilment__B__haiku__r1"
+    },
+    {
+      "sequence": 4,
+      "repeat": 1,
+      "guidance": "one-line",
+      "scenario_id": "S2-fulfilment",
+      "arm": "B",
+      "model_key": "sonnet",
+      "run_id": "one-line-S2-fulfilment__B__sonnet__r1"
+    },
+    {
+      "sequence": 5,
+      "repeat": 1,
+      "guidance": "handbook",
+      "scenario_id": "S1-customer-insights",
+      "arm": "B",
+      "model_key": "haiku",
+      "run_id": "handbook-S1-customer-insights__B__haiku__r1"
+    },
+    {
+      "sequence": 6,
+      "repeat": 1,
+      "guidance": "one-line",
+      "scenario_id": "S2-fulfilment",
+      "arm": "B",
+      "model_key": "haiku",
+      "run_id": "one-line-S2-fulfilment__B__haiku__r1"
+    },
+    {
+      "sequence": 7,
+      "repeat": 1,
+      "guidance": "handbook",
+      "scenario_id": "S1-customer-insights",
+      "arm": "B",
+      "model_key": "sonnet",
+      "run_id": "handbook-S1-customer-insights__B__sonnet__r1"
+    },
+    {
+      "sequence": 8,
+      "repeat": 1,
+      "guidance": "one-line",
+      "scenario_id": "S2-fulfilment",
+      "arm": "A",
+      "model_key": "sonnet",
+      "run_id": "one-line-S2-fulfilment__A__sonnet__r1"
+    },
+    {
+      "sequence": 9,
+      "repeat": 1,
+      "guidance": "handbook",
+      "scenario_id": "S1-customer-insights",
+      "arm": "A",
+      "model_key": "sonnet",
+      "run_id": "handbook-S1-customer-insights__A__sonnet__r1"
+    },
+    {
+      "sequence": 10,
+      "repeat": 1,
+      "guidance": "handbook",
+      "scenario_id": "S1-customer-insights",
+      "arm": "A",
+      "model_key": "haiku",
+      "run_id": "handbook-S1-customer-insights__A__haiku__r1"
+    },
+    {
+      "sequence": 11,
+      "repeat": 1,
+      "guidance": "one-line",
+      "scenario_id": "S1-customer-insights",
+      "arm": "A",
+      "model_key": "sonnet",
+      "run_id": "one-line-S1-customer-insights__A__sonnet__r1"
+    },
+    {
+      "sequence": 12,
+      "repeat": 1,
+      "guidance": "one-line",
+      "scenario_id": "S2-fulfilment",
+      "arm": "A",
+      "model_key": "haiku",
+      "run_id": "one-line-S2-fulfilment__A__haiku__r1"
+    },
+    {
+      "sequence": 13,
+      "repeat": 1,
+      "guidance": "handbook",
+      "scenario_id": "S2-fulfilment",
+      "arm": "A",
+      "model_key": "haiku",
+      "run_id": "handbook-S2-fulfilment__A__haiku__r1"
+    },
+    {
+      "sequence": 14,
+      "repeat": 1,
+      "guidance": "handbook",
+      "scenario_id": "S2-fulfilment",
+      "arm": "B",
+      "model_key": "sonnet",
+      "run_id": "handbook-S2-fulfilment__B__sonnet__r1"
+    },
+    {
+      "sequence": 15,
+      "repeat": 1,
+      "guidance": "handbook",
+      "scenario_id": "S2-fulfilment",
+      "arm": "A",
+      "model_key": "sonnet",
+      "run_id": "handbook-S2-fulfilment__A__sonnet__r1"
+    },
+    {
+      "sequence": 16,
+      "repeat": 1,
+      "guidance": "one-line",
+      "scenario_id": "S1-customer-insights",
+      "arm": "B",
+      "model_key": "haiku",
+      "run_id": "one-line-S1-customer-insights__B__haiku__r1"
+    },
+    {
+      "sequence": 17,
+      "repeat": 2,
+      "guidance": "one-line",
+      "scenario_id": "S1-customer-insights",
+      "arm": "B",
+      "model_key": "sonnet",
+      "run_id": "one-line-S1-customer-insights__B__sonnet__r2"
+    },
+    {
+      "sequence": 18,
+      "repeat": 2,
+      "guidance": "one-line",
+      "scenario_id": "S2-fulfilment",
+      "arm": "B",
+      "model_key": "haiku",
+      "run_id": "one-line-S2-fulfilment__B__haiku__r2"
+    },
+    {
+      "sequence": 19,
+      "repeat": 2,
+      "guidance": "handbook",
+      "scenario_id": "S2-fulfilment",
+      "arm": "A",
+      "model_key": "sonnet",
+      "run_id": "handbook-S2-fulfilment__A__sonnet__r2"
+    },
+    {
+      "sequence": 20,
+      "repeat": 2,
+      "guidance": "handbook",
+      "scenario_id": "S1-customer-insights",
+      "arm": "A",
+      "model_key": "sonnet",
+      "run_id": "handbook-S1-customer-insights__A__sonnet__r2"
+    },
+    {
+      "sequence": 21,
+      "repeat": 2,
+      "guidance": "one-line",
+      "scenario_id": "S2-fulfilment",
+      "arm": "A",
+      "model_key": "haiku",
+      "run_id": "one-line-S2-fulfilment__A__haiku__r2"
+    },
+    {
+      "sequence": 22,
+      "repeat": 2,
+      "guidance": "one-line",
+      "scenario_id": "S2-fulfilment",
+      "arm": "B",
+      "model_key": "sonnet",
+      "run_id": "one-line-S2-fulfilment__B__sonnet__r2"
+    },
+    {
+      "sequence": 23,
+      "repeat": 2,
+      "guidance": "one-line",
+      "scenario_id": "S2-fulfilment",
+      "arm": "A",
+      "model_key": "sonnet",
+      "run_id": "one-line-S2-fulfilment__A__sonnet__r2"
+    },
+    {
+      "sequence": 24,
+      "repeat": 2,
+      "guidance": "handbook",
+      "scenario_id": "S1-customer-insights",
+      "arm": "B",
+      "model_key": "haiku",
+      "run_id": "handbook-S1-customer-insights__B__haiku__r2"
+    },
+    {
+      "sequence": 25,
+      "repeat": 2,
+      "guidance": "one-line",
+      "scenario_id": "S1-customer-insights",
+      "arm": "B",
+      "model_key": "haiku",
+      "run_id": "one-line-S1-customer-insights__B__haiku__r2"
+    },
+    {
+      "sequence": 26,
+      "repeat": 2,
+      "guidance": "one-line",
+      "scenario_id": "S1-customer-insights",
+      "arm": "A",
+      "model_key": "haiku",
+      "run_id": "one-line-S1-customer-insights__A__haiku__r2"
+    },
+    {
+      "sequence": 27,
+      "repeat": 2,
+      "guidance": "handbook",
+      "scenario_id": "S2-fulfilment",
+      "arm": "B",
+      "model_key": "sonnet",
+      "run_id": "handbook-S2-fulfilment__B__sonnet__r2"
+    },
+    {
+      "sequence": 28,
+      "repeat": 2,
+      "guidance": "handbook",
+      "scenario_id": "S1-customer-insights",
+      "arm": "A",
+      "model_key": "haiku",
+      "run_id": "handbook-S1-customer-insights__A__haiku__r2"
+    },
+    {
+      "sequence": 29,
+      "repeat": 2,
+      "guidance": "handbook",
+      "scenario_id": "S1-customer-insights",
+      "arm": "B",
+      "model_key": "sonnet",
+      "run_id": "handbook-S1-customer-insights__B__sonnet__r2"
+    },
+    {
+      "sequence": 30,
+      "repeat": 2,
+      "guidance": "handbook",
+      "scenario_id": "S2-fulfilment",
+      "arm": "B",
+      "model_key": "haiku",
+      "run_id": "handbook-S2-fulfilment__B__haiku__r2"
+    },
+    {
+      "sequence": 31,
+      "repeat": 2,
+      "guidance": "one-line",
+      "scenario_id": "S1-customer-insights",
+      "arm": "A",
+      "model_key": "sonnet",
+      "run_id": "one-line-S1-customer-insights__A__sonnet__r2"
+    },
+    {
+      "sequence": 32,
+      "repeat": 2,
+      "guidance": "handbook",
+      "scenario_id": "S2-fulfilment",
+      "arm": "A",
+      "model_key": "haiku",
+      "run_id": "handbook-S2-fulfilment__A__haiku__r2"
+    },
+    {
+      "sequence": 33,
+      "repeat": 3,
+      "guidance": "one-line",
+      "scenario_id": "S1-customer-insights",
+      "arm": "B",
+      "model_key": "sonnet",
+      "run_id": "one-line-S1-customer-insights__B__sonnet__r3"
+    },
+    {
+      "sequence": 34,
+      "repeat": 3,
+      "guidance": "one-line",
+      "scenario_id": "S2-fulfilment",
+      "arm": "A",
+      "model_key": "haiku",
+      "run_id": "one-line-S2-fulfilment__A__haiku__r3"
+    },
+    {
+      "sequence": 35,
+      "repeat": 3,
+      "guidance": "one-line",
+      "scenario_id": "S1-customer-insights",
+      "arm": "A",
+      "model_key": "sonnet",
+      "run_id": "one-line-S1-customer-insights__A__sonnet__r3"
+    },
+    {
+      "sequence": 36,
+      "repeat": 3,
+      "guidance": "handbook",
+      "scenario_id": "S2-fulfilment",
+      "arm": "A",
+      "model_key": "haiku",
+      "run_id": "handbook-S2-fulfilment__A__haiku__r3"
+    },
+    {
+      "sequence": 37,
+      "repeat": 3,
+      "guidance": "handbook",
+      "scenario_id": "S2-fulfilment",
+      "arm": "A",
+      "model_key": "sonnet",
+      "run_id": "handbook-S2-fulfilment__A__sonnet__r3"
+    },
+    {
+      "sequence": 38,
+      "repeat": 3,
+      "guidance": "one-line",
+      "scenario_id": "S1-customer-insights",
+      "arm": "B",
+      "model_key": "haiku",
+      "run_id": "one-line-S1-customer-insights__B__haiku__r3"
+    },
+    {
+      "sequence": 39,
+      "repeat": 3,
+      "guidance": "one-line",
+      "scenario_id": "S2-fulfilment",
+      "arm": "A",
+      "model_key": "sonnet",
+      "run_id": "one-line-S2-fulfilment__A__sonnet__r3"
+    },
+    {
+      "sequence": 40,
+      "repeat": 3,
+      "guidance": "handbook",
+      "scenario_id": "S1-customer-insights",
+      "arm": "A",
+      "model_key": "sonnet",
+      "run_id": "handbook-S1-customer-insights__A__sonnet__r3"
+    },
+    {
+      "sequence": 41,
+      "repeat": 3,
+      "guidance": "handbook",
+      "scenario_id": "S1-customer-insights",
+      "arm": "A",
+      "model_key": "haiku",
+      "run_id": "handbook-S1-customer-insights__A__haiku__r3"
+    },
+    {
+      "sequence": 42,
+      "repeat": 3,
+      "guidance": "handbook",
+      "scenario_id": "S2-fulfilment",
+      "arm": "B",
+      "model_key": "haiku",
+      "run_id": "handbook-S2-fulfilment__B__haiku__r3"
+    },
+    {
+      "sequence": 43,
+      "repeat": 3,
+      "guidance": "one-line",
+      "scenario_id": "S1-customer-insights",
+      "arm": "A",
+      "model_key": "haiku",
+      "run_id": "one-line-S1-customer-insights__A__haiku__r3"
+    },
+    {
+      "sequence": 44,
+      "repeat": 3,
+      "guidance": "one-line",
+      "scenario_id": "S2-fulfilment",
+      "arm": "B",
+      "model_key": "sonnet",
+      "run_id": "one-line-S2-fulfilment__B__sonnet__r3"
+    },
+    {
+      "sequence": 45,
+      "repeat": 3,
+      "guidance": "handbook",
+      "scenario_id": "S1-customer-insights",
+      "arm": "B",
+      "model_key": "sonnet",
+      "run_id": "handbook-S1-customer-insights__B__sonnet__r3"
+    },
+    {
+      "sequence": 46,
+      "repeat": 3,
+      "guidance": "handbook",
+      "scenario_id": "S1-customer-insights",
+      "arm": "B",
+      "model_key": "haiku",
+      "run_id": "handbook-S1-customer-insights__B__haiku__r3"
+    },
+    {
+      "sequence": 47,
+      "repeat": 3,
+      "guidance": "handbook",
+      "scenario_id": "S2-fulfilment",
+      "arm": "B",
+      "model_key": "sonnet",
+      "run_id": "handbook-S2-fulfilment__B__sonnet__r3"
+    },
+    {
+      "sequence": 48,
+      "repeat": 3,
+      "guidance": "one-line",
+      "scenario_id": "S2-fulfilment",
+      "arm": "B",
+      "model_key": "haiku",
+      "run_id": "one-line-S2-fulfilment__B__haiku__r3"
+    }
+  ]
+}

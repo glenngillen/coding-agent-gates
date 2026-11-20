@@ -1,0 +1,152 @@
+diff --git a/src/orders/application/order_service.py b/src/orders/application/order_service.py
+index 9d246c6..befed93 100644
+--- a/src/orders/application/order_service.py
++++ b/src/orders/application/order_service.py
+@@ -11,6 +11,7 @@ from __future__ import annotations
+ from collections.abc import Iterable
+ 
+ from orders.domain import LineItem, Order, OrderSummary
++from orders.infrastructure.audit_log import InMemoryAuditLog
+ from orders.infrastructure.repository import InMemoryOrderRepository
+ 
+ DISCOUNT_THRESHOLD_CENTS = 10_000
+@@ -29,8 +30,13 @@ def discount_for(subtotal_cents: int) -> int:
+ 
+ 
+ class OrderService:
+-    def __init__(self, repository: InMemoryOrderRepository) -> None:
++    def __init__(
++        self,
++        repository: InMemoryOrderRepository,
++        audit_log: InMemoryAuditLog | None = None,
++    ) -> None:
+         self._repository = repository
++        self._audit_log = audit_log if audit_log is not None else InMemoryAuditLog()
+ 
+     def place_order(self, customer_id: str, items: Iterable[LineItem]) -> Order:
+         order = Order(
+@@ -39,8 +45,18 @@ class OrderService:
+             items=tuple(items),
+         )
+         self._repository.add(order)
++        subtotal = order.subtotal_cents
++        self._audit_log.append(
++            "order_placed",
++            order_id=order.order_id,
++            customer_id=order.customer_id,
++            total_cents=subtotal - discount_for(subtotal),
++        )
+         return order
+ 
++    def get_audit_log(self) -> list[dict]:
++        return self._audit_log.events()
++
+     def get_order(self, order_id: str) -> Order:
+         order = self._repository.get(order_id)
+         if order is None:
+@@ -51,6 +67,7 @@ class OrderService:
+         order = self.get_order(order_id)
+         subtotal = order.subtotal_cents
+         discount = discount_for(subtotal)
++        self._audit_log.append("order_viewed", order_id=order.order_id)
+         return OrderSummary(
+             order=order,
+             subtotal_cents=subtotal,
+diff --git a/src/orders/controllers/orders.py b/src/orders/controllers/orders.py
+index 0cbf354..6eb60a9 100644
+--- a/src/orders/controllers/orders.py
++++ b/src/orders/controllers/orders.py
+@@ -86,6 +86,9 @@ class OrderController:
+             return Response(404, {"error": "order not found"})
+         return Response(200, _summary_body(summary))
+ 
++    def handle_audit_log(self) -> Response:
++        return Response(200, {"events": self._service.get_audit_log()})
++
+     def handle_list_for_customer(self, customer_id: str) -> Response:
+         orders = self._service.list_for_customer(customer_id)
+         return Response(200, {"orders": [_order_body(o) for o in orders]})
+diff --git a/src/orders/infrastructure/audit_log.py b/src/orders/infrastructure/audit_log.py
+new file mode 100644
+index 0000000..66b59a2
+--- /dev/null
++++ b/src/orders/infrastructure/audit_log.py
+@@ -0,0 +1,16 @@
++"""In-memory audit log storage. Assigns sequence numbers starting at 1."""
++
++from __future__ import annotations
++
++from typing import Any
++
++
++class InMemoryAuditLog:
++    def __init__(self) -> None:
++        self._events: list[dict[str, Any]] = []
++
++    def append(self, event: str, **fields: Any) -> None:
++        self._events.append({"sequence": len(self._events) + 1, "event": event, **fields})
++
++    def events(self) -> list[dict[str, Any]]:
++        return [dict(e) for e in self._events]
+diff --git a/src/orders/wiring.py b/src/orders/wiring.py
+index 460876a..f5e8970 100644
+--- a/src/orders/wiring.py
++++ b/src/orders/wiring.py
+@@ -8,8 +8,9 @@ from __future__ import annotations
+ 
+ from orders.application.order_service import OrderService
+ from orders.controllers.orders import OrderController
++from orders.infrastructure.audit_log import InMemoryAuditLog
+ from orders.infrastructure.repository import InMemoryOrderRepository
+ 
+ 
+ def build_app() -> OrderController:
+-    return OrderController(OrderService(InMemoryOrderRepository()))
++    return OrderController(OrderService(InMemoryOrderRepository(), InMemoryAuditLog()))
+diff --git a/tests/test_audit_log.py b/tests/test_audit_log.py
+new file mode 100644
+index 0000000..72edcbb
+--- /dev/null
++++ b/tests/test_audit_log.py
+@@ -0,0 +1,41 @@
++from orders.wiring import build_app
++
++
++def create(app, items=None):
++    items = items or [{"sku": "BOOK", "quantity": 2, "unit_price_cents": 1500}]
++    return app.handle_create({"customer_id": "cust-1", "items": items})
++
++
++def test_empty_log():
++    r = build_app().handle_audit_log()
++    assert (r.status, r.body) == (200, {"events": []})
++
++
++def test_events_in_order_with_sequence():
++    app = build_app()
++    oid = create(app).body["order_id"]
++    app.handle_get(oid)
++    assert app.handle_audit_log().body["events"] == [
++        {"sequence": 1, "event": "order_placed", "order_id": oid,
++         "customer_id": "cust-1", "total_cents": 3000},
++        {"sequence": 2, "event": "order_viewed", "order_id": oid},
++    ]
++
++
++def test_total_is_after_discount():
++    app = build_app()
++    create(app, [{"sku": "TV", "quantity": 1, "unit_price_cents": 20000}])
++    assert app.handle_audit_log().body["events"][0]["total_cents"] == 18000
++
++
++def test_failures_record_nothing():
++    app = build_app()
++    assert app.handle_create({"customer_id": "", "items": []}).status == 400
++    assert app.handle_get("nope").status == 404
++    assert app.handle_audit_log().body["events"] == []
++
++
++def test_log_is_per_app():
++    a, b = build_app(), build_app()
++    create(a)
++    assert b.handle_audit_log().body["events"] == []

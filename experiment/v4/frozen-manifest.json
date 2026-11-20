@@ -1,0 +1,22 @@
+{
+  "schema": "coding-agent-gates/frozen-manifest/v1",
+  "written_at": "2026-11-20T05:23:29+00:00",
+  "note": "Version 4 frozen before any session: lean one-line prompt vs a large generated handbook, arms A and B.",
+  "patterns": [
+    "experiment/protocol-v4.md",
+    "experiment/v4/study.json",
+    "experiment/v4/instructions/*.md",
+    "experiment/tools/run_study_v4.py"
+  ],
+  "files": {
+    "experiment/protocol-v4.md": "2c0597f3028d20790ff3da6970f92c83a12f67bae4d2de7700e4376a7b8d11b4",
+    "experiment/tools/run_study_v4.py": "41d78bfca22115b3533a9aebd4defe1f82fbfe6cdbbcc07a3bad0b83e4290a07",
+    "experiment/v4/instructions/handbook.md": "cbe2d40ad926f5f5c21ef34085c55e654020d0629de5da7a5a0d377b3c335f10",
+    "experiment/v4/instructions/one-line.md": "1bf083de72baca7c51be72a716c661f68b8c64187e8924f814f00e442b6bc31c",
+    "experiment/v4/study.json": "c04157df71ad4c4b6977a5c3e5100853d332639811769c6700b6cb79d118acbb"
+  },
+  "tree_sha256": "2e76c68e81ec791337f3ed21ca27ad5942b780e7170eb92b8eceb31be2fc0528",
+  "depends_on": {
+    "experiment/v2/frozen-manifest.json": "b9fe0be84c81d4b182d991faf898c0fe4bba3a186b551b9a204489019aeb96e3"
+  }
+}

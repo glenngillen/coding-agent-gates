@@ -1,0 +1,141 @@
+src/orders/controllers/customer_insights.py --- Python
+  1 """Customer insight endpoints for the account team."""
+  2 
+  3 from __future__ import annotations
+  4 
+  5 from typing import Any
+  6 
+  7 from orders.application.pricing import discount_for
+  8 from orders.controllers.http import InvalidRequest, Response, bad_request, not_found, require_positive_int
+  9 from orders.infrastructure.customers import InMemoryCustomerRepository
+ 10 from orders.infrastructure.repository import InMemoryOrderRepository
+ 11 
+ 12 
+ 13 class CustomerInsightsController:
+ 14     def __init__(self, customers: InMemoryCustomerRepository, orders: InMemoryOrderRepository) -> None:
+ 15         self._customers = customers
+ 16         self._orders = orders
+ 17 
+ 18     def handle_order_history(self, customer_id: str) -> Response:
+ 19         """Order history for a customer, newest order first."""
+ 20         customer = self._customers.get(customer_id)
+ 21         if customer is None:
+ 22             return not_found("customer")
+ 23 
+ 24         customer_orders = self._orders.list_for_customer(customer_id)
+ 25         tier = customer.tier
+ 26 
+ 27         order_entries = []
+ 28         for order in reversed(customer_orders):
+ 29             subtotal = order.subtotal_cents
+ 30             discount = discount_for(subtotal, tier)
+ 31             total_cents = subtotal - discount
+ 32             order_entries.append({
+ 33                 "order_id": order.order_id,
+ 34                 "status": order.status,
+ 35                 "total_cents": total_cents,
+ 36             })
+ 37 
+ 38         return Response(200, {"customer_id": customer_id, "orders": order_entries})
+ 39 
+ 40     def handle_lifetime_value(self, customer_id: str) -> Response:
+ 41         """Lifetime value for a customer: order count and total revenue from non-cancelled orders."""
+ 42         customer = self._customers.get(customer_id)
+ 43         if customer is None:
+ 44             return not_found("customer")
+ 45 
+ 46         customer_orders = self._orders.list_for_customer(customer_id)
+ 47         tier = customer.tier
+ 48 
+ 49         order_count = 0
+ 50         lifetime_value_cents = 0
+ 51         for order in customer_orders:
+ 52             if order.status != "cancelled":
+ 53                 order_count += 1
+ 54                 subtotal = order.subtotal_cents
+ 55                 discount = discount_for(subtotal, tier)
+ 56                 total_cents = subtotal - discount
+ 57                 lifetime_value_cents += total_cents
+ 58 
+ 59         return Response(200, {
+ 60             "customer_id": customer_id,
+ 61             "order_count": order_count,
+ 62             "lifetime_value_cents": lifetime_value_cents,
+ 63         })
+ 64 
+ 65     def handle_top_customers(self, limit: Any) -> Response:
+ 66         """Top customers by lifetime value."""
+ 67         try:
+ 68             limit = require_positive_int(limit, "limit")
+ 69         except InvalidRequest as exc:
+ 70             return bad_request(exc)
+ 71 
+ 72         customers_list = self._customers.list_all()
+ 73         customer_values = []
+ 74 
+ 75         for customer in customers_list:
+ 76             customer_orders = self._orders.list_for_customer(customer.customer_id)
+ 77             tier = customer.tier
+ 78 
+ 79             lifetime_value_cents = 0
+ 80             for order in customer_orders:
+ 81                 if order.status != "cancelled":
+ 82                     subtotal = order.subtotal_cents
+ 83                     discount = discount_for(subtotal, tier)
+ 84                     total_cents = subtotal - discount
+ 85                     lifetime_value_cents += total_cents
+ 86 
+ 87             if lifetime_value_cents > 0:
+ 88                 customer_values.append({
+ 89                     "customer_id": customer.customer_id,
+ 90                     "name": customer.name,
+ 91                     "lifetime_value_cents": lifetime_value_cents,
+ 92                 })
+ 93 
+ 94         customer_values.sort(key=lambda c: (-c["lifetime_value_cents"], c["customer_id"]))
+ 95         return Response(200, {"customers": customer_values[:limit]})
+ 96 
+ 97     def handle_customers_without_orders(self) -> Response:
+ 98         """Customers with no non-cancelled orders, in registration order."""
+ 99         customers_list = self._customers.list_all()
+100         result = []
+101 
+102         for customer in customers_list:
+103             customer_orders = self._orders.list_for_customer(customer.customer_id)
+104             has_non_cancelled = any(order.status != "cancelled" for order in customer_orders)
+105 
+106             if not has_non_cancelled:
+107                 result.append({
+108                     "customer_id": customer.customer_id,
+109                     "name": customer.name,
+110                     "email": customer.email,
+111                 })
+112 
+113         return Response(200, {"customers": result})
+114 
+
+src/orders/wiring.py --- 1/3 --- Python
+ 8  8 from orders.application.customer_service import CustomerService
+ 9  9 from orders.application.order_service import OrderService
+10 10 from orders.controllers.catalog import CatalogController
+.. 11 from orders.controllers.customer_insights import CustomerInsightsController
+11 12 from orders.controllers.customers import CustomerController
+12 13 from orders.controllers.orders import OrderController
+13 14 from orders.controllers.reports import ReportsController
+
+src/orders/wiring.py --- 2/3 --- Python
+23 24     catalog: CatalogController
+24 25     orders: OrderController
+25 26     reports: ReportsController
+.. 27     insights: CustomerInsightsController
+26 28 
+27 29 
+28 30 def build_app() -> Api:
+
+src/orders/wiring.py --- 3/3 --- Python
+35 37         catalog=CatalogController(CatalogService(catalog, stock)),
+36 38         orders=OrderController(OrderService(orders, customers, catalog, stock)),
+37 39         reports=ReportsController(orders),
+.. 40         insights=CustomerInsightsController(customers, orders),
+38 41     )
+

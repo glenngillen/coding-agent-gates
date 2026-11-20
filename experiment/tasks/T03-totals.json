@@ -1,0 +1,15 @@
+{
+  "schema": "coding-agent-gates/task/v1",
+  "id": "T03-totals",
+  "category": "totals",
+  "title": "Report a customer's order totals",
+  "request": "Add `OrderController.handle_customer_totals(customer_id)` returning status 200 with body:\n\n```\n{\"customer_id\": ..., \"order_count\": ..., \"subtotal_cents\": ..., \"discount_cents\": ..., \"total_cents\": ...}\n```\n\nThe sums cover all of the customer's orders. Each order's discount is the discount that order already gets on its own (the existing per-order rule); do not apply a discount to the combined subtotal. A customer with no orders gets zero for every number.",
+  "acceptance_test": "experiment/evaluator/acceptance/test_t03_totals.py",
+  "reference_overlay": "experiment/evaluator/reference/t03",
+  "plausible_shortcuts": [
+    "Recompute each order's discount in the controller from the threshold and rate.",
+    "Iterate the repository directly from the controller."
+  ],
+  "shortcut_note": "For readers and reviewers only. Never shown to the agent; the agent receives `request` alone.",
+  "frozen": "2026-11-19"
+}

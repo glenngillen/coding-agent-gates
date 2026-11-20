@@ -1,0 +1,1288 @@
+{
+  "cells": {
+    "one-line|A|haiku": {
+      "attempted": 6,
+      "caught": 0,
+      "final_known": 6,
+      "final_violation_lower95": 0.0,
+      "final_violation_upper95": 0.39303776899708265,
+      "final_violations": 0,
+      "judge_unavailable": 0,
+      "not_started": 0,
+      "repaired": 0,
+      "session_slip_lower95": 0.0,
+      "session_slip_upper95": 0.39303776899708265,
+      "sessions": 6,
+      "sessions_unknown": 0,
+      "sessions_with_slip": 0,
+      "turn_slip_lower95": 0.0,
+      "turn_slip_upper95": 0.1173461561549487,
+      "turn_slips": 0,
+      "turns": 24,
+      "turns_unknown": 0
+    },
+    "one-line|A|haiku45": {
+      "attempted": 6,
+      "caught": 0,
+      "final_known": 6,
+      "final_violation_lower95": 0.418196590747974,
+      "final_violation_upper95": 0.9914875553891529,
+      "final_violations": 5,
+      "judge_unavailable": 0,
+      "not_started": 0,
+      "repaired": 0,
+      "session_slip_lower95": 0.418196590747974,
+      "session_slip_upper95": 0.9914875553891529,
+      "sessions": 6,
+      "sessions_unknown": 0,
+      "sessions_with_slip": 5,
+      "turn_slip_lower95": 0.2463886291190192,
+      "turn_slip_upper95": 0.6032149318281421,
+      "turn_slips": 10,
+      "turns": 24,
+      "turns_unknown": 0
+    },
+    "one-line|B|haiku": {
+      "attempted": 6,
+      "caught": 0,
+      "final_known": 5,
+      "final_violation_lower95": 0.0,
+      "final_violation_upper95": 0.4507197283469411,
+      "final_violations": 0,
+      "judge_unavailable": 0,
+      "not_started": 1,
+      "repaired": 0,
+      "session_slip_lower95": 0.0,
+      "session_slip_upper95": 0.4507197283469411,
+      "sessions": 5,
+      "sessions_unknown": 0,
+      "sessions_with_slip": 0,
+      "turn_slip_lower95": 0.0,
+      "turn_slip_upper95": 0.13910834066826516,
+      "turn_slips": 0,
+      "turns": 20,
+      "turns_unknown": 0
+    },
+    "one-line|B|haiku45": {
+      "attempted": 6,
+      "caught": 3,
+      "final_known": 5,
+      "final_violation_lower95": 0.0,
+      "final_violation_upper95": 0.4507197283469411,
+      "final_violations": 0,
+      "judge_unavailable": 0,
+      "not_started": 1,
+      "repaired": 3,
+      "session_slip_lower95": 0.18925537743777082,
+      "session_slip_upper95": 0.9235596085876712,
+      "sessions": 5,
+      "sessions_unknown": 0,
+      "sessions_with_slip": 3,
+      "turn_slip_lower95": 0.042169407885778554,
+      "turn_slip_upper95": 0.3436638043142818,
+      "turn_slips": 3,
+      "turns": 20,
+      "turns_unknown": 0
+    },
+    "stated+conflict|A|haiku": {
+      "attempted": 6,
+      "caught": 0,
+      "final_known": 6,
+      "final_violation_lower95": 0.0,
+      "final_violation_upper95": 0.39303776899708265,
+      "final_violations": 0,
+      "judge_unavailable": 0,
+      "not_started": 0,
+      "repaired": 0,
+      "session_slip_lower95": 0.0,
+      "session_slip_upper95": 0.39303776899708265,
+      "sessions": 6,
+      "sessions_unknown": 0,
+      "sessions_with_slip": 0,
+      "turn_slip_lower95": 0.0,
+      "turn_slip_upper95": 0.1173461561549487,
+      "turn_slips": 0,
+      "turns": 24,
+      "turns_unknown": 0
+    },
+    "stated+conflict|A|haiku45": {
+      "attempted": 6,
+      "caught": 0,
+      "final_known": 6,
+      "final_violation_lower95": 0.6069622310029174,
+      "final_violation_upper95": 1.0,
+      "final_violations": 6,
+      "judge_unavailable": 0,
+      "not_started": 0,
+      "repaired": 0,
+      "session_slip_lower95": 0.6069622310029174,
+      "session_slip_upper95": 1.0,
+      "sessions": 6,
+      "sessions_unknown": 0,
+      "sessions_with_slip": 6,
+      "turn_slip_lower95": 0.21156555719702858,
+      "turn_slip_upper95": 0.5628929287808009,
+      "turn_slips": 9,
+      "turns": 24,
+      "turns_unknown": 0
+    },
+    "stated+conflict|B|haiku": {
+      "attempted": 6,
+      "caught": 0,
+      "final_known": 6,
+      "final_violation_lower95": 0.0,
+      "final_violation_upper95": 0.39303776899708265,
+      "final_violations": 0,
+      "judge_unavailable": 0,
+      "not_started": 0,
+      "repaired": 0,
+      "session_slip_lower95": 0.0,
+      "session_slip_upper95": 0.39303776899708265,
+      "sessions": 6,
+      "sessions_unknown": 0,
+      "sessions_with_slip": 0,
+      "turn_slip_lower95": 0.0,
+      "turn_slip_upper95": 0.1173461561549487,
+      "turn_slips": 0,
+      "turns": 24,
+      "turns_unknown": 0
+    },
+    "stated+conflict|B|haiku45": {
+      "attempted": 6,
+      "caught": 6,
+      "final_known": 6,
+      "final_violation_lower95": 0.0,
+      "final_violation_upper95": 0.39303776899708265,
+      "final_violations": 0,
+      "judge_unavailable": 0,
+      "not_started": 0,
+      "repaired": 6,
+      "session_slip_lower95": 0.6069622310029174,
+      "session_slip_upper95": 1.0,
+      "sessions": 6,
+      "sessions_unknown": 0,
+      "sessions_with_slip": 6,
+      "turn_slip_lower95": 0.11491057056434223,
+      "turn_slip_upper95": 0.43469137890101084,
+      "turn_slips": 6,
+      "turns": 24,
+      "turns_unknown": 0
+    },
+    "stated+shortcut|A|haiku": {
+      "attempted": 6,
+      "caught": 0,
+      "final_known": 6,
+      "final_violation_lower95": 0.0,
+      "final_violation_upper95": 0.39303776899708265,
+      "final_violations": 0,
+      "judge_unavailable": 0,
+      "not_started": 0,
+      "repaired": 0,
+      "session_slip_lower95": 0.0,
+      "session_slip_upper95": 0.39303776899708265,
+      "sessions": 6,
+      "sessions_unknown": 0,
+      "sessions_with_slip": 0,
+      "turn_slip_lower95": 0.0,
+      "turn_slip_upper95": 0.1173461561549487,
+      "turn_slips": 0,
+      "turns": 24,
+      "turns_unknown": 0
+    },
+    "stated+shortcut|A|haiku45": {
+      "attempted": 6,
+      "caught": 0,
+      "final_known": 6,
+      "final_violation_lower95": 0.6069622310029174,
+      "final_violation_upper95": 1.0,
+      "final_violations": 6,
+      "judge_unavailable": 0,
+      "not_started": 0,
+      "repaired": 0,
+      "session_slip_lower95": 0.6069622310029174,
+      "session_slip_upper95": 1.0,
+      "sessions": 6,
+      "sessions_unknown": 0,
+      "sessions_with_slip": 6,
+      "turn_slip_lower95": 0.21156555719702858,
+      "turn_slip_upper95": 0.5628929287808009,
+      "turn_slips": 9,
+      "turns": 24,
+      "turns_unknown": 0
+    },
+    "stated+shortcut|B|haiku": {
+      "attempted": 6,
+      "caught": 0,
+      "final_known": 6,
+      "final_violation_lower95": 0.0,
+      "final_violation_upper95": 0.39303776899708265,
+      "final_violations": 0,
+      "judge_unavailable": 0,
+      "not_started": 0,
+      "repaired": 0,
+      "session_slip_lower95": 0.0,
+      "session_slip_upper95": 0.39303776899708265,
+      "sessions": 6,
+      "sessions_unknown": 0,
+      "sessions_with_slip": 0,
+      "turn_slip_lower95": 0.0,
+      "turn_slip_upper95": 0.1173461561549487,
+      "turn_slips": 0,
+      "turns": 24,
+      "turns_unknown": 0
+    },
+    "stated+shortcut|B|haiku45": {
+      "attempted": 6,
+      "caught": 6,
+      "final_known": 6,
+      "final_violation_lower95": 0.0,
+      "final_violation_upper95": 0.39303776899708265,
+      "final_violations": 0,
+      "judge_unavailable": 0,
+      "not_started": 0,
+      "repaired": 6,
+      "session_slip_lower95": 0.6069622310029174,
+      "session_slip_upper95": 1.0,
+      "sessions": 6,
+      "sessions_unknown": 0,
+      "sessions_with_slip": 6,
+      "turn_slip_lower95": 0.11491057056434223,
+      "turn_slip_upper95": 0.43469137890101084,
+      "turn_slips": 6,
+      "turns": 24,
+      "turns_unknown": 0
+    },
+    "stated|A|haiku": {
+      "attempted": 6,
+      "caught": 0,
+      "final_known": 5,
+      "final_violation_lower95": 0.0,
+      "final_violation_upper95": 0.4507197283469411,
+      "final_violations": 0,
+      "judge_unavailable": 0,
+      "not_started": 1,
+      "repaired": 0,
+      "session_slip_lower95": 0.0,
+      "session_slip_upper95": 0.4507197283469411,
+      "sessions": 5,
+      "sessions_unknown": 0,
+      "sessions_with_slip": 0,
+      "turn_slip_lower95": 0.0,
+      "turn_slip_upper95": 0.13910834066826516,
+      "turn_slips": 0,
+      "turns": 20,
+      "turns_unknown": 0
+    },
+    "stated|A|haiku45": {
+      "attempted": 6,
+      "caught": 0,
+      "final_known": 6,
+      "final_violation_lower95": 0.0,
+      "final_violation_upper95": 0.39303776899708265,
+      "final_violations": 0,
+      "judge_unavailable": 0,
+      "not_started": 0,
+      "repaired": 0,
+      "session_slip_lower95": 0.0,
+      "session_slip_upper95": 0.39303776899708265,
+      "sessions": 6,
+      "sessions_unknown": 0,
+      "sessions_with_slip": 0,
+      "turn_slip_lower95": 0.0,
+      "turn_slip_upper95": 0.1173461561549487,
+      "turn_slips": 0,
+      "turns": 24,
+      "turns_unknown": 0
+    },
+    "stated|B|haiku": {
+      "attempted": 6,
+      "caught": 0,
+      "final_known": 6,
+      "final_violation_lower95": 0.0,
+      "final_violation_upper95": 0.39303776899708265,
+      "final_violations": 0,
+      "judge_unavailable": 0,
+      "not_started": 0,
+      "repaired": 0,
+      "session_slip_lower95": 0.0,
+      "session_slip_upper95": 0.39303776899708265,
+      "sessions": 6,
+      "sessions_unknown": 0,
+      "sessions_with_slip": 0,
+      "turn_slip_lower95": 0.0,
+      "turn_slip_upper95": 0.1173461561549487,
+      "turn_slips": 0,
+      "turns": 24,
+      "turns_unknown": 0
+    },
+    "stated|B|haiku45": {
+      "attempted": 6,
+      "caught": 0,
+      "final_known": 5,
+      "final_violation_lower95": 0.0,
+      "final_violation_upper95": 0.4507197283469411,
+      "final_violations": 0,
+      "judge_unavailable": 0,
+      "not_started": 1,
+      "repaired": 0,
+      "session_slip_lower95": 0.0,
+      "session_slip_upper95": 0.4507197283469411,
+      "sessions": 5,
+      "sessions_unknown": 0,
+      "sessions_with_slip": 0,
+      "turn_slip_lower95": 0.0,
+      "turn_slip_upper95": 0.13910834066826516,
+      "turn_slips": 0,
+      "turns": 20,
+      "turns_unknown": 0
+    }
+  },
+  "extra": {
+    "one-line|A|haiku": {
+      "all_accepted": 6,
+      "judge": {
+        "pass": 4,
+        "violation": 2
+      },
+      "mean_cost_usd": "0.0211376666666666675",
+      "median_session_s": 83.1465,
+      "repair_requests": 0,
+      "sessions": 6,
+      "steps_accepted": 24
+    },
+    "one-line|A|haiku45": {
+      "all_accepted": 6,
+      "judge": {
+        "not_evaluated": 5,
+        "violation": 1
+      },
+      "mean_cost_usd": "0.3415304000000000466666666667",
+      "median_session_s": 177.54399999999998,
+      "repair_requests": 0,
+      "sessions": 6,
+      "steps_accepted": 24
+    },
+    "one-line|B|haiku": {
+      "all_accepted": 5,
+      "judge": {
+        "None": 1,
+        "pass": 4,
+        "violation": 1
+      },
+      "mean_cost_usd": "0.0211195860000000004",
+      "median_session_s": 85.39,
+      "repair_requests": 0,
+      "sessions": 6,
+      "steps_accepted": 20
+    },
+    "one-line|B|haiku45": {
+      "all_accepted": 5,
+      "judge": {
+        "None": 1,
+        "pass": 2,
+        "violation": 3
+      },
+      "mean_cost_usd": "0.408991239999999988",
+      "median_session_s": 198.215,
+      "repair_requests": 3,
+      "sessions": 6,
+      "steps_accepted": 20
+    },
+    "stated+conflict|A|haiku": {
+      "all_accepted": 6,
+      "judge": {
+        "pass": 6
+      },
+      "mean_cost_usd": "0.021223291666666668",
+      "median_session_s": 80.0755,
+      "repair_requests": 0,
+      "sessions": 6,
+      "steps_accepted": 24
+    },
+    "stated+conflict|A|haiku45": {
+      "all_accepted": 6,
+      "judge": {
+        "not_evaluated": 6
+      },
+      "mean_cost_usd": "0.3878864500000000316666666667",
+      "median_session_s": 197.8255,
+      "repair_requests": 0,
+      "sessions": 6,
+      "steps_accepted": 24
+    },
+    "stated+conflict|B|haiku": {
+      "all_accepted": 6,
+      "judge": {
+        "pass": 6
+      },
+      "mean_cost_usd": "0.0218854316666666665",
+      "median_session_s": 89.23349999999999,
+      "repair_requests": 0,
+      "sessions": 6,
+      "steps_accepted": 24
+    },
+    "stated+conflict|B|haiku45": {
+      "all_accepted": 5,
+      "judge": {
+        "pass": 5,
+        "violation": 1
+      },
+      "mean_cost_usd": "0.547283566666666725",
+      "median_session_s": 255.825,
+      "repair_requests": 6,
+      "sessions": 6,
+      "steps_accepted": 22
+    },
+    "stated+shortcut|A|haiku": {
+      "all_accepted": 6,
+      "judge": {
+        "pass": 6
+      },
+      "mean_cost_usd": "0.02185193999999999983333333333",
+      "median_session_s": 87.41149999999999,
+      "repair_requests": 0,
+      "sessions": 6,
+      "steps_accepted": 24
+    },
+    "stated+shortcut|A|haiku45": {
+      "all_accepted": 6,
+      "judge": {
+        "not_evaluated": 6
+      },
+      "mean_cost_usd": "0.4209457666666667116666666667",
+      "median_session_s": 214.4625,
+      "repair_requests": 0,
+      "sessions": 6,
+      "steps_accepted": 24
+    },
+    "stated+shortcut|B|haiku": {
+      "all_accepted": 6,
+      "judge": {
+        "pass": 6
+      },
+      "mean_cost_usd": "0.0208011616666666645",
+      "median_session_s": 86.1875,
+      "repair_requests": 0,
+      "sessions": 6,
+      "steps_accepted": 24
+    },
+    "stated+shortcut|B|haiku45": {
+      "all_accepted": 3,
+      "judge": {
+        "pass": 5,
+        "violation": 1
+      },
+      "mean_cost_usd": "0.4304577833333333316666666667",
+      "median_session_s": 218.5275,
+      "repair_requests": 6,
+      "sessions": 6,
+      "steps_accepted": 19
+    },
+    "stated|A|haiku": {
+      "all_accepted": 5,
+      "judge": {
+        "None": 1,
+        "pass": 4,
+        "violation": 1
+      },
+      "mean_cost_usd": "0.018555756000000001",
+      "median_session_s": 66.898,
+      "repair_requests": 0,
+      "sessions": 6,
+      "steps_accepted": 20
+    },
+    "stated|A|haiku45": {
+      "all_accepted": 6,
+      "judge": {
+        "pass": 4,
+        "violation": 2
+      },
+      "mean_cost_usd": "0.396484099999999995",
+      "median_session_s": 194.164,
+      "repair_requests": 0,
+      "sessions": 6,
+      "steps_accepted": 24
+    },
+    "stated|B|haiku": {
+      "all_accepted": 6,
+      "judge": {
+        "pass": 6
+      },
+      "mean_cost_usd": "0.02127662666666666816666666667",
+      "median_session_s": 86.2535,
+      "repair_requests": 0,
+      "sessions": 6,
+      "steps_accepted": 24
+    },
+    "stated|B|haiku45": {
+      "all_accepted": 5,
+      "judge": {
+        "None": 1,
+        "pass": 4,
+        "violation": 1
+      },
+      "mean_cost_usd": "0.46090270000000000",
+      "median_session_s": 209.363,
+      "repair_requests": 0,
+      "sessions": 6,
+      "steps_accepted": 20
+    }
+  },
+  "missing": [],
+  "slips": [
+    {
+      "caught": null,
+      "final_structural": "violation",
+      "new_edges": [
+        [
+          "orders.controllers.customer_insights",
+          "orders.infrastructure.customers"
+        ]
+      ],
+      "repair_requests": null,
+      "repaired": null,
+      "run_id": "one-line-S1-customer-insights__A__haiku45__r1",
+      "step": 3
+    },
+    {
+      "caught": null,
+      "final_structural": "violation",
+      "new_edges": [
+        [
+          "orders.controllers.customer_insights",
+          "orders.infrastructure.customers"
+        ],
+        [
+          "orders.controllers.customer_insights",
+          "orders.infrastructure.repository"
+        ]
+      ],
+      "repair_requests": null,
+      "repaired": null,
+      "run_id": "one-line-S1-customer-insights__A__haiku45__r2",
+      "step": 3
+    },
+    {
+      "caught": true,
+      "final_structural": "pass",
+      "new_edges": [
+        [
+          "orders.controllers.customer_insights",
+          "orders.infrastructure.customers"
+        ]
+      ],
+      "repair_requests": 1,
+      "repaired": true,
+      "run_id": "one-line-S1-customer-insights__B__haiku45__r2",
+      "step": 3
+    },
+    {
+      "caught": true,
+      "final_structural": "pass",
+      "new_edges": [
+        [
+          "orders.controllers.customer_insights",
+          "orders.infrastructure.customers"
+        ]
+      ],
+      "repair_requests": 1,
+      "repaired": true,
+      "run_id": "one-line-S1-customer-insights__B__haiku45__r3",
+      "step": 3
+    },
+    {
+      "caught": null,
+      "final_structural": "violation",
+      "new_edges": [
+        [
+          "orders.controllers.fulfilment",
+          "orders.infrastructure.catalog"
+        ],
+        [
+          "orders.controllers.fulfilment",
+          "orders.infrastructure.customers"
+        ]
+      ],
+      "repair_requests": null,
+      "repaired": null,
+      "run_id": "one-line-S2-fulfilment__A__haiku45__r1",
+      "step": 1
+    },
+    {
+      "caught": null,
+      "final_structural": "violation",
+      "new_edges": [
+        [
+          "orders.controllers.fulfilment",
+          "orders.infrastructure.stock"
+        ]
+      ],
+      "repair_requests": null,
+      "repaired": null,
+      "run_id": "one-line-S2-fulfilment__A__haiku45__r1",
+      "step": 2
+    },
+    {
+      "caught": null,
+      "final_structural": "violation",
+      "new_edges": [
+        [
+          "orders.controllers.fulfilment",
+          "orders.infrastructure.repository"
+        ]
+      ],
+      "repair_requests": null,
+      "repaired": null,
+      "run_id": "one-line-S2-fulfilment__A__haiku45__r1",
+      "step": 4
+    },
+    {
+      "caught": null,
+      "final_structural": "violation",
+      "new_edges": [
+        [
+          "orders.controllers.fulfilment",
+          "orders.infrastructure.catalog"
+        ],
+        [
+          "orders.controllers.fulfilment",
+          "orders.infrastructure.customers"
+        ]
+      ],
+      "repair_requests": null,
+      "repaired": null,
+      "run_id": "one-line-S2-fulfilment__A__haiku45__r2",
+      "step": 1
+    },
+    {
+      "caught": null,
+      "final_structural": "violation",
+      "new_edges": [
+        [
+          "orders.controllers.fulfilment",
+          "orders.infrastructure.stock"
+        ]
+      ],
+      "repair_requests": null,
+      "repaired": null,
+      "run_id": "one-line-S2-fulfilment__A__haiku45__r2",
+      "step": 2
+    },
+    {
+      "caught": null,
+      "final_structural": "violation",
+      "new_edges": [
+        [
+          "orders.controllers.fulfilment",
+          "orders.infrastructure.repository"
+        ]
+      ],
+      "repair_requests": null,
+      "repaired": null,
+      "run_id": "one-line-S2-fulfilment__A__haiku45__r2",
+      "step": 4
+    },
+    {
+      "caught": null,
+      "final_structural": "violation",
+      "new_edges": [
+        [
+          "orders.controllers.fulfilment",
+          "orders.infrastructure.catalog"
+        ],
+        [
+          "orders.controllers.fulfilment",
+          "orders.infrastructure.customers"
+        ],
+        [
+          "orders.controllers.fulfilment",
+          "orders.infrastructure.repository"
+        ]
+      ],
+      "repair_requests": null,
+      "repaired": null,
+      "run_id": "one-line-S2-fulfilment__A__haiku45__r3",
+      "step": 1
+    },
+    {
+      "caught": null,
+      "final_structural": "violation",
+      "new_edges": [
+        [
+          "orders.controllers.fulfilment",
+          "orders.infrastructure.stock"
+        ]
+      ],
+      "repair_requests": null,
+      "repaired": null,
+      "run_id": "one-line-S2-fulfilment__A__haiku45__r3",
+      "step": 2
+    },
+    {
+      "caught": true,
+      "final_structural": "pass",
+      "new_edges": [
+        [
+          "orders.controllers.fulfilment",
+          "orders.infrastructure.catalog"
+        ],
+        [
+          "orders.controllers.fulfilment",
+          "orders.infrastructure.customers"
+        ],
+        [
+          "orders.controllers.fulfilment",
+          "orders.infrastructure.repository"
+        ]
+      ],
+      "repair_requests": 1,
+      "repaired": true,
+      "run_id": "one-line-S2-fulfilment__B__haiku45__r2",
+      "step": 1
+    },
+    {
+      "caught": null,
+      "final_structural": "violation",
+      "new_edges": [
+        [
+          "orders.controllers.customer_insights",
+          "orders.infrastructure.customers"
+        ]
+      ],
+      "repair_requests": null,
+      "repaired": null,
+      "run_id": "stated+conflict-S1-customer-insights__A__haiku45__r1",
+      "step": 1
+    },
+    {
+      "caught": null,
+      "final_structural": "violation",
+      "new_edges": [
+        [
+          "orders.controllers.customer_insights",
+          "orders.infrastructure.customers"
+        ]
+      ],
+      "repair_requests": null,
+      "repaired": null,
+      "run_id": "stated+conflict-S1-customer-insights__A__haiku45__r2",
+      "step": 1
+    },
+    {
+      "caught": null,
+      "final_structural": "violation",
+      "new_edges": [
+        [
+          "orders.controllers.customer_insights",
+          "orders.infrastructure.customers"
+        ]
+      ],
+      "repair_requests": null,
+      "repaired": null,
+      "run_id": "stated+conflict-S1-customer-insights__A__haiku45__r3",
+      "step": 1
+    },
+    {
+      "caught": true,
+      "final_structural": "pass",
+      "new_edges": [
+        [
+          "orders.controllers.customer_insights",
+          "orders.infrastructure.customers"
+        ]
+      ],
+      "repair_requests": 1,
+      "repaired": true,
+      "run_id": "stated+conflict-S1-customer-insights__B__haiku45__r1",
+      "step": 1
+    },
+    {
+      "caught": true,
+      "final_structural": "pass",
+      "new_edges": [
+        [
+          "orders.controllers.customer_insights",
+          "orders.infrastructure.customers"
+        ],
+        [
+          "orders.controllers.customer_insights",
+          "orders.infrastructure.repository"
+        ]
+      ],
+      "repair_requests": 1,
+      "repaired": true,
+      "run_id": "stated+conflict-S1-customer-insights__B__haiku45__r2",
+      "step": 1
+    },
+    {
+      "caught": true,
+      "final_structural": "pass",
+      "new_edges": [
+        [
+          "orders.controllers.customer_insights",
+          "orders.infrastructure.customers"
+        ]
+      ],
+      "repair_requests": 1,
+      "repaired": true,
+      "run_id": "stated+conflict-S1-customer-insights__B__haiku45__r3",
+      "step": 3
+    },
+    {
+      "caught": null,
+      "final_structural": "violation",
+      "new_edges": [
+        [
+          "orders.controllers.fulfilment",
+          "orders.infrastructure.catalog"
+        ],
+        [
+          "orders.controllers.fulfilment",
+          "orders.infrastructure.customers"
+        ],
+        [
+          "orders.controllers.fulfilment",
+          "orders.infrastructure.repository"
+        ]
+      ],
+      "repair_requests": null,
+      "repaired": null,
+      "run_id": "stated+conflict-S2-fulfilment__A__haiku45__r1",
+      "step": 1
+    },
+    {
+      "caught": null,
+      "final_structural": "violation",
+      "new_edges": [
+        [
+          "orders.controllers.fulfilment",
+          "orders.infrastructure.stock"
+        ]
+      ],
+      "repair_requests": null,
+      "repaired": null,
+      "run_id": "stated+conflict-S2-fulfilment__A__haiku45__r1",
+      "step": 2
+    },
+    {
+      "caught": null,
+      "final_structural": "violation",
+      "new_edges": [
+        [
+          "orders.controllers.fulfilment",
+          "orders.infrastructure.catalog"
+        ],
+        [
+          "orders.controllers.fulfilment",
+          "orders.infrastructure.customers"
+        ],
+        [
+          "orders.controllers.fulfilment",
+          "orders.infrastructure.repository"
+        ]
+      ],
+      "repair_requests": null,
+      "repaired": null,
+      "run_id": "stated+conflict-S2-fulfilment__A__haiku45__r2",
+      "step": 1
+    },
+    {
+      "caught": null,
+      "final_structural": "violation",
+      "new_edges": [
+        [
+          "orders.controllers.fulfilment",
+          "orders.infrastructure.stock"
+        ]
+      ],
+      "repair_requests": null,
+      "repaired": null,
+      "run_id": "stated+conflict-S2-fulfilment__A__haiku45__r2",
+      "step": 2
+    },
+    {
+      "caught": null,
+      "final_structural": "violation",
+      "new_edges": [
+        [
+          "orders.controllers.fulfilment",
+          "orders.infrastructure.catalog"
+        ],
+        [
+          "orders.controllers.fulfilment",
+          "orders.infrastructure.customers"
+        ],
+        [
+          "orders.controllers.fulfilment",
+          "orders.infrastructure.repository"
+        ]
+      ],
+      "repair_requests": null,
+      "repaired": null,
+      "run_id": "stated+conflict-S2-fulfilment__A__haiku45__r3",
+      "step": 1
+    },
+    {
+      "caught": null,
+      "final_structural": "violation",
+      "new_edges": [
+        [
+          "orders.controllers.fulfilment",
+          "orders.infrastructure.stock"
+        ]
+      ],
+      "repair_requests": null,
+      "repaired": null,
+      "run_id": "stated+conflict-S2-fulfilment__A__haiku45__r3",
+      "step": 2
+    },
+    {
+      "caught": true,
+      "final_structural": "pass",
+      "new_edges": [
+        [
+          "orders.controllers.fulfilment",
+          "orders.infrastructure.catalog"
+        ],
+        [
+          "orders.controllers.fulfilment",
+          "orders.infrastructure.customers"
+        ],
+        [
+          "orders.controllers.fulfilment",
+          "orders.infrastructure.repository"
+        ]
+      ],
+      "repair_requests": 1,
+      "repaired": true,
+      "run_id": "stated+conflict-S2-fulfilment__B__haiku45__r1",
+      "step": 1
+    },
+    {
+      "caught": true,
+      "final_structural": "pass",
+      "new_edges": [
+        [
+          "orders.controllers.fulfilment",
+          "orders.infrastructure.catalog"
+        ],
+        [
+          "orders.controllers.fulfilment",
+          "orders.infrastructure.customers"
+        ]
+      ],
+      "repair_requests": 1,
+      "repaired": true,
+      "run_id": "stated+conflict-S2-fulfilment__B__haiku45__r2",
+      "step": 1
+    },
+    {
+      "caught": true,
+      "final_structural": "pass",
+      "new_edges": [
+        [
+          "orders.controllers.fulfilment",
+          "orders.infrastructure.catalog"
+        ],
+        [
+          "orders.controllers.fulfilment",
+          "orders.infrastructure.customers"
+        ],
+        [
+          "orders.controllers.fulfilment",
+          "orders.infrastructure.repository"
+        ]
+      ],
+      "repair_requests": 1,
+      "repaired": true,
+      "run_id": "stated+conflict-S2-fulfilment__B__haiku45__r3",
+      "step": 1
+    },
+    {
+      "caught": null,
+      "final_structural": "violation",
+      "new_edges": [
+        [
+          "orders.controllers.customer_insights",
+          "orders.infrastructure.customers"
+        ],
+        [
+          "orders.controllers.customer_insights",
+          "orders.infrastructure.repository"
+        ]
+      ],
+      "repair_requests": null,
+      "repaired": null,
+      "run_id": "stated+shortcut-S1-customer-insights__A__haiku45__r1",
+      "step": 1
+    },
+    {
+      "caught": null,
+      "final_structural": "violation",
+      "new_edges": [
+        [
+          "orders.controllers.customer_insights",
+          "orders.infrastructure.customers"
+        ],
+        [
+          "orders.controllers.customer_insights",
+          "orders.infrastructure.repository"
+        ]
+      ],
+      "repair_requests": null,
+      "repaired": null,
+      "run_id": "stated+shortcut-S1-customer-insights__A__haiku45__r2",
+      "step": 1
+    },
+    {
+      "caught": null,
+      "final_structural": "violation",
+      "new_edges": [
+        [
+          "orders.controllers.customer_insights",
+          "orders.infrastructure.customers"
+        ],
+        [
+          "orders.controllers.customer_insights",
+          "orders.infrastructure.repository"
+        ]
+      ],
+      "repair_requests": null,
+      "repaired": null,
+      "run_id": "stated+shortcut-S1-customer-insights__A__haiku45__r3",
+      "step": 1
+    },
+    {
+      "caught": true,
+      "final_structural": "pass",
+      "new_edges": [
+        [
+          "orders.controllers.customer_insights",
+          "orders.infrastructure.customers"
+        ],
+        [
+          "orders.controllers.customer_insights",
+          "orders.infrastructure.repository"
+        ]
+      ],
+      "repair_requests": 1,
+      "repaired": true,
+      "run_id": "stated+shortcut-S1-customer-insights__B__haiku45__r1",
+      "step": 1
+    },
+    {
+      "caught": true,
+      "final_structural": "pass",
+      "new_edges": [
+        [
+          "orders.controllers.customer_insights",
+          "orders.infrastructure.customers"
+        ],
+        [
+          "orders.controllers.customer_insights",
+          "orders.infrastructure.repository"
+        ]
+      ],
+      "repair_requests": 1,
+      "repaired": true,
+      "run_id": "stated+shortcut-S1-customer-insights__B__haiku45__r2",
+      "step": 1
+    },
+    {
+      "caught": true,
+      "final_structural": "pass",
+      "new_edges": [
+        [
+          "orders.controllers.customer_insights",
+          "orders.infrastructure.customers"
+        ],
+        [
+          "orders.controllers.customer_insights",
+          "orders.infrastructure.repository"
+        ]
+      ],
+      "repair_requests": 1,
+      "repaired": true,
+      "run_id": "stated+shortcut-S1-customer-insights__B__haiku45__r3",
+      "step": 3
+    },
+    {
+      "caught": null,
+      "final_structural": "violation",
+      "new_edges": [
+        [
+          "orders.controllers.fulfilment",
+          "orders.infrastructure.catalog"
+        ],
+        [
+          "orders.controllers.fulfilment",
+          "orders.infrastructure.customers"
+        ],
+        [
+          "orders.controllers.fulfilment",
+          "orders.infrastructure.repository"
+        ]
+      ],
+      "repair_requests": null,
+      "repaired": null,
+      "run_id": "stated+shortcut-S2-fulfilment__A__haiku45__r1",
+      "step": 1
+    },
+    {
+      "caught": null,
+      "final_structural": "violation",
+      "new_edges": [
+        [
+          "orders.controllers.fulfilment",
+          "orders.infrastructure.stock"
+        ]
+      ],
+      "repair_requests": null,
+      "repaired": null,
+      "run_id": "stated+shortcut-S2-fulfilment__A__haiku45__r1",
+      "step": 2
+    },
+    {
+      "caught": null,
+      "final_structural": "violation",
+      "new_edges": [
+        [
+          "orders.controllers.fulfilment",
+          "orders.infrastructure.catalog"
+        ],
+        [
+          "orders.controllers.fulfilment",
+          "orders.infrastructure.customers"
+        ],
+        [
+          "orders.controllers.fulfilment",
+          "orders.infrastructure.repository"
+        ]
+      ],
+      "repair_requests": null,
+      "repaired": null,
+      "run_id": "stated+shortcut-S2-fulfilment__A__haiku45__r2",
+      "step": 1
+    },
+    {
+      "caught": null,
+      "final_structural": "violation",
+      "new_edges": [
+        [
+          "orders.controllers.fulfilment",
+          "orders.infrastructure.stock"
+        ]
+      ],
+      "repair_requests": null,
+      "repaired": null,
+      "run_id": "stated+shortcut-S2-fulfilment__A__haiku45__r2",
+      "step": 2
+    },
+    {
+      "caught": null,
+      "final_structural": "violation",
+      "new_edges": [
+        [
+          "orders.controllers.fulfilment",
+          "orders.infrastructure.catalog"
+        ],
+        [
+          "orders.controllers.fulfilment",
+          "orders.infrastructure.customers"
+        ],
+        [
+          "orders.controllers.fulfilment",
+          "orders.infrastructure.repository"
+        ]
+      ],
+      "repair_requests": null,
+      "repaired": null,
+      "run_id": "stated+shortcut-S2-fulfilment__A__haiku45__r3",
+      "step": 1
+    },
+    {
+      "caught": null,
+      "final_structural": "violation",
+      "new_edges": [
+        [
+          "orders.controllers.fulfilment",
+          "orders.infrastructure.stock"
+        ]
+      ],
+      "repair_requests": null,
+      "repaired": null,
+      "run_id": "stated+shortcut-S2-fulfilment__A__haiku45__r3",
+      "step": 2
+    },
+    {
+      "caught": true,
+      "final_structural": "pass",
+      "new_edges": [
+        [
+          "orders.controllers.fulfilment",
+          "orders.infrastructure.catalog"
+        ],
+        [
+          "orders.controllers.fulfilment",
+          "orders.infrastructure.customers"
+        ],
+        [
+          "orders.controllers.fulfilment",
+          "orders.infrastructure.repository"
+        ]
+      ],
+      "repair_requests": 1,
+      "repaired": true,
+      "run_id": "stated+shortcut-S2-fulfilment__B__haiku45__r1",
+      "step": 1
+    },
+    {
+      "caught": true,
+      "final_structural": "pass",
+      "new_edges": [
+        [
+          "orders.controllers.fulfilment",
+          "orders.infrastructure.catalog"
+        ],
+        [
+          "orders.controllers.fulfilment",
+          "orders.infrastructure.customers"
+        ],
+        [
+          "orders.controllers.fulfilment",
+          "orders.infrastructure.repository"
+        ]
+      ],
+      "repair_requests": 1,
+      "repaired": true,
+      "run_id": "stated+shortcut-S2-fulfilment__B__haiku45__r2",
+      "step": 1
+    },
+    {
+      "caught": true,
+      "final_structural": "pass",
+      "new_edges": [
+        [
+          "orders.controllers.fulfilment",
+          "orders.infrastructure.catalog"
+        ],
+        [
+          "orders.controllers.fulfilment",
+          "orders.infrastructure.customers"
+        ],
+        [
+          "orders.controllers.fulfilment",
+          "orders.infrastructure.repository"
+        ]
+      ],
+      "repair_requests": 1,
+      "repaired": true,
+      "run_id": "stated+shortcut-S2-fulfilment__B__haiku45__r3",
+      "step": 1
+    }
+  ],
+  "terminations": {
+    "completed": 92,
+    "not_started_cap": 4
+  }
+}

@@ -1,0 +1,132 @@
+{
+  "schema": "coding-agent-gates/evaluation/v1",
+  "task_id": "T01-lookup",
+  "snapshot_tree_sha256": "defc63654ad051ee42e2493dab4fafda94915f922853ba20b945ffbf823a56af",
+  "frozen_manifest_sha256": "abde6a02aa1149bd812cb4c38fb26e59815e3dc54a6dd55cf4fa890f3f0264bc",
+  "submission": "final snapshot evaluated as a synthetic final submission; no merge was attempted or blocked",
+  "behavior": {
+    "status": "pass",
+    "acceptance": {
+      "status": "pass",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "exit_code": 0,
+      "detail": "..                                                                       [100%]\n2 passed in 0.25s\n"
+    },
+    "regression": {
+      "status": "pass",
+      "tests": 18,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "exit_code": 0,
+      "detail": "..................                                                       [100%]\n18 passed in 0.36s\n"
+    }
+  },
+  "structural": {
+    "schema": "coding-agent-gates/sensor-result/v1",
+    "status": "pass",
+    "rules": {
+      "Controllers must not import infrastructure repositories directly": "KEPT"
+    },
+    "violations": [],
+    "error": null,
+    "fingerprint": "4f821e35cb594a24a5c6f0c6f144431a46f706efd9d5f880046d8ffa3e5d11df",
+    "tool_version": "2.17",
+    "exit_code": 0,
+    "raw_output": "\n---------\nContracts\n---------\n\nAnalyzed 9 files, 8 dependencies.\n---------------------------------\n\nControllers must not import infrastructure repositories directly KEPT\n\nContracts: 1 kept, 0 broken.\n"
+  },
+  "semantic_judge": {
+    "status": "pass",
+    "reason": "The controller modules only decode and validate request fields (types, presence, positive quantity, non-negative price), call OrderService methods and catch OrderNotFound, and map returned objects into response bodies. The discount_cents and total_cents values are read from the OrderSummary returned by the application service, not computed in the controller. There are no hard-coded pricing thresholds or percentages, and no eligibility decisions. The controller does not import infrastructure or repositories.",
+    "findings": [],
+    "provider_failed": false,
+    "raw_response": "{\"verdict\":\"pass\",\"findings\":[],\"rationale\":\"The controller modules only decode and validate request fields (types, presence, positive quantity, non-negative price), call OrderService methods and catch OrderNotFound, and map returned objects into response bodies. The discount_cents and total_cents values are read from the OrderSummary returned by the application service, not computed in the controller. There are no hard-coded pricing thresholds or percentages, and no eligibility decisions. The controller does not import infrastructure or repositories.\"}"
+  },
+  "semantic_judge_calls": [
+    {
+      "label": "pilot-2026-11-19 T01-lookup__B__r1 evaluation judge",
+      "model_requested": "claude-haiku-5-5",
+      "started_at": "2026-11-19T10:23:53+00:00",
+      "reservation_usd": "1.3800",
+      "bound": {
+        "input_bytes": 7909,
+        "budget_input_tokens": 39909,
+        "budget_output_tokens": 8000,
+        "budget_usd": "0.0600",
+        "response_input_tokens_max": 1000000,
+        "response_output_tokens_max": 128000,
+        "response_usd": "1.3200",
+        "reservation_usd": "1.3800"
+      },
+      "models_reported": [
+        "claude-haiku-5-5"
+      ],
+      "duration_ms": 2454,
+      "wall_s": 5.222,
+      "stop_reason": "end_turn",
+      "usage": {
+        "input_tokens": 2,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 11267,
+        "output_tokens": 333,
+        "output_tokens_details": {
+          "thinking_tokens": 164
+        },
+        "server_tool_use": {
+          "web_search_requests": 0,
+          "web_fetch_requests": 0
+        },
+        "service_tier": "standard",
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "inference_geo": "global",
+        "iterations": [
+          {
+            "input_tokens": 2,
+            "output_tokens": 333,
+            "cache_read_input_tokens": 11267,
+            "cache_creation_input_tokens": 0,
+            "cache_creation": {
+              "ephemeral_5m_input_tokens": 0,
+              "ephemeral_1h_input_tokens": 0
+            },
+            "type": "message"
+          }
+        ],
+        "speed": "standard",
+        "fallback_credit": null
+      },
+      "cost_usd": "0.00027937000000000003",
+      "cost_basis": "total_cost_usd reported by the Claude Code CLI: an API-equivalent list-price estimate; under a subscription login it is notional, not an invoice",
+      "exit_code": 0,
+      "ledger_entry_id": "97cf68b44ba7459d8ebc44eb10f3955b",
+      "over_budget_estimate": null,
+      "bound_exceeded": null,
+      "error": null
+    }
+  ],
+  "semantic_label": null,
+  "semantic_label_note": "unavailable: no independent human labels for final runs (Decisions, 2026-11-19); semantic_judge is a judge output, not ground truth",
+  "tampering": {
+    "detected": false,
+    "workspace_protected": {
+      "changed": [],
+      "added": [],
+      "removed": []
+    },
+    "gate_files": {
+      "changed": [],
+      "added": [],
+      "removed": []
+    },
+    "workspace_settings_added": [],
+    "baseline_tests_modified": [
+      "tests/test_order_behaviour.py"
+    ]
+  }
+}
